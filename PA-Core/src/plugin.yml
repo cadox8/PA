@@ -1,0 +1,4 @@
+name: ${project.artifactId}
+main: PACore
+version: ${project.version}
+authors: [cadox8, Wikijito7]
