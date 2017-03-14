@@ -23,6 +23,7 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.net.InetSocketAddress;
 import java.util.UUID;
 
 public class PAUser {
@@ -206,6 +207,16 @@ public class PAUser {
     @Data
     public static class UserData {
         PACmd.Grupo grupo = PACmd.Grupo.Usuario;
+        Location lastLocation = null;
+        Boolean god = false;
+        Long lastConnect = 0L;
+        Long timeJoin = 0L;
+        Long timePlayed = 0L;
+        String nickname = null;
+        Integer coins = 0;
+        InetSocketAddress ip = null;
+
+        public UserData() {}
     }
 
 

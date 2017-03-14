@@ -9,6 +9,9 @@
 
         <!-- Globales -->
         <module>PA-Core</module>
+
+        <!-- Lobby -->
+        <module>PA-Antium</module>
 		
     </modules>
     <properties>
