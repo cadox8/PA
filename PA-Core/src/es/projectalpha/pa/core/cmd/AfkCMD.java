@@ -8,7 +8,7 @@ import java.util.Arrays;
 public class AfkCMD extends PACmd {
 
     public AfkCMD() {
-        super("afk", Grupo.Craftero, Arrays.asList("away", "aefecá", "aefeka", "adefeka"));
+        super("afk", Grupo.Usuario, Arrays.asList("away", "aefecá", "aefeka", "adefeka"));
     }
 
     @Override

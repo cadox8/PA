@@ -11,7 +11,7 @@ import java.util.List;
 public class ClearCMD extends PACmd {
 
     public ClearCMD() {
-        super("clear", Grupo.Mod, Arrays.asList("limpiar", "limpia"));
+        super("clear", Grupo.MOD, Arrays.asList("limpiar", "limpia"));
     }
 
     //TODO: Mensages

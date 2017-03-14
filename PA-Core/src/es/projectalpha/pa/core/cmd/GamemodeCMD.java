@@ -2,23 +2,20 @@ package es.projectalpha.pa.core.cmd;
 
 import es.projectalpha.pa.core.api.PAServer;
 import es.projectalpha.pa.core.api.PAUser;
-import es.projectalpha.pa.core.exceptions.NullInventorySaveException;
 import org.bukkit.GameMode;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
-import org.bukkit.inventory.Inventory;
 
 import java.util.List;
 
 public class GamemodeCMD extends PACmd {
 
     public GamemodeCMD(){
-        super("gamemode", Grupo.Builder, "gm");
+        super("gamemode", Grupo.BUILDER, "gm");
     }
 
     public void run(PAUser user, String label, String[] args){
         if (args.length == 1){
-            user.getUserData().setInventory(user.getPlayer().getInventory());
 
             //user.getPlayer().getInventory().clear();
             //backInventory(user);
@@ -37,22 +34,6 @@ public class GamemodeCMD extends PACmd {
             target.getPlayer().setGameMode(parseGamemode(args[0]));
             user.sendMessagePrefix("&6Modo de juego cambiado de &2" + target.getName() + " a &c" + parseGamemode(args[0]).toString());
             target.sendMessagePrefix("&6Modo de juego cambiado a &c" + parseGamemode(args[0]).toString());
-        }
-    }
-
-    private void backInventory(PAUser user){
-        if (user.getPlayer().getGameMode() != GameMode.CREATIVE) return;
-        Inventory inv = user.getUserData().getInventory();
-
-        try{
-            if (inv == null) {
-                throw new NullInventorySaveException("Inventario no guardado al cambiar de gamemode");
-            } else {
-                user.getPlayer().getInventory().clear();
-                user.getPlayer().getInventory().addItem(inv.getContents());
-            }
-        }catch (NullInventorySaveException e){
-            plugin.debugLog("Causa: " + e.getCause());
         }
     }
 

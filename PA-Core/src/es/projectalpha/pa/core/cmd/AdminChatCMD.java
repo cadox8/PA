@@ -11,7 +11,7 @@ import java.util.List;
 public class AdminChatCMD extends PACmd {
 
     public AdminChatCMD() {
-        super("a", Grupo.Builder, Arrays.asList("adminchat", "ac"));
+        super("a", Grupo.BUILDER, Arrays.asList("adminchat", "ac"));
     }
 
     @Override

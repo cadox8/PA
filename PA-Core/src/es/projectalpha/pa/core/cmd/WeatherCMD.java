@@ -9,7 +9,7 @@ import java.util.Random;
 public class WeatherCMD extends PACmd {
 
     public WeatherCMD(){
-        super("weather", Grupo.Admin, Arrays.asList("tiempo", "metereologia"));
+        super("weather", Grupo.ADMIN, Arrays.asList("tiempo", "metereologia"));
     }
 
     @Override

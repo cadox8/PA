@@ -12,7 +12,7 @@ import java.util.UUID;
 public class TeleportAskAllCMD extends PACmd {
 
     public TeleportAskAllCMD() {
-        super("tpaall", Grupo.Mod, Arrays.asList("teleportaskall"));
+        super("tpaall", Grupo.MOD, Arrays.asList("teleportaskall"));
     }
 
     @Override

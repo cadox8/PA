@@ -10,7 +10,7 @@ import java.util.List;
 public class FeedCMD extends PACmd {
 
     public FeedCMD(){
-        super("feed", Grupo.Admin, "alimentar");
+        super("feed", Grupo.ADMIN, "alimentar");
     }
 
     public void run(PAUser user, String label, String[] args){

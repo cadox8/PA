@@ -12,7 +12,7 @@ import java.util.List;
 public class InvSeeCMD extends PACmd {
 
     public InvSeeCMD() {
-        super("invsee", Grupo.Mod, Arrays.asList("verinv"));
+        super("invsee", Grupo.MOD, Arrays.asList("verinv"));
     }
 
     @Override

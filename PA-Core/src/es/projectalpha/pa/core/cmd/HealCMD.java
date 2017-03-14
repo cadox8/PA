@@ -10,7 +10,7 @@ import java.util.List;
 public class HealCMD extends PACmd {
 
     public HealCMD(){
-        super("heal", Grupo.Mod, "curar");
+        super("heal", Grupo.MOD, "curar");
     }
 
     public void run(PAUser user, String label, String[] args){

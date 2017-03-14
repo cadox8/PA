@@ -7,7 +7,7 @@ import es.projectalpha.pa.core.api.PAUser;
 public class FakeJoinCMD extends PACmd {
 
     public FakeJoinCMD(){
-        super("fakejoin", Grupo.Admin, "fj");
+        super("fakejoin", Grupo.ADMIN, "fj");
     }
 
     public void run(PAUser user, String label, String[] args){

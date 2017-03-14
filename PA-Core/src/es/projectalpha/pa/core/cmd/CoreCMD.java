@@ -5,7 +5,7 @@ import es.projectalpha.pa.core.api.PAUser;
 public class CoreCMD extends PACmd {
 
     public CoreCMD() {
-        super("wccore", Grupo.Craftero, "core");
+        super("pacore", Grupo.Usuario, "core");
     }
 
     @Override

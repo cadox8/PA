@@ -10,14 +10,14 @@ import java.util.List;
 public class AyudaCMD extends PACmd {
 
     public AyudaCMD() {
-        super("ayuda", Grupo.Craftero, Arrays.asList("help"));
+        super("ayuda", Grupo.Usuario, Arrays.asList("help"));
     }
 
     @Override
     public void run(PAUser user, String label, String[] args) {
         if(args.length == 0) {
             user.sendDiv();
-            user.sendMessagePrefix("&6Comandos de WorldCrafteros:");
+            user.sendMessagePrefix("&6Comandos de WorldUsuarios:");
             user.sendMessage("");
             user.sendDiv();
         }

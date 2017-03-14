@@ -14,7 +14,7 @@ import java.util.List;
 public class DecirCMD extends PACmd {
 
     public DecirCMD() {
-        super("decir", Grupo.Craftero, Arrays.asList("w", "m", "msg", "mensaje"));
+        super("decir", Grupo.Usuario, Arrays.asList("w", "m", "msg", "mensaje"));
     }
 
     @Override

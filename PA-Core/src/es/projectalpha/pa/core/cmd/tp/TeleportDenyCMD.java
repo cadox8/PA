@@ -10,7 +10,7 @@ import java.util.Arrays;
 public class TeleportDenyCMD extends PACmd {
     
     public TeleportDenyCMD() {
-        super("tpadeny", Grupo.Craftero, Arrays.asList("teleportdeny"));
+        super("tpadeny", Grupo.Usuario, Arrays.asList("teleportdeny"));
     }
     
     @Override

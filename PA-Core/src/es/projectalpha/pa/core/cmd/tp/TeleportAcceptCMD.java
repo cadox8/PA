@@ -10,7 +10,7 @@ import java.util.Arrays;
 public class TeleportAcceptCMD extends PACmd {
     
     public TeleportAcceptCMD() {
-        super("tpaccept", Grupo.Craftero, Arrays.asList("teleportaccept", "tpaacept"));
+        super("tpaccept", Grupo.Usuario, Arrays.asList("teleportaccept", "tpaacept"));
     }
     
     @Override

@@ -12,12 +12,12 @@ import java.util.List;
 public class PingCMD extends PACmd {
 
     public PingCMD() {
-        super("ping", Grupo.Craftero, Arrays.asList("pong"));
+        super("ping", Grupo.Usuario, Arrays.asList("pong"));
     }
 
     @Override
     public void run(PAUser user, String label, String[] args) {
-        if (args.length == 1 && user.isOnRank(Grupo.Mod)) {
+        if (args.length == 1 && user.isOnRank(Grupo.MOD)) {
             Player target = plugin.getServer().getPlayer(args[0]);
             if (target == null) {
                 userNotOnline(user);

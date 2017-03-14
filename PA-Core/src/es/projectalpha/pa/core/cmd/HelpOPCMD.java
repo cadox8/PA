@@ -8,7 +8,7 @@ import es.projectalpha.pa.core.utils.Utils;
 public class HelpOPCMD extends PACmd {
 
     public HelpOPCMD() {
-        super("helpop", Grupo.Craftero, "hp");
+        super("helpop", Grupo.Usuario, "hp");
     }
 
     private final Cooldown temp = new Cooldown(30);
@@ -29,7 +29,7 @@ public class HelpOPCMD extends PACmd {
     private void hp(PAUser user, String msg){
         plugin.getServer().getOnlinePlayers().forEach(p -> {
             PAUser u = PAServer.getUser(p);
-            if (u.isOnRank(Grupo.Admin)) {
+            if (u.isOnRank(Grupo.ADMIN)) {
                 u.sendMessage("&4AYUDA: &3" + user.getName() + "&r: " + msg);
             }
         });

@@ -6,7 +6,7 @@
         <artifactId>PA</artifactId>
         <version>0.0.1</version>
     </parent>
-    <artifactId>Pa-Core</artifactId>
+    <artifactId>PA-Core</artifactId>
     <packaging>jar</packaging>
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>
@@ -32,7 +32,7 @@
             <url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
         </repository>
         <repository>
-            <id>wc-repo</id>
+            <id>pa-repo</id>
             <url>http://cadox8.cf/repo/pa/</url>
         </repository>
     </repositories>

@@ -11,7 +11,7 @@ import java.util.List;
 public class SetGroupCMD extends PACmd {
 
     public SetGroupCMD(){
-        super("setgroup", Grupo.Craftero, Arrays.asList("dargrupo", "setgrupo"));
+        super("setgroup", Grupo.DEV, Arrays.asList("dargrupo", "setgrupo"));
     }
 
     @Override
@@ -38,7 +38,6 @@ public class SetGroupCMD extends PACmd {
             }
 
             user.getUserData().setGrupo(Grupo.values()[i]);
-            new DataManager(user).setGrupo();
             user.sendMessagePrefix("&3Rango cambiado &3: " + Grupo.groupColor(Grupo.values()[i]) + Grupo.values()[i].toString());
         }
 
@@ -62,7 +61,6 @@ public class SetGroupCMD extends PACmd {
         }
 
         target.getUserData().setGrupo(Grupo.values()[i]);
-        new DataManager(target).setGrupo();
         user.sendMessagePrefix("&3Rango cambiado a &c" + target.getName() + "&3: " + Grupo.groupColor(Grupo.values()[i]) + Grupo.values()[i].toString());
         target.sendMessagePrefix("&6Tu rango ha sido cambiado a " + Grupo.groupColor(Grupo.values()[i]) + Grupo.values()[i].toString());
     }

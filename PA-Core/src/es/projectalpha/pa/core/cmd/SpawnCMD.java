@@ -8,7 +8,7 @@ import es.projectalpha.pa.core.utils.Utils;
 public class SpawnCMD extends PACmd {
 
     public SpawnCMD(){
-        super("spawn", Grupo.Craftero, "");
+        super("spawn", Grupo.Usuario, "");
     }
 
     @Override
@@ -20,7 +20,7 @@ public class SpawnCMD extends PACmd {
         }
         if (args.length == 1) {
             if (args[0].equalsIgnoreCase("set")) {
-                if (!user.isOnRank(Grupo.Admin)) return;
+                if (!user.isOnRank(Grupo.ADMIN)) return;
                 plugin.getConfig().set("spawn", Utils.locationToString(user.getPlayer().getLocation()));
                 plugin.saveConfig();
 

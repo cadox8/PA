@@ -14,7 +14,7 @@ import java.util.List;
 public class TeleportCMD extends PACmd {
     
     public TeleportCMD() {
-        super("tp", Grupo.Mod, Arrays.asList("teleport", "tppos", "tploc"));
+        super("tp", Grupo.MOD, Arrays.asList("teleport", "tppos", "tploc"));
     }
     
     @Override

@@ -7,7 +7,7 @@ import es.projectalpha.pa.core.utils.Messages;
 public class FakeLeaveCMD extends PACmd {
 
     public FakeLeaveCMD(){
-        super("fakeleave", Grupo.Admin, "fl");
+        super("fakeleave", Grupo.ADMIN, "fl");
     }
 
     public void run(PAUser user, String label, String[] args){
