@@ -3,8 +3,7 @@ install: mvn clean install
 jdk:
   - oraclejdk8
 notifications:
-  email: false 
-  webhooks: https://fathomless-fjord-24024.herokuapp.com/notify?secret=worldcrafteros
+  email: false
 cache:
   directories:
   - $HOME/.m2
