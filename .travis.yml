@@ -1,0 +1,12 @@
+language: java
+install: mvn clean install
+jdk:
+  - oraclejdk8
+notifications:
+  email: false 
+  webhooks: https://fathomless-fjord-24024.herokuapp.com/notify?secret=worldcrafteros
+cache:
+  directories:
+  - $HOME/.m2
+after_success:
+    "bash deploy.sh"
