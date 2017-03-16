@@ -12,6 +12,7 @@
 
         <!-- Lobby -->
         <module>PA-Antium</module>
+        <module>PA-Lobby</module>
 		
     </modules>
     <properties>
