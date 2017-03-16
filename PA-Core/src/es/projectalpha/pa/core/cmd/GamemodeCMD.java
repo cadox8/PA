@@ -11,7 +11,7 @@ import java.util.List;
 public class GamemodeCMD extends PACmd {
 
     public GamemodeCMD(){
-        super("gamemode", Grupo.BUILDER, "gm");
+        super("gamemode", Grupo.Builder, "gm");
     }
 
     public void run(PAUser user, String label, String[] args){

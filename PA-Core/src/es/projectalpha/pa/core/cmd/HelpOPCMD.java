@@ -29,7 +29,7 @@ public class HelpOPCMD extends PACmd {
     private void hp(PAUser user, String msg){
         plugin.getServer().getOnlinePlayers().forEach(p -> {
             PAUser u = PAServer.getUser(p);
-            if (u.isOnRank(Grupo.ADMIN)) {
+            if (u.isOnRank(Grupo.Admin)) {
                 u.sendMessage("&4AYUDA: &3" + user.getName() + "&r: " + msg);
             }
         });

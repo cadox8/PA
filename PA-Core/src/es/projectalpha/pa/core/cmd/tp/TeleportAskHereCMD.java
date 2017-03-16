@@ -12,7 +12,7 @@ import java.util.List;
 public class TeleportAskHereCMD extends PACmd {
     
     public TeleportAskHereCMD() {
-        super("tpahere", Grupo.MOD, Arrays.asList("teleportaskhere"));
+        super("tpahere", Grupo.Mod, Arrays.asList("teleportaskhere"));
     }
     
     @Override

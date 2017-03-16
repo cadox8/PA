@@ -24,7 +24,7 @@ public class Utils {
     public static void sendAdminMsg(PAUser user, String msg){
         plugin.getServer().getOnlinePlayers().forEach(p -> {
             PAUser u = PAServer.getUser(p);
-            if (u.isOnRank(PACmd.Grupo.BUILDER)) {
+            if (u.isOnRank(PACmd.Grupo.Builder)) {
                 u.sendMessage("&0[&2A&0] &3" + user.getName() + "&r: " + msg);
                 u.sendSound(Sound.BLOCK_ANVIL_HIT);
             }

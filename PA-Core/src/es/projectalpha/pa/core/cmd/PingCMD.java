@@ -17,7 +17,7 @@ public class PingCMD extends PACmd {
 
     @Override
     public void run(PAUser user, String label, String[] args) {
-        if (args.length == 1 && user.isOnRank(Grupo.MOD)) {
+        if (args.length == 1 && user.isOnRank(Grupo.Mod)) {
             Player target = plugin.getServer().getPlayer(args[0]);
             if (target == null) {
                 userNotOnline(user);

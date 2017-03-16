@@ -31,8 +31,8 @@ public abstract class PACmd {
         this.aliases = aliases;
     }
 
-    public PACmd(final String name, final Grupo grupo, final String aliase){
-        this(name, grupo, Arrays.asList(aliase));
+    public PACmd(final String name, final Grupo grupo, final String... aliases) {
+        this(name, grupo, Arrays.asList(aliases));
     }
 
     public PACmd(final String name, final Grupo grupo){
@@ -70,25 +70,25 @@ public abstract class PACmd {
         VIP(1),
         ORIGIN(2),
         YT(4),
-        BUILDER(5),
-        MOD(6),
-        ADMIN(7),
+        Builder(5),
+        Mod(6),
+        Admin(7),
         DEV(8),
-        OWNER(9);
+        Owner(9);
 
         private final int rank;
 
         public static char groupColor(Grupo grupo){
             switch (grupo){
-                case OWNER:
+                case Owner:
                     return 'c';
                 case DEV:
                     return 'b';
-                case ADMIN:
+                case Admin:
                     return '2';
-                case MOD:
+                case Mod:
                     return 'a';
-                case BUILDER:
+                case Builder:
                     return '6';
                 case YT:
                     return '5';

@@ -9,7 +9,7 @@ import org.bukkit.inventory.ItemStack;
 public class EnchantCMD extends PACmd {
 
     public EnchantCMD(){
-        super("enchant", Grupo.ADMIN, "encantar");
+        super("enchant", Grupo.Admin, "encantar");
     }
 
     public void run(PAUser user, String label, String[] args){

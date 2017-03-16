@@ -47,6 +47,14 @@ public class PAUser {
     public Player getPlayer() {
         return plugin.getServer().getPlayer(uuid);
     }
+
+
+    public void save() {
+        plugin.getMysql().saveUser(this);
+        PAServer.users.remove(this);
+        plugin.getMysql().loadUserData(uuid);
+        PAServer.users.add(this);
+    }
     //
 
     /**
@@ -186,11 +194,12 @@ public class PAUser {
     /**
      * Bungee
      */
-    public void sendToServer(String str) {
+    public void sendToServer(String server) {
         ByteArrayDataOutput out = ByteStreams.newDataOutput();
         out.writeUTF("Connect");
-        out.writeUTF(str);
+        out.writeUTF(server);
         getPlayer().sendPluginMessage(plugin, "BungeeCord", out.toByteArray());
+        sendMessagePrefix("&cConectando a &6" + server);
     }
 
     public void sendToLobby() {

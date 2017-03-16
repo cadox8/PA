@@ -14,9 +14,12 @@ public class PAServer {
 
     private static PACore plugin = PACore.getInstance();
 
+    public static ArrayList<PAUser> users = new ArrayList<>();
     @Getter private static ArrayList<PAUser> adminChatMode = new ArrayList<>();
+
     private static final HashMap<UUID, UUID> tp = new HashMap<>();
     private static final HashMap<UUID, UUID> tph = new HashMap<>();
+
     public static ArrayList<PAUser> afkMode = new ArrayList<>();
 
     public static PAUser getUser(String user){

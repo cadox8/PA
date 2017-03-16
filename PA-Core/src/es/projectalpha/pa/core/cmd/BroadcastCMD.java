@@ -9,7 +9,7 @@ import java.util.Arrays;
 public class BroadcastCMD extends PACmd {
 
     public BroadcastCMD() {
-        super("broadcast", Grupo.MOD, Arrays.asList("bcast", "bc", "decir"));
+        super("broadcast", Grupo.Mod, Arrays.asList("bcast", "bc", "decir"));
     }
 
     @Override

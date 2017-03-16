@@ -27,7 +27,7 @@ public class PlayerListener implements Listener{
         PAUser user = PAServer.getUser(p);
 
         if (plugin.isMaintenance()){
-            if (!user.isOnRank(PACmd.Grupo.BUILDER)){
+            if (!user.isOnRank(PACmd.Grupo.Builder)){
                 user.getPlayer().kickPlayer(Utils.colorize("&cEl servidor está en mantenimiento, lo sentimos"));
             }
         }
@@ -44,7 +44,7 @@ public class PlayerListener implements Listener{
         Player p = e.getPlayer();
 
         if (plugin.getConfig().getString("spawn").equalsIgnoreCase("NONE")) {
-            if (PAServer.getUser(p).isOnRank(PACmd.Grupo.ADMIN)) {
+            if (PAServer.getUser(p).isOnRank(PACmd.Grupo.Admin)) {
                 PAServer.getUser(e.getPlayer()).sendMessagePrefix("&7El spawn no está definido. Puedes hacerlo poniendo /forcespawn set en las coordenadas que quieras");
             }
         } else {

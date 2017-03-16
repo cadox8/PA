@@ -20,7 +20,7 @@ public class SpawnCMD extends PACmd {
         }
         if (args.length == 1) {
             if (args[0].equalsIgnoreCase("set")) {
-                if (!user.isOnRank(Grupo.ADMIN)) return;
+                if (!user.isOnRank(Grupo.Admin)) return;
                 plugin.getConfig().set("spawn", Utils.locationToString(user.getPlayer().getLocation()));
                 plugin.saveConfig();
 
