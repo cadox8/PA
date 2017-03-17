@@ -24,15 +24,15 @@ public class Title {
                 title = ChatColor.translateAlternateColorCodes('&', title);
                 title = title.replaceAll("%player%", player.getDisplayName());
                 // Times packets
-                e = ReflectionAPI.getNmsClass("PacketPlayOutTitle").getDeclaredClasses()[0].getField("TIMES").get((Object) null);
-                chatTitle = ReflectionAPI.getNmsClass("IChatBaseComponent").getDeclaredClasses()[0].getMethod("a", new Class[]{String.class}).invoke((Object) null, new Object[]{"{\"text\":\"" + title + "\"}"});
-                subtitleConstructor = ReflectionAPI.getNmsClass("PacketPlayOutTitle").getConstructor(new Class[]{ReflectionAPI.getNmsClass("PacketPlayOutTitle").getDeclaredClasses()[0], ReflectionAPI.getNmsClass("IChatBaseComponent"), Integer.TYPE, Integer.TYPE, Integer.TYPE});
+                e = ReflectionAPI.getNMSClass("PacketPlayOutTitle").getDeclaredClasses()[0].getField("TIMES").get((Object) null);
+                chatTitle = ReflectionAPI.getNMSClass("IChatBaseComponent").getDeclaredClasses()[0].getMethod("a", new Class[]{String.class}).invoke((Object) null, new Object[]{"{\"text\":\"" + title + "\"}"});
+                subtitleConstructor = ReflectionAPI.getNMSClass("PacketPlayOutTitle").getConstructor(new Class[]{ReflectionAPI.getNMSClass("PacketPlayOutTitle").getDeclaredClasses()[0], ReflectionAPI.getNMSClass("IChatBaseComponent"), Integer.TYPE, Integer.TYPE, Integer.TYPE});
                 titlePacket = subtitleConstructor.newInstance(new Object[]{e, chatTitle, fadeIn, stay, fadeOut});
                 ReflectionAPI.sendPacket(player, titlePacket);
 
-                e = ReflectionAPI.getNmsClass("PacketPlayOutTitle").getDeclaredClasses()[0].getField("TITLE").get((Object) null);
-                chatTitle = ReflectionAPI.getNmsClass("IChatBaseComponent").getDeclaredClasses()[0].getMethod("a", new Class[]{String.class}).invoke((Object) null, new Object[]{"{\"text\":\"" + title + "\"}"});
-                subtitleConstructor = ReflectionAPI.getNmsClass("PacketPlayOutTitle").getConstructor(new Class[]{ReflectionAPI.getNmsClass("PacketPlayOutTitle").getDeclaredClasses()[0], ReflectionAPI.getNmsClass("IChatBaseComponent")});
+                e = ReflectionAPI.getNMSClass("PacketPlayOutTitle").getDeclaredClasses()[0].getField("TITLE").get((Object) null);
+                chatTitle = ReflectionAPI.getNMSClass("IChatBaseComponent").getDeclaredClasses()[0].getMethod("a", new Class[]{String.class}).invoke((Object) null, new Object[]{"{\"text\":\"" + title + "\"}"});
+                subtitleConstructor = ReflectionAPI.getNMSClass("PacketPlayOutTitle").getConstructor(new Class[]{ReflectionAPI.getNMSClass("PacketPlayOutTitle").getDeclaredClasses()[0], ReflectionAPI.getNMSClass("IChatBaseComponent")});
                 titlePacket = subtitleConstructor.newInstance(new Object[]{e, chatTitle});
                 ReflectionAPI.sendPacket(player, titlePacket);
             }
@@ -41,15 +41,15 @@ public class Title {
                 subtitle = ChatColor.translateAlternateColorCodes('&', subtitle);
                 subtitle = subtitle.replaceAll("%player%", player.getDisplayName());
                 // Times packets
-                e = ReflectionAPI.getNmsClass("PacketPlayOutTitle").getDeclaredClasses()[0].getField("TIMES").get((Object) null);
-                chatSubtitle = ReflectionAPI.getNmsClass("IChatBaseComponent").getDeclaredClasses()[0].getMethod("a", new Class[]{String.class}).invoke((Object) null, new Object[]{"{\"text\":\"" + title + "\"}"});
-                subtitleConstructor = ReflectionAPI.getNmsClass("PacketPlayOutTitle").getConstructor(new Class[]{ReflectionAPI.getNmsClass("PacketPlayOutTitle").getDeclaredClasses()[0], ReflectionAPI.getNmsClass("IChatBaseComponent"), Integer.TYPE, Integer.TYPE, Integer.TYPE});
+                e = ReflectionAPI.getNMSClass("PacketPlayOutTitle").getDeclaredClasses()[0].getField("TIMES").get((Object) null);
+                chatSubtitle = ReflectionAPI.getNMSClass("IChatBaseComponent").getDeclaredClasses()[0].getMethod("a", new Class[]{String.class}).invoke((Object) null, new Object[]{"{\"text\":\"" + title + "\"}"});
+                subtitleConstructor = ReflectionAPI.getNMSClass("PacketPlayOutTitle").getConstructor(new Class[]{ReflectionAPI.getNMSClass("PacketPlayOutTitle").getDeclaredClasses()[0], ReflectionAPI.getNMSClass("IChatBaseComponent"), Integer.TYPE, Integer.TYPE, Integer.TYPE});
                 subtitlePacket = subtitleConstructor.newInstance(new Object[]{e, chatSubtitle, fadeIn, stay, fadeOut});
                 ReflectionAPI.sendPacket(player, subtitlePacket);
 
-                e = ReflectionAPI.getNmsClass("PacketPlayOutTitle").getDeclaredClasses()[0].getField("SUBTITLE").get((Object) null);
-                chatSubtitle = ReflectionAPI.getNmsClass("IChatBaseComponent").getDeclaredClasses()[0].getMethod("a", new Class[]{String.class}).invoke((Object) null, new Object[]{"{\"text\":\"" + subtitle + "\"}"});
-                subtitleConstructor = ReflectionAPI.getNmsClass("PacketPlayOutTitle").getConstructor(new Class[]{ReflectionAPI.getNmsClass("PacketPlayOutTitle").getDeclaredClasses()[0], ReflectionAPI.getNmsClass("IChatBaseComponent"), Integer.TYPE, Integer.TYPE, Integer.TYPE});
+                e = ReflectionAPI.getNMSClass("PacketPlayOutTitle").getDeclaredClasses()[0].getField("SUBTITLE").get((Object) null);
+                chatSubtitle = ReflectionAPI.getNMSClass("IChatBaseComponent").getDeclaredClasses()[0].getMethod("a", new Class[]{String.class}).invoke((Object) null, new Object[]{"{\"text\":\"" + subtitle + "\"}"});
+                subtitleConstructor = ReflectionAPI.getNMSClass("PacketPlayOutTitle").getConstructor(new Class[]{ReflectionAPI.getNMSClass("PacketPlayOutTitle").getDeclaredClasses()[0], ReflectionAPI.getNMSClass("IChatBaseComponent"), Integer.TYPE, Integer.TYPE, Integer.TYPE});
                 subtitlePacket = subtitleConstructor.newInstance(new Object[]{e, chatSubtitle, fadeIn, stay, fadeOut});
                 ReflectionAPI.sendPacket(player, subtitlePacket);
             }

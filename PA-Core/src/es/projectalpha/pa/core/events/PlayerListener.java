@@ -5,7 +5,6 @@ import es.projectalpha.pa.core.api.PAServer;
 import es.projectalpha.pa.core.api.PAUser;
 import es.projectalpha.pa.core.cmd.PACmd;
 import es.projectalpha.pa.core.utils.Utils;
-import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -42,6 +41,11 @@ public class PlayerListener implements Listener{
     @EventHandler(priority = EventPriority.LOW)
     public void onPlayerJoin(PlayerJoinEvent e){
         Player p = e.getPlayer();
+        PAUser u = PAServer.getUser(p);
+
+        plugin.getMysql().setupTable(p);
+        u.getUserData().setCoins(100);
+        u.save();
 
         if (plugin.getConfig().getString("spawn").equalsIgnoreCase("NONE")) {
             if (PAServer.getUser(p).isOnRank(PACmd.Grupo.Admin)) {
@@ -70,22 +74,6 @@ public class PlayerListener implements Listener{
         if (PAServer.getAdminChatMode().contains(user)) {
             Utils.sendAdminMsg(user, e.getMessage());
             e.setCancelled(true);
-        }
-
-        if (e.getMessage().contains("@")){
-            String[] args = e.getMessage().split(" ");
-            for (String s : args){
-                if (s.startsWith("@")){
-                    to = PAServer.getUser(plugin.getServer().getPlayer(s.replaceAll("@", "")));
-
-                    if (!to.isOnline()) {
-                        user.sendMessagePrefix("&cEl jugador no está conectado");
-                        e.setCancelled(true);
-                        return;
-                    }
-                    to.sendSound(Sound.ENTITY_PLAYER_LEVELUP);
-                }
-            }
         }
     }
 

@@ -10,6 +10,9 @@
         <!-- Globales -->
         <module>PA-Core</module>
 
+        <!-- Bungee -->
+        <module>PA-Bungee</module>
+
         <!-- Lobby -->
         <module>PA-Antium</module>
         <module>PA-Lobby</module>

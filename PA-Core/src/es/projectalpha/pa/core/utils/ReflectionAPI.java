@@ -20,9 +20,21 @@ public class ReflectionAPI {
         return "";
     }
 
-    public static Class<?> getNmsClass(String name) {
+    public static Class<?> getNMSClass(String name) {
         String version = getVersion();
         String className = "net.minecraft.server." + version + name;
+        Class<?> clazz = null;
+        try {
+            clazz = Class.forName(className);
+        } catch (ClassNotFoundException ex) {
+            ex.printStackTrace();
+        }
+        return clazz;
+    }
+
+    public static Class<?> getOBCClass(String name) {
+        String version = getVersion();
+        String className = "org.bukkit.craftbukkit." + version + name;
         Class<?> clazz = null;
         try {
             clazz = Class.forName(className);

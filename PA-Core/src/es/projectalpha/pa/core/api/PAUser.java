@@ -129,8 +129,8 @@ public class PAUser {
      */
     public void sendActionBar(String msg) {
         try {
-            Constructor<?> constructor = ReflectionAPI.getNmsClass("PacketPlayOutChat").getConstructor(ReflectionAPI.getNmsClass("IChatBaseComponent"), byte.class);
-            Object icbc = ReflectionAPI.getNmsClass("IChatBaseComponent").getDeclaredClasses()[0].getMethod("a", String.class).invoke(null, "{\"text\":\"" + Utils.colorize(msg) + "\"}");
+            Constructor<?> constructor = ReflectionAPI.getNMSClass("PacketPlayOutChat").getConstructor(ReflectionAPI.getNMSClass("IChatBaseComponent"), byte.class);
+            Object icbc = ReflectionAPI.getNMSClass("IChatBaseComponent").getDeclaredClasses()[0].getMethod("a", String.class).invoke(null, "{\"text\":\"" + Utils.colorize(msg) + "\"}");
             Object packet = constructor.newInstance(icbc, (byte) 2);
 
             ReflectionAPI.sendPacket(getPlayer(), packet);
@@ -141,11 +141,11 @@ public class PAUser {
 
     public void sendHeaderAndFooter(String headerText, String footerText) {
         try {
-            Class chatSerializer = ReflectionAPI.getNmsClass("IChatBaseComponent$ChatSerializer");
+            Class chatSerializer = ReflectionAPI.getNMSClass("IChatBaseComponent$ChatSerializer");
 
             Object tabHeader = chatSerializer.getMethod("a", String.class).invoke(chatSerializer, "{'text': '" + Utils.colorize(headerText) + "'}");
             Object tabFooter = chatSerializer.getMethod("a", String.class).invoke(chatSerializer, "{'text': '" + Utils.colorize(footerText) + "'}");
-            Object tab = ReflectionAPI.getNmsClass("PacketPlayOutPlayerListHeaderFooter").getConstructor(new Class[]{ReflectionAPI.getNmsClass("IChatBaseComponent")}).newInstance(new Object[]{tabHeader});
+            Object tab = ReflectionAPI.getNMSClass("PacketPlayOutPlayerListHeaderFooter").getConstructor(new Class[]{ReflectionAPI.getNMSClass("IChatBaseComponent")}).newInstance(new Object[]{tabHeader});
 
             Field f = tab.getClass().getDeclaredField("b");
             f.setAccessible(true);
