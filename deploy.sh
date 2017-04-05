@@ -1,5 +1,5 @@
-FTP_USER=cadox8@cadox8.cf
-FTP_PASSWORD=123abc4d
+FTP_USER=root@projectalpha.es
+FTP_PASSWORD=vivalapepa123
 BRANCH_A_DEPLOY=master
 NO_DEPLOY_MESSAGE=NoDeploy
 
@@ -10,7 +10,7 @@ else
     if [ "$TRAVIS_BRANCH" == "$BRANCH_A_DEPLOY" ]; then
         for file in *.jar; do
             echo  Subiendo $file al servidor [185.116.215.111]
-            curl --ftp-create-dirs -T $file -u $FTP_USER:$FTP_PASSWORD ftp://185.116.215.111/public_html/repo/pa/$file
+            curl --ftp-create-dirs -T $file -u $FTP_USER:$FTP_PASSWORD ftp://149.202.43.17/magic/pa$file
         done
         echo " Todos los archivos han sido subidos"
     else
