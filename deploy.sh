@@ -10,7 +10,7 @@ else
     if [ "$TRAVIS_BRANCH" == "$BRANCH_A_DEPLOY" ]; then
         for file in *.jar; do
             echo  Subiendo $file al servidor [185.116.215.111]
-            curl --ftp-create-dirs -T $file -u $FTP_USER:$FTP_PASSWORD ftp://149.202.43.17/magic/pa$file
+            curl --ftp-create-dirs -T $file -u $FTP_USER:$FTP_PASSWORD sftp://149.202.43.17/magic/pa$file
         done
         echo " Todos los archivos han sido subidos"
     else

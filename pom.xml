@@ -16,6 +16,9 @@
         <!-- Lobby -->
         <module>PA-Antium</module>
         <module>PA-Lobby</module>
+
+        <!-- Games -->
+        <module>PA-DTB</module>
 		
     </modules>
     <properties>
