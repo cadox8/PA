@@ -33,7 +33,7 @@
         </repository>
         <repository>
             <id>pa-repo</id>
-            <url>http://cadox8.cf/repo/pa/</url>
+            <url>http://projectalpha.es/repo/pa/</url>
         </repository>
     </repositories>
     <dependencies>

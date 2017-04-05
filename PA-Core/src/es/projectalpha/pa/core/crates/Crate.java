@@ -1,9 +1,11 @@
 package es.projectalpha.pa.core.crates;
 
+import es.projectalpha.pa.core.PACore;
 import es.projectalpha.pa.core.api.PAUser;
+import es.projectalpha.pa.core.utils.ItemMaker;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.ArrayList;
@@ -12,39 +14,34 @@ public class Crate {
 
     @Getter private String name;
     @Getter private CrateType crateType;
-    @Getter private CrateAction crateAction;
-    @Getter private Location location;
 
-    public Crate(String name, CrateAction crateAction, Location location){
-        this(name, CrateType.NORMAL, crateAction, location);
+    protected PACore plugin = PACore.getInstance();
+
+    public Crate(String name){
+        this(name, CrateType.NORMAL);
     }
 
-    public Crate(String name, CrateType crateType, CrateAction crateAction, Location location){
+    public Crate(String name, CrateType crateType){
         this.name = name;
         this.crateType = crateType;
-        this.crateAction = crateAction;
-        this.location = location;
     }
 
-
-
-    public void use(PAUser user){}
+    public void open(PAUser user){
+    }
 
     public ArrayList<ItemStack> contains(){
-        return new ArrayList<>();
+        ArrayList<ItemStack> i = new ArrayList<>();
+        i.add(new ItemMaker(Material.APPLE).setDisplayName(":D").build());
+        return i;
     }
 
 
     @AllArgsConstructor
-    public enum CrateType{
+    public enum CrateType {
         NORMAL("Normal"),
         EPICA("Épica"),
         LEGENDARIA("Legendaria");
 
         @Getter private final String name;
-    }
-
-    public enum CrateAction{
-        RANDOM, DROP;
     }
 }

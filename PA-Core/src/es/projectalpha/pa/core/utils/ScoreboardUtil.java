@@ -22,7 +22,7 @@ public class ScoreboardUtil {
     public ScoreboardUtil(String displayName, String score) {
         this.scoreboard = Bukkit.getScoreboardManager().getNewScoreboard();
         this.objective = this.scoreboard.registerNewObjective(score, "dummy");
-        this.objective.setDisplayName(displayName);
+        this.objective.setDisplayName(Utils.colorize(displayName));
         this.objective.setDisplaySlot(DisplaySlot.SIDEBAR);
         this.scores = new HashMap<>();
     }

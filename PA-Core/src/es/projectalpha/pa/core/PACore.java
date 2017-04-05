@@ -1,5 +1,6 @@
 package es.projectalpha.pa.core;
 
+import es.projectalpha.hp.api.Mage;
 import es.projectalpha.pa.core.api.PAServer;
 import es.projectalpha.pa.core.events.PlayerListener;
 import es.projectalpha.pa.core.managers.WorldManager;

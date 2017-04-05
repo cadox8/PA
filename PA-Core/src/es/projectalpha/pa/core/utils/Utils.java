@@ -63,15 +63,20 @@ public class Utils {
     }
 
     public static String locationToString(Location loc) {
+        if (loc == null) return "";
         return loc.getWorld().getName() + "%" + loc.getX() + "%" + loc.getY() + "%" + loc.getZ() + "%" + loc.getYaw() + "%" + loc.getPitch();
     }
 
     public static Location stringToLocation(String string) {
         if (string == null) return null;
         String[] s = string.split("%");
-        Location loc = new Location(Bukkit.getWorld(s[0]), Double.parseDouble(s[1]),
+        return new Location(Bukkit.getWorld(s[0]), Double.parseDouble(s[1]),
                 Double.parseDouble(s[2]), Double.parseDouble(s[3]), Float.parseFloat(s[4]), Float.parseFloat(s[5]));
-        return loc;
+    }
+
+    public static Location cuboidToLocation(String string, int args){
+        if (args > 1 || string == null) return null;
+        return stringToLocation(string.split(";")[args]);
     }
 
     public static Location centre(Location loc) {
