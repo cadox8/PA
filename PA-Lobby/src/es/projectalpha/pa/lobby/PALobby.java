@@ -2,6 +2,8 @@ package es.projectalpha.pa.lobby;
 
 import es.projectalpha.pa.core.PACore;
 import es.projectalpha.pa.lobby.events.InventoryEvents;
+import es.projectalpha.pa.lobby.events.PlayerEvents;
+import es.projectalpha.pa.lobby.utils.LobbyTeams;
 import lombok.Getter;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.plugin.PluginManager;
@@ -15,8 +17,9 @@ public class PALobby extends JavaPlugin {
     public void onEnable(){
         instance = this;
 
-        plugin.debugLog("Cargando Eventos...");
+        plugin.debugLog("Cargando Eventos, Clases, Equipos y Comandos...");
         registerEvents();
+        LobbyTeams.initTeams();
     }
 
 
@@ -24,6 +27,7 @@ public class PALobby extends JavaPlugin {
         PluginManager pm = getServer().getPluginManager();
 
         pm.registerEvents(new InventoryEvents(instance), instance);
+        pm.registerEvents(new PlayerEvents(instance), instance);
     }
 
 

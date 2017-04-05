@@ -1,5 +1,7 @@
-package es.projectalpha.pa.lobby;
+package es.projectalpha.pa.lobby.utils;
 
+import es.projectalpha.pa.lobby.LobbyPlayer;
+import es.projectalpha.pa.lobby.PALobby;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.inventory.Inventory;
@@ -10,7 +12,7 @@ public class LobbyMenu {
     private PALobby plugin;
 
     public enum MenuType {
-        SERVERS;
+        SERVERS
     }
 
     private static Inventory servers;
