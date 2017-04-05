@@ -1,6 +1,8 @@
 package es.projectalpha.pa.bungee;
 
+import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.ServerPing;
+import net.md_5.bungee.api.chat.TextComponent;
 import net.md_5.bungee.api.config.ServerInfo;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
 import net.md_5.bungee.api.event.PostLoginEvent;
@@ -35,9 +37,15 @@ public class PABungee extends Plugin implements Listener {
 
     @EventHandler
     public void onProxyPing(ProxyPingEvent e){
-        ServerPing.Protocol version = e.getResponse().getVersion();
+        ServerPing ping = e.getResponse();
+        ServerPing.Protocol version = ping.getVersion();
         version.setName("ProjectAlpha.es");
         version.setProtocol(316);
+
+        String motd = ChatColor.translateAlternateColorCodes('&', "&cProject&rAlpha");
+
+        ping.setDescriptionComponent(new TextComponent(motd));
+
         e.getResponse().setVersion(version);
     }
 

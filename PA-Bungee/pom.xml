@@ -33,24 +33,25 @@
         </repository>
     </repositories>
     <dependencies>
+        <!-- Bungee -->
         <dependency>
             <groupId>net.md-5</groupId>
             <artifactId>bungeecord-api</artifactId>
             <version>1.11-SNAPSHOT</version>
-            <type>jar</type>
-            <scope>provided</scope>
         </dependency>
+        <!-- Gson -->
         <dependency>
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
             <version>2.7</version>
             <type>jar</type>
         </dependency>
+        <!--Lombok Repo-->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>1.12.2</version>
-            <type>jar</type>
+            <version>LATEST</version>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
 </project>
