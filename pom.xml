@@ -17,6 +17,10 @@
         <!-- Lobby -->
         <module>PA-Lobby</module>
 
+        <!-- Juegos -->
+        <module>PA-Rage</module>
+        <module>PA-TowerBattle</module>
+
 		
     </modules>
     <properties>
