@@ -84,9 +84,9 @@ public class PlayerListener implements Listener{
     public void onCommand(PlayerCommandPreprocessEvent e){
         PAUser p = PAServer.getUser(e.getPlayer());
 
-        if(p.isOnRank(PACmd.Grupo.DEV)) return;
 
         if (e.getMessage().startsWith("/?") || e.getMessage().startsWith("/bukkit:") || e.getMessage().startsWith("/pl") || e.getMessage().startsWith("/plugins") || e.getMessage().startsWith("/minecraft:")) {
+            if(!p.isOnRank(PACmd.Grupo.DEV)) return;
             p.sendMessagePrefix("&cLos plugins de este servidor ha sido creados por los desarrolladores del mismo, es por eso por lo que no tenemos" +
                     "ningún problema en decirlos: &6PA-Core. &cAhora, te invito a que los crees tu mismo, puesto que el código " +
                     "de los plugins sólo lo tenemos nosotros :D");
