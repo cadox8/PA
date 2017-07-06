@@ -33,7 +33,7 @@
         </repository>
         <repository>
             <id>pa-repo</id>
-            <url>http://projectalpha.es/repo/pa/</url>
+            <url>https://projectalpha.es</url>
         </repository>
     </repositories>
     <dependencies>
@@ -41,7 +41,7 @@
         <dependency>
             <groupId>org.spigotmc</groupId>
             <artifactId>spigot-api</artifactId>
-            <version>1.11-R0.1-SNAPSHOT</version>
+            <version>1.12-R0.1-SNAPSHOT</version>
         </dependency>
         <!--Lombok Repo-->
         <dependency>

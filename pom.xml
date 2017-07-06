@@ -9,16 +9,14 @@
 
         <!-- Globales -->
         <module>PA-Core</module>
+        <module>PA-Antium</module>
 
         <!-- Bungee -->
         <module>PA-Bungee</module>
 
         <!-- Lobby -->
-        <module>PA-Antium</module>
         <module>PA-Lobby</module>
 
-        <!-- Games -->
-        <module>PA-DTB</module>
 		
     </modules>
     <properties>

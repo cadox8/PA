@@ -40,7 +40,7 @@ public class PABungee extends Plugin implements Listener {
         ServerPing ping = e.getResponse();
         ServerPing.Protocol version = ping.getVersion();
         version.setName("ProjectAlpha.es");
-        version.setProtocol(316);
+        version.setProtocol(335);
 
         String motd = ChatColor.translateAlternateColorCodes('&', "&cProject&rAlpha");
 

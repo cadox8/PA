@@ -33,7 +33,7 @@ public class PAAntium extends JavaPlugin {
 
         plugin.debugLog("Cargando MySQL...");
         try {
-            mysql = new MySQL("localost", "pa", "root", "vivalapepa");
+            mysql = new MySQL("projectalpha.es", "projectalpha", "root", "vivalapepa123");
             connection = mysql.openConnection();
         } catch (SQLException | ClassNotFoundException exc) {
             getLogger().severe("Error al abrir la conexion MySQL!");

@@ -34,7 +34,7 @@ public class PACore extends JavaPlugin {
 
         try {
             debugLog("Cargando modulo de MySQL");
-            mysql = new MySQL("localost", "pa", "root", "vivalapepa");
+            mysql = new MySQL("projectalpha", "pa", "root", "vivalapepa");
             connection = mysql.openConnection();
         } catch (SQLException | ClassNotFoundException exc) {
             getLogger().severe("Error al abrir la conexion MySQL!");

@@ -18,8 +18,7 @@ public class CommandAlert extends Command {
             StringBuilder builder = new StringBuilder();
             String[] arrayOfString;
             int j = (arrayOfString = args).length;
-            for (int i = 0; i < j; i++)
-            {
+            for (int i = 0; i < j; i++) {
                 String s = arrayOfString[i];
                 builder.append(ChatColor.translateAlternateColorCodes('&', s));
                 builder.append(" ");
