@@ -1,4 +1,4 @@
-package es.projectalpha.pa.rage.manager;
+package es.projectalpha.pa.core.utils;
 
 import lombok.Getter;
 import lombok.Setter;
