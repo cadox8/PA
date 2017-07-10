@@ -5,6 +5,7 @@ import es.projectalpha.pa.rage.events.PlayerEvents;
 import es.projectalpha.pa.rage.manager.ArenaManager;
 import es.projectalpha.pa.rage.manager.GameManager;
 import lombok.Getter;
+import org.bukkit.ChatColor;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;

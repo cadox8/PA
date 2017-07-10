@@ -2,7 +2,7 @@ package es.projectalpha.pa.rage.tasks;
 
 import es.projectalpha.pa.core.utils.Utils;
 import es.projectalpha.pa.rage.RageGames;
-import es.projectalpha.pa.rage.manager.GameState;
+import es.projectalpha.pa.core.utils.GameState;
 import org.bukkit.Sound;
 import org.bukkit.scheduler.BukkitRunnable;
 
