@@ -1,4 +1,4 @@
-package es.projectalpha.pa.towerbattle.api;
+package es.projectalpha.pa.tower.api;
 
 import es.projectalpha.pa.core.api.PAUser;
 

@@ -1,18 +1,22 @@
-package es.projectalpha.pa.towerbattle;
+package es.projectalpha.pa.tower;
 
-import es.projectalpha.pa.towerbattle.api.TowerPlayer;
+import es.projectalpha.pa.tower.api.TowerPlayer;
+import es.projectalpha.pa.tower.managers.ArenaManager;
+import es.projectalpha.pa.tower.managers.GameManager;
 import lombok.Getter;
 import org.bukkit.OfflinePlayer;
-import org.bukkit.plugin.PluginManager;
+import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.ArrayList;
 
-public class TowerBattle {
+public class TowerBattle extends JavaPlugin {
 
-    @Getter
-    private static TowerBattle instance;
+    @Getter private static TowerBattle instance;
 
     public static ArrayList<TowerPlayer> players = new ArrayList<>();
+
+    @Getter private GameManager gm;
+    @Getter private ArenaManager am;
 
     public void onEnable() {
         instance = this;
@@ -22,6 +26,8 @@ public class TowerBattle {
     }
 
     private void registerClasses(){
+        gm = new GameManager();
+        am = new ArenaManager();
     }
 
     private void registerEvents() {
