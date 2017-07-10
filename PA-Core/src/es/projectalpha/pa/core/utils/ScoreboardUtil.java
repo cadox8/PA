@@ -1,5 +1,7 @@
 package es.projectalpha.pa.core.utils;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.scoreboard.DisplaySlot;
@@ -11,11 +13,11 @@ import java.util.HashMap;
 
 public class ScoreboardUtil {
 
-    private final Scoreboard scoreboard;
+    @Getter private final Scoreboard scoreboard;
 
     private final Objective objective;
 
-    private boolean reset;
+    @Getter @Setter private boolean reset;
 
     private final HashMap<Integer, String> scores;
 
@@ -61,18 +63,6 @@ public class ScoreboardUtil {
             scores.clear();
             setReset(true);
         }
-    }
-
-    public Scoreboard getScoreboard() {
-        return scoreboard;
-    }
-
-    public void setReset(boolean reset) {
-        this.reset = reset;
-    }
-
-    public boolean isReset() {
-        return reset;
     }
 
     public void build(Player player) {

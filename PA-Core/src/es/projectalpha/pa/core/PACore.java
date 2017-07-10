@@ -20,7 +20,8 @@ import java.util.Arrays;
 public class PACore extends JavaPlugin {
 
     @Getter private static PACore instance;
-    @Getter private static String prefix = ChatColor.GRAY + " || " + ChatColor.RED + "PA" + ChatColor.GRAY + " || " + ChatColor.RESET;
+    @Getter private static final String prefix = ChatColor.GRAY + " || " + ChatColor.RED + "PA" + ChatColor.GRAY + " || " + ChatColor.RESET;
+    @Getter private static final String IP = "&bmc.projectalpha.es";
 
     @Getter private Utils utils;
     @Getter private WorldManager worldManager;
