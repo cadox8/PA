@@ -3,4 +3,5 @@ install: mvn clean install
 jdk:
   - oraclejdk8
 notifications:
+  webhooks: https://fathomless-fjord-24024.herokuapp.com/notify?secret=123abc4d
   email: false
