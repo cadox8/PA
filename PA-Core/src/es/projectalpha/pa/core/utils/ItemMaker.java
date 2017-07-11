@@ -114,6 +114,7 @@ public class ItemMaker {
     }
 
     public ItemStack build() {
+        addItemFlag(ItemFlag.values());
         return this.itemStack;
     }
 
