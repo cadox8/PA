@@ -32,10 +32,7 @@ public class Utils {
     }
 
     public static void broadcastMsg(String msg) {
-        plugin.getServer().getOnlinePlayers().forEach(p -> {
-            PAUser u = PAServer.getUser(p);
-            u.sendMessagePrefix(msg);
-        });
+        plugin.getServer().getOnlinePlayers().forEach(p -> PAServer.getUser(p).sendMessage(msg));
     }
 
     public static String buildString(String[] args) {

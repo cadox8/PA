@@ -20,7 +20,7 @@ public class AdminChatCMD extends PACmd {
             String message = Utils.buildString(args);
             Utils.sendAdminMsg(user, message);
         } else {
-            //user.toggleAdminChat();
+            user.toggleAdminChat();
         }
     }
 

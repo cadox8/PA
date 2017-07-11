@@ -1,6 +1,7 @@
 package es.projectalpha.pa.core.events;
 
 import es.projectalpha.pa.core.PACore;
+import es.projectalpha.pa.core.api.PAData;
 import es.projectalpha.pa.core.api.PAServer;
 import es.projectalpha.pa.core.api.PAUser;
 import es.projectalpha.pa.core.cmd.PACmd;
@@ -49,7 +50,7 @@ public class PlayerListener implements Listener{
 
         if (plugin.getConfig().getString("spawn").equalsIgnoreCase("NONE")) {
             if (PAServer.getUser(p).isOnRank(PACmd.Grupo.Admin)) {
-                PAServer.getUser(e.getPlayer()).sendMessagePrefix("&7El spawn no está definido. Puedes hacerlo poniendo /forcespawn set en las coordenadas que quieras");
+                PAServer.getUser(e.getPlayer()).sendMessage(PAData.PAPlugins.CORE.getPrefix() + "&7El spawn no está definido. Puedes hacerlo poniendo /forcespawn set en las coordenadas que quieras");
             }
         } else {
             e.getPlayer().teleport(Utils.stringToLocation(plugin.getConfig().getString("spawn")));
@@ -87,7 +88,7 @@ public class PlayerListener implements Listener{
 
         if (e.getMessage().startsWith("/?") || e.getMessage().startsWith("/bukkit:") || e.getMessage().startsWith("/pl") || e.getMessage().startsWith("/plugins") || e.getMessage().startsWith("/minecraft:")) {
             if(!p.isOnRank(PACmd.Grupo.DEV)) return;
-            p.sendMessagePrefix("&cLos plugins de este servidor ha sido creados por los desarrolladores del mismo, es por eso por lo que no tenemos" +
+            p.sendMessage(PAData.PAPlugins.CORE.getPrefix() + "&cLos plugins de este servidor ha sido creados por los desarrolladores del mismo, es por eso por lo que no tenemos" +
                     "ningún problema en decirlos: &6PA-Core. &cAhora, te invito a que los crees tu mismo, puesto que el código " +
                     "de los plugins sólo lo tenemos nosotros :D");
             e.setCancelled(true);

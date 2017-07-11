@@ -1,5 +1,6 @@
 package es.projectalpha.pa.core.cmd;
 
+import es.projectalpha.pa.core.api.PAData;
 import es.projectalpha.pa.core.api.PAServer;
 import es.projectalpha.pa.core.api.PAUser;
 import org.bukkit.command.Command;
@@ -23,14 +24,14 @@ public class PingCMD extends PACmd {
                 userNotOnline(user);
                 return;
             }
-            user.sendMessagePrefix("Ping de &2" + target.getDisplayName() + "&r: " + format(PAServer.getUser(target).getPing()));
+            user.sendMessage(PAData.PAPlugins.CORE.getPrefix() + "Ping de &2" + target.getDisplayName() + "&r: " + format(PAServer.getUser(target).getPing()));
             return;
         }
         if (user.getPing() < 0) {
-            user.sendMessagePrefix("&c¡Ha ocurrido un error obteniendo tu ping! Intentalo más tarde");
+            user.sendMessage(PAData.PAPlugins.CORE.getPrefix() + "&c¡Ha ocurrido un error obteniendo tu ping! Intentalo más tarde");
             return;
         }
-        user.sendMessagePrefix("Tu Ping: " + format(user.getPing()));
+        user.sendMessage(PAData.PAPlugins.CORE.getPrefix() + "Tu Ping: " + format(user.getPing()));
     }
 
     private String format(int ping) {

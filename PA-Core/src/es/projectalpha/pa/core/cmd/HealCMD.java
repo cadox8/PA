@@ -1,5 +1,6 @@
 package es.projectalpha.pa.core.cmd;
 
+import es.projectalpha.pa.core.api.PAData;
 import es.projectalpha.pa.core.api.PAServer;
 import es.projectalpha.pa.core.api.PAUser;
 import org.bukkit.command.Command;
@@ -18,16 +19,16 @@ public class HealCMD extends PACmd {
             user.getPlayer().setHealth(user.getPlayer().getMaxHealth());
             user.getPlayer().setFoodLevel(20);
 
-            user.sendMessagePrefix("&6Te has curado");
+            user.sendMessage(PAData.PAPlugins.CORE.getPrefix() + "&6Te has curado");
             return;
         }
         if (args.length == 1){
             PAUser target = PAServer.getUser(args[0]);
             if (target == null || !target.isOnline()){
-                user.sendMessagePrefix("&cEL jugador debe estar conectado");
+                user.sendMessage(PAData.PAPlugins.CORE.getPrefix() + "&cEL jugador debe estar conectado");
                 return;
             }
-            user.sendMessagePrefix("&6Has curado a &c" + target.getName());
+            user.sendMessage(PAData.PAPlugins.CORE.getPrefix() + "&6Has curado a &c" + target.getName());
             target.getPlayer().setHealth(user.getPlayer().getMaxHealth());
         }
     }

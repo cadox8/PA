@@ -1,5 +1,6 @@
 package es.projectalpha.pa.core.cmd;
 
+import es.projectalpha.pa.core.api.PAData;
 import es.projectalpha.pa.core.api.PAServer;
 import es.projectalpha.pa.core.api.PAUser;
 import es.projectalpha.pa.core.utils.Messages;
@@ -16,7 +17,7 @@ public class SpawnCMD extends PACmd {
         if (args.length == 0) {
             if (plugin.getConfig().getString("spawn").equalsIgnoreCase("NONE")) return;
             user.teleport(Utils.stringToLocation(plugin.getConfig().getString("spawn")));
-            user.sendMessagePrefix("&6Has sido teletransportado al spawn");
+            user.sendMessage(PAData.PAPlugins.CORE.getPrefix() + "&6Has sido teletransportado al spawn");
         }
         if (args.length == 1) {
             if (args[0].equalsIgnoreCase("set")) {
@@ -24,7 +25,7 @@ public class SpawnCMD extends PACmd {
                 plugin.getConfig().set("spawn", Utils.locationToString(user.getPlayer().getLocation()));
                 plugin.saveConfig();
 
-                user.sendMessagePrefix("&2Has puesto el punto de spawn satisfactoriamente");
+                user.sendMessage(PAData.PAPlugins.CORE.getPrefix() + "&2Has puesto el punto de spawn satisfactoriamente");
 
                 return;
             }
@@ -38,11 +39,11 @@ public class SpawnCMD extends PACmd {
 
             if (plugin.getConfig().getString("spawn").equalsIgnoreCase("NONE")) return;
             target.teleport(Utils.stringToLocation(plugin.getConfig().getString("spawn")));
-            target.sendMessagePrefix("&6Has sido teletransportado al spawn");
-            user.sendMessagePrefix("&6Has llevado a &c" + target.getName() + " &6al spawn");
+            target.sendMessage(PAData.PAPlugins.CORE.getPrefix() + "&6Has sido teletransportado al spawn");
+            user.sendMessage(PAData.PAPlugins.CORE.getPrefix() + "&6Has llevado a &c" + target.getName() + " &6al spawn");
         }
         if (args.length >= 2) {
-            user.sendMessagePrefix(Messages.help);
+            user.sendMessage(Messages.getMessage(Messages.INFO, PAData.PAPlugins.CORE));
         }
     }
 }

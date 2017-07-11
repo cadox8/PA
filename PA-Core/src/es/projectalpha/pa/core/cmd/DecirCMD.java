@@ -1,6 +1,7 @@
 package es.projectalpha.pa.core.cmd;
 
 import es.projectalpha.pa.core.PACore;
+import es.projectalpha.pa.core.api.PAData;
 import es.projectalpha.pa.core.api.PAServer;
 import es.projectalpha.pa.core.api.PAUser;
 import es.projectalpha.pa.core.utils.Utils;
@@ -22,11 +23,11 @@ public class DecirCMD extends PACmd {
         PAUser target = PAServer.getUser(PACore.getInstance().getServer().getPlayer(args[0]));
 
         if (target.equals(user)) {
-            user.sendMessagePrefix("&c¡No puedes enviarte mensajes a ti mismo!");
+            user.sendMessage(PAData.PAPlugins.CORE.getPrefix() + "&c¡No puedes enviarte mensajes a ti mismo!");
             return;
         }
         if (!target.isOnline()){
-            user.sendMessagePrefix("&cEl jugador está desconectado");
+            user.sendMessage(PAData.PAPlugins.CORE.getPrefix() + "&cEl jugador está desconectado");
             return;
         }
         String[] formatedArgs = args;

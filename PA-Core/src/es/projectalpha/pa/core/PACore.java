@@ -3,6 +3,7 @@ package es.projectalpha.pa.core;
 import es.projectalpha.pa.core.api.PAServer;
 import es.projectalpha.pa.core.events.PlayerListener;
 import es.projectalpha.pa.core.managers.WorldManager;
+import es.projectalpha.pa.core.utils.Log;
 import es.projectalpha.pa.core.utils.MySQL;
 import es.projectalpha.pa.core.utils.Utils;
 import lombok.Getter;
@@ -20,7 +21,6 @@ import java.util.Arrays;
 public class PACore extends JavaPlugin {
 
     @Getter private static PACore instance;
-    @Getter private static final String prefix = ChatColor.GRAY + " || " + ChatColor.RED + "PA" + ChatColor.GRAY + " || " + ChatColor.RESET;
     @Getter private static final String IP = "&bmc.projectalpha.es";
 
     @Getter private Utils utils;
@@ -51,9 +51,9 @@ public class PACore extends JavaPlugin {
                 try {
                     getConfig().options().copyDefaults(true);
                     saveConfig();
-                    log("Generando archivo config.yml correctamente");
+                    Log.debugLog("Generando archivo config.yml correctamente");
                 } catch (Exception e) {
-                    log(PAServer.Level.WARNING, "Fallo al generar el config.yml!");
+                    Log.log(Log.Level.WARNING, "Fallo al generar el config.yml!");
                     debugLog("Causa: " + e.toString());
                 }
             }
@@ -70,9 +70,9 @@ public class PACore extends JavaPlugin {
             debugLog("Cargando comandos...");
             PACommands.load();
 
-            log("PACore v" + getDescription().getVersion() + " ha sido cargado completamente!");
+            Log.debugLog("PACore v" + getDescription().getVersion() + " ha sido cargado completamente!");
         } catch (Throwable t) {
-            log("No se ha podido cargar PACore v" + getDescription().getVersion());
+            Log.debugLog("No se ha podido cargar PACore v" + getDescription().getVersion());
             debugLog("Causa: " + t.toString());
             getPluginLoader().disablePlugin(this);
         }
@@ -97,21 +97,10 @@ public class PACore extends JavaPlugin {
         try {
             PACommands.onCmd(sender, cmd, label, args);
         } catch (Exception ex) {
-            log(PAServer.Level.SEVERE, "Error al ejecutar el comando '" + label + Arrays.toString(args) + "'");
+            Log.log(Log.Level.SEVERE, "Error al ejecutar el comando '" + label + Arrays.toString(args) + "'");
             ex.printStackTrace();
         }
         return true;
-    }
-
-
-
-    //Log
-    public void log(String msg) {
-        log(PAServer.Level.INFO, msg);
-    }
-
-    public void log(PAServer.Level level, String msg) {
-        PAServer.log(level, msg);
     }
 
     public boolean isDebug() {
@@ -119,7 +108,7 @@ public class PACore extends JavaPlugin {
     }
 
     public void debugLog(String msg) {
-        PAServer.debugLog(msg);
+        Log.debugLog(msg);
     }
 
     //Maintenance/Pruebas

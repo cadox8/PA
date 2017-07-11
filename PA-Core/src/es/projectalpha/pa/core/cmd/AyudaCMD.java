@@ -17,7 +17,7 @@ public class AyudaCMD extends PACmd {
     public void run(PAUser user, String label, String[] args) {
         if(args.length == 0) {
             user.sendDiv();
-            user.sendMessagePrefix("&6Comandos de WorldUsuarios:");
+            user.sendMessage("&6Comandos de ProjectAlpha:");
             user.sendMessage("");
             user.sendDiv();
         }

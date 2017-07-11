@@ -1,5 +1,6 @@
 package es.projectalpha.pa.core.cmd;
 
+import es.projectalpha.pa.core.api.PAData;
 import es.projectalpha.pa.core.api.PAServer;
 import es.projectalpha.pa.core.api.PAUser;
 import org.bukkit.GameMode;
@@ -21,7 +22,7 @@ public class GamemodeCMD extends PACmd {
             //backInventory(user);
 
             user.getPlayer().setGameMode(parseGamemode(args[0]));
-            user.sendMessagePrefix("&6Modo de juego cambiado a &c" + parseGamemode(args[0]).toString());
+            user.sendMessage(PAData.PAPlugins.CORE.getPrefix() + "&6Modo de juego cambiado a &c" + parseGamemode(args[0]).toString());
         }
 
         if (args.length == 2){
@@ -32,8 +33,8 @@ public class GamemodeCMD extends PACmd {
                 return;
             }
             target.getPlayer().setGameMode(parseGamemode(args[0]));
-            user.sendMessagePrefix("&6Modo de juego cambiado de &2" + target.getName() + " a &c" + parseGamemode(args[0]).toString());
-            target.sendMessagePrefix("&6Modo de juego cambiado a &c" + parseGamemode(args[0]).toString());
+            user.sendMessage(PAData.PAPlugins.CORE.getPrefix() + "&6Modo de juego cambiado de &2" + target.getName() + " a &c" + parseGamemode(args[0]).toString());
+            target.sendMessage(PAData.PAPlugins.CORE.getPrefix() + "&6Modo de juego cambiado a &c" + parseGamemode(args[0]).toString());
         }
     }
 

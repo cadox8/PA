@@ -16,4 +16,21 @@ public enum PAData {
     public String fullPrefix() {
         return ChatColor.GRAY + " || " + prefix + ChatColor.GRAY + " || ";
     }
+
+    @AllArgsConstructor
+    public enum PAPlugins {
+        CORE("&cPA"),
+        BUNGEE("&cBungee"),
+        LOBBY("&dLobby"),
+        ANTIUM("&eAntium"),
+        RG("&cRageGames"),
+        TOA("&aTOA"),
+        TB("&eTowerBattle");
+
+        private String prefix;
+
+        public String getPrefix() {
+            return "&7 || " + prefix + "&7 || ";
+        }
+    }
 }

@@ -1,7 +1,10 @@
 package es.projectalpha.pa.core.cmd;
 
+import es.projectalpha.pa.core.api.PAData;
 import es.projectalpha.pa.core.api.PAServer;
 import es.projectalpha.pa.core.api.PAUser;
+import es.projectalpha.pa.core.utils.Messages;
+import es.projectalpha.pa.core.utils.Utils;
 
 import java.util.Arrays;
 
@@ -14,11 +17,11 @@ public class AfkCMD extends PACmd {
     @Override
     public void run(PAUser user, String lbl, String[] args) {
         if (PAServer.afkMode.contains(user)) {
-            plugin.getServer().getOnlinePlayers().forEach(p -> PAServer.getUser(p).sendMessagePrefix("&3" + user.getName() + " &6ya no está afk"));
+            Utils.broadcastMsg(Messages.getMessage(Messages.NO_AFK, PAData.PAPlugins.CORE, "%player%", user.getName()));
             PAServer.afkMode.remove(user);
         } else {
             PAServer.afkMode.add(user);
-            plugin.getServer().getOnlinePlayers().forEach(p -> PAServer.getUser(p).sendMessagePrefix("&3" + user.getName() + " &6está afk"));
+            Utils.broadcastMsg(Messages.getMessage(Messages.AFK, PAData.PAPlugins.CORE, "%player%", user.getName()));
         }
     }
 }

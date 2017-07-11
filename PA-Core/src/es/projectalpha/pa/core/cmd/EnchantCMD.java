@@ -2,6 +2,7 @@ package es.projectalpha.pa.core.cmd;
 
 import es.projectalpha.pa.core.api.PAServer;
 import es.projectalpha.pa.core.api.PAUser;
+import es.projectalpha.pa.core.utils.Log;
 import es.projectalpha.pa.core.utils.Utils;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
@@ -14,7 +15,6 @@ public class EnchantCMD extends PACmd {
 
     public void run(PAUser user, String label, String[] args){
         if (args.length == 2){
-            boolean unsafe = plugin.getConfig().getBoolean("allowUnsafeEnchantment");
             ItemStack i = user.getPlayer().getInventory().getItemInMainHand();
 
             Enchantment enchantment;
@@ -26,13 +26,7 @@ public class EnchantCMD extends PACmd {
 
             if (enchantment == null) return;
 
-            if (unsafe){
-                i.addUnsafeEnchantment(enchantment, level);
-                return;
-            }
-            if (level > enchantment.getMaxLevel()) return;
-
-            i.addEnchantment(enchantment, level);
+            i.addUnsafeEnchantment(enchantment, level);
         }
     }
 
@@ -40,7 +34,7 @@ public class EnchantCMD extends PACmd {
         try{
             return Enchantment.getByName(enchantment);
         }catch (NullPointerException e){
-            plugin.log(PAServer.Level.WARNING, "El encantamiento no existe");
+            Log.log(Log.Level.WARNING, "El encantamiento no existe");
         }
         return null;
     }

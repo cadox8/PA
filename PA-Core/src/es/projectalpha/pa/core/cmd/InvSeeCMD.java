@@ -1,5 +1,6 @@
 package es.projectalpha.pa.core.cmd;
 
+import es.projectalpha.pa.core.api.PAData;
 import es.projectalpha.pa.core.api.PAServer;
 import es.projectalpha.pa.core.api.PAUser;
 import org.bukkit.command.Command;
@@ -18,7 +19,7 @@ public class InvSeeCMD extends PACmd {
     @Override
     public void run(PAUser user, String lbl, String[] args) {
         if (args.length < 1) {
-            user.sendMessage("&cDebes poner un usuario");
+            user.sendMessage(PAData.PAPlugins.CORE.getPrefix() + "&cDebes poner un usuario");
             return;
         }
 

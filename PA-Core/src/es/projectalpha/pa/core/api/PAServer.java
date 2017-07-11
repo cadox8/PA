@@ -34,19 +34,6 @@ public class PAServer {
         return getUser(p.getUniqueId());
     }
 
-    @Getter @AllArgsConstructor
-    public enum Level {
-
-        INFO("[INFO]", 'r'),
-        WARNING("[&cAVISO&r]", 'c'),
-        SEVERE("[&4IMPORTANTE&r]", '4'),
-        DEBUG("[&3DEBUG&r]", '3');
-
-        private String prefix;
-        private char color;
-    }
-
-
     public static HashMap<UUID, UUID> getTeleportRequests() {
         return tp;
     }
@@ -71,12 +58,5 @@ public class PAServer {
         tph.remove(u);
     }
 
-    public static void log(Level level, String msg){
-        plugin.getServer().getConsoleSender().sendMessage(Utils.colorize(level.getPrefix() + " &" + level.getPrefix() + msg));
-    }
 
-    public static void debugLog(String msg) {
-        if (!plugin.isDebug()) return;
-        log(PAServer.Level.DEBUG, msg);
-    }
 }

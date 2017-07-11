@@ -1,5 +1,6 @@
 package es.projectalpha.pa.core.cmd;
 
+import es.projectalpha.pa.core.api.PAData;
 import es.projectalpha.pa.core.api.PAUser;
 
 public class CoreCMD extends PACmd {
@@ -36,7 +37,7 @@ public class CoreCMD extends PACmd {
     }
 
     private void def(PAUser user) {
-        user.sendMessagePrefix("&aFunciona con PACore " + "&7v" + plugin.getDescription().getVersion());
+        user.sendMessage(PAData.PAPlugins.CORE.getPrefix() + "&aFunciona con PACore " + "&7v" + plugin.getDescription().getVersion());
     }
 
     private void toggleDebug(PAUser user) {

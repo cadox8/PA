@@ -1,9 +1,11 @@
 package es.projectalpha.pa.core;
 
+import es.projectalpha.pa.core.api.PAData;
 import es.projectalpha.pa.core.api.PAServer;
 import es.projectalpha.pa.core.api.PAUser;
 import es.projectalpha.pa.core.cmd.*;
 import es.projectalpha.pa.core.cmd.tp.*;
+import es.projectalpha.pa.core.utils.Log;
 import es.projectalpha.pa.core.utils.Messages;
 import org.apache.commons.lang.StringUtils;
 import org.bukkit.Bukkit;
@@ -94,7 +96,7 @@ public class PACommands implements TabCompleter {
         if (!cmds.contains(cmd)) cmds.add(cmd);
 
         if (plugin.getServer().getPluginCommand(name + cmd.getName()) == null) {
-            PACore.getInstance().log(PAServer.Level.WARNING, "Error al cargar el comando /" + cmd.getName());
+            Log.log(Log.Level.WARNING, "Error al cargar el comando /" + cmd.getName());
         }
     }
 
@@ -129,7 +131,7 @@ public class PACommands implements TabCompleter {
                         return;
                     }
 
-                    p.sendMessagePrefix(Messages.noPerms);
+                    p.sendMessage(PAData.PAPlugins.CORE.getPrefix() + Messages.NO_PERMS);
                     return;
                 }
                 cmdr.run(sender, label, args);
@@ -154,7 +156,7 @@ public class PACommands implements TabCompleter {
                     }
                     rtrn = cmdr.onTabComplete(sender, cmd, label, args, args[args.length - 1], args.length - 1);
                 } catch (Exception ex) {
-                    PACore.getInstance().log(PAServer.Level.WARNING, "Fallo al autocompletar " + label);
+                    Log.log(Log.Level.WARNING, "Fallo al autocompletar " + label);
                 }
                 break;
             }

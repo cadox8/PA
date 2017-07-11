@@ -1,5 +1,6 @@
 package es.projectalpha.pa.core.cmd;
 
+import es.projectalpha.pa.core.api.PAData;
 import es.projectalpha.pa.core.api.PAUser;
 import org.bukkit.World;
 import org.bukkit.entity.Entity;
@@ -31,7 +32,7 @@ public class KillAllCMD extends PACmd {
 
             int mobs = worldEntities(user.getPlayer().getWorld(), entity).size();
             worldEntities(user.getPlayer().getWorld(), entity).forEach(e -> e.remove());
-            user.sendMessagePrefix("&6Eliminados &c" + mobs + " &6mobs");
+            user.sendMessage(PAData.PAPlugins.CORE.getPrefix() + "&6Eliminados &c" + mobs + " &6mobs");
         }
 
         if (args.length == 2){
@@ -42,7 +43,7 @@ public class KillAllCMD extends PACmd {
 
                 int mobs = worldEntities(user.getPlayer().getWorld(), entity).size();
                 worldClassEntities(user.getPlayer().getWorld(), entity).forEach(e -> e.remove());
-                user.sendMessagePrefix("&6Eliminados &c" + mobs + " &6mobs");
+                user.sendMessage(PAData.PAPlugins.CORE.getPrefix() + "&6Eliminados &c" + mobs + " &6mobs");
             }
         }
     }

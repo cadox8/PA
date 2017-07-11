@@ -1,5 +1,6 @@
 package es.projectalpha.pa.core.cmd;
 
+import es.projectalpha.pa.core.api.PAData;
 import es.projectalpha.pa.core.api.PAServer;
 import es.projectalpha.pa.core.api.PAUser;
 import es.projectalpha.pa.core.utils.Cooldown;
@@ -16,14 +17,14 @@ public class HelpOPCMD extends PACmd {
     @Override
     public void run(PAUser user, String label, String[] args) {
         if (temp.isCoolingDown(user.getName())){
-            user.sendMessagePrefix("&cEl comando está en cooldown");
+            user.sendMessage(PAData.PAPlugins.CORE.getPrefix() + "&cEl comando está en cooldown");
             return;
         }
 
         String message = Utils.buildString(args);
         hp(user, message);
         temp.setOnCooldown(user.getPlayer());
-        user.sendMessagePrefix("&2El mensaje ha sido enviado al Staff");
+        user.sendMessage(PAData.PAPlugins.CORE.getPrefix() + "&2El mensaje ha sido enviado al Staff");
     }
 
     private void hp(PAUser user, String msg){

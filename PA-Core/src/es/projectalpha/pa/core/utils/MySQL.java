@@ -186,7 +186,7 @@ public class MySQL {
             if (!rs.next()) return false;
             return true;
         } catch (SQLException | ClassNotFoundException e) {
-            PACore.getInstance().log(PAServer.Level.SEVERE, e.toString());
+            Log.log(Log.Level.SEVERE, e.toString());
         }
         return false;
     }
@@ -198,7 +198,7 @@ public class MySQL {
             statement.executeQuery();
             return true;
         } catch (SQLException | ClassNotFoundException e) {
-            PACore.getInstance().log(PAServer.Level.SEVERE, e.toString());
+            Log.log(Log.Level.SEVERE, e.toString());
         }
         return false;
     }

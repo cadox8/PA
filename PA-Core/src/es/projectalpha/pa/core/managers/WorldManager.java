@@ -1,9 +1,11 @@
 package es.projectalpha.pa.core.managers;
 
 import es.projectalpha.pa.core.PACore;
+import es.projectalpha.pa.core.api.PAData;
 import es.projectalpha.pa.core.api.PAServer;
 import es.projectalpha.pa.core.api.PAUser;
 import es.projectalpha.pa.core.exceptions.NullWorldException;
+import es.projectalpha.pa.core.utils.Log;
 import es.projectalpha.pa.core.utils.Utils;
 import lombok.NonNull;
 import org.bukkit.World;
@@ -88,7 +90,7 @@ public class WorldManager {
                 }
             });
         }catch(NullPointerException e){
-            plugin.log(PAServer.Level.WARNING, "Imposible borrar el mundo");
+            Log.log(Log.Level.WARNING, "Imposible borrar el mundo");
             plugin.debugLog("Causa: " + e.getCause());
             return;
         }
@@ -108,7 +110,7 @@ public class WorldManager {
             if (e instanceof Player){ //Mandar jugadores al spawn principal
                 PAUser user = PAServer.getUser((Player)e);
                 user.teleport(Utils.stringToLocation(plugin.getConfig().getString("spawn")));
-                user.sendMessagePrefix("&2Has sido sacado del mundo &e" + name);
+                user.sendMessage(PAData.PAPlugins.CORE.getPrefix() + "&2Has sido sacado del mundo &e" + name);
             }
         });
         plugin.getServer().unloadWorld(world, true);

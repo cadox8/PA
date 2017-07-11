@@ -1,5 +1,6 @@
 package es.projectalpha.pa.core.cmd;
 
+import es.projectalpha.pa.core.api.PAData;
 import es.projectalpha.pa.core.api.PAUser;
 import org.bukkit.World;
 
@@ -45,6 +46,6 @@ public class WeatherCMD extends PACmd {
             default:
                 break;
         }
-        user.sendMessagePrefix("Tiempo &2" + args[0].toLowerCase());
+        user.sendMessage(PAData.PAPlugins.CORE.getPrefix() + "Tiempo &2" + args[0].toLowerCase());
     }
 }

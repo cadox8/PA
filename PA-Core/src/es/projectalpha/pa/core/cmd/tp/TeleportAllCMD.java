@@ -1,5 +1,6 @@
 package es.projectalpha.pa.core.cmd.tp;
 
+import es.projectalpha.pa.core.api.PAData;
 import es.projectalpha.pa.core.api.PAServer;
 import es.projectalpha.pa.core.api.PAUser;
 import es.projectalpha.pa.core.cmd.PACmd;
@@ -32,7 +33,7 @@ public class TeleportAllCMD extends PACmd {
             p.teleport(target.getPlayer().getLocation(), PlayerTeleportEvent.TeleportCause.COMMAND);
         }
 
-        user.sendMessagePrefix("&6Todos los jugadores han sido teletransportados");
+        user.sendMessage(PAData.PAPlugins.CORE.getPrefix() + "&6Todos los jugadores han sido teletransportados");
     }
     
     @Override

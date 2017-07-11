@@ -80,9 +80,6 @@ public class PAUser {
     public void sendMessage(String str) {
         getPlayer().sendMessage(Utils.colorize(str));
     }
-    public void sendMessagePrefix(String str) {
-        getPlayer().sendMessage(PACore.getPrefix() + Utils.colorize(str));
-    }
 
     public void sendSound(Sound sound){
         getPlayer().playSound(getPlayer().getLocation(), sound, 1, 1);
@@ -104,20 +101,20 @@ public class PAUser {
 
     public void toggleAdminChat() {
         if (!PAServer.getAdminChatMode().contains(this)) {
-            sendMessagePrefix("&2AdminChat Activado");
+            sendMessage(PAData.PAPlugins.CORE.getPrefix() + "&2AdminChat Activado");
             PAServer.getAdminChatMode().add(this);
         } else {
-            sendMessagePrefix("&2AdminChat Desactivado");
+            sendMessage(PAData.PAPlugins.CORE.getPrefix() + "&2AdminChat Desactivado");
             PAServer.getAdminChatMode().remove(this);
         }
     }
 
     public void toggleFly(){
         if (getPlayer().isFlying()){
-            sendMessagePrefix("&cVuelo desactivado");
+            sendMessage(PAData.PAPlugins.CORE.getPrefix() + "&cVuelo desactivado");
             getPlayer().setAllowFlight(false);
         } else {
-            sendMessagePrefix("&2Vuelo activado");
+            sendMessage(PAData.PAPlugins.CORE.getPrefix() + "&2Vuelo activado");
             getPlayer().setAllowFlight(true);
         }
     }
@@ -199,7 +196,7 @@ public class PAUser {
         out.writeUTF("Connect");
         out.writeUTF(server);
         getPlayer().sendPluginMessage(plugin, "BungeeCord", out.toByteArray());
-        sendMessagePrefix("&cConectando a &6" + server);
+        sendMessage(PAData.PAPlugins.BUNGEE.getPrefix() + "&cConectando a &6" + server);
     }
 
     public void sendToLobby() {

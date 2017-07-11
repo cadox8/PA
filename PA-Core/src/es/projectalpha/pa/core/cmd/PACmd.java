@@ -1,6 +1,7 @@
 package es.projectalpha.pa.core.cmd;
 
 import es.projectalpha.pa.core.PACore;
+import es.projectalpha.pa.core.api.PAData;
 import es.projectalpha.pa.core.api.PAServer;
 import es.projectalpha.pa.core.utils.Utils;
 import es.projectalpha.pa.core.api.PAUser;
@@ -60,7 +61,7 @@ public abstract class PACmd {
     }
 
     public void userNotOnline(PAUser user){
-        user.sendMessagePrefix("&cEL jugador debe estar conectado");
+        user.sendMessage(PAData.PAPlugins.CORE.getPrefix() + "&cEL jugador debe estar conectado");
     }
 
     @Getter
@@ -73,27 +74,24 @@ public abstract class PACmd {
         Builder(5),
         Mod(6),
         Admin(7),
-        DEV(8),
-        Owner(9);
+        DEV(8);
 
         private final int rank;
 
         public static char groupColor(Grupo grupo){
             switch (grupo){
-                case Owner:
-                    return 'c';
                 case DEV:
-                    return 'b';
+                    return 'd';
                 case Admin:
-                    return '2';
+                    return 'c';
                 case Mod:
-                    return 'a';
+                    return '3';
                 case Builder:
                     return '6';
                 case YT:
-                    return '5';
+                    return 'a';
                 case ORIGIN:
-                    return '3';
+                    return '2';
                 case VIP:
                     return 'e';
                 default:
