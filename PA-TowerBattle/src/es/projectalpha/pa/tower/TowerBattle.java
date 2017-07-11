@@ -26,7 +26,7 @@ public class TowerBattle extends JavaPlugin {
     }
 
     private void registerClasses(){
-        gm = new GameManager();
+        gm = new GameManager(instance);
         am = new ArenaManager();
     }
 
