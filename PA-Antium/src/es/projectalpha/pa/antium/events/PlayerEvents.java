@@ -1,6 +1,7 @@
 package es.projectalpha.pa.antium.events;
 
 import es.projectalpha.pa.antium.PAAntium;
+import es.projectalpha.pa.core.api.PAData;
 import es.projectalpha.pa.core.api.PAUser;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -20,10 +21,10 @@ public class PlayerEvents implements Listener {
         PAUser u = PAAntium.getUser(e.getPlayer());
 
         if (plugin.getMysql().isRegistered(u)) {
-            u.sendMessagePrefix("&3Por favor, escribe &c/login <contraseña> &3para acceder al servidor");
+            u.sendMessage(PAData.PAPlugins.ANTIUM.getPrefix() + "&3Por favor, escribe &c/login <contraseña> &3para acceder al servidor");
             return;
         }
-        u.sendMessagePrefix("&3Por favor, escribe &c/register <contraseña> <contraseña> &3para acceder al servidor");
+        u.sendMessage(PAData.PAPlugins.ANTIUM.getPrefix() + "&3Por favor, escribe &c/register <contraseña> <contraseña> &3para acceder al servidor");
     }
 
     @EventHandler
@@ -49,7 +50,7 @@ public class PlayerEvents implements Listener {
     }
 
     @EventHandler(priority = EventPriority.HIGH)
-    public void onIteract(PlayerInteractEvent e){
+    public void onInteract(PlayerInteractEvent e){
         PAUser u = PAAntium.getUser(e.getPlayer());
 
         if (!plugin.getPassManager().getLogged().contains(u)) e.setCancelled(true);
