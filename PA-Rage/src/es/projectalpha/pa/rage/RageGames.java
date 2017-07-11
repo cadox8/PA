@@ -1,6 +1,7 @@
 package es.projectalpha.pa.rage;
 
 import es.projectalpha.pa.rage.api.RagePlayer;
+import es.projectalpha.pa.rage.events.GameEvents;
 import es.projectalpha.pa.rage.events.PlayerEvents;
 import es.projectalpha.pa.rage.manager.ArenaManager;
 import es.projectalpha.pa.rage.manager.GameManager;
@@ -37,6 +38,7 @@ public class RageGames extends JavaPlugin {
         PluginManager pm = getServer().getPluginManager();
 
         pm.registerEvents(new PlayerEvents(instance), instance);
+        pm.registerEvents(new GameEvents(instance), instance);
     }
 
 
