@@ -1,17 +1,22 @@
 package es.projectalpha.pa.rage.events;
 
 import es.projectalpha.pa.core.utils.ItemMaker;
+import es.projectalpha.pa.core.utils.Utils;
 import es.projectalpha.pa.rage.RageGames;
 import es.projectalpha.pa.rage.manager.ArenaManager;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
-import org.bukkit.entity.Item;
+import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Player;
+import org.bukkit.entity.Projectile;
+import org.bukkit.entity.Snowball;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.entity.EntityInteractEvent;
 import org.bukkit.event.entity.ProjectileHitEvent;
+import org.bukkit.event.entity.ProjectileLaunchEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
@@ -46,7 +51,7 @@ public class GameEvents implements Listener {
 
             if(d.getInventory().getItemInMainHand().equals(knife())){
                e.setCancelled(true);
-               Bukkit.broadcastMessage(ChatColor.GOLD + d.getName() + ChatColor.GREEN + " ha matado a " + ChatColor.GOLD + a.getName() + ChatColor.GREEN + " usando " + knife().getItemMeta().getDisplayName());
+                Utils.broadcastMsg(ChatColor.GOLD + d.getName() + ChatColor.GREEN + " ha matado a " + ChatColor.GOLD + a.getName() + ChatColor.GREEN + " usando " + knife().getItemMeta().getDisplayName());
                a.setHealth(20d);
                remove(a);
                a.teleport(am.getRandomSpawn());
@@ -55,11 +60,43 @@ public class GameEvents implements Listener {
         }
     }
 
+    @EventHandler
     public void OnProjectile(ProjectileHitEvent e){
-        if(e.getEntity().equals(arrow)){
+        if (e.getEntity().getShooter() instanceof Player){
             Player s = (Player) e.getEntity().getShooter();
             Player h = (Player) e.getHitEntity();
+            Projectile a = e.getEntity();
 
+            if(a instanceof Arrow){
+                h.setHealth(20d);
+                remove(h);
+                s.getInventory().setItem(9, arrow);
+                Utils.broadcastMsg(ChatColor.GOLD + h.getName() + ChatColor.GREEN + " ha matado a " + ChatColor.GOLD + s.getName() + ChatColor.GREEN + " usando " + arrow.getItemMeta().getDisplayName());
+                a.teleport(am.getRandomSpawn());
+            }
+
+            if(a instanceof Snowball){
+                h.setHealth(20d);
+                remove(h);
+                Utils.broadcastMsg(ChatColor.GOLD + h.getName() + ChatColor.GREEN + " ha matado a " + ChatColor.GOLD + s.getName() + ChatColor.GREEN + " usando " + axe.getItemMeta().getDisplayName());
+                h.teleport(am.getRandomSpawn());
+            }
+
+        }
+    }
+
+    @EventHandler
+    public void onThrowProjectile(ProjectileLaunchEvent e){
+
+    }
+
+    @EventHandler
+    public void onInteract(EntityInteractEvent e){
+        if(e.getEntity() instanceof Player){
+            Player p = (Player) e.getEntity();
+            if(p.getInventory().getItemInMainHand().equals(axe)){
+
+            }
         }
     }
 
