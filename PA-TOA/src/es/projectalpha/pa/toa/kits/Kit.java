@@ -5,6 +5,10 @@ import org.bukkit.entity.Player;
 
 public class Kit {
 
+    public static final Warrior WARRIOR = new Warrior();
+    public static final Archer ARCHER = new Archer();
+
+
     @Getter public String name;
 
     public Kit(String name){
