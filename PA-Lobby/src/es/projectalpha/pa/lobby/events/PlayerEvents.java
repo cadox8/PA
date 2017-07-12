@@ -1,9 +1,11 @@
 package es.projectalpha.pa.lobby.events;
 
+import es.projectalpha.pa.core.api.PAData;
+import es.projectalpha.pa.core.api.PAServer;
 import es.projectalpha.pa.core.api.PAUser;
 import es.projectalpha.pa.core.cmd.PACmd;
 import es.projectalpha.pa.core.utils.Utils;
-import es.projectalpha.pa.lobby.LobbyPlayer;
+import es.projectalpha.pa.lobby.api.LobbyPlayer;
 import es.projectalpha.pa.lobby.utils.LobbyTeams;
 import es.projectalpha.pa.lobby.PALobby;
 import org.bukkit.Material;
@@ -52,6 +54,14 @@ public class PlayerEvents implements Listener {
 
         u.lobbyScoreboard();
         LobbyTeams.setScoreboardTeam(u);
+
+        if (plugin.getConfig().getString("spawn").equalsIgnoreCase("NONE")) {
+            if (u.isOnRank(PACmd.Grupo.Admin)) {
+                u.sendMessage(PAData.PAPlugins.CORE.getPrefix() + "&7El spawn no está definido. Puedes hacerlo poniendo /forcespawn set en las coordenadas que quieras");
+                return;
+            }
+        }
+        u.sendToSpawn();
     }
 
     @EventHandler

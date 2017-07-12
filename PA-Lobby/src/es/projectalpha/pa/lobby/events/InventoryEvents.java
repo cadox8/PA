@@ -1,6 +1,6 @@
 package es.projectalpha.pa.lobby.events;
 
-import es.projectalpha.pa.lobby.LobbyPlayer;
+import es.projectalpha.pa.lobby.api.LobbyPlayer;
 import es.projectalpha.pa.lobby.PALobby;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -17,8 +17,7 @@ public class InventoryEvents implements Listener {
 
     @EventHandler
     public void onInventoryClick(InventoryClickEvent e){
-        Player p = (Player) e.getWhoClicked();
-        LobbyPlayer u = plugin.getPlayer2(p);
+        LobbyPlayer u = PALobby.getPlayer((Player) e.getWhoClicked());
 
         switch (e.getClickedInventory().getName()){
             case "Servidores":

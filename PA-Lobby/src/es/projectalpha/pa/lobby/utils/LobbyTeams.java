@@ -13,13 +13,11 @@ public class LobbyTeams {
     public static Team tOrigin;
     public static Team tMod;
     public static Team tAdmin;
-    public static Team tOwner;
     public static Team tDev;
 
     public static void initTeams() {
         board = Bukkit.getScoreboardManager().getMainScoreboard();
 
-        tOwner = board.getTeam("1Core_Own") == null ? board.registerNewTeam("1Core_Own") : board.getTeam("1Core_Own");
         tAdmin = board.getTeam("2Core_Admin") == null ? board.registerNewTeam("2Core_Admin") : board.getTeam("2Core_Admin");
         tDev = board.getTeam("3Core_Dev") == null ? board.registerNewTeam("3Core_Dev") : board.getTeam("3Core_Dev");
         tMod = board.getTeam("4Core_Mod") == null ? board.registerNewTeam("4Core_Mod") : board.getTeam("4Core_Mod");
@@ -27,7 +25,6 @@ public class LobbyTeams {
         tVip = board.getTeam("7Core_Vip") == null ? board.registerNewTeam("7Core_Vip") : board.getTeam("7Core_Vip");
         tUsuario = board.getTeam("8Core_User") == null ? board.registerNewTeam("8Core_User") : board.getTeam("8Core_User");
 
-        tOwner.setPrefix("§4[OWN] ");
         tAdmin.setPrefix("§c[ADM] ");
         tDev.setPrefix("§5[DEV] ");
         tMod.setPrefix("§b[MOD] ");
@@ -35,7 +32,6 @@ public class LobbyTeams {
         tVip.setPrefix("§a[VIP] ");
         tUsuario.setPrefix("§e");
 
-        tOwner.setOption(Team.Option.COLLISION_RULE, Team.OptionStatus.NEVER);
         tAdmin.setOption(Team.Option.COLLISION_RULE, Team.OptionStatus.NEVER);
         tDev.setOption(Team.Option.COLLISION_RULE, Team.OptionStatus.NEVER);
         tMod.setOption(Team.Option.COLLISION_RULE, Team.OptionStatus.NEVER);
@@ -48,8 +44,6 @@ public class LobbyTeams {
     public static void setScoreboardTeam(PAUser user) {
         removeScoreboardTeam(user);
         switch(user.getUserData().getGrupo()) {
-            case Owner:
-                tOwner.addEntry(user.getName()); break;
             case Admin:
                 tAdmin.addEntry(user.getName()); break;
             case DEV:

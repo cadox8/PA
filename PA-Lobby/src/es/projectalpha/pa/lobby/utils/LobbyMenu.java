@@ -1,6 +1,6 @@
 package es.projectalpha.pa.lobby.utils;
 
-import es.projectalpha.pa.lobby.LobbyPlayer;
+import es.projectalpha.pa.lobby.api.LobbyPlayer;
 import es.projectalpha.pa.lobby.PALobby;
 import org.bukkit.Material;
 import org.bukkit.Sound;
