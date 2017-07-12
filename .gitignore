@@ -1,3 +1,9 @@
 *.jar
 .idea
 *.iml
+PA-Antium/target/
+PA-Bungee/target/
+PA-Core/target/
+PA-Lobby/target/
+PA-Rage/target/
+PA-TowerBattle/target/
