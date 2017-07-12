@@ -69,6 +69,9 @@ public class PAUser {
     public boolean isOnRank(PACmd.Grupo rank) {
         return rank.getRank() <= getUserData().getGrupo().getRank();
     }
+    public Location getLoc() {
+        return getPlayer().getLocation();
+    }
 
     /**
     * Methods
@@ -76,15 +79,12 @@ public class PAUser {
     public void sendDiv(){
         getPlayer().sendMessage(Utils.colorize("&e====================="));
     }
-
     public void sendMessage(String str) {
         getPlayer().sendMessage(Utils.colorize(str));
     }
-
     public void sendSound(Sound sound){
-        getPlayer().playSound(getPlayer().getLocation(), sound, 1, 1);
+        getPlayer().playSound(getPlayer().getLocation(), sound, 4, 4);
     }
-
     public void teleport(Location location){
         getPlayer().teleport(location, PlayerTeleportEvent.TeleportCause.COMMAND);
     }
@@ -94,10 +94,10 @@ public class PAUser {
     public void teleport(World world){
         teleport(world.getSpawnLocation());
     }
-
     public void removeItemInHand(){
         getPlayer().getInventory().setItemInMainHand(new ItemStack(Material.AIR));
     }
+
 
     public void toggleAdminChat() {
         if (!PAServer.getAdminChatMode().contains(this)) {
@@ -169,6 +169,7 @@ public class PAUser {
         return -1;
     }
 
+
     /**
     * Json
     */
@@ -179,7 +180,7 @@ public class PAUser {
         getPlayer().spigot().sendMessage(message);
     }
 
-    public  void jsonMessages(String text, String hover, String command){
+    public void jsonMessages(String text, String hover, String command){
         TextComponent message = new TextComponent(Utils.colorize(text));
         message.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, command));
         message.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(Utils.colorize(hover)).create()));
@@ -202,8 +203,6 @@ public class PAUser {
     public void sendToLobby() {
         sendToServer("lobby");
     }
-
-
 
 
 

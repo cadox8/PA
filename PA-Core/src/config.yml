@@ -8,13 +8,3 @@ maintenance: false
 
 #Modo Pruebas
 pruebas: false
-
-#Estilo de mensajes de entrada y salida del servidor. {0} es el jugador
-join: '&7[&2+&7] &6{0}'
-leave: '&7[&c-&7] &6{0}'
-
-#El spawn principal del servidor (recomiendo ponerlo)
-spawn: NONE
-
-#Permitir encantamientos imposibles en Minecraft Vanilla (por comando)
-allowUnsafeEnchantment: true

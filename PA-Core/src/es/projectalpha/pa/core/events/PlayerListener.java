@@ -5,6 +5,7 @@ import es.projectalpha.pa.core.api.PAData;
 import es.projectalpha.pa.core.api.PAServer;
 import es.projectalpha.pa.core.api.PAUser;
 import es.projectalpha.pa.core.cmd.PACmd;
+import es.projectalpha.pa.core.utils.Messages;
 import es.projectalpha.pa.core.utils.Utils;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -48,19 +49,12 @@ public class PlayerListener implements Listener{
         u.getUserData().setCoins(100);
         u.save();
 
-        if (plugin.getConfig().getString("spawn").equalsIgnoreCase("NONE")) {
-            if (PAServer.getUser(p).isOnRank(PACmd.Grupo.Admin)) {
-                PAServer.getUser(e.getPlayer()).sendMessage(PAData.PAPlugins.CORE.getPrefix() + "&7El spawn no está definido. Puedes hacerlo poniendo /forcespawn set en las coordenadas que quieras");
-            }
-        } else {
-            e.getPlayer().teleport(Utils.stringToLocation(plugin.getConfig().getString("spawn")));
-        }
-        e.setJoinMessage(Utils.colorize(plugin.getConfig().getString("join")).replace("{0}", e.getPlayer().getName()));
+        e.setJoinMessage(Messages.getMessage(Messages.JOIN, PAData.PAPlugins.CORE, "%player%", e.getPlayer().getName()));
     }
 
     @EventHandler(priority = EventPriority.LOW)
     public void onPlayerQuit(PlayerQuitEvent e){
-        e.setQuitMessage(Utils.colorize(plugin.getConfig().getString("leave")).replace("{0}", e.getPlayer().getName()));
+        e.setQuitMessage(Messages.getMessage(Messages.LEFT, PAData.PAPlugins.CORE, "%player%", e.getPlayer().getName()));
     }
 
     /*
