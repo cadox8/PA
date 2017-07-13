@@ -21,7 +21,8 @@ public enum Messages {
     NO_PERMS("&cNo tienes permiso para este comando"),
     INFO("&cEste comando no existe, para ver tus comandos, usa &3/ayuda"),
     NEED_ARGS("&c¡Faltan argumentos!"),
-    BUFF_ARGS("&c¡Demasidos argumentos!");
+    BUFF_ARGS("&c¡Demasidos argumentos!"),
+    SEND("&3Serás enviado al lobby en %t% segundos");
 
 
     @Getter private String message;

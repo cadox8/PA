@@ -17,8 +17,11 @@ public class BossBarUtils {
     }
 
     public static BossBar bossBar(String title, BarColor color, BarStyle style, BarFlag... flags){
-        BossBar bb = PACore.getInstance().getServer().createBossBar(title, color, style, flags);
-        bb.setTitle(title);
-        return bb;
+        return PACore.getInstance().getServer().createBossBar(title, color, style, flags);
+    }
+
+    public static BossBar editBossBar(BossBar bossBar, String title) {
+        bossBar.setTitle(title);
+        return bossBar;
     }
 }
