@@ -1,4 +1,4 @@
-##Servidores
+# Servidores
 
 | Tipo | Gb | Abierto |
 |------|----|---|
