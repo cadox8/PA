@@ -4,6 +4,7 @@ import es.projectalpha.pa.core.PACore;
 import es.projectalpha.pa.core.api.PAData;
 import es.projectalpha.pa.core.api.PAUser;
 import es.projectalpha.pa.core.utils.ScoreboardUtil;
+import es.projectalpha.pa.rage.utils.Items;
 import es.projectalpha.pa.rage.RageGames;
 import org.bukkit.scheduler.BukkitRunnable;
 
@@ -63,5 +64,14 @@ public class RagePlayer extends PAUser {
                 }
             }
         }.runTaskTimer(plugin, 0, 20);
+    }
+
+    public void resetPlayer() {
+        getPlayer().setHealth(getPlayer().getMaxHealth());
+        getPlayer().getInventory().clear();
+        getPlayer().getInventory().setItem(0, Items.getKnife());
+        getPlayer().getInventory().setItem(1, Items.getBow());
+        getPlayer().getInventory().setItem(2, Items.getAxe());
+        getPlayer().getInventory().setItem(9, Items.getArrow());
     }
 }
