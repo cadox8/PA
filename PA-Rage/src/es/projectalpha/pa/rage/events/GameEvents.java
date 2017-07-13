@@ -94,8 +94,10 @@ public class GameEvents implements Listener {
     public void onInteract(EntityInteractEvent e){
         if(e.getEntity() instanceof Player){
             Player p = (Player) e.getEntity();
-            if(p.getInventory().getItemInMainHand().equals(axe)){
-
+            if(p.getInventory().getItemInMainHand().getType() == Material.IRON_AXE){
+                final Snowball sb = (Snowball) p.launchProjectile(Snowball.class);
+                sb.addPassenger(p.getWorld().dropItem(p.getLocation(), axe));
+                p.getInventory().setItemInMainHand(null);
             }
         }
     }
