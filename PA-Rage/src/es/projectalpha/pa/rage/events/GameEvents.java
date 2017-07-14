@@ -29,22 +29,18 @@ public class GameEvents implements Listener {
             Player d = (Player) e.getDamager();
             Player a = (Player) e.getEntity();
 
-            if(d.getInventory().getItemInMainHand().getType() == Material.IRON_SWORD){
+            if(d.getInventory().getItemInHand().getType() == Material.IRON_SWORD){
                e.setCancelled(true);
                Utils.broadcastMsg(ChatColor.GOLD + d.getName() + ChatColor.GREEN + " ha matado a " + ChatColor.GOLD + a.getName() + ChatColor.GREEN + " usando " + Items.getKnife().getItemMeta().getDisplayName());
                RageGames.getPlayer(a).resetPlayer();
                a.teleport(plugin.getAm().getRandomSpawn());
             }
-
         }
-    }
 
-    @EventHandler
-    public void OnProjectile(ProjectileHitEvent e){
-        if (e.getEntity().getShooter() instanceof Player && e.getHitEntity() instanceof Player){
-            Player s = (Player) e.getEntity().getShooter();
-            Player h = (Player) e.getHitEntity();
-            Projectile a = e.getEntity();
+        if (e.getDamager() instanceof Projectile && e.getEntity() instanceof Player){
+            Player s = (Player) ((Projectile) e.getDamager()).getShooter();
+            Player h = (Player) e.getEntity();
+            Projectile a = (Projectile) e.getDamager();
 
             if(a instanceof Arrow){
                 s.getInventory().setItem(9, Items.getArrow());
@@ -59,7 +55,7 @@ public class GameEvents implements Listener {
 
                 h.teleport(plugin.getAm().getRandomSpawn());
                 RageGames.getPlayer(h).resetPlayer();
-                a.getPassengers().forEach(Entity::remove);
+                a.getPassenger().remove();
             }
         }
     }
@@ -68,10 +64,10 @@ public class GameEvents implements Listener {
     public void onInteract(PlayerInteractEvent e){
         Player p = e.getPlayer();
 
-        if (p.getInventory().getItemInMainHand().getType() == Material.IRON_AXE){
+        if (p.getInventory().getItemInHand().getType() == Material.IRON_AXE){
             final Snowball sb = p.launchProjectile(Snowball.class);
-            sb.addPassenger(p.getWorld().dropItem(p.getLocation(), new ItemStack(Material.IRON_AXE)));
-            p.getInventory().setItemInMainHand(null);
+            sb.setPassenger(p.getWorld().dropItem(p.getLocation(), new ItemStack(Material.IRON_AXE)));
+            p.getInventory().setItemInHand(null);
             sb.setShooter(p);
         }
     }

@@ -18,7 +18,7 @@ public class StaffCMD extends PACmd {
         if (args.length == 0) {
             user.getPlayer().closeInventory();
             user.getPlayer().openInventory(staffInv());
-            user.sendSound(Sound.UI_BUTTON_CLICK);
+            user.sendSound(Sound.CLICK);
         }
 
         if (args.length >= 1) user.sendMessage(Messages.getMessage(Messages.BUFF_ARGS, PAData.PAPlugins.CORE));

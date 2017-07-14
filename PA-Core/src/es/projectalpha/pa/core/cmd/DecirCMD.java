@@ -43,6 +43,6 @@ public class DecirCMD extends PACmd {
     private static void sendPrivateMessage(PAUser target, PAUser from, String mensaje){
         target.sendMessage("&2" + target.getName() + " &6-> &cYo &r: " + mensaje);
         from.sendMessage("&2Yo &6-> &c" + target.getName() + "&r: " + mensaje);
-        target.sendSound(Sound.ENTITY_PLAYER_LEVELUP);
+        target.sendSound(Sound.LEVEL_UP);
     }
 }

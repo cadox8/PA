@@ -1,4 +1,4 @@
 name: ${project.artifactId}
-main: PACore
+main: es.projectalpha.pa.core.PACore
 version: ${project.version}
 authors: [cadox8, Wikijito7]

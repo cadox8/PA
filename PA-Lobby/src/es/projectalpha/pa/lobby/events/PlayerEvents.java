@@ -5,9 +5,10 @@ import es.projectalpha.pa.core.api.PAServer;
 import es.projectalpha.pa.core.api.PAUser;
 import es.projectalpha.pa.core.cmd.PACmd;
 import es.projectalpha.pa.core.utils.Utils;
-import es.projectalpha.pa.lobby.api.LobbyPlayer;
+import es.projectalpha.pa.lobby.utils.Helpers;
 import es.projectalpha.pa.lobby.utils.LobbyTeams;
 import es.projectalpha.pa.lobby.PALobby;
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.BlockFace;
 import org.bukkit.entity.Player;
@@ -34,7 +35,7 @@ public class PlayerEvents implements Listener {
 
     @EventHandler
     public void onLoggin(PlayerLoginEvent e){
-        LobbyPlayer u = PALobby.getPlayer(e.getPlayer());
+        PAUser u = PAServer.getUser(e.getPlayer());
 
         if (u.isOnRank(PACmd.Grupo.ORIGIN) && plugin.getServer().getOnlinePlayers().size() == plugin.getServer().getMaxPlayers()){
             getRandomUser().getPlayer().kickPlayer(Utils.colorize("&cUn jugador con rango Origin o más ha entrado al servidor, por lo que has sido kickeado"));
@@ -42,47 +43,47 @@ public class PlayerEvents implements Listener {
     }
 
     private PAUser getRandomUser(){
-        UUID uuid = plugin.getServer().getOnlinePlayers().toArray(new Player[plugin.getServer().getOnlinePlayers().size()])[new Random().nextInt(plugin.getServer().getOnlinePlayers().size())].getUniqueId();
-        LobbyPlayer d = new LobbyPlayer(uuid);
+        PAUser d = PAServer.users.get(new Random().nextInt(PAServer.users.size()));
         if (d.isOnRank(PACmd.Grupo.ORIGIN)) getRandomUser();
         return d;
     }
 
     @EventHandler
     public void onJoin(PlayerJoinEvent e){
-        LobbyPlayer u = PALobby.getPlayer(e.getPlayer());
+        PAUser u = PAServer.getUser(e.getPlayer());
+        Helpers h = new Helpers(u);
 
-        u.lobbyScoreboard();
+        h.lobbyScoreboard();
         LobbyTeams.setScoreboardTeam(u);
+        h.sendToSpawn();
+    }
 
-        if (plugin.getConfig().getString("spawn").equalsIgnoreCase("NONE")) {
-            if (u.isOnRank(PACmd.Grupo.Admin)) {
-                u.sendMessage(PAData.PAPlugins.CORE.getPrefix() + "&7El spawn no está definido. Puedes hacerlo poniendo /forcespawn set en las coordenadas que quieras");
-                return;
-            }
-        }
-        u.sendToSpawn();
+    @EventHandler
+    public void onLeave(PlayerQuitEvent e){
+        PAUser u = PAServer.getUser(e.getPlayer());
+
+        u.save();
     }
 
     @EventHandler
     public void onBreak(BlockBreakEvent e){
-        LobbyPlayer u = PALobby.getPlayer(e.getPlayer());
+        PAUser u = PAServer.getUser(e.getPlayer());
 
-        if (!u.isOnRank(PACmd.Grupo.Admin)) e.setCancelled(true);
+        if (!u.isOnRank(PACmd.Grupo.Builder)) e.setCancelled(true);
     }
 
     @EventHandler
     public void onPlace(BlockPlaceEvent e){
-        LobbyPlayer u = PALobby.getPlayer(e.getPlayer());
+        PAUser u = PAServer.getUser(e.getPlayer());
 
-        if (!u.isOnRank(PACmd.Grupo.Admin)) e.setCancelled(true);
+        if (!u.isOnRank(PACmd.Grupo.Builder)) e.setCancelled(true);
     }
 
     @EventHandler
     public void onInteract(PlayerInteractEvent e){
-        LobbyPlayer u = PALobby.getPlayer(e.getPlayer());
+        PAUser u = PAServer.getUser(e.getPlayer());
 
-        if (!u.isOnRank(PACmd.Grupo.Admin)){
+        if (!u.isOnRank(PACmd.Grupo.Builder)){
             if (e.getClickedBlock() != null) {
                 if (e.getClickedBlock().getType().equals(Material.TRAP_DOOR) || e.getClickedBlock().getType().equals(Material.IRON_TRAPDOOR)
                         || e.getClickedBlock().getType().equals(Material.FENCE_GATE) || e.getClickedBlock().getType().equals(Material.FIRE)
@@ -102,6 +103,11 @@ public class PlayerEvents implements Listener {
         }
     }
 
+    @EventHandler(priority = EventPriority.HIGHEST)
+    public void onPlayerInteractEntity(PlayerInteractEntityEvent e) {
+        e.setCancelled(true);
+    }
+
     @EventHandler
     public void onDamage(EntityDamageByEntityEvent e){
         e.setCancelled(true);
@@ -119,11 +125,6 @@ public class PlayerEvents implements Listener {
 
     @EventHandler(ignoreCancelled = true, priority = EventPriority.LOWEST)
     public void onPlayerDrop(PlayerDropItemEvent e) {
-        e.setCancelled(true);
-    }
-
-    @EventHandler(priority = EventPriority.HIGHEST)
-    public void onPlayerInteractEntity(PlayerInteractEntityEvent e) {
         e.setCancelled(true);
     }
 

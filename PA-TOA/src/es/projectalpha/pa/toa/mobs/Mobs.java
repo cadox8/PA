@@ -2,7 +2,6 @@ package es.projectalpha.pa.toa.mobs;
 
 import org.bukkit.Location;
 import org.bukkit.World;
-import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.Blaze;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Skeleton;
@@ -27,7 +26,6 @@ public class Mobs {
         z.setCustomNameVisible(false);
         z.setMaxHealth(100 + ((20 * 0.2) * level));
         z.setHealth(z.getMaxHealth());
-        z.getAttribute(Attribute.GENERIC_ATTACK_SPEED).setBaseValue(0.2);
 
         z.teleport(l);
     }
@@ -39,8 +37,6 @@ public class Mobs {
         z.setCustomNameVisible(false);
         z.setMaxHealth(100 + ((20 * 0.1) * level));
         z.setHealth(z.getMaxHealth());
-        z.getAttribute(Attribute.GENERIC_ATTACK_SPEED).setBaseValue(1.2);
-        z.getAttribute(Attribute.GENERIC_MOVEMENT_SPEED).setBaseValue(1.1);
 
         z.teleport(l);
     }
@@ -52,7 +48,6 @@ public class Mobs {
         z.setCustomNameVisible(false);
         z.setMaxHealth(100 + ((20 * 0.3) * level));
         z.setHealth(z.getMaxHealth());
-        z.getAttribute(Attribute.GENERIC_ATTACK_SPEED).setBaseValue(1.2);
 
         z.teleport(l);
     }

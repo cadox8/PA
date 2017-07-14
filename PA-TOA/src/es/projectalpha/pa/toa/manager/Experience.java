@@ -7,11 +7,11 @@ public class Experience {
     private static final int BASE_XP = 500;
 
     private TOAUser user;
-    private TOAUser.UserData ud;
+    private TOAUser.TOAUserData ud;
 
     public Experience(TOAUser user) {
         this.user = user;
-        ud = user.getUserData();
+        ud = user.getToaUserData();
     }
 
     public void addExp(int amount) {

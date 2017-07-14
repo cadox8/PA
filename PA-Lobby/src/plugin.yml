@@ -1,0 +1,5 @@
+name: ${project.artifactId}
+main: es.projectalpha.pa.lobby.PALobby
+version: ${project.version}
+authors: [cadox8, Wikijito7]
+depend: [PA-Core]

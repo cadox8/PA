@@ -21,22 +21,26 @@ public class PlayerListener implements Listener{
         plugin = instance;
     }
 
-
-    @EventHandler
+    @EventHandler(priority = EventPriority.LOWEST)
     public void onLogin(PlayerLoginEvent e){
         Player p = e.getPlayer();
-        PAUser user = PAServer.getUser(p);
-
+/*
         if (plugin.isMaintenance()){
             if (!user.isOnRank(PACmd.Grupo.Builder)){
+                e.setResult(PlayerLoginEvent.Result.KICK_OTHER);
                 user.getPlayer().kickPlayer(Utils.colorize("&cEl servidor está en mantenimiento, lo sentimos"));
             }
         }
 
         if (plugin.isPruebas()){
             if (!user.isOnRank(PACmd.Grupo.VIP)){
+                e.setResult(PlayerLoginEvent.Result.KICK_OTHER);
                 user.getPlayer().kickPlayer(Utils.colorize("&cEl servidor está en pruebas, lo sentimos"));
             }
+        }*/
+
+        if (e.getResult() == PlayerLoginEvent.Result.ALLOWED) {
+            plugin.getMysql().setupTable(p);
         }
     }
 
@@ -45,8 +49,9 @@ public class PlayerListener implements Listener{
         Player p = e.getPlayer();
         PAUser u = PAServer.getUser(p);
 
-        plugin.getMysql().setupTable(p);
-        u.getUserData().setCoins(100);
+        u.getUserData().setLastConnect(System.currentTimeMillis());
+        u.getUserData().setTimeJoin(System.currentTimeMillis());
+        u.getUserData().setIp(u.getPlayer().getAddress());
         u.save();
 
         e.setJoinMessage(Messages.getMessage(Messages.JOIN, PAData.PAPlugins.CORE, "%player%", e.getPlayer().getName()));
@@ -54,7 +59,11 @@ public class PlayerListener implements Listener{
 
     @EventHandler(priority = EventPriority.LOW)
     public void onPlayerQuit(PlayerQuitEvent e){
+        PAUser u = PAServer.getUser(e.getPlayer());
+
         e.setQuitMessage(Messages.getMessage(Messages.LEFT, PAData.PAPlugins.CORE, "%player%", e.getPlayer().getName()));
+        u.save();
+        PAServer.users.remove(u);
     }
 
     /*
@@ -63,7 +72,6 @@ public class PlayerListener implements Listener{
     @EventHandler(priority = EventPriority.LOW)
     public void onPlayerChat(AsyncPlayerChatEvent e) {
         PAUser user = PAServer.getUser(e.getPlayer());
-        PAUser to;
 
         //AdminChat
         if (PAServer.getAdminChatMode().contains(user)) {
@@ -81,7 +89,7 @@ public class PlayerListener implements Listener{
 
 
         if (e.getMessage().startsWith("/?") || e.getMessage().startsWith("/bukkit:") || e.getMessage().startsWith("/pl") || e.getMessage().startsWith("/plugins") || e.getMessage().startsWith("/minecraft:")) {
-            if(!p.isOnRank(PACmd.Grupo.DEV)) return;
+            if(!p.isOnRank(PACmd.Grupo.Builder)) return;
             p.sendMessage(PAData.PAPlugins.CORE.getPrefix() + "&cLos plugins de este servidor ha sido creados por los desarrolladores del mismo, es por eso por lo que no tenemos" +
                     "ningún problema en decirlos: &6PA-Core. &cAhora, te invito a que los crees tu mismo, puesto que el código " +
                     "de los plugins sólo lo tenemos nosotros :D");

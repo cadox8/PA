@@ -12,6 +12,8 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
+import us.myles.ViaVersion.api.Via;
+import us.myles.ViaVersion.api.ViaAPI;
 
 import java.io.File;
 import java.sql.Connection;
@@ -29,13 +31,15 @@ public class PACore extends JavaPlugin {
     @Getter private MySQL mysql = null;
     private Connection connection = null;
 
+    @Getter private static ViaAPI api = Via.getAPI();
+
     @Override
     public void onEnable() {
         instance = this;
 
         try {
             debugLog("Cargando modulo de MySQL");
-            mysql = new MySQL("projectalpha.es", "pa", "root", "vivalapepa123");
+            mysql = new MySQL("localhost", "pa", "root", "vivalapepa123");
             connection = mysql.openConnection();
         } catch (SQLException | ClassNotFoundException exc) {
             getLogger().severe("Error al abrir la conexion MySQL!");
@@ -88,8 +92,6 @@ public class PACore extends JavaPlugin {
         utils = new Utils(this);
         worldManager = new WorldManager(this);
     }
-
-
 
 
     @Override

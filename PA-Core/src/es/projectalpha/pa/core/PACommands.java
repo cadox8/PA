@@ -53,7 +53,6 @@ public class PACommands implements TabCompleter {
         cmds.add(new PingCMD());
         cmds.add(new SetGroupCMD());
         cmds.add(new SocialCMD());
-        cmds.add(new SpawnCMD());
         cmds.add(new StaffCMD());
         cmds.add(new WeatherCMD());
 
@@ -71,7 +70,7 @@ public class PACommands implements TabCompleter {
         //
         ucmds = new PACommands();
         //
-        cmds.forEach(cmd -> register(cmd));
+        cmds.forEach(PACommands::register);
     }
 
     public static void register(PACmd... cmdList){
@@ -132,7 +131,7 @@ public class PACommands implements TabCompleter {
                         return;
                     }
 
-                    p.sendMessage(PAData.PAPlugins.CORE.getPrefix() + Messages.NO_PERMS);
+                    p.sendMessage(Messages.getMessage(Messages.NO_PERMS, PAData.PAPlugins.CORE));
                     return;
                 }
                 cmdr.run(sender, label, args);

@@ -26,7 +26,7 @@ public class Utils {
             PAUser u = PAServer.getUser(p);
             if (u.isOnRank(PACmd.Grupo.Builder)) {
                 u.sendMessage("&0[&2A&0] &3" + user.getName() + "&r: " + msg);
-                u.sendSound(Sound.BLOCK_ANVIL_HIT);
+                u.sendSound(Sound.ANVIL_BREAK);
             }
         });
     }

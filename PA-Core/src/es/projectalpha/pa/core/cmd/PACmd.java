@@ -70,11 +70,11 @@ public abstract class PACmd {
         Usuario(0),
         VIP(1),
         ORIGIN(2),
-        YT(4),
-        Builder(5),
-        Mod(6),
-        Admin(7),
-        DEV(8);
+        YT(3),
+        Builder(4),
+        Mod(5),
+        Admin(6),
+        DEV(7);
 
         private final int rank;
 

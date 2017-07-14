@@ -27,7 +27,13 @@ public class PAServer {
     }
 
     public static PAUser getUser(UUID id) {
-        return new PAUser(id);
+        for (PAUser pl : users) {
+            if (pl.getUuid() == null) continue;
+            if (pl.getUuid().equals(id)) return pl;
+        }
+        PAUser us = new PAUser(id);
+        if (us.isOnline()) users.add(us);
+        return us;
     }
 
     public static PAUser getUser(OfflinePlayer p) {

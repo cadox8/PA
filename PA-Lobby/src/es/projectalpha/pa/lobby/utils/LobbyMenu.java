@@ -1,6 +1,6 @@
 package es.projectalpha.pa.lobby.utils;
 
-import es.projectalpha.pa.lobby.api.LobbyPlayer;
+import es.projectalpha.pa.core.api.PAUser;
 import es.projectalpha.pa.lobby.PALobby;
 import org.bukkit.Material;
 import org.bukkit.Sound;
@@ -24,7 +24,7 @@ public class LobbyMenu {
         servers.addItem(new ItemStack(Material.APPLE));
     }
 
-    public static void openMenu(LobbyPlayer u, MenuType menuType){
+    public static void openMenu(PAUser u, MenuType menuType){
         Inventory clon = null;
 
         switch (menuType){
@@ -35,7 +35,7 @@ public class LobbyMenu {
         if (clon != null) {
             u.getPlayer().closeInventory();
             u.getPlayer().openInventory(clon);
-            u.sendSound(Sound.UI_BUTTON_CLICK);
+            u.sendSound(Sound.CLICK);
         }
     }
 }

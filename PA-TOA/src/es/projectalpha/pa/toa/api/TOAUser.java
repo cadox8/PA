@@ -20,7 +20,7 @@ public class TOAUser extends PAUser {
 
     private TOA plugin = TOA.getInstance();
 
-    @Getter @Setter private UserData userData;
+    @Getter @Setter private TOAUserData toaUserData;
 
     public TOAUser(UUID uuid) {
         super(uuid);
@@ -46,7 +46,7 @@ public class TOAUser extends PAUser {
 
 
     @Data
-    public static class UserData {
+    public static class TOAUserData {
         Integer piso = 0;
         Integer maxPiso = 0;
 
@@ -58,6 +58,6 @@ public class TOAUser extends PAUser {
         Integer kills = 0;
         Integer deaths = 0;
 
-        public UserData() {}
+        public TOAUserData() {}
     }
 }

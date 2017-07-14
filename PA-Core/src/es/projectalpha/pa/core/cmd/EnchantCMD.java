@@ -15,7 +15,7 @@ public class EnchantCMD extends PACmd {
 
     public void run(PAUser user, String label, String[] args){
         if (args.length == 2){
-            ItemStack i = user.getPlayer().getInventory().getItemInMainHand();
+            ItemStack i = user.getPlayer().getInventory().getItemInHand();
 
             Enchantment enchantment;
             int level;

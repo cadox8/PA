@@ -39,6 +39,7 @@ public class PAUser {
 
     public PAUser(UUID id) {
         uuid = id;
+        setUserData(plugin.getMysql().loadUserData(uuid));
     }
 
     public OfflinePlayer getOfflinePlayer() {
@@ -95,7 +96,7 @@ public class PAUser {
         teleport(world.getSpawnLocation());
     }
     public void removeItemInHand(){
-        getPlayer().getInventory().setItemInMainHand(new ItemStack(Material.AIR));
+        getPlayer().getInventory().setItemInHand(new ItemStack(Material.AIR));
     }
 
 

@@ -4,7 +4,7 @@
     <parent>
         <groupId>es.projectalpha</groupId>
         <artifactId>PA</artifactId>
-        <version>0.0.1</version>
+        <version>0.5.0</version>
     </parent>
     <artifactId>PA-Bungee</artifactId>
     <packaging>jar</packaging>

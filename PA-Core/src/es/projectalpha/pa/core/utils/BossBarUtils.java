@@ -1,27 +1,14 @@
 package es.projectalpha.pa.core.utils;
 
-import es.projectalpha.pa.core.PACore;
-import org.bukkit.boss.BarColor;
-import org.bukkit.boss.BarFlag;
-import org.bukkit.boss.BarStyle;
-import org.bukkit.boss.BossBar;
+import net.md_5.bungee.api.chat.TextComponent;
+import org.bukkit.entity.Player;
+import org.inventivetalent.bossbar.BossBar;
+import org.inventivetalent.bossbar.BossBarAPI;
 
 public class BossBarUtils {
 
-    public static BossBar bossBar(String title){
-        return bossBar(title, BarColor.PINK, BarStyle.SOLID);
-    }
-
-    public static BossBar bossBar(String title, BarColor color){
-        return bossBar(title, color, BarStyle.SOLID);
-    }
-
-    public static BossBar bossBar(String title, BarColor color, BarStyle style, BarFlag... flags){
-        return PACore.getInstance().getServer().createBossBar(title, color, style, flags);
-    }
-
-    public static BossBar editBossBar(BossBar bossBar, String title) {
-        bossBar.setTitle(title);
-        return bossBar;
+    public static void create(Player p, String title, BossBarAPI.Color color, BossBarAPI.Style style) {
+        BossBarAPI.removeAllBars(p);
+        BossBarAPI.addBar(p, new TextComponent(Utils.colorize(title)), color, style, 1f);
     }
 }

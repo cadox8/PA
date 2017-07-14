@@ -27,10 +27,14 @@ public enum PAData {
         TOA("&aTOA"),
         TB("&eTowerBattle");
 
-        private String prefix;
+        @Getter private String name;
 
         public String getPrefix() {
-            return "&7 || " + prefix + "&7 || ";
+            return "&7 || " + name + "&7 || ";
+        }
+
+        public String getOldPrefix() {
+            return "§7 || " + name.replace('&', '§') + "§7 || ";
         }
     }
 }
