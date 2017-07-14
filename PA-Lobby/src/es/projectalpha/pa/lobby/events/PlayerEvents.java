@@ -6,6 +6,7 @@ import es.projectalpha.pa.core.api.PAUser;
 import es.projectalpha.pa.core.cmd.PACmd;
 import es.projectalpha.pa.core.utils.Utils;
 import es.projectalpha.pa.lobby.utils.Helpers;
+import es.projectalpha.pa.lobby.utils.LobbyMenu;
 import es.projectalpha.pa.lobby.utils.LobbyTeams;
 import es.projectalpha.pa.lobby.PALobby;
 import org.bukkit.Location;
@@ -15,6 +16,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockDamageEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
@@ -56,6 +58,8 @@ public class PlayerEvents implements Listener {
         h.lobbyScoreboard();
         LobbyTeams.setScoreboardTeam(u);
         h.sendToSpawn();
+
+        u.sendMessage("&6Actualmente hay &2" + PAServer.users.size() + " &6usuarios en línea");
     }
 
     @EventHandler
@@ -82,6 +86,13 @@ public class PlayerEvents implements Listener {
     @EventHandler
     public void onInteract(PlayerInteractEvent e){
         PAUser u = PAServer.getUser(e.getPlayer());
+
+        if (e.getAction() == Action.RIGHT_CLICK_AIR || e.getAction() == Action.RIGHT_CLICK_BLOCK) {
+            if (e.getItem().getType() == Material.NETHER_STAR) {
+                e.setCancelled(true);
+                LobbyMenu.openMenu(u, LobbyMenu.MenuType.SERVERS);
+            }
+        }
 
         if (!u.isOnRank(PACmd.Grupo.Builder)){
             if (e.getClickedBlock() != null) {

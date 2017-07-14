@@ -22,14 +22,14 @@ public class InventoryEvents implements Listener {
 
         switch (e.getClickedInventory().getName()){
             case "Servidores":
-                e.setCancelled(true);
                 switch (e.getSlot()){
                     case 0:
-                        u.sendToServer("survival");
+                        //u.sendToServer("survival");
                         break;
                     default:
                         break;
                 }
+                e.setCancelled(true);
                 break;
             default:
                 break;

@@ -9,7 +9,7 @@ import org.bukkit.inventory.ItemStack;
 
 public class LobbyMenu {
 
-    private PALobby plugin;
+    private PALobby plugin = PALobby.getInstance();
 
     public enum MenuType {
         SERVERS
