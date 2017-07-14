@@ -1,6 +1,7 @@
 package es.projectalpha.pa.core.utils;
 
 import es.projectalpha.pa.core.PACore;
+import es.projectalpha.pa.core.api.PAData;
 import es.projectalpha.pa.core.api.PAServer;
 import es.projectalpha.pa.core.api.PAUser;
 import es.projectalpha.pa.core.cmd.PACmd;
@@ -25,14 +26,14 @@ public class Utils {
         plugin.getServer().getOnlinePlayers().forEach(p -> {
             PAUser u = PAServer.getUser(p);
             if (u.isOnRank(PACmd.Grupo.Builder)) {
-                u.sendMessage("&0[&2A&0] &3" + user.getName() + "&r: " + msg);
+                u.sendMessage("&0[&2A&0] &3" + user.getName() + "&r: " + Utils.colorize(msg));
                 u.sendSound(Sound.ANVIL_BREAK);
             }
         });
     }
 
     public static void broadcastMsg(String msg) {
-        plugin.getServer().getOnlinePlayers().forEach(p -> PAServer.getUser(p).sendMessage(msg));
+        plugin.getServer().getOnlinePlayers().forEach(p -> PAServer.getUser(p).sendMessage(PAData.PAPlugins.CORE.getPrefix() + msg));
     }
 
     public static String buildString(String[] args) {
@@ -81,7 +82,7 @@ public class Utils {
         return clon.add(0.5, 0, 0.5);
     }
 
-    //Amount = Número de puntos del círculo, recomiendo 20 (?)
+    //Amount = Número de puntos del círculo
     public static ArrayList<Location> getCircle(Location center, double radius, int amount) {
         World world = center.getWorld();
         double increment = (2 * Math.PI) / amount;

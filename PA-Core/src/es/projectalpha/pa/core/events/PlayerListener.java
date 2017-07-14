@@ -78,6 +78,11 @@ public class PlayerListener implements Listener{
             Utils.sendAdminMsg(user, e.getMessage());
             e.setCancelled(true);
         }
+
+        //Format
+        String tag = user.getUserData().getGrupo() == PACmd.Grupo.Usuario ? "&7" : "[&" + PACmd.Grupo.groupColor(user.getUserData().getGrupo()) + user.getUserData().getGrupo().toString().toUpperCase() + "&r]";
+        String msg = user.isOnRank(PACmd.Grupo.ORIGIN) ? Utils.colorize(e.getMessage()) : e.getMessage();
+        e.setFormat(Utils.colorize(tag + " " + user.getName() + ": ") + msg);
     }
 
     /*
