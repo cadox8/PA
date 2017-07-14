@@ -6,6 +6,9 @@ import es.projectalpha.pa.core.api.PAUser;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.BlockDamageEvent;
+import org.bukkit.event.entity.*;
+import org.bukkit.event.inventory.InventoryMoveItemEvent;
 import org.bukkit.event.player.*;
 
 public class PlayerEvents implements Listener {
@@ -54,5 +57,60 @@ public class PlayerEvents implements Listener {
         PAUser u = PAAntium.getUser(e.getPlayer());
 
         if (!plugin.getPassManager().getLogged().contains(u)) e.setCancelled(true);
+    }
+
+    @EventHandler(priority = EventPriority.HIGHEST)
+    public void onPlayerInteractEntity(PlayerInteractEntityEvent e) {
+        e.setCancelled(true);
+    }
+
+    @EventHandler
+    public void onDamage(EntityDamageByEntityEvent e){
+        e.setCancelled(true);
+    }
+
+    @EventHandler
+    public void onCombust(EntityCombustEvent e){
+        e.setCancelled(true);
+    }
+
+    @EventHandler(priority = EventPriority.NORMAL)
+    public void onInventoryMoveItemEvent(InventoryMoveItemEvent e) {
+        e.setCancelled(true);
+    }
+
+    @EventHandler(ignoreCancelled = true, priority = EventPriority.LOWEST)
+    public void onPlayerDrop(PlayerDropItemEvent e) {
+        e.setCancelled(true);
+    }
+
+    @EventHandler(ignoreCancelled = true, priority = EventPriority.LOWEST)
+    public void onBlockDamage(BlockDamageEvent e) {
+        e.setCancelled(true);
+    }
+
+    @EventHandler(ignoreCancelled = true, priority = EventPriority.LOWEST)
+    public void onPlayerPickupItem(PlayerPickupItemEvent e) {
+        e.setCancelled(true);
+    }
+
+    @EventHandler(ignoreCancelled = true, priority = EventPriority.LOWEST)
+    public void onEntityTarget(EntityTargetEvent e) {
+        e.setCancelled(true);
+    }
+
+    @EventHandler(ignoreCancelled = true, priority = EventPriority.HIGHEST)
+    public void onFoodLevelChange(FoodLevelChangeEvent e) {
+        e.setCancelled(true);
+    }
+
+    @EventHandler(ignoreCancelled = true, priority = EventPriority.LOWEST)
+    public void onEntityDamage(EntityDamageEvent e) {
+        e.setCancelled(true);
+    }
+
+    @EventHandler(priority = EventPriority.HIGHEST)
+    public void onDeath(PlayerDeathEvent e) {
+        e.setDeathMessage("");
     }
 }
