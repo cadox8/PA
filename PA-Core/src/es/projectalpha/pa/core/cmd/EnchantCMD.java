@@ -35,7 +35,7 @@ public class EnchantCMD extends PACmd {
             return Enchantment.getByName(enchantment);
         }catch (NullPointerException e){
             Log.log(Log.Level.WARNING, "El encantamiento no existe");
+            return Enchantment.ARROW_INFINITE;
         }
-        return null;
     }
 }

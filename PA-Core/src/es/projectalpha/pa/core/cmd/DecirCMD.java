@@ -30,9 +30,8 @@ public class DecirCMD extends PACmd {
             user.sendMessage(PAData.PAPlugins.CORE.getPrefix() + "&cEl jugador está desconectado");
             return;
         }
-        String[] formatedArgs = args;
-        formatedArgs[0] = "";
-        sendPrivateMessage(target, user, Utils.buildString(formatedArgs));
+        args[0] = "";
+        sendPrivateMessage(target, user, Utils.buildString(args));
     }
 
     @Override
