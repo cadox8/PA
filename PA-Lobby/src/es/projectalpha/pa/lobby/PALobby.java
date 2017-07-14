@@ -2,6 +2,7 @@ package es.projectalpha.pa.lobby;
 
 import es.projectalpha.pa.core.PACommands;
 import es.projectalpha.pa.core.PACore;
+import es.projectalpha.pa.lobby.cmd.KittyCMD;
 import es.projectalpha.pa.lobby.cmd.SpawnCMD;
 import es.projectalpha.pa.lobby.events.InventoryEvents;
 import es.projectalpha.pa.lobby.events.PlayerEvents;
@@ -26,7 +27,7 @@ public class PALobby extends JavaPlugin {
         registerEvents();
         LobbyTeams.initTeams();
 
-        PACommands.register(new SpawnCMD());
+        PACommands.register(new SpawnCMD(), new KittyCMD());
         new LobbyMenu(instance);
 
         new NoFallTasks(instance).runTaskTimer(instance, 0, 20);
