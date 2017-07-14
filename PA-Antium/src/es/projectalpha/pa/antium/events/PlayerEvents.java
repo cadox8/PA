@@ -24,10 +24,10 @@ public class PlayerEvents implements Listener {
         PAUser u = PAAntium.getUser(e.getPlayer());
 
         if (plugin.getMysql().isRegistered(u)) {
-            u.sendMessage(PAData.PAPlugins.ANTIUM.getPrefix() + "&3Por favor, escribe &c/login <contraseña> &3para acceder al servidor");
+            u.sendMessage(PAData.ANTIUM.getPrefix() + "&3Por favor, escribe &c/login <contraseña> &3para acceder al servidor");
             return;
         }
-        u.sendMessage(PAData.PAPlugins.ANTIUM.getPrefix() + "&3Por favor, escribe &c/register <contraseña> <contraseña> &3para acceder al servidor");
+        u.sendMessage(PAData.ANTIUM.getPrefix() + "&3Por favor, escribe &c/register <contraseña> <contraseña> &3para acceder al servidor");
     }
 
     @EventHandler

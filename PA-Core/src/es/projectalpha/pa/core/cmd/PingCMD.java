@@ -24,14 +24,14 @@ public class PingCMD extends PACmd {
                 userNotOnline(user);
                 return;
             }
-            user.sendMessage(PAData.PAPlugins.CORE.getPrefix() + "Ping de &2" + target.getDisplayName() + "&r: " + format(PAServer.getUser(target).getPing()));
+            user.sendMessage(PAData.CORE.getPrefix() + "Ping de &2" + target.getDisplayName() + "&r: " + format(PAServer.getUser(target).getPing()));
             return;
         }
         if (user.getPing() < 0) {
-            user.sendMessage(PAData.PAPlugins.CORE.getPrefix() + "&c¡Ha ocurrido un error obteniendo tu ping! Intentalo más tarde");
+            user.sendMessage(PAData.CORE.getPrefix() + "&c¡Ha ocurrido un error obteniendo tu ping! Intentalo más tarde");
             return;
         }
-        user.sendMessage(PAData.PAPlugins.CORE.getPrefix() + "Tu Ping: " + format(user.getPing()));
+        user.sendMessage(PAData.CORE.getPrefix() + "Tu Ping: " + format(user.getPing()));
     }
 
     private String format(int ping) {

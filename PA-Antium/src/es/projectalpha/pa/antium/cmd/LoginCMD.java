@@ -16,7 +16,7 @@ public class LoginCMD extends PACmd {
     @Override
     public void run(PAUser u, String label, String[] args){
         if (args.length == 0 || args.length >= 2){
-            u.sendMessage(PAData.PAPlugins.ANTIUM.getPrefix() + syntax);
+            u.sendMessage(PAData.ANTIUM.getPrefix() + syntax);
             return;
         }
         if (args.length == 1){

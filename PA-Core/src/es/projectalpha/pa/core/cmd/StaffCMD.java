@@ -21,7 +21,7 @@ public class StaffCMD extends PACmd {
             user.sendSound(Sound.CLICK);
         }
 
-        if (args.length >= 1) user.sendMessage(Messages.getMessage(Messages.BUFF_ARGS, PAData.PAPlugins.CORE));
+        if (args.length >= 1) user.sendMessage(Messages.getMessage(Messages.BUFF_ARGS, PAData.CORE));
     }
 
     //Temporal

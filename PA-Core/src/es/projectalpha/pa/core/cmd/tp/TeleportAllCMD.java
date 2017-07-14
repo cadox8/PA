@@ -33,7 +33,7 @@ public class TeleportAllCMD extends PACmd {
             p.teleport(target.getPlayer().getLocation(), PlayerTeleportEvent.TeleportCause.COMMAND);
         }
 
-        user.sendMessage(PAData.PAPlugins.CORE.getPrefix() + "&6Todos los jugadores han sido teletransportados");
+        user.sendMessage(PAData.CORE.getPrefix() + "&6Todos los jugadores han sido teletransportados");
     }
     
     @Override

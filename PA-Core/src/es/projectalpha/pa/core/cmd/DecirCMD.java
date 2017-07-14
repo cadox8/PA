@@ -23,11 +23,11 @@ public class DecirCMD extends PACmd {
         PAUser target = PAServer.getUser(PACore.getInstance().getServer().getPlayer(args[0]));
 
         if (target.equals(user)) {
-            user.sendMessage(PAData.PAPlugins.CORE.getPrefix() + "&c¡No puedes enviarte mensajes a ti mismo!");
+            user.sendMessage(PAData.CORE.getPrefix() + "&c¡No puedes enviarte mensajes a ti mismo!");
             return;
         }
         if (!target.isOnline()){
-            user.sendMessage(PAData.PAPlugins.CORE.getPrefix() + "&cEl jugador está desconectado");
+            user.sendMessage(PAData.CORE.getPrefix() + "&cEl jugador está desconectado");
             return;
         }
         args[0] = "";

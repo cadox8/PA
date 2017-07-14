@@ -110,7 +110,7 @@ public class WorldManager {
             if (e instanceof Player){ //Mandar jugadores al spawn principal
                 PAUser user = PAServer.getUser((Player)e);
                 user.teleport(Utils.stringToLocation(plugin.getConfig().getString("spawn")));
-                user.sendMessage(PAData.PAPlugins.CORE.getPrefix() + "&2Has sido sacado del mundo &e" + name);
+                user.sendMessage(PAData.CORE.getPrefix() + "&2Has sido sacado del mundo &e" + name);
             }
         });
         plugin.getServer().unloadWorld(world, true);

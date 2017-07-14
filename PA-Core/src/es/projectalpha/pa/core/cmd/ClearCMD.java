@@ -18,7 +18,7 @@ public class ClearCMD extends PACmd {
     @Override
     public void run(PAUser user, String lbl, String[] args) {
         if (args.length < 1) {
-            user.sendMessage(PAData.PAPlugins.CORE.getPrefix() + "&6Has borrado tu inventario");
+            user.sendMessage(PAData.CORE.getPrefix() + "&6Has borrado tu inventario");
             int invsize = user.getPlayer().getInventory().getSize() - 5;
             for (int i = 0; i < invsize; i++) {
                 user.getPlayer().getInventory().clear(i);
@@ -29,12 +29,12 @@ public class ClearCMD extends PACmd {
         PAUser target = PAServer.getUser(plugin.getServer().getPlayer(args[0]));
 
         if (target == null || !target.isOnline()){
-            user.sendMessage(PAData.PAPlugins.CORE.getPrefix() + "&cEL jugador debe estar conectado");
+            user.sendMessage(PAData.CORE.getPrefix() + "&cEL jugador debe estar conectado");
             return;
         }
 
-        target.sendMessage(PAData.PAPlugins.CORE.getPrefix() + "&6Tu inventario ha sido borrado");
-        user.sendMessage(PAData.PAPlugins.CORE.getPrefix() + "&6Has borrado el inventario de &c" + target.getName());
+        target.sendMessage(PAData.CORE.getPrefix() + "&6Tu inventario ha sido borrado");
+        user.sendMessage(PAData.CORE.getPrefix() + "&6Has borrado el inventario de &c" + target.getName());
 
         int invsize = user.getPlayer().getInventory().getSize() - 5;
 

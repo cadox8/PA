@@ -21,7 +21,7 @@ public class SetGroupCMD extends PACmd {
         if (!user.getPlayer().isOp()) return;
 
         if(args.length == 0){
-            user.sendMessage(PAData.PAPlugins.CORE.getPrefix() + "&6Tu Rango: &" + Grupo.groupColor(user.getUserData().getGrupo()) + user.getUserData().getGrupo().toString());
+            user.sendMessage(PAData.CORE.getPrefix() + "&6Tu Rango: &" + Grupo.groupColor(user.getUserData().getGrupo()) + user.getUserData().getGrupo().toString());
             return;
         }
 
@@ -30,30 +30,30 @@ public class SetGroupCMD extends PACmd {
             try {
                 i = Integer.parseInt(args[1]);
             } catch (NumberFormatException ex) {
-                user.sendMessage(PAData.PAPlugins.CORE.getPrefix() + "&cEl rango no es un número");
+                user.sendMessage(PAData.CORE.getPrefix() + "&cEl rango no es un número");
                 return;
             }
 
             if (i > Grupo.values().length - 1) {
-                user.sendMessage(PAData.PAPlugins.CORE.getPrefix() + "&cEste número es más grande de los rangos que hay");
+                user.sendMessage(PAData.CORE.getPrefix() + "&cEste número es más grande de los rangos que hay");
                 return;
             }
 
             user.getUserData().setGrupo(Grupo.values()[i]);
             user.save();
-            user.sendMessage(PAData.PAPlugins.CORE.getPrefix() + "&3Rango cambiado : &" + Grupo.groupColor(Grupo.values()[i]) + Grupo.values()[i].toString());
+            user.sendMessage(PAData.CORE.getPrefix() + "&3Rango cambiado : &" + Grupo.groupColor(Grupo.values()[i]) + Grupo.values()[i].toString());
         }
 
         Integer i;
         try {
             i = Integer.parseInt(args[1]);
         } catch (NumberFormatException ex) {
-            user.sendMessage(PAData.PAPlugins.CORE.getPrefix() + "&cEl rango no es un número");
+            user.sendMessage(PAData.CORE.getPrefix() + "&cEl rango no es un número");
             return;
         }
 
         if (i > Grupo.values().length - 1) {
-            user.sendMessage(PAData.PAPlugins.CORE.getPrefix() + "&cEste número es más grande de los rangos que hay");
+            user.sendMessage(PAData.CORE.getPrefix() + "&cEste número es más grande de los rangos que hay");
             return;
         }
         PAUser target = PAServer.getUser(plugin.getServer().getPlayer(args[0]));
@@ -65,8 +65,8 @@ public class SetGroupCMD extends PACmd {
 
         target.getUserData().setGrupo(Grupo.values()[i]);
         target.save();
-        user.sendMessage(PAData.PAPlugins.CORE.getPrefix() + "&3Rango cambiado a &c" + target.getName() + " &3: &" + Grupo.groupColor(Grupo.values()[i]) + Grupo.values()[i].toString());
-        target.sendMessage(PAData.PAPlugins.CORE.getPrefix() + "&6Tu rango ha sido cambiado a &" + Grupo.groupColor(Grupo.values()[i]) + Grupo.values()[i].toString());
+        user.sendMessage(PAData.CORE.getPrefix() + "&3Rango cambiado a &c" + target.getName() + " &3: &" + Grupo.groupColor(Grupo.values()[i]) + Grupo.values()[i].toString());
+        target.sendMessage(PAData.CORE.getPrefix() + "&6Tu rango ha sido cambiado a &" + Grupo.groupColor(Grupo.values()[i]) + Grupo.values()[i].toString());
     }
 
     @Override
@@ -76,12 +76,12 @@ public class SetGroupCMD extends PACmd {
             try {
                 i = Integer.parseInt(args[1]);
             } catch (NumberFormatException ex) {
-                sender.sendMessage(PAData.PAPlugins.CORE.getPrefix() + "&cEl rango no es un número");
+                sender.sendMessage(PAData.CORE.getPrefix() + "&cEl rango no es un número");
                 return;
             }
 
             if (i > Grupo.values().length - 1) {
-                sender.sendMessage(PAData.PAPlugins.CORE.getPrefix() + "&cEste número es más grande de los rangos que hay");
+                sender.sendMessage(PAData.CORE.getPrefix() + "&cEste número es más grande de los rangos que hay");
                 return;
             }
             PAUser target = PAServer.getUser(plugin.getServer().getPlayer(args[0]));

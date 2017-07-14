@@ -19,7 +19,7 @@ public class InvSeeCMD extends PACmd {
     @Override
     public void run(PAUser user, String lbl, String[] args) {
         if (args.length < 1) {
-            user.sendMessage(PAData.PAPlugins.CORE.getPrefix() + "&cDebes poner un usuario");
+            user.sendMessage(PAData.CORE.getPrefix() + "&cDebes poner un usuario");
             return;
         }
 

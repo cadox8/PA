@@ -17,14 +17,14 @@ public class HelpOPCMD extends PACmd {
     @Override
     public void run(PAUser user, String label, String[] args) {
         if (temp.isCoolingDown(user.getName())){
-            user.sendMessage(PAData.PAPlugins.CORE.getPrefix() + "&cEl comando está en cooldown");
+            user.sendMessage(PAData.CORE.getPrefix() + "&cEl comando está en cooldown");
             return;
         }
 
         String message = Utils.buildString(args);
         hp(user, message);
         temp.setOnCooldown(user.getPlayer());
-        user.sendMessage(PAData.PAPlugins.CORE.getPrefix() + "&2El mensaje ha sido enviado al Staff");
+        user.sendMessage(PAData.CORE.getPrefix() + "&2El mensaje ha sido enviado al Staff");
     }
 
     private void hp(PAUser user, String msg){

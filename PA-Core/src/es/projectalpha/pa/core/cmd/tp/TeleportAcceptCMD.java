@@ -24,18 +24,18 @@ public class TeleportAcceptCMD extends PACmd {
             }
 
             user.getPlayer().teleport(target.getPlayer(), PlayerTeleportEvent.TeleportCause.COMMAND);
-            target.sendMessage(PAData.PAPlugins.CORE.getPrefix() + "&6Teletransportado a &c" + user.getName());
+            target.sendMessage(PAData.CORE.getPrefix() + "&6Teletransportado a &c" + user.getName());
             PAServer.removeTeleportHereRequest(target.getUuid());
 
         } else if (!PAServer.getTeleportRequests().containsKey(user.getUuid())) {
-            user.sendMessage(PAData.PAPlugins.CORE.getPrefix() + "&cNo tienes peticiones de TP pendientes");
+            user.sendMessage(PAData.CORE.getPrefix() + "&cNo tienes peticiones de TP pendientes");
         } else {
             PAUser target = PAServer.getUser(PAServer.getTeleportRequests().get(user.getUuid()));
             if (target == null) {
                 user.sendMessage("");
             } else {
                 target.getPlayer().teleport(user.getPlayer(), PlayerTeleportEvent.TeleportCause.COMMAND);
-                target.sendMessage(PAData.PAPlugins.CORE.getPrefix() + "&6Teletransportado a &c" + user.getName());
+                target.sendMessage(PAData.CORE.getPrefix() + "&6Teletransportado a &c" + user.getName());
                 PAServer.removeTeleportRequest(user.getUuid());
             }
         }

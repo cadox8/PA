@@ -22,7 +22,7 @@ public class GamemodeCMD extends PACmd {
             //backInventory(user);
 
             user.getPlayer().setGameMode(parseGamemode(args[0]));
-            user.sendMessage(PAData.PAPlugins.CORE.getPrefix() + "&6Modo de juego cambiado a &c" + parseGamemode(args[0]).toString());
+            user.sendMessage(PAData.CORE.getPrefix() + "&6Modo de juego cambiado a &c" + parseGamemode(args[0]).toString());
         }
 
         if (args.length == 2){
@@ -33,8 +33,8 @@ public class GamemodeCMD extends PACmd {
                 return;
             }
             target.getPlayer().setGameMode(parseGamemode(args[0]));
-            user.sendMessage(PAData.PAPlugins.CORE.getPrefix() + "&6Modo de juego cambiado de &2" + target.getName() + " a &c" + parseGamemode(args[0]).toString());
-            target.sendMessage(PAData.PAPlugins.CORE.getPrefix() + "&6Modo de juego cambiado a &c" + parseGamemode(args[0]).toString());
+            user.sendMessage(PAData.CORE.getPrefix() + "&6Modo de juego cambiado de &2" + target.getName() + " a &c" + parseGamemode(args[0]).toString());
+            target.sendMessage(PAData.CORE.getPrefix() + "&6Modo de juego cambiado a &c" + parseGamemode(args[0]).toString());
         }
     }
 

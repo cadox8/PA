@@ -19,16 +19,16 @@ public class HealCMD extends PACmd {
             user.getPlayer().setHealth(user.getPlayer().getMaxHealth());
             user.getPlayer().setFoodLevel(20);
 
-            user.sendMessage(PAData.PAPlugins.CORE.getPrefix() + "&6Te has curado");
+            user.sendMessage(PAData.CORE.getPrefix() + "&6Te has curado");
             return;
         }
         if (args.length == 1){
             PAUser target = PAServer.getUser(args[0]);
             if (target == null || !target.isOnline()){
-                user.sendMessage(PAData.PAPlugins.CORE.getPrefix() + "&cEL jugador debe estar conectado");
+                user.sendMessage(PAData.CORE.getPrefix() + "&cEL jugador debe estar conectado");
                 return;
             }
-            user.sendMessage(PAData.PAPlugins.CORE.getPrefix() + "&6Has curado a &c" + target.getName());
+            user.sendMessage(PAData.CORE.getPrefix() + "&6Has curado a &c" + target.getName());
             target.getPlayer().setHealth(user.getPlayer().getMaxHealth());
         }
     }

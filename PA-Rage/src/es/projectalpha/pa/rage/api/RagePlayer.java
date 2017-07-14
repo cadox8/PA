@@ -19,14 +19,14 @@ public class RagePlayer extends PAUser {
     }
 
     public void setLobby() {
-        ScoreboardUtil board = new ScoreboardUtil(PAData.RAGE.fullPrefix(), "lobby");
+        ScoreboardUtil board = new ScoreboardUtil(PAData.RG.getOldPrefix(), "lobby");
         new BukkitRunnable() {
             @Override
             public void run() {
                 if (getPlayer() == null) cancel();
 
                 if (plugin.getGm().acceptPlayers()) {
-                    board.setName(PAData.RAGE.getPrefix());
+                    board.setName(PAData.RG.getOldPrefix());
                     board.text(5, "§d ");
                     board.text(4, "§6" + plugin.getGm().getPlaying().size() + "§d/§6" + plugin.getAm().getMaxPlayers());
                     board.text(3, "§a ");
@@ -43,14 +43,14 @@ public class RagePlayer extends PAUser {
     }
 
     public void setGame() {
-        ScoreboardUtil board = new ScoreboardUtil(PAData.RAGE.fullPrefix(), "game");
+        ScoreboardUtil board = new ScoreboardUtil(PAData.RG.getOldPrefix(), "game");
         new BukkitRunnable() {
             @Override
             public void run() {
                 if (getPlayer() == null) cancel();
 
                 if (plugin.getGm().acceptPlayers()) {
-                    board.setName(PAData.RAGE.getPrefix());
+                    board.setName(PAData.RG.getOldPrefix());
                     board.text(5, "§d ");
                     board.text(4, "§6Kills: ");
                     board.text(3, "§a ");

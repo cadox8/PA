@@ -1,10 +1,8 @@
 package es.projectalpha.pa.core.utils;
 
-import es.projectalpha.pa.core.PACore;
 import es.projectalpha.pa.core.api.PAData;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NonNull;
 import org.bukkit.ChatColor;
 
 /**
@@ -27,15 +25,15 @@ public enum Messages {
 
     @Getter private String message;
 
-    public static String getMessage(Messages m, PAData.PAPlugins pl) {
+    public static String getMessage(Messages m, PAData pl) {
         return Utils.colorize(pl.getPrefix() + ChatColor.RESET + m.getMessage());
     }
 
-    public static String getMessage(Messages m, PAData.PAPlugins pl, String object, String arg) {
+    public static String getMessage(Messages m, PAData pl, String object, String arg) {
         return Utils.colorize(pl.getPrefix() + ChatColor.RESET + m.getMessage()).replace(object, arg);
     }
 
-    public static String getMessage(Messages m, PAData.PAPlugins pl, String[] objects, String[] args) {
+    public static String getMessage(Messages m, PAData pl, String[] objects, String[] args) {
         String base = pl.getPrefix() + ChatColor.RESET + m.getMessage();
         int id = 0;
 

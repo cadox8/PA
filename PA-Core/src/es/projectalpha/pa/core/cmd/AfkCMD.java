@@ -17,11 +17,11 @@ public class AfkCMD extends PACmd {
     @Override
     public void run(PAUser user, String lbl, String[] args) {
         if (PAServer.afkMode.contains(user)) {
-            Utils.broadcastMsg(Messages.getMessage(Messages.NO_AFK, PAData.PAPlugins.CORE, "%player%", user.getName()));
+            Utils.broadcastMsg(Messages.getMessage(Messages.NO_AFK, PAData.CORE, "%player%", user.getName()));
             PAServer.afkMode.remove(user);
         } else {
             PAServer.afkMode.add(user);
-            Utils.broadcastMsg(Messages.getMessage(Messages.AFK, PAData.PAPlugins.CORE, "%player%", user.getName()));
+            Utils.broadcastMsg(Messages.getMessage(Messages.AFK, PAData.CORE, "%player%", user.getName()));
         }
     }
 }

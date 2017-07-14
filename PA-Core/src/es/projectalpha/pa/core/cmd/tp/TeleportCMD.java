@@ -28,7 +28,7 @@ public class TeleportCMD extends PACmd {
                     return;
                 }
                 user.getPlayer().teleport(target.getPlayer().getLocation(), PlayerTeleportEvent.TeleportCause.COMMAND);
-                user.sendMessage(PAData.PAPlugins.CORE.getPrefix() + "&6Teletransportado a &c" + target.getName());
+                user.sendMessage(PAData.CORE.getPrefix() + "&6Teletransportado a &c" + target.getName());
                 break;
             case 2: //tp de un user a otro
                 PAUser from = PAServer.getUser(plugin.getServer().getPlayer(args[0]));
@@ -40,8 +40,8 @@ public class TeleportCMD extends PACmd {
                 }
 
                 from.getPlayer().teleport(to.getPlayer().getLocation(), PlayerTeleportEvent.TeleportCause.COMMAND);
-                user.sendMessage(PAData.PAPlugins.CORE.getPrefix() + "&c" + user.getName() + " &6se ha teletransportado hacia tí");
-                from.sendMessage(PAData.PAPlugins.CORE.getPrefix() + "&6Teletransportado a &c" + user.getName());
+                user.sendMessage(PAData.CORE.getPrefix() + "&c" + user.getName() + " &6se ha teletransportado hacia tí");
+                from.sendMessage(PAData.CORE.getPrefix() + "&6Teletransportado a &c" + user.getName());
                 break;   
             case 3: //mandar sender a unas coordenadas
                 Double x, y, z;

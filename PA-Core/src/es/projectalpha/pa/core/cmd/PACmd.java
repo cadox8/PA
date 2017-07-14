@@ -61,7 +61,7 @@ public abstract class PACmd {
     }
 
     public void userNotOnline(PAUser user){
-        user.sendMessage(PAData.PAPlugins.CORE.getPrefix() + "&cEL jugador debe estar conectado");
+        user.sendMessage(PAData.CORE.getPrefix() + "&cEL jugador debe estar conectado");
     }
 
     @Getter

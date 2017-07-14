@@ -7,7 +7,6 @@ import es.projectalpha.pa.core.cmd.PACmd;
 import es.projectalpha.pa.core.utils.ScoreboardUtil;
 import es.projectalpha.pa.lobby.PALobby;
 import lombok.Getter;
-import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
 public class Helpers {
@@ -19,13 +18,13 @@ public class Helpers {
     }
 
     public void lobbyScoreboard(){
-        ScoreboardUtil board = new ScoreboardUtil(PAData.PAPlugins.LOBBY.getPrefix(), "lobby");
+        ScoreboardUtil board = new ScoreboardUtil(PAData.LOBBY.getPrefix(), "lobby");
         new BukkitRunnable() {
             @Override
             public void run() {
                 if (u.getPlayer() == null) cancel();
 
-                board.setName(PAData.PAPlugins.LOBBY.getOldPrefix());
+                board.setName(PAData.LOBBY.getOldPrefix());
                 board.text(3, "§d ");
                 board.text(2, "Rango: §" + PACmd.Grupo.groupColor(u.getUserData().getGrupo()) + u.getUserData().getGrupo().toString());
                 board.text(1, "§d ");

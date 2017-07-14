@@ -37,7 +37,7 @@ public class CoreCMD extends PACmd {
     }
 
     private void def(PAUser user) {
-        user.sendMessage(PAData.PAPlugins.CORE.getPrefix() + "&aFunciona con PACore " + "&7v" + plugin.getDescription().getVersion());
+        user.sendMessage(PAData.CORE.getPrefix() + "&aFunciona con PACore " + "&7v" + plugin.getDescription().getVersion());
     }
 
     private void toggleDebug(PAUser user) {

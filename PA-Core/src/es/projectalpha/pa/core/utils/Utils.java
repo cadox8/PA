@@ -33,7 +33,7 @@ public class Utils {
     }
 
     public static void broadcastMsg(String msg) {
-        plugin.getServer().getOnlinePlayers().forEach(p -> PAServer.getUser(p).sendMessage(PAData.PAPlugins.CORE.getPrefix() + msg));
+        plugin.getServer().getOnlinePlayers().forEach(p -> PAServer.getUser(p).sendMessage(PAData.CORE.getPrefix() + msg));
     }
 
     public static String buildString(String[] args) {

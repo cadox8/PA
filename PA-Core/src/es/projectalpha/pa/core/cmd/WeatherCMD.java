@@ -46,6 +46,6 @@ public class WeatherCMD extends PACmd {
             default:
                 break;
         }
-        user.sendMessage(PAData.PAPlugins.CORE.getPrefix() + "Tiempo &2" + args[0].toLowerCase());
+        user.sendMessage(PAData.CORE.getPrefix() + "Tiempo &2" + args[0].toLowerCase());
     }
 }

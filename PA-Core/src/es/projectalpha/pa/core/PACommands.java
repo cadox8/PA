@@ -131,7 +131,7 @@ public class PACommands implements TabCompleter {
                         return;
                     }
 
-                    p.sendMessage(Messages.getMessage(Messages.NO_PERMS, PAData.PAPlugins.CORE));
+                    p.sendMessage(Messages.getMessage(Messages.NO_PERMS, PAData.CORE));
                     return;
                 }
                 cmdr.run(sender, label, args);
