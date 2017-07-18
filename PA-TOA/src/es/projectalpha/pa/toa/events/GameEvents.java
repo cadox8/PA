@@ -2,11 +2,13 @@ package es.projectalpha.pa.toa.events;
 
 import es.projectalpha.pa.toa.TOA;
 import es.projectalpha.pa.toa.manager.Experience;
+import org.bukkit.entity.Animals;
 import org.bukkit.entity.Monster;
 import org.bukkit.entity.Zombie;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDeathEvent;
+import org.bukkit.event.entity.EntitySpawnEvent;
 
 public class GameEvents implements Listener {
 
@@ -22,5 +24,10 @@ public class GameEvents implements Listener {
             if (plugin.getSpawnTask().getCount() == 0) return;
             plugin.getSpawnTask().setCount(plugin.getSpawnTask().getCount() - 1);
         }
+    }
+
+    @EventHandler
+    public void onSpawn(EntitySpawnEvent e) {
+        if (e.getEntity() instanceof Animals) e.setCancelled(true);
     }
 }

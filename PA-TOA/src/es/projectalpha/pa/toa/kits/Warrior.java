@@ -6,8 +6,8 @@ import org.bukkit.inventory.ItemStack;
 
 public class Warrior extends Kit {
 
-    public Warrior(){
-        super("Caballero");
+    public Warrior(int id) {
+        super(id, "Caballero");
     }
 
     public void setItems(Player p) {

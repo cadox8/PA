@@ -1,6 +1,7 @@
 package es.projectalpha.pa.toa;
 
 import es.projectalpha.pa.toa.api.TOAUser;
+import es.projectalpha.pa.toa.drops.DropsManager;
 import es.projectalpha.pa.toa.manager.ArenaManager;
 import es.projectalpha.pa.toa.manager.GameManager;
 import es.projectalpha.pa.toa.tasks.SpawnTask;
@@ -20,6 +21,7 @@ public class TOA extends JavaPlugin {
 
     @Getter private ArenaManager am;
     @Getter private GameManager gm;
+    @Getter private DropsManager drops;
 
     @Getter private SpawnTask spawnTask;
 
@@ -33,6 +35,7 @@ public class TOA extends JavaPlugin {
     private void registerClasses() {
         am = new ArenaManager(instance);
         gm = new GameManager(instance);
+        drops = new DropsManager();
         spawnTask = new SpawnTask(instance);
     }
 

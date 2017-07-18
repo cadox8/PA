@@ -8,11 +8,15 @@ import org.bukkit.inventory.ItemStack;
 
 public class Archer extends Kit {
 
-    public Archer() {
-        super("Arquero");
+    public Archer(int id) {
+        super(id, "Arquero");
     }
 
     public void setItems(Player p) {
         p.getInventory().addItem(new ItemMaker(Material.BOW).addUnsafeEnchant(Enchantment.ARROW_INFINITE, 1).setUnbreakable().build());
+    }
+
+    public boolean enabled(){
+        return false;
     }
 }

@@ -14,6 +14,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
+import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.PlayerInventory;
 
@@ -23,6 +24,15 @@ public class PlayerEvents implements Listener {
 
     public PlayerEvents(TOA instance) {
         this.plugin = instance;
+    }
+
+    @EventHandler
+    public void onJoin(PlayerJoinEvent e) {
+        TOAUser u = TOA.getPlayer(e.getPlayer());
+        Kit k = Kit.parseKit(u.getToaUserData().getKit());
+
+        u.sendToCity();
+        if (k != null) k.addEffects(u);
     }
 
     @EventHandler
@@ -50,6 +60,9 @@ public class PlayerEvents implements Listener {
                     break;
                 case BOW:
                     u.setKit(Kit.ARCHER);
+                    break;
+                case SHEARS:
+                    u.setKit(Kit.PICARO);
                     break;
             }
         }

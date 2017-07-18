@@ -36,9 +36,14 @@ public class TOAUser extends PAUser {
     }
 
 
-    public void sendToTower(){
+    public void sendToTower() {
         teleport(plugin.getAm().getTower());
         plugin.getGm().joinTower(this);
+    }
+
+    public void leaveTower() {
+        sendToCity();
+        plugin.getGm().leaveTower(this);
     }
 
     public void sendToCity(){
@@ -64,7 +69,7 @@ public class TOAUser extends PAUser {
         sendMessage(PAData.TOA.getPrefix() + "&2Has perdido &6" + zenys + "&2 zenys");
     }
 
-    public void setKit(Kit kit){
+    public void setKit(Kit kit) {
         getPlayer().getInventory().clear();
         kit.setItems(getPlayer());
         sendToCity();
@@ -84,6 +89,8 @@ public class TOAUser extends PAUser {
 
         Integer kills = 0;
         Integer deaths = 0;
+
+        Integer kit = -1;
 
         public TOAUserData() {}
     }

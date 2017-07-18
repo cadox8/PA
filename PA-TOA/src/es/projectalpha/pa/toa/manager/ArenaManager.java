@@ -22,7 +22,7 @@ public class ArenaManager {
     }
 
     private void initArena() {
-        for (String key : plugin.getConfig().getConfigurationSection("TOA.spawns").getKeys(false)) {
+        for (String key : plugin.getConfig().getConfigurationSection("Mobs").getKeys(false)) {
             Location l = Utils.stringToLocation(plugin.getConfig().getString(key + ".loc"));
             int level = plugin.getConfig().getInt(key + ".level");
             MobType mt = MobType.parseMobType(plugin.getConfig().getInt(key + ".type"));

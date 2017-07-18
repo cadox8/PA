@@ -9,6 +9,8 @@ public class Mob {
     @Getter private MobType mobType;
     @Getter private Location l;
 
+    private final double XP_BASE = 10;
+
     public Mob(int level, MobType mobType, Location l) {
         this.level = level;
         this.mobType = mobType;
@@ -30,5 +32,9 @@ public class Mob {
             case UKNOWN:
                 break;
         }
+    }
+
+    public int exp() {
+        return (int)((XP_BASE * level) * ((XP_BASE * level) * 0.08));
     }
 }
