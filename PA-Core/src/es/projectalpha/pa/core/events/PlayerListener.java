@@ -53,6 +53,8 @@ public class PlayerListener implements Listener{
         u.getUserData().setTimeJoin(System.currentTimeMillis());
         u.getUserData().setIp(u.getPlayer().getAddress());
         u.save();
+        u.getPlayer().setFlySpeed(0.1f);
+        u.getPlayer().setWalkSpeed(0.1f);
 
         e.setJoinMessage(Messages.getMessage(Messages.JOIN, PAData.CORE, "%player%", e.getPlayer().getName()));
     }
