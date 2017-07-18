@@ -12,6 +12,8 @@ import es.projectalpha.pa.lobby.PALobby;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.BlockFace;
+import org.bukkit.entity.ArmorStand;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -24,6 +26,7 @@ import org.bukkit.event.entity.*;
 import org.bukkit.event.inventory.InventoryMoveItemEvent;
 import org.bukkit.event.player.*;
 
+import javax.swing.plaf.nimbus.AbstractRegionPainter;
 import java.util.Random;
 import java.util.UUID;
 
@@ -116,7 +119,21 @@ public class PlayerEvents implements Listener {
 
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onPlayerInteractEntity(PlayerInteractEntityEvent e) {
-        e.setCancelled(true);
+        PAUser u = PAServer.getUser(e.getPlayer());
+        Entity en = e.getRightClicked();
+
+        if (en instanceof ArmorStand) {
+            ArmorStand ar = (ArmorStand) en;
+
+            switch (ar.getItemInHand().getType()) {
+                case IRON_AXE:
+                    u.sendToServer("toa");
+                    break;
+                case BOW:
+
+                    break;
+            }
+        }
     }
 
     @EventHandler
