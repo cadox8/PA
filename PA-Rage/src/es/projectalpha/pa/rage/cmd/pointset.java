@@ -19,7 +19,7 @@ public class pointset extends PACmd {
                 p = Integer.parseInt(plugin.getConfig().getString("rage.puntos")) + 1;
                 plugin.getConfig().set("Rage.puntos", p);
                 plugin.getConfig().set("Rage.puntos." + p, Utils.locationToString(user.getLoc()));
-                user.sendMessage("&aPunto puesto satisfactoriamente" + "&6" + p);
+                user.sendMessage("&aPunto puesto satisfactoriamente " + "&6" + p);
         }
     }
 
