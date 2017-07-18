@@ -21,5 +21,8 @@ public class SpeedCMD extends PACmd{
             }
             user.getPlayer().setFlySpeed(Float.parseFloat(args[1])/10);
         }
+        if (args.length >= 2) {
+            user.sendMessage(ChatColor.RED + "Demasiados argumentos. (/speed int)");
+        }
     }
 }
