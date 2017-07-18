@@ -118,6 +118,16 @@ public class WorldManager {
     //
 
     /**
+     * Unload World.
+     *
+     * @param name the name of the world to unload.
+     */
+    public void loadWorld(String name){
+        plugin.getServer().createWorld(new WorldCreator(name));
+    }
+    //
+
+    /**
      * TP World.
      *
      * @param name the name of the world to teleport.
