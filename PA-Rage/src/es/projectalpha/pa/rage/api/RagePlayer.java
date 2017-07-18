@@ -3,6 +3,7 @@ package es.projectalpha.pa.rage.api;
 import es.projectalpha.pa.core.PACore;
 import es.projectalpha.pa.core.api.PAData;
 import es.projectalpha.pa.core.api.PAUser;
+import es.projectalpha.pa.core.utils.GameState;
 import es.projectalpha.pa.core.utils.ScoreboardUtil;
 import es.projectalpha.pa.rage.utils.Items;
 import es.projectalpha.pa.rage.RageGames;
@@ -49,14 +50,11 @@ public class RagePlayer extends PAUser {
             public void run() {
                 if (getPlayer() == null) cancel();
 
-                if (plugin.getGm().acceptPlayers()) {
+                if (GameState.getState() == GameState.INGAME) {
                     board.setName(PAData.RG.getOldPrefix());
-                    board.text(5, "§d ");
-                    board.text(4, "§6Kills: ");
-                    board.text(3, "§a ");
-                    board.text(2, "§eMuertes: ");
-                    board.text(1, "§e ");
-                    board.text(0, PACore.getIP());
+                    plugin.getGm().getScore().keySet().forEach(u -> board.text(plugin.getGm().getScore().get(u), u.getName()));
+                    board.text(-1, "§e ");
+                    board.text(-2, PACore.getIP());
                     if (getPlayer() != null) board.build(getPlayer());
                 } else {
                     board.reset();

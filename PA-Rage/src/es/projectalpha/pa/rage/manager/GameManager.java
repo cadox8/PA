@@ -3,6 +3,7 @@ package es.projectalpha.pa.rage.manager;
 import es.projectalpha.pa.core.utils.GameState;
 import es.projectalpha.pa.core.utils.ItemMaker;
 import es.projectalpha.pa.rage.RageGames;
+import es.projectalpha.pa.rage.api.RagePlayer;
 import es.projectalpha.pa.rage.tasks.LobbyTask;
 import lombok.Getter;
 import lombok.Setter;
@@ -11,12 +12,14 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class GameManager {
 
     private RageGames plugin;
 
-    @Getter private ArrayList<Player> playing = new ArrayList<>();
+    @Getter private ArrayList<RagePlayer> playing = new ArrayList<>();
+    @Getter private HashMap<RagePlayer, Integer> score = new HashMap<>();
 
     @Getter @Setter private boolean checkStart = true;
 
@@ -31,7 +34,7 @@ public class GameManager {
         }
     }
 
-    public void addPlayerToGame(Player player) {
+    public void addPlayerToGame(RagePlayer player) {
         if (playing.contains(player)) {
             playing.remove(player);
             playing.add(player);
@@ -40,8 +43,12 @@ public class GameManager {
         }
     }
 
-    public void removePlayerFromGame(Player p) {
+    public void removePlayerFromGame(RagePlayer p) {
         playing.remove(p);
+    }
+
+    public void addPoint(RagePlayer u){
+        score.put(u, score.get(u) + 1);
     }
 
     public boolean acceptPlayers() {

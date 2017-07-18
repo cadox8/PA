@@ -26,9 +26,7 @@ public class LobbyTask extends BukkitRunnable {
             return;
         }
 
-        plugin.getGm().getPlaying().forEach(p -> {
-            RageGames.getPlayer(p).sendActionBar("&a&lEl juego empieza en: " + count);
-        });
+        plugin.getGm().getPlaying().forEach(p -> p.sendActionBar("&a&lEl juego empieza en: " + count));
 
         switch (count){
             case 30:
@@ -40,9 +38,10 @@ public class LobbyTask extends BukkitRunnable {
             case 2:
             case 1:
                 Utils.broadcastMsg("&7El juego empezará en &c" + count + " &7segundos");
-                plugin.getGm().getPlaying().forEach(p -> p.playSound(p.getLocation(), Sound.NOTE_PLING, 1F, 1F));
+                plugin.getGm().getPlaying().forEach(p -> p.sendSound(Sound.NOTE_PLING));
                 break;
             case 0:
+                plugin.getGm().getPlaying().forEach(p -> plugin.getGm().getScore().put(p, 0));
                 new GameTask(plugin).runTaskTimer(plugin, 0, 20);
                 cancel();
                 break;

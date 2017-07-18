@@ -19,7 +19,7 @@ public class GameTask extends BukkitRunnable {
 
     public void run() {
         plugin.getGm().getPlaying().forEach(p -> {
-            BossBarUtils.create(p, "&cTiempo restante: &6" + count, BossBarAPI.Color.BLUE, BossBarAPI.Style.PROGRESS);
+            BossBarUtils.create(p.getPlayer(), "&cTiempo restante: &6" + count, BossBarAPI.Color.BLUE, BossBarAPI.Style.PROGRESS);
         });
 
         switch (count) {
