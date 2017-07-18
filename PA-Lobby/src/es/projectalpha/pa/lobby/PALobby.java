@@ -6,6 +6,7 @@ import es.projectalpha.pa.lobby.cmd.KittyCMD;
 import es.projectalpha.pa.lobby.cmd.SpawnCMD;
 import es.projectalpha.pa.lobby.events.InventoryEvents;
 import es.projectalpha.pa.lobby.events.PlayerEvents;
+import es.projectalpha.pa.lobby.files.Files;
 import es.projectalpha.pa.lobby.tasks.NoFallTasks;
 import es.projectalpha.pa.lobby.utils.LobbyMenu;
 import es.projectalpha.pa.lobby.utils.LobbyTeams;
@@ -29,7 +30,7 @@ public class PALobby extends JavaPlugin {
 
         PACommands.register(new SpawnCMD(), new KittyCMD());
         new LobbyMenu(instance);
-
+        new Files();
         new NoFallTasks(instance).runTaskTimer(instance, 0, 20);
     }
 

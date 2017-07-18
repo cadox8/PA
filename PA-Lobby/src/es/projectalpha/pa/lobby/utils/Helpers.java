@@ -5,13 +5,16 @@ import es.projectalpha.pa.core.api.PAData;
 import es.projectalpha.pa.core.api.PAUser;
 import es.projectalpha.pa.core.cmd.PACmd;
 import es.projectalpha.pa.core.utils.ScoreboardUtil;
+import es.projectalpha.pa.core.utils.Utils;
 import es.projectalpha.pa.lobby.PALobby;
+import es.projectalpha.pa.lobby.files.Files;
 import lombok.Getter;
 import org.bukkit.scheduler.BukkitRunnable;
 
 public class Helpers {
 
     @Getter private PAUser u;
+    Files files;
 
     public Helpers(PAUser u) {
         this.u = u;
@@ -35,6 +38,6 @@ public class Helpers {
     }
 
     public void sendToSpawn() {
-        u.teleport(es.projectalpha.pa.core.utils.Utils.stringToLocation("world%0.0%14.0%2.0%180.0%0.0"));
+        u.teleport(Utils.stringToLocation(files.getConfig().getString("spawn.point")));
     }
 }

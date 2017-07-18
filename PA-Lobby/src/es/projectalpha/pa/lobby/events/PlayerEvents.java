@@ -1,20 +1,18 @@
 package es.projectalpha.pa.lobby.events;
 
-import es.projectalpha.pa.core.api.PAData;
 import es.projectalpha.pa.core.api.PAServer;
 import es.projectalpha.pa.core.api.PAUser;
 import es.projectalpha.pa.core.cmd.PACmd;
 import es.projectalpha.pa.core.utils.Utils;
+import es.projectalpha.pa.lobby.files.Files;
 import es.projectalpha.pa.lobby.utils.Helpers;
 import es.projectalpha.pa.lobby.utils.LobbyMenu;
 import es.projectalpha.pa.lobby.utils.LobbyTeams;
 import es.projectalpha.pa.lobby.PALobby;
-import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.BlockFace;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Entity;
-import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
@@ -26,13 +24,12 @@ import org.bukkit.event.entity.*;
 import org.bukkit.event.inventory.InventoryMoveItemEvent;
 import org.bukkit.event.player.*;
 
-import javax.swing.plaf.nimbus.AbstractRegionPainter;
 import java.util.Random;
-import java.util.UUID;
 
 public class PlayerEvents implements Listener {
 
     private PALobby plugin;
+    Files files;
 
     public PlayerEvents(PALobby instance){
         this.plugin = instance;
@@ -60,7 +57,7 @@ public class PlayerEvents implements Listener {
 
         h.lobbyScoreboard();
         LobbyTeams.setScoreboardTeam(u);
-        h.sendToSpawn();
+        u.teleport(Utils.stringToLocation(files.getConfig().getString("spawn.point")));
 
         u.sendMessage("&6Actualmente hay &2" + PAServer.users.size() + " &6usuarios en línea");
     }
