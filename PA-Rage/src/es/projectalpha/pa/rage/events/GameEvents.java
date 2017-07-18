@@ -34,6 +34,7 @@ public class GameEvents implements Listener {
                Utils.broadcastMsg(ChatColor.GOLD + d.getName() + ChatColor.GREEN + " ha matado a " + ChatColor.GOLD + a.getName() + ChatColor.GREEN + " usando " + Items.getKnife().getItemMeta().getDisplayName());
                RageGames.getPlayer(a).resetPlayer();
                a.teleport(plugin.getAm().getRandomSpawn());
+               plugin.getGm().addPoint(RageGames.getPlayer(d), 20);
             }
         }
 
@@ -48,6 +49,7 @@ public class GameEvents implements Listener {
 
                 h.teleport(plugin.getAm().getRandomSpawn());
                 RageGames.getPlayer(h).resetPlayer();
+                plugin.getGm().addPoint(RageGames.getPlayer(s), 30);
             }
 
             if(a instanceof Snowball){
@@ -56,6 +58,8 @@ public class GameEvents implements Listener {
                 h.teleport(plugin.getAm().getRandomSpawn());
                 RageGames.getPlayer(h).resetPlayer();
                 a.getPassenger().remove();
+                plugin.getGm().addPoint(RageGames.getPlayer(s), 50);
+                plugin.getGm().removePoint(RageGames.getPlayer(h), 25);
             }
         }
     }

@@ -47,9 +47,17 @@ public class GameManager {
         playing.remove(p);
     }
 
-    public void addPoint(RagePlayer u){
-        score.put(u, score.get(u) + 1);
+    public void addPoint(RagePlayer u, int v){
+        score.put(u, score.get(u) + v);
     }
+    public void removePoint(RagePlayer u, int v){
+        if(score.get(u) != 0) {
+            score.put(u, score.get(u) - v);
+        }else{
+            return;
+        }
+    }
+
 
     public boolean acceptPlayers() {
         return GameState.getState() == GameState.LOBBY;
