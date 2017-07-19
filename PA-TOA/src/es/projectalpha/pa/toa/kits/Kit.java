@@ -15,8 +15,8 @@ public class Kit {
     public static final Archer ARCHER = new Archer(2);
 
 
-    @Getter public String name;
-    @Getter public int id;
+    @Getter private String name;
+    @Getter private int id;
 
     public Kit(int id, String name){
         this.name = name;
@@ -41,9 +41,7 @@ public class Kit {
     }
 
     public static Kit parseKit(int id) {
-        for (Kit k : kits) {
-            if (k.getId() == id) return k;
-        }
+        for (Kit k : kits) if (k.getId() == id) return k;
         return null;
     }
 }

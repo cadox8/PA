@@ -1,8 +1,10 @@
 package es.projectalpha.pa.toa.api;
 
+import es.projectalpha.pa.core.PACore;
 import es.projectalpha.pa.core.api.PAData;
 import es.projectalpha.pa.core.api.PAUser;
 import es.projectalpha.pa.core.cmd.PACmd;
+import es.projectalpha.pa.core.utils.ScoreboardUtil;
 import es.projectalpha.pa.core.utils.Title;
 import es.projectalpha.pa.toa.TOA;
 import es.projectalpha.pa.toa.kits.Kit;
@@ -15,6 +17,7 @@ import org.bukkit.Material;
 import org.bukkit.entity.Item;
 import org.bukkit.entity.Snowball;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.scheduler.BukkitRunnable;
 
 import java.net.InetSocketAddress;
 import java.util.Random;
@@ -35,19 +38,40 @@ public class TOAUser extends PAUser {
 
     }
 
+    private void setCity() {
+        ScoreboardUtil board = new ScoreboardUtil(PAData.RG.getOldPrefix(), "lobby");
+        new BukkitRunnable() {
+            @Override
+            public void run() {
+                if (getPlayer() == null) cancel();
+
+                if (plugin.getGm().getInTower().contains(TOA.getPlayer(getPlayer()))) {
+                    board.reset();
+                    cancel();
+                    return;
+                }
+                String kit = Kit.parseKit(getToaUserData().getKit()) == null ? "Ninguna" : Kit.parseKit(getToaUserData().getKit()).getName();
+
+                board.setName(PAData.RG.getOldPrefix());
+                board.text(4, "Zenys: §b" + getToaUserData().getZeny());
+                board.text(3, "§e ");
+                board.text(2, "Clase: §e" + kit);
+                board.text(1, "§e ");
+                board.text(0, PACore.getIP());
+                if (getPlayer() != null) board.build(getPlayer());
+            }
+        }.runTaskTimer(plugin, 0, 20);
+    }
 
     public void sendToTower() {
         teleport(plugin.getAm().getTower());
         plugin.getGm().joinTower(this);
     }
 
-    public void leaveTower() {
-        sendToCity();
-        plugin.getGm().leaveTower(this);
-    }
-
     public void sendToCity(){
+        plugin.getGm().leaveTower(this);
         teleport(plugin.getAm().getCity());
+        setCity();
     }
 
 
