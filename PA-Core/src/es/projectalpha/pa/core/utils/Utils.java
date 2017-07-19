@@ -5,6 +5,8 @@ import es.projectalpha.pa.core.api.PAData;
 import es.projectalpha.pa.core.api.PAServer;
 import es.projectalpha.pa.core.api.PAUser;
 import es.projectalpha.pa.core.cmd.PACmd;
+import lombok.NonNull;
+import lombok.experimental.NonFinal;
 import org.bukkit.*;
 
 import java.util.ArrayList;
@@ -60,12 +62,12 @@ public class Utils {
         return true;
     }
 
-    public static String locationToString(Location loc) {
+    public static String locationToString(@NonNull Location loc) {
         if (loc == null) return "";
         return loc.getWorld().getName() + "%" + loc.getX() + "%" + loc.getY() + "%" + loc.getZ() + "%" + loc.getYaw() + "%" + loc.getPitch();
     }
 
-    public static Location stringToLocation(String string) {
+    public static Location stringToLocation(@NonNull String string) {
         if (string == null) return null;
         String[] s = string.split("%");
         return new Location(Bukkit.getWorld(s[0]), Double.parseDouble(s[1]),

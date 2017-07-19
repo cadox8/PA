@@ -55,6 +55,13 @@ public class CuboidZone {
         return result;
     }
 
+    public List<Location> toLocations() {
+        List<Location> result = new ArrayList<>();
+
+        toArray().forEach(b -> result.add(b.getLocation()));
+        return result;
+    }
+
     @Override
     public String toString() {
         Location l = corner1.getLocation();
@@ -77,16 +84,5 @@ public class CuboidZone {
 
     public void clear() {
         toArray().forEach(b -> b.setType(Material.AIR));
-    }
-
-
-    //DTB
-    public void addDifficulty(){
-        clear();
-        int maxBlocks = r.nextInt(toArray().size() / 5) + 1;
-
-        for (int x = 0; x < maxBlocks; x++){
-            toArray().get(r.nextInt(toArray().size())).setType(Material.GOLD_BLOCK);
-        }
     }
 }
