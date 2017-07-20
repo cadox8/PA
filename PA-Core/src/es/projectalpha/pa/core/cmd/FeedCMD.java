@@ -9,16 +9,16 @@ import java.util.List;
 
 public class FeedCMD extends PACmd {
 
-    public FeedCMD(){
+    public FeedCMD() {
         super("feed", Grupo.Admin, "alimentar");
     }
 
-    public void run(PAUser user, String label, String[] args){
-        if (args.length == 0){
+    public void run(PAUser user, String label, String[] args) {
+        if (args.length == 0) {
             user.getPlayer().setFoodLevel(20);
             return;
         }
-        if (args.length == 1){
+        if (args.length == 1) {
             PAServer.getUser(args[0]).getPlayer().setFoodLevel(20);
         }
     }

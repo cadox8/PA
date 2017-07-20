@@ -13,11 +13,11 @@ import java.util.Arrays;
 import java.util.List;
 
 public class TeleportAllCMD extends PACmd {
-    
+
     public TeleportAllCMD() {
         super("tpall", Grupo.Admin, Arrays.asList("teleportall"));
     }
-    
+
     @Override
     public void run(PAUser user, String label, String[] args) {
         PAUser target = user;
@@ -28,14 +28,14 @@ public class TeleportAllCMD extends PACmd {
                 return;
             }
         }
-        
+
         for (Player p : plugin.getServer().getOnlinePlayers()) {
             p.teleport(target.getPlayer().getLocation(), PlayerTeleportEvent.TeleportCause.COMMAND);
         }
 
         user.sendMessage(PAData.CORE.getPrefix() + "&6Todos los jugadores han sido teletransportados");
     }
-    
+
     @Override
     public List<String> onTabComplete(CommandSender cs, Command cmd, String alias, String[] args, String curs, Integer curn) {
         return null;

@@ -9,19 +9,19 @@ import java.util.List;
 
 public class KillCMD extends PACmd {
 
-    public KillCMD(){
+    public KillCMD() {
         super("kill", Grupo.DEV, "matar");
     }
 
     @Override
-    public void run(PAUser user, String label, String[] args){
-        if (args.length == 0){
+    public void run(PAUser user, String label, String[] args) {
+        if (args.length == 0) {
             user.getPlayer().damage(user.getPlayer().getHealth());
         }
-        if (args.length == 1){
+        if (args.length == 1) {
             PAUser target = PAServer.getUser(args[0]);
 
-            if (target == null || !target.isOnline()){
+            if (target == null || !target.isOnline()) {
                 userNotOnline(user);
                 return;
             }

@@ -2,7 +2,6 @@ package es.projectalpha.pa.core.utils;
 
 import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.entity.Player;
-import org.inventivetalent.bossbar.BossBar;
 import org.inventivetalent.bossbar.BossBarAPI;
 
 public class BossBarUtils {

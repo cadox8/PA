@@ -7,23 +7,19 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 public class ItemUtils {
 
-    public enum ColoredBlock {
-        GLASS, FLAT_GLASS, CLAY;
-    }
-
-    public static ItemStack coloredBlock(DyeColor color, String name, ColoredBlock block){
+    public static ItemStack coloredBlock(DyeColor color, String name, ColoredBlock block) {
         return coloredBlock(color, name, 1, block);
     }
 
-    public static ItemStack coloredBlock(DyeColor color, int amount, ColoredBlock block){
+    public static ItemStack coloredBlock(DyeColor color, int amount, ColoredBlock block) {
         return coloredBlock(color, "%0000%1", amount, block);
     }
 
-    public static ItemStack coloredBlock(DyeColor color, String name, int amount, ColoredBlock block){
+    public static ItemStack coloredBlock(DyeColor color, String name, int amount, ColoredBlock block) {
         ItemStack i;
         ItemMeta im;
 
-        switch (block){
+        switch (block) {
             case GLASS:
                 i = new ItemStack(Material.STAINED_GLASS, amount, color.getDyeData());
                 break;
@@ -39,10 +35,14 @@ public class ItemUtils {
         }
 
         im = i.getItemMeta();
-        if (!name.equalsIgnoreCase("%0000%1"))  im.setDisplayName(Utils.colorize(name));
+        if (!name.equalsIgnoreCase("%0000%1")) im.setDisplayName(Utils.colorize(name));
 
         i.setItemMeta(im);
 
         return i;
+    }
+
+    public enum ColoredBlock {
+        GLASS, FLAT_GLASS, CLAY;
     }
 }

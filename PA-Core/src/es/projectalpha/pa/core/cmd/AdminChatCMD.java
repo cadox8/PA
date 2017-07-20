@@ -16,7 +16,7 @@ public class AdminChatCMD extends PACmd {
 
     @Override
     public void run(PAUser user, String label, String[] args) {
-        if(args.length > 0) {
+        if (args.length > 0) {
             String message = Utils.buildString(args);
             Utils.sendAdminMsg(user, message);
         } else {

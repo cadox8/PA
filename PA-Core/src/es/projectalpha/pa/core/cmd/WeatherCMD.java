@@ -9,16 +9,16 @@ import java.util.Random;
 
 public class WeatherCMD extends PACmd {
 
-    public WeatherCMD(){
+    public WeatherCMD() {
         super("weather", Grupo.Admin, Arrays.asList("tiempo", "metereologia"));
     }
 
     @Override
-    public void run (PAUser user, String lbl, String[] args) {
+    public void run(PAUser user, String lbl, String[] args) {
         World mundo = user.getPlayer().getWorld();
         int parametrosdelluvia = (300 + (new Random()).nextInt(600)) * 20;
 
-        switch(args[0].toLowerCase()) {
+        switch (args[0].toLowerCase()) {
             case "sun":
             case "sol":
             case "clear":

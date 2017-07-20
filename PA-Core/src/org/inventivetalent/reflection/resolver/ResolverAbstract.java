@@ -64,8 +64,8 @@ public abstract class ResolverAbstract<T> {
      * @param queries Array of possible queries
      * @return the resolved object (if it was found)
      * @throws ReflectiveOperationException if none of the possibilities could
-     * be resolved
-     * @throws IllegalArgumentException if the given possibilities are empty
+     *                                      be resolved
+     * @throws IllegalArgumentException     if the given possibilities are empty
      */
     protected T resolve(ResolverQuery... queries) throws ReflectiveOperationException {
         if (queries == null || queries.length <= 0) {

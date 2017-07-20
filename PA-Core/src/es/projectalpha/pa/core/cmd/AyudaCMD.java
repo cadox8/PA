@@ -15,7 +15,7 @@ public class AyudaCMD extends PACmd {
 
     @Override
     public void run(PAUser user, String label, String[] args) {
-        if(args.length == 0) {
+        if (args.length == 0) {
             user.sendDiv();
             user.sendMessage("&6Comandos de ProjectAlpha:");
             user.sendMessage("");

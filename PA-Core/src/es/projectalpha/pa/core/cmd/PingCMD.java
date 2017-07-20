@@ -37,15 +37,15 @@ public class PingCMD extends PACmd {
     private String format(int ping) {
         String color;
         if (ping <= 130) {
-            color ="&a";
+            color = "&a";
         } else if (ping <= 250) {
-            color ="&e";
+            color = "&e";
         } else if (ping <= 500) {
-            color ="&c";
+            color = "&c";
         } else {
-            color="&4";
+            color = "&4";
         }
-        return color+ping;
+        return color + ping;
     }
 
     @Override

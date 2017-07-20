@@ -53,7 +53,7 @@ public class CoreCMD extends PACmd {
         user.sendMessage("&eConfiguración recargada");
     }
 
-    private void toggleMaintenance(PAUser user){
+    private void toggleMaintenance(PAUser user) {
         plugin.getConfig().set("maintenance", !plugin.isMaintenance());
         plugin.saveConfig();
 
@@ -61,7 +61,7 @@ public class CoreCMD extends PACmd {
         user.sendMessage("&eHas cambiado el modo Mantenimiento del PACore a: " + main);
     }
 
-    private void togglePruebas(PAUser user){
+    private void togglePruebas(PAUser user) {
         plugin.getConfig().set("pruebas", !plugin.isPruebas());
         plugin.saveConfig();
 

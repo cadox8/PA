@@ -12,7 +12,7 @@ import java.util.List;
 
 public class SetGroupCMD extends PACmd {
 
-    public SetGroupCMD(){
+    public SetGroupCMD() {
         super("setgroup", Grupo.Admin, Arrays.asList("dargrupo", "setgrupo"));
     }
 
@@ -20,12 +20,12 @@ public class SetGroupCMD extends PACmd {
     public void run(PAUser user, String label, String[] args) {
         if (!user.getPlayer().isOp()) return;
 
-        if(args.length == 0){
+        if (args.length == 0) {
             user.sendMessage(PAData.CORE.getPrefix() + "&6Tu Rango: &" + Grupo.groupColor(user.getUserData().getGrupo()) + user.getUserData().getGrupo().toString());
             return;
         }
 
-        if (args.length == 1){
+        if (args.length == 1) {
             Integer i;
             try {
                 i = Integer.parseInt(args[1]);
@@ -58,7 +58,7 @@ public class SetGroupCMD extends PACmd {
         }
         PAUser target = PAServer.getUser(plugin.getServer().getPlayer(args[0]));
 
-        if (target == null || !target.isOnline()){
+        if (target == null || !target.isOnline()) {
             userNotOnline(user);
             return;
         }

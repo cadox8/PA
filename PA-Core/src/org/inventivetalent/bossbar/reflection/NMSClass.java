@@ -4,8 +4,6 @@ import java.lang.reflect.Field;
 
 public abstract class NMSClass {
 
-    private static boolean initialized;
-
     public static Class<?> Entity;
     public static Class<?> EntityLiving;
     public static Class<?> EntityInsentient;
@@ -29,6 +27,7 @@ public abstract class NMSClass {
     public static Class<?> BlockPosition;
     public static Class<?> Vector3f;
     public static Class<?> EnumEntityUseAction;
+    private static boolean initialized;
 
     static {
         if (!initialized) {

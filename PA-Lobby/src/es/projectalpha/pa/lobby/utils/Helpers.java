@@ -13,14 +13,15 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 public class Helpers {
 
-    @Getter private PAUser u;
     Files files;
+    @Getter
+    private PAUser u;
 
     public Helpers(PAUser u) {
         this.u = u;
     }
 
-    public void lobbyScoreboard(){
+    public void lobbyScoreboard() {
         ScoreboardUtil board = new ScoreboardUtil(PAData.LOBBY.getPrefix(), "lobby");
         new BukkitRunnable() {
             @Override

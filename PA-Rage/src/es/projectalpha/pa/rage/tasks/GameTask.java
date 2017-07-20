@@ -14,14 +14,13 @@ import java.util.List;
 public class GameTask extends BukkitRunnable {
 
     private final RageGames plugin;
+    private int count = 180;
+
+    //El GameManager accedes por plugin.getGm()
 
     public GameTask(RageGames instance) {
         this.plugin = instance;
     }
-
-    //El GameManager accedes por plugin.getGm()
-
-    private int count = 180;
 
     public void run() {
         plugin.getGm().getPlaying().forEach(p -> {

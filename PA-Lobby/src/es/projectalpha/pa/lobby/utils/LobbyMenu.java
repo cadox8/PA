@@ -9,25 +9,20 @@ import org.bukkit.inventory.ItemStack;
 
 public class LobbyMenu {
 
+    private static Inventory servers;
     private PALobby plugin = PALobby.getInstance();
 
-    public enum MenuType {
-        SERVERS
-    }
-
-    private static Inventory servers;
-
-    public LobbyMenu(PALobby instance){
+    public LobbyMenu(PALobby instance) {
         this.plugin = instance;
         servers = plugin.getServer().createInventory(null, 54, "Servidores");
 
         servers.addItem(new ItemStack(Material.APPLE));
     }
 
-    public static void openMenu(PAUser u, MenuType menuType){
+    public static void openMenu(PAUser u, MenuType menuType) {
         Inventory clon = null;
 
-        switch (menuType){
+        switch (menuType) {
             case SERVERS:
                 clon = servers;
                 break;
@@ -37,5 +32,9 @@ public class LobbyMenu {
             u.getPlayer().openInventory(clon);
             u.sendSound(Sound.CLICK);
         }
+    }
+
+    public enum MenuType {
+        SERVERS
     }
 }

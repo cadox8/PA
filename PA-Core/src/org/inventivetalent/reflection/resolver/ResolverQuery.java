@@ -55,6 +55,10 @@ public class ResolverQuery {
         this.types = types;
     }
 
+    public static Builder builder() {
+        return new Builder();
+    }
+
     public String getName() {
         return name;
     }
@@ -95,10 +99,6 @@ public class ResolverQuery {
                 + "name='" + name + '\''
                 + ", types=" + Arrays.toString(types)
                 + '}';
-    }
-
-    public static Builder builder() {
-        return new Builder();
     }
 
     /**

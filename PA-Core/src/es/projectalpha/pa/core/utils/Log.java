@@ -1,13 +1,21 @@
 package es.projectalpha.pa.core.utils;
 
 import es.projectalpha.pa.core.PACore;
-import es.projectalpha.pa.core.api.PAServer;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 public class Log {
 
     private static PACore plugin = PACore.getInstance();
+
+    public static void log(Level level, String msg) {
+        plugin.getServer().getConsoleSender().sendMessage(Utils.colorize(level.getPrefix() + " &" + level.getPrefix() + msg));
+    }
+
+    public static void debugLog(String msg) {
+        if (!plugin.isDebug()) return;
+        log(Level.DEBUG, msg);
+    }
 
     @Getter
     @AllArgsConstructor
@@ -20,14 +28,5 @@ public class Log {
 
         private String prefix;
         private char color;
-    }
-
-    public static void log(Level level, String msg){
-        plugin.getServer().getConsoleSender().sendMessage(Utils.colorize(level.getPrefix() + " &" + level.getPrefix() + msg));
-    }
-
-    public static void debugLog(String msg) {
-        if (!plugin.isDebug()) return;
-        log(Level.DEBUG, msg);
     }
 }

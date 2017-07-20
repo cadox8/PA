@@ -9,18 +9,17 @@ import org.bukkit.scheduler.BukkitRunnable;
 public class LobbyTask extends BukkitRunnable {
 
     private final TowerBattle plugin;
+    private int count = 40;
 
     public LobbyTask(TowerBattle instance) {
         this.plugin = instance;
     }
 
-    private int count = 40;
-
     @Override
     public void run() {
         if (plugin.getGm().getPlaying().size() < plugin.getAm().getMinPlayers()) {
             plugin.getGm().setCheckStart(true);
-            plugin.getServer().getOnlinePlayers().forEach(pl ->  pl.setLevel(0));
+            plugin.getServer().getOnlinePlayers().forEach(pl -> pl.setLevel(0));
             GameState.setState(GameState.LOBBY);
             cancel();
             return;
@@ -30,7 +29,7 @@ public class LobbyTask extends BukkitRunnable {
             TowerBattle.getPlayer(p).sendActionBar("&a&lEl juego empieza en: " + count);
         });
 
-        switch (count){
+        switch (count) {
             case 30:
                 Utils.broadcastMsg("&7El juego empezará en &c30 &7segundos");
                 break;

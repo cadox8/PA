@@ -163,10 +163,10 @@ public enum ParticleEffect {
     SWEEP_ATTACK("sweepAttack", v1_9_R1),
     FALLING_DUST("fallingDust", v1_10_R1);
 
+    protected Particle particle;
     private String name;
     private Minecraft.Version minVersion;
     private Feature feature;
-    protected Particle particle;
 
     ParticleEffect(String name, Minecraft.Version minVersion, Feature feature) {
         this.name = name;
@@ -185,6 +185,38 @@ public enum ParticleEffect {
 
     ParticleEffect(String name) {
         this(name, v1_7_R1);
+    }
+
+    static Enum<?> getEnum(String enumFullName) {
+        String[] x = enumFullName.split("\\.(?=[^\\.]+$)");
+        if (x.length == 2) {
+            String enumClassName = x[0];
+            String enumName = x[1];
+            try {
+                Class<Enum> cl = (Class<Enum>) Class.forName(enumClassName);
+                return Enum.valueOf(cl, enumName);
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            }
+        }
+        return null;
+    }
+
+    protected static void sendPacket(Object packet, Player p) throws IllegalArgumentException, IllegalAccessException, InvocationTargetException, ClassNotFoundException, NoSuchFieldException, NoSuchMethodException {
+        if (Reflection.EntityPlayerFieldResolver == null) {
+            Reflection.EntityPlayerFieldResolver = new FieldResolver(Reflection.NMS_CLASS_RESOLVER.resolve("EntityPlayer"));
+        }
+        if (Reflection.PlayerConnectionMethodResolver == null) {
+            Reflection.PlayerConnectionMethodResolver = new MethodResolver(Reflection.NMS_CLASS_RESOLVER.resolve("PlayerConnection"));
+        }
+
+        try {
+            Object handle = Minecraft.getHandle(p);
+            final Object connection = Reflection.EntityPlayerFieldResolver.resolve("playerConnection").get(handle);
+            Reflection.PlayerConnectionMethodResolver.resolve("sendPacket").invoke(connection, packet);
+        } catch (ReflectiveOperationException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public String getName() {
@@ -208,14 +240,16 @@ public enum ParticleEffect {
         return Minecraft.VERSION.newerThan(getMinVersion());
     }
 
+    //*** Public send methods
+    //General
+
     /**
      * Check if this particle has special
      * {@link org.inventivetalent.particle.ParticleEffect.Feature}s - Particles
      * with features cannot use the default send() methods - Particles without
      * features cannot use special sendColor or sendData methods
      *
-     * @param feature
-     * {@link org.inventivetalent.particle.ParticleEffect.Feature} to check
+     * @param feature {@link org.inventivetalent.particle.ParticleEffect.Feature} to check
      * @return <code>true</code> if this particle has the feature
      * @see #hasNoFeatures()
      */
@@ -236,21 +270,19 @@ public enum ParticleEffect {
         return this.feature == null;
     }
 
-    //*** Public send methods
-    //General
     /**
      * Send this particle
      *
      * @param receivers Collection of receivers
-     * @param x X-Location
-     * @param y Y-Location
-     * @param z Z-Location
-     * @param offsetX X-Offset
-     * @param offsetY Y-Offset
-     * @param offsetZ Z-Offset
-     * @param speed Particle speed
-     * @param count Particle count
-     * @param range Maximum visibility range
+     * @param x         X-Location
+     * @param y         Y-Location
+     * @param z         Z-Location
+     * @param offsetX   X-Offset
+     * @param offsetY   Y-Offset
+     * @param offsetZ   Z-Offset
+     * @param speed     Particle speed
+     * @param count     Particle count
+     * @param range     Maximum visibility range
      */
     public void send(Collection<? extends Player> receivers, double x, double y, double z, double offsetX, double offsetY, double offsetZ, double speed, int count, double range) {
         double squareRange = range * range;
@@ -267,17 +299,17 @@ public enum ParticleEffect {
      * Send this particle
      *
      * @param receivers Collection of receivers
-     * @param location {@link Location}
-     * @param offsetX X-Offset
-     * @param offsetY Y-Offset
-     * @param offsetZ Z-Offset
-     * @param speed Particle speed
-     * @param count Particle count
-     * @param range Maximum visibility range
+     * @param location  {@link Location}
+     * @param offsetX   X-Offset
+     * @param offsetY   Y-Offset
+     * @param offsetZ   Z-Offset
+     * @param speed     Particle speed
+     * @param count     Particle count
+     * @param range     Maximum visibility range
      */
     public void send(Collection<? extends Player> receivers, Location location, double offsetX, double offsetY, double offsetZ, double speed, int count, double range) {
         receivers = new ArrayList<>(receivers);
-        for (Iterator<? extends Player> iterator = receivers.iterator(); iterator.hasNext();) {
+        for (Iterator<? extends Player> iterator = receivers.iterator(); iterator.hasNext(); ) {
             if (!iterator.next().getWorld().getName().equals(location.getWorld().getName())) {
                 iterator.remove();
             }
@@ -285,18 +317,20 @@ public enum ParticleEffect {
         send(receivers, location.getX(), location.getY(), location.getZ(), offsetX, offsetY, offsetZ, speed, count, range);
     }
 
+    //Color
+
     /**
      * Send this particle
      *
      * @param receivers Collection of receivers
-     * @param x X-Location
-     * @param y Y-Location
-     * @param z Z-Location
-     * @param offsetX X-Offset
-     * @param offsetY Y-Offset
-     * @param offsetZ Z-Offset
-     * @param speed Particle speed
-     * @param count Particle count
+     * @param x         X-Location
+     * @param y         Y-Location
+     * @param z         Z-Location
+     * @param offsetX   X-Offset
+     * @param offsetY   Y-Offset
+     * @param offsetZ   Z-Offset
+     * @param speed     Particle speed
+     * @param count     Particle count
      */
     public void send(Collection<? extends Player> receivers, double x, double y, double z, double offsetX, double offsetY, double offsetZ, double speed, int count) {
         this.particle.send(receivers, x, y, z, offsetX, offsetY, offsetZ, speed, count);
@@ -306,16 +340,16 @@ public enum ParticleEffect {
      * Send this particle
      *
      * @param receivers Collection of receivers
-     * @param location {@link Location}
-     * @param offsetX X-Offset
-     * @param offsetY Y-Offset
-     * @param offsetZ Z-Offset
-     * @param speed Particle speed
-     * @param count Particle count
+     * @param location  {@link Location}
+     * @param offsetX   X-Offset
+     * @param offsetY   Y-Offset
+     * @param offsetZ   Z-Offset
+     * @param speed     Particle speed
+     * @param count     Particle count
      */
     public void send(Collection<? extends Player> receivers, Location location, double offsetX, double offsetY, double offsetZ, double speed, int count) {
         receivers = new ArrayList<>(receivers);
-        for (Iterator<? extends Player> iterator = receivers.iterator(); iterator.hasNext();) {
+        for (Iterator<? extends Player> iterator = receivers.iterator(); iterator.hasNext(); ) {
             if (!iterator.next().getWorld().getName().equals(location.getWorld().getName())) {
                 iterator.remove();
             }
@@ -323,15 +357,14 @@ public enum ParticleEffect {
         this.particle.send(receivers, location.getX(), location.getY(), location.getZ(), offsetX, offsetY, offsetZ, speed, count);
     }
 
-    //Color
     /**
      * Send this particle with a color
      *
      * @param receivers Collection of receivers
-     * @param x X-Location
-     * @param y Y-Location
-     * @param z Z-Location
-     * @param color {@link org.bukkit.Color} of the particle
+     * @param x         X-Location
+     * @param y         Y-Location
+     * @param z         Z-Location
+     * @param color     {@link org.bukkit.Color} of the particle
      * @throws ParticleException if this particle cannot have a color
      */
     public void sendColor(Collection<? extends Player> receivers, double x, double y, double z, org.bukkit.Color color) {
@@ -345,10 +378,10 @@ public enum ParticleEffect {
      * Send this particle with a color
      *
      * @param receivers Collection of receivers
-     * @param x X-Location
-     * @param y Y-Location
-     * @param z Z-Location
-     * @param color {@link  java.awt.Color} of the particle
+     * @param x         X-Location
+     * @param y         Y-Location
+     * @param z         Z-Location
+     * @param color     {@link  java.awt.Color} of the particle
      * @throws ParticleException if this particle cannot have a color
      */
     public void sendColor(Collection<? extends Player> receivers, double x, double y, double z, java.awt.Color color) {
@@ -358,9 +391,11 @@ public enum ParticleEffect {
         ((ColoredParticle) this.particle).send(receivers, x, y, z, color);
     }
 
+    //Data
+
     public void sendColor(Collection<? extends Player> receivers, Location location, Color color) {
         receivers = new ArrayList<>(receivers);
-        for (Iterator<? extends Player> iterator = receivers.iterator(); iterator.hasNext();) {
+        for (Iterator<? extends Player> iterator = receivers.iterator(); iterator.hasNext(); ) {
             if (!iterator.next().getWorld().getName().equals(location.getWorld().getName())) {
                 iterator.remove();
             }
@@ -370,7 +405,7 @@ public enum ParticleEffect {
 
     public void sendColor(Collection<? extends Player> receivers, Location location, java.awt.Color color) {
         receivers = new ArrayList<>(receivers);
-        for (Iterator<? extends Player> iterator = receivers.iterator(); iterator.hasNext();) {
+        for (Iterator<? extends Player> iterator = receivers.iterator(); iterator.hasNext(); ) {
             if (!iterator.next().getWorld().getName().equals(location.getWorld().getName())) {
                 iterator.remove();
             }
@@ -378,21 +413,20 @@ public enum ParticleEffect {
         sendColor(receivers, location.getX(), location.getY(), location.getZ(), color);
     }
 
-    //Data
     /**
      * Send this particle with block or item data
      *
      * @param receivers Collection of receivers
-     * @param x X-Location
-     * @param y Y-Location
-     * @param z Z-Location
-     * @param offsetX X-Offset
-     * @param offsetY Y-Offset
-     * @param offsetZ Z-Offset
-     * @param speed Particle speed
-     * @param count Particle count
-     * @param itemId ID of the item/block
-     * @param data Data of the item/block
+     * @param x         X-Location
+     * @param y         Y-Location
+     * @param z         Z-Location
+     * @param offsetX   X-Offset
+     * @param offsetY   Y-Offset
+     * @param offsetZ   Z-Offset
+     * @param speed     Particle speed
+     * @param count     Particle count
+     * @param itemId    ID of the item/block
+     * @param data      Data of the item/block
      * @throws ParticleException if this particle cannot have block or item data
      */
     public void sendData(Collection<? extends Player> receivers, double x, double y, double z, double offsetX, double offsetY, double offsetZ, double speed, int count, int itemId, byte data) {
@@ -406,16 +440,16 @@ public enum ParticleEffect {
      * Send this particle with block or item data
      *
      * @param receivers Collection of receivers
-     * @param x X-Location
-     * @param y Y-Location
-     * @param z Z-Location
-     * @param offsetX X-Offset
-     * @param offsetY Y-Offset
-     * @param offsetZ Z-Offset
-     * @param speed Particle speed
-     * @param count Particle count
+     * @param x         X-Location
+     * @param y         Y-Location
+     * @param z         Z-Location
+     * @param offsetX   X-Offset
+     * @param offsetY   Y-Offset
+     * @param offsetZ   Z-Offset
+     * @param speed     Particle speed
+     * @param count     Particle count
      * @param itemStack {@link ItemStack} containing the ID&amp;data of the
-     * item/block
+     *                  item/block
      * @throws ParticleException if this particle cannot have block or item data
      */
     public void sendData(Collection<? extends Player> receivers, double x, double y, double z, double offsetX, double offsetY, double offsetZ, double speed, int count, ItemStack itemStack) {
@@ -484,17 +518,17 @@ public enum ParticleEffect {
 
         void send_1_8(Collection<? extends Player> receivers, double x, double y, double z, double offsetX, double offsetY, double offsetZ, double speed, int count, int... extra) throws Exception {
             Object packet = PacketParticleConstructorResolver.resolve(new Class[]{
-                EnumParticle,
-                boolean.class,
-                float.class,
-                float.class,
-                float.class,
-                float.class,
-                float.class,
-                float.class,
-                float.class,
-                int.class,
-                int[].class}).newInstance(//
+                    EnumParticle,
+                    boolean.class,
+                    float.class,
+                    float.class,
+                    float.class,
+                    float.class,
+                    float.class,
+                    float.class,
+                    float.class,
+                    int.class,
+                    int[].class}).newInstance(//
                     getEnum(EnumParticle.getName() + "." + effect.name()),//particle enum
                     true,//long-distance
                     (float) x,//X
@@ -515,15 +549,15 @@ public enum ParticleEffect {
 
         void send_1_7(String name, Collection<? extends Player> receivers, double x, double y, double z, double offsetX, double offsetY, double offsetZ, double speed, int count) throws Exception {
             Object packet = PacketParticleConstructorResolver.resolve(new Class[]{
-                String.class,
-                float.class,
-                float.class,
-                float.class,
-                float.class,
-                float.class,
-                float.class,
-                float.class,
-                int.class}).newInstance(//
+                    String.class,
+                    float.class,
+                    float.class,
+                    float.class,
+                    float.class,
+                    float.class,
+                    float.class,
+                    float.class,
+                    int.class}).newInstance(//
                     name,//Particle name
                     (float) x,//X
                     (float) y,//Y
@@ -578,8 +612,8 @@ public enum ParticleEffect {
             try {
                 if (Minecraft.VERSION.newerThan(v1_8_R1)) {
                     send_1_8(receivers, x, y, z, offsetX, offsetY, offsetZ, speed, count, new int[]{
-                        id,
-                        id | data << 12});
+                            id,
+                            id | data << 12});
                 } else {
                     send_1_7(effect.name + id + (data >= 0 ? "_" + data : ""), receivers, x, y, z, offsetX, offsetY, offsetZ, speed, count);
                 }
@@ -594,44 +628,12 @@ public enum ParticleEffect {
         }
     }
 
-    static Enum<?> getEnum(String enumFullName) {
-        String[] x = enumFullName.split("\\.(?=[^\\.]+$)");
-        if (x.length == 2) {
-            String enumClassName = x[0];
-            String enumName = x[1];
-            try {
-                Class<Enum> cl = (Class<Enum>) Class.forName(enumClassName);
-                return Enum.valueOf(cl, enumName);
-            } catch (ClassNotFoundException e) {
-                e.printStackTrace();
-            }
-        }
-        return null;
-    }
-
     static class Reflection {
 
         static final NMSClassResolver NMS_CLASS_RESOLVER = new NMSClassResolver();
         //Packets
         private static FieldResolver EntityPlayerFieldResolver;
         private static MethodResolver PlayerConnectionMethodResolver;
-    }
-
-    protected static void sendPacket(Object packet, Player p) throws IllegalArgumentException, IllegalAccessException, InvocationTargetException, ClassNotFoundException, NoSuchFieldException, NoSuchMethodException {
-        if (Reflection.EntityPlayerFieldResolver == null) {
-            Reflection.EntityPlayerFieldResolver = new FieldResolver(Reflection.NMS_CLASS_RESOLVER.resolve("EntityPlayer"));
-        }
-        if (Reflection.PlayerConnectionMethodResolver == null) {
-            Reflection.PlayerConnectionMethodResolver = new MethodResolver(Reflection.NMS_CLASS_RESOLVER.resolve("PlayerConnection"));
-        }
-
-        try {
-            Object handle = Minecraft.getHandle(p);
-            final Object connection = Reflection.EntityPlayerFieldResolver.resolve("playerConnection").get(handle);
-            Reflection.PlayerConnectionMethodResolver.resolve("sendPacket").invoke(connection, packet);
-        } catch (ReflectiveOperationException e) {
-            throw new RuntimeException(e);
-        }
     }
 
 }

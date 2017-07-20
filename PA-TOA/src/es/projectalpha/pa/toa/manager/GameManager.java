@@ -10,7 +10,8 @@ public class GameManager {
 
     private TOA plugin;
 
-    @Getter private ArrayList<TOAUser> inTower = new ArrayList<>();
+    @Getter
+    private ArrayList<TOAUser> inTower = new ArrayList<>();
 
     public GameManager(TOA instance) {
         this.plugin = instance;

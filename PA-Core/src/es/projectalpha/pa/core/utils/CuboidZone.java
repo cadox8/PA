@@ -14,9 +14,12 @@ public class CuboidZone {
 
     private Random r = new Random();
 
-    @Getter private Block corner1;
-    @Getter private Block corner2;
-    @Getter private World world;
+    @Getter
+    private Block corner1;
+    @Getter
+    private Block corner2;
+    @Getter
+    private World world;
 
     public CuboidZone(Block corner1, Block corner2) {
         if (corner1.getWorld().equals(corner2.getWorld())) {

@@ -8,11 +8,11 @@ import es.projectalpha.pa.core.cmd.PACmd;
 import java.util.Arrays;
 
 public class TeleportDenyCMD extends PACmd {
-    
+
     public TeleportDenyCMD() {
         super("tpadeny", Grupo.Usuario, Arrays.asList("teleportdeny"));
     }
-    
+
     @Override
     public void run(PAUser user, String label, String[] args) {
         if (PAServer.getTeleportRequests().containsKey(user.getUuid()) || PAServer.getTeleportHereRequests().containsKey(user.getUuid())) {
@@ -27,5 +27,5 @@ public class TeleportDenyCMD extends PACmd {
         } else {
             user.sendMessage("");
         }
-    }  
+    }
 }

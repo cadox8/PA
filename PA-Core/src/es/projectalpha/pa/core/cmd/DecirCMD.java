@@ -18,6 +18,12 @@ public class DecirCMD extends PACmd {
         super("decir", Grupo.Usuario, Arrays.asList("w", "m", "msg", "mensaje"));
     }
 
+    private static void sendPrivateMessage(PAUser target, PAUser from, String mensaje) {
+        target.sendMessage("&2" + target.getName() + " &6-> &cYo &r: " + mensaje);
+        from.sendMessage("&2Yo &6-> &c" + target.getName() + "&r: " + mensaje);
+        target.sendSound(Sound.LEVEL_UP);
+    }
+
     @Override
     public void run(PAUser user, String lbl, String[] args) {
         PAUser target = PAServer.getUser(PACore.getInstance().getServer().getPlayer(args[0]));
@@ -26,7 +32,7 @@ public class DecirCMD extends PACmd {
             user.sendMessage(PAData.CORE.getPrefix() + "&c¡No puedes enviarte mensajes a ti mismo!");
             return;
         }
-        if (!target.isOnline()){
+        if (!target.isOnline()) {
             user.sendMessage(PAData.CORE.getPrefix() + "&cEl jugador está desconectado");
             return;
         }
@@ -37,11 +43,5 @@ public class DecirCMD extends PACmd {
     @Override
     public List<String> onTabComplete(CommandSender sender, Command cmd, String alias, String[] args, String curs, Integer curn) {
         return null;
-    }
-
-    private static void sendPrivateMessage(PAUser target, PAUser from, String mensaje){
-        target.sendMessage("&2" + target.getName() + " &6-> &cYo &r: " + mensaje);
-        from.sendMessage("&2Yo &6-> &c" + target.getName() + "&r: " + mensaje);
-        target.sendSound(Sound.LEVEL_UP);
     }
 }

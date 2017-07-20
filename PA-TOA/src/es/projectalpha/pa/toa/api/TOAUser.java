@@ -3,7 +3,6 @@ package es.projectalpha.pa.toa.api;
 import es.projectalpha.pa.core.PACore;
 import es.projectalpha.pa.core.api.PAData;
 import es.projectalpha.pa.core.api.PAUser;
-import es.projectalpha.pa.core.cmd.PACmd;
 import es.projectalpha.pa.core.utils.ScoreboardUtil;
 import es.projectalpha.pa.core.utils.Title;
 import es.projectalpha.pa.toa.TOA;
@@ -12,22 +11,17 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import org.bukkit.GameMode;
-import org.bukkit.Location;
-import org.bukkit.Material;
-import org.bukkit.entity.Item;
-import org.bukkit.entity.Snowball;
-import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import java.net.InetSocketAddress;
-import java.util.Random;
 import java.util.UUID;
 
 public class TOAUser extends PAUser {
 
     private TOA plugin = TOA.getInstance();
 
-    @Getter @Setter private TOAUserData toaUserData;
+    @Getter
+    @Setter
+    private TOAUserData toaUserData;
 
     public TOAUser(UUID uuid) {
         super(uuid);
@@ -68,7 +62,7 @@ public class TOAUser extends PAUser {
         plugin.getGm().joinTower(this);
     }
 
-    public void sendToCity(){
+    public void sendToCity() {
         plugin.getGm().leaveTower(this);
         teleport(plugin.getAm().getCity());
         setCity();
@@ -87,7 +81,7 @@ public class TOAUser extends PAUser {
     private void respawn() {
         getPlayer().setGameMode(GameMode.ADVENTURE);
         sendToCity();
-        int zenys = (int)(getToaUserData().getZeny() * 0.02);
+        int zenys = (int) (getToaUserData().getZeny() * 0.02);
 
         getToaUserData().setZeny(getToaUserData().getZeny() - zenys);
         sendMessage(PAData.TOA.getPrefix() + "&2Has perdido &6" + zenys + "&2 zenys");
@@ -97,6 +91,7 @@ public class TOAUser extends PAUser {
         getPlayer().getInventory().clear();
         kit.setItems(getPlayer());
         sendToCity();
+        plugin.getHealth().setHealth(this, kit.getHealth());
         Title.sendTitle(getPlayer(), 0, 3, 0, "", "&cTu aventura comienza ahora");
     }
 
@@ -116,6 +111,7 @@ public class TOAUser extends PAUser {
 
         Integer kit = -1;
 
-        public TOAUserData() {}
+        public TOAUserData() {
+        }
     }
 }

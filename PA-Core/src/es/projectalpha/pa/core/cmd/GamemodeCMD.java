@@ -11,12 +11,12 @@ import java.util.List;
 
 public class GamemodeCMD extends PACmd {
 
-    public GamemodeCMD(){
+    public GamemodeCMD() {
         super("gamemode", Grupo.Builder, "gm");
     }
 
-    public void run(PAUser user, String label, String[] args){
-        if (args.length == 1){
+    public void run(PAUser user, String label, String[] args) {
+        if (args.length == 1) {
 
             //user.getPlayer().getInventory().clear();
             //backInventory(user);
@@ -25,10 +25,10 @@ public class GamemodeCMD extends PACmd {
             user.sendMessage(PAData.CORE.getPrefix() + "&6Modo de juego cambiado a &c" + parseGamemode(args[0]).toString());
         }
 
-        if (args.length == 2){
+        if (args.length == 2) {
             PAUser target = PAServer.getUser(args[1]);
 
-            if (target == null || !target.isOnline()){
+            if (target == null || !target.isOnline()) {
                 userNotOnline(user);
                 return;
             }
@@ -38,8 +38,8 @@ public class GamemodeCMD extends PACmd {
         }
     }
 
-    private GameMode parseGamemode(String gamemode){
-        switch (gamemode){
+    private GameMode parseGamemode(String gamemode) {
+        switch (gamemode) {
             case "creativo":
             case "1":
             case "c":

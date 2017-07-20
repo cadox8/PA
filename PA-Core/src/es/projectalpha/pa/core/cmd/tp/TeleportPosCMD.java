@@ -8,18 +8,18 @@ import org.bukkit.event.player.PlayerTeleportEvent;
 import java.util.Arrays;
 
 public class TeleportPosCMD extends PACmd {
-    
+
     public TeleportPosCMD() {
         super("tppos", Grupo.Admin, Arrays.asList("tploc"));
     }
-    
+
     @Override
     public void run(PAUser user, String label, String[] args) {
         if (args.length != 3) {
             user.sendMessage("&eUsa: /" + label + " <x> <y> <z>");
             return;
         }
-        
+
         Double x, y, z;
         try {
             x = Double.parseDouble(args[0]);
@@ -33,5 +33,5 @@ public class TeleportPosCMD extends PACmd {
 
         user.getPlayer().teleport(loc, PlayerTeleportEvent.TeleportCause.COMMAND);
         user.sendMessage("&6Teleportando a &e" + x + "&6, &e" + y + "&6, &e" + z);
-    }  
+    }
 }

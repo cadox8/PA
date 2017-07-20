@@ -20,15 +20,24 @@ import java.sql.SQLException;
 
 public class PAAntium extends JavaPlugin {
 
-    @Getter private static PACore plugin = PACore.getInstance();
-    @Getter private static PAAntium instance;
+    @Getter
+    private static PACore plugin = PACore.getInstance();
+    @Getter
+    private static PAAntium instance;
 
-    @Getter private PassManager passManager;
+    @Getter
+    private PassManager passManager;
 
-    @Getter private MySQL mysql = null;
-    @Getter private Connection connection = null;
+    @Getter
+    private MySQL mysql = null;
+    @Getter
+    private Connection connection = null;
 
-    public void onEnable(){
+    public static PAUser getUser(OfflinePlayer p) {
+        return PAServer.getUser(p);
+    }
+
+    public void onEnable() {
         instance = this;
 
         plugin.debugLog("Cargando MySQL...");
@@ -48,30 +57,26 @@ public class PAAntium extends JavaPlugin {
         registerCommands();
     }
 
-    public void onDisable(){
+    public void onDisable() {
         if (connection != null) {
             try {
                 connection.close();
-            } catch (SQLException ex) {}
+            } catch (SQLException ex) {
+            }
         }
     }
 
-
-    private void registerClasses(){
+    private void registerClasses() {
         passManager = new PassManager(instance);
     }
 
-    private void registerEvents(){
+    private void registerEvents() {
         PluginManager pm = getServer().getPluginManager();
 
         pm.registerEvents(new PlayerEvents(instance), instance);
     }
 
-    private void registerCommands(){
+    private void registerCommands() {
         PACommands.register(new LoginCMD(), new RegisterCMD(), new AntiumCMD());
-    }
-
-    public static PAUser getUser(OfflinePlayer p){
-        return PAServer.getUser(p);
     }
 }

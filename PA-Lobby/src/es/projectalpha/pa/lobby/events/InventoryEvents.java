@@ -13,7 +13,7 @@ public class InventoryEvents implements Listener {
 
     private PALobby plugin;
 
-    public InventoryEvents(PALobby instance){
+    public InventoryEvents(PALobby instance) {
         this.plugin = instance;
     }
 

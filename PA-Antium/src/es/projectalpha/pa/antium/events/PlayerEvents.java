@@ -15,12 +15,12 @@ public class PlayerEvents implements Listener {
 
     private PAAntium plugin;
 
-    public PlayerEvents(PAAntium instance){
+    public PlayerEvents(PAAntium instance) {
         this.plugin = instance;
     }
 
     @EventHandler
-    public void onJoin(PlayerJoinEvent e){
+    public void onJoin(PlayerJoinEvent e) {
         PAUser u = PAAntium.getUser(e.getPlayer());
 
         if (plugin.getMysql().isRegistered(u)) {
@@ -31,7 +31,7 @@ public class PlayerEvents implements Listener {
     }
 
     @EventHandler
-    public void onLeave(PlayerQuitEvent e){
+    public void onLeave(PlayerQuitEvent e) {
         PAUser u = PAAntium.getUser(e.getPlayer());
 
         if (!plugin.getPassManager().getLogged().contains(u)) plugin.getPassManager().removeLogged(u);
@@ -39,21 +39,21 @@ public class PlayerEvents implements Listener {
 
 
     @EventHandler
-    public void onChat(AsyncPlayerChatEvent e){
+    public void onChat(AsyncPlayerChatEvent e) {
         PAUser u = PAAntium.getUser(e.getPlayer());
 
         if (!plugin.getPassManager().getLogged().contains(u)) e.setCancelled(true);
     }
 
     @EventHandler
-    public void onMove(PlayerMoveEvent e){
+    public void onMove(PlayerMoveEvent e) {
         PAUser u = PAAntium.getUser(e.getPlayer());
 
         if (!plugin.getPassManager().getLogged().contains(u)) e.setCancelled(true);
     }
 
     @EventHandler(priority = EventPriority.HIGH)
-    public void onInteract(PlayerInteractEvent e){
+    public void onInteract(PlayerInteractEvent e) {
         PAUser u = PAAntium.getUser(e.getPlayer());
 
         if (!plugin.getPassManager().getLogged().contains(u)) e.setCancelled(true);
@@ -65,12 +65,12 @@ public class PlayerEvents implements Listener {
     }
 
     @EventHandler
-    public void onDamage(EntityDamageByEntityEvent e){
+    public void onDamage(EntityDamageByEntityEvent e) {
         e.setCancelled(true);
     }
 
     @EventHandler
-    public void onCombust(EntityCombustEvent e){
+    public void onCombust(EntityCombustEvent e) {
         e.setCancelled(true);
     }
 

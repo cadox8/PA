@@ -7,7 +7,6 @@ import es.projectalpha.pa.core.utils.Log;
 import es.projectalpha.pa.core.utils.MySQL;
 import es.projectalpha.pa.core.utils.Utils;
 import lombok.Getter;
-import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.plugin.PluginManager;
@@ -22,16 +21,19 @@ import java.util.Arrays;
 
 public class PACore extends JavaPlugin {
 
-    @Getter private static PACore instance;
-    @Getter private static final String IP = "&bmc.projectalpha.es";
-
-    @Getter private Utils utils;
-    @Getter private WorldManager worldManager;
-
-    @Getter private MySQL mysql = null;
+    @Getter
+    private static final String IP = "&bmc.projectalpha.es";
+    @Getter
+    private static PACore instance;
+    @Getter
+    private static ViaAPI api = Via.getAPI();
+    @Getter
+    private Utils utils;
+    @Getter
+    private WorldManager worldManager;
+    @Getter
+    private MySQL mysql = null;
     private Connection connection = null;
-
-    @Getter private static ViaAPI api = Via.getAPI();
 
     @Override
     public void onEnable() {
@@ -114,11 +116,11 @@ public class PACore extends JavaPlugin {
     }
 
     //Maintenance/Pruebas
-    public boolean isMaintenance(){
+    public boolean isMaintenance() {
         return getConfig().getBoolean("maintenance");
     }
 
-    public boolean isPruebas(){
+    public boolean isPruebas() {
         return getConfig().getBoolean("pruebas");
     }
 }

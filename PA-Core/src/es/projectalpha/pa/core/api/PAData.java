@@ -16,7 +16,8 @@ public enum PAData {
     TOA(5, "&aTOA"),
     TB(6, "&eTowerBattle");
 
-    @Getter private int id;
+    @Getter
+    private int id;
     private String prefix;
 
     public String getPrefix() {

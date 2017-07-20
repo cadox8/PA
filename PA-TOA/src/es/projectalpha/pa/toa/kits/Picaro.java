@@ -4,14 +4,13 @@ import es.projectalpha.pa.core.utils.ItemMaker;
 import es.projectalpha.pa.toa.TOA;
 import es.projectalpha.pa.toa.api.TOAUser;
 import org.bukkit.Material;
-import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemFlag;
 
 public class Picaro extends Kit {
 
-    public Picaro(int id){
-        super(id, "Picaro");
+    public Picaro(int id, int health) {
+        super(id, "Picaro", health);
     }
 
     public void setItems(Player p) {

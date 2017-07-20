@@ -12,9 +12,12 @@ public class GameManager {
 
     private TowerBattle plugin;
 
-    @Getter private ArrayList<Player> playing = new ArrayList<>();
+    @Getter
+    private ArrayList<Player> playing = new ArrayList<>();
 
-    @Getter @Setter private boolean checkStart = true;
+    @Getter
+    @Setter
+    private boolean checkStart = true;
 
     public GameManager(TowerBattle instance) {
         this.plugin = instance;

@@ -25,11 +25,9 @@ import java.util.List;
 
 public class PACommands implements TabCompleter {
 
-    private static PACore plugin = PACore.getInstance();
-
     public static List<PACmd> cmds = new ArrayList<>();
     public static PACommands ucmds;
-
+    private static PACore plugin = PACore.getInstance();
     private static String name = "pa-core:";
 
     public static void load() {
@@ -73,8 +71,8 @@ public class PACommands implements TabCompleter {
         cmds.forEach(PACommands::register);
     }
 
-    public static void register(PACmd... cmdList){
-        for (PACmd cmd : cmdList){
+    public static void register(PACmd... cmdList) {
+        for (PACmd cmd : cmdList) {
             register(cmd);
         }
     }
@@ -139,6 +137,20 @@ public class PACommands implements TabCompleter {
         }
     }
 
+    private static CommandMap getCommandMap() {
+        CommandMap commandMap = null;
+        try {
+            if (Bukkit.getPluginManager() instanceof SimplePluginManager) {
+                Field f = SimplePluginManager.class.getDeclaredField("commandMap");
+                f.setAccessible(true);
+                commandMap = (CommandMap) f.get(Bukkit.getPluginManager());
+            }
+        } catch (SecurityException | IllegalArgumentException | IllegalAccessException | NoSuchFieldException e) {
+            e.printStackTrace();
+        }
+        return commandMap;
+    }
+
     @Override
     public List<String> onTabComplete(CommandSender sender, Command cmd, String label, String[] args) {
         List<String> rtrn = null;
@@ -186,19 +198,5 @@ public class PACommands implements TabCompleter {
             rtrn.removeAll(remv);
         }
         return rtrn;
-    }
-
-    private static CommandMap getCommandMap() {
-        CommandMap commandMap = null;
-        try {
-            if (Bukkit.getPluginManager() instanceof SimplePluginManager) {
-                Field f = SimplePluginManager.class.getDeclaredField("commandMap");
-                f.setAccessible(true);
-                commandMap = (CommandMap) f.get(Bukkit.getPluginManager());
-            }
-        } catch (SecurityException | IllegalArgumentException | IllegalAccessException | NoSuchFieldException e) {
-            e.printStackTrace();
-        }
-        return commandMap;
     }
 }

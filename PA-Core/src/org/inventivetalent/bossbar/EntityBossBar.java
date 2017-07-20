@@ -70,24 +70,16 @@ public class EntityBossBar extends BukkitRunnable implements BossBar {
     }
 
     @Override
-    public void setHealth(float percentage) {
-        this.health = percentage / 100F * this.getMaxHealth();
-        if (this.health <= this.minHealth) {
-            BossBarAPI.removeBar(this.receiver);
-        } else {
-            this.sendMetadata();
-        }
-    }
-
-    @Override
     public float getHealth() {
         return health;
     }
 
     @Override
-    public void setMessage(String message) {
-        this.message = message;
-        if (this.isVisible()) {
+    public void setHealth(float percentage) {
+        this.health = percentage / 100F * this.getMaxHealth();
+        if (this.health <= this.minHealth) {
+            BossBarAPI.removeBar(this.receiver);
+        } else {
             this.sendMetadata();
         }
     }
@@ -134,6 +126,14 @@ public class EntityBossBar extends BukkitRunnable implements BossBar {
     }
 
     @Override
+    public void setMessage(String message) {
+        this.message = message;
+        if (this.isVisible()) {
+            this.sendMetadata();
+        }
+    }
+
+    @Override
     public Location getLocation() {
         return this.location;
     }
@@ -149,6 +149,11 @@ public class EntityBossBar extends BukkitRunnable implements BossBar {
     }
 
     @Override
+    public boolean isVisible() {
+        return this.visible;
+    }
+
+    @Override
     public void setVisible(boolean flag) {
         if (flag == this.visible) {
             return;
@@ -161,18 +166,13 @@ public class EntityBossBar extends BukkitRunnable implements BossBar {
     }
 
     @Override
-    public boolean isVisible() {
-        return this.visible;
+    public float getProgress() {
+        return getHealth() / 100;
     }
 
     @Override
     public void setProgress(float progress) {
         setHealth(progress * 100);
-    }
-
-    @Override
-    public float getProgress() {
-        return getHealth() / 100;
     }
 
     @Override

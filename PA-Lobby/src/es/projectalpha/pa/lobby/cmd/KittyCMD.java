@@ -13,7 +13,7 @@ import java.util.Random;
 
 public class KittyCMD extends PACmd {
 
-    public KittyCMD(){
+    public KittyCMD() {
         super("kitty", Grupo.DEV, "kittycannon", "kc");
     }
 

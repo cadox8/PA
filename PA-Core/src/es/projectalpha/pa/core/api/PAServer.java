@@ -1,8 +1,6 @@
 package es.projectalpha.pa.core.api;
 
 import es.projectalpha.pa.core.PACore;
-import es.projectalpha.pa.core.utils.Utils;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import org.bukkit.OfflinePlayer;
 
@@ -12,17 +10,15 @@ import java.util.UUID;
 
 public class PAServer {
 
-    private static PACore plugin = PACore.getInstance();
-
-    public static ArrayList<PAUser> users = new ArrayList<>();
-    @Getter private static ArrayList<PAUser> adminChatMode = new ArrayList<>();
-
     private static final HashMap<UUID, UUID> tp = new HashMap<>();
     private static final HashMap<UUID, UUID> tph = new HashMap<>();
-
+    public static ArrayList<PAUser> users = new ArrayList<>();
     public static ArrayList<PAUser> afkMode = new ArrayList<>();
+    private static PACore plugin = PACore.getInstance();
+    @Getter
+    private static ArrayList<PAUser> adminChatMode = new ArrayList<>();
 
-    public static PAUser getUser(String user){
+    public static PAUser getUser(String user) {
         return getUser(plugin.getServer().getPlayer(user).getUniqueId());
     }
 

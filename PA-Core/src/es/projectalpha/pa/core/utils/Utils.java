@@ -6,7 +6,6 @@ import es.projectalpha.pa.core.api.PAServer;
 import es.projectalpha.pa.core.api.PAUser;
 import es.projectalpha.pa.core.cmd.PACmd;
 import lombok.NonNull;
-import lombok.experimental.NonFinal;
 import org.bukkit.*;
 
 import java.util.ArrayList;
@@ -24,7 +23,7 @@ public class Utils {
         return ChatColor.translateAlternateColorCodes('&', s);
     }
 
-    public static void sendAdminMsg(PAUser user, String msg){
+    public static void sendAdminMsg(PAUser user, String msg) {
         plugin.getServer().getOnlinePlayers().forEach(p -> {
             PAUser u = PAServer.getUser(p);
             if (u.isOnRank(PACmd.Grupo.Builder)) {
@@ -53,10 +52,10 @@ public class Utils {
         return stringBuilder.toString();
     }
 
-    public static boolean isInt(String number){
+    public static boolean isInt(String number) {
         try {
             Integer.parseInt(number);
-        } catch(NumberFormatException | NullPointerException e) {
+        } catch (NumberFormatException | NullPointerException e) {
             return false;
         }
         return true;
@@ -74,7 +73,7 @@ public class Utils {
                 Double.parseDouble(s[2]), Double.parseDouble(s[3]), Float.parseFloat(s[4]), Float.parseFloat(s[5]));
     }
 
-    public static Location cuboidToLocation(String string, int args){
+    public static Location cuboidToLocation(String string, int args) {
         if (args > 1 || string == null) return null;
         return stringToLocation(string.split(";")[args]);
     }
@@ -90,7 +89,7 @@ public class Utils {
         double increment = (2 * Math.PI) / amount;
         ArrayList<Location> locations = new ArrayList<>();
 
-        for(int i = 0; i < amount; i++) {
+        for (int i = 0; i < amount; i++) {
             double angle = i * increment;
             double x = center.getX() + (radius * Math.cos(angle));
             double z = center.getZ() + (radius * Math.sin(angle));
@@ -99,7 +98,7 @@ public class Utils {
         return locations;
     }
 
-    public static World getWorld(String name){
+    public static World getWorld(String name) {
         return plugin.getServer().getWorld(name);
     }
 }

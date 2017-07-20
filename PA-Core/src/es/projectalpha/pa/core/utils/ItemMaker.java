@@ -24,6 +24,11 @@ public class ItemMaker {
         itemStack = new ItemStack(type);
     }
 
+    public static ItemStack setAmount(ItemStack itemStack, int amount) {
+        itemStack.setAmount(amount);
+        return itemStack;
+    }
+
     public ItemMaker setType(Material type) {
         itemStack.setType(type);
         return this;
@@ -41,7 +46,7 @@ public class ItemMaker {
         return this;
     }
 
-    public ItemMaker setDurability(short durability){
+    public ItemMaker setDurability(short durability) {
         this.itemStack.setDurability(durability);
         return this;
     }
@@ -90,7 +95,7 @@ public class ItemMaker {
         return this;
     }
 
-    public ItemMaker addPotionType(PotionType type, int time){
+    public ItemMaker addPotionType(PotionType type, int time) {
         addPotionType(type, time, 0);
         return this;
     }
@@ -105,7 +110,7 @@ public class ItemMaker {
         return this;
     }
 
-    public ItemMaker setUnbreakable(){
+    public ItemMaker setUnbreakable() {
         ItemMeta meta = this.itemStack.getItemMeta();
         meta.spigot().setUnbreakable(true);
         meta.addItemFlags(ItemFlag.HIDE_UNBREAKABLE);
@@ -116,10 +121,5 @@ public class ItemMaker {
     public ItemStack build() {
         addItemFlag(ItemFlag.values());
         return this.itemStack;
-    }
-
-    public static ItemStack setAmount(ItemStack itemStack, int amount){
-        itemStack.setAmount(amount);
-        return itemStack;
     }
 }

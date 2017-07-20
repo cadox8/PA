@@ -10,21 +10,21 @@ import java.util.List;
 
 public class HealCMD extends PACmd {
 
-    public HealCMD(){
+    public HealCMD() {
         super("heal", Grupo.Mod, "curar");
     }
 
-    public void run(PAUser user, String label, String[] args){
-        if (args.length == 0){
+    public void run(PAUser user, String label, String[] args) {
+        if (args.length == 0) {
             user.getPlayer().setHealth(user.getPlayer().getMaxHealth());
             user.getPlayer().setFoodLevel(20);
 
             user.sendMessage(PAData.CORE.getPrefix() + "&6Te has curado");
             return;
         }
-        if (args.length == 1){
+        if (args.length == 1) {
             PAUser target = PAServer.getUser(args[0]);
-            if (target == null || !target.isOnline()){
+            if (target == null || !target.isOnline()) {
                 user.sendMessage(PAData.CORE.getPrefix() + "&cEL jugador debe estar conectado");
                 return;
             }
