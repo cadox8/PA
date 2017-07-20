@@ -18,6 +18,7 @@ public class GameManager {
     private ArrayList<RagePlayer> playing = new ArrayList<>();
     @Getter
     private HashMap<RagePlayer, Integer> score = new HashMap<>();
+    @Getter private ArrayList<RagePlayer> top = new ArrayList<>();
 
     @Getter
     @Setter

@@ -53,7 +53,6 @@ public class GameTask extends BukkitRunnable {
         Bukkit.broadcastMessage("3º " + plugin.getGm().getTop().get(2) + ": " + plugin.getGm().getScore().get(plugin.getGm().getTop().get(0)) + " puntos.");
         Bukkit.broadcastMessage("");
         Bukkit.broadcastMessage("------------------------");
-
         plugin.getGm().getPlaying().forEach(p ->{
             p.getPlayer().getInventory().clear();
             p.getPlayer().setGameMode(GameMode.SPECTATOR);
