@@ -2,3 +2,4 @@ name: ${project.artifactId}
 main: es.projectalpha.pa.core.PACore
 version: ${project.version}
 authors: [cadox8, Wikijito7]
+depend: [ViaVersion]
