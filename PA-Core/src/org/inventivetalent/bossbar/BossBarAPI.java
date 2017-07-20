@@ -23,39 +23,17 @@ public class BossBarAPI implements Listener {
 
     public static boolean is1_9 = Minecraft.VERSION.newerThan(Minecraft.Version.v1_9_R1);
 
-    public enum Color {
-        PINK,
-        BLUE,
-        RED,
-        GREEN,
-        YELLOW,
-        PURPLE,
-        WHITE;
-    }
-
-    public enum Style {
-        PROGRESS,
-        NOTCHED_6,
-        NOTCHED_10,
-        NOTCHED_12,
-        NOTCHED_20;
-    }
-
-    public enum Property {
-        DARKEN_SKY,
-        PLAY_MUSIC,
-        //This seems to be the only property implemented client-side currently
-        CREATE_FOG;
+    public BossBarAPI() {
     }
 
     /**
      * Not compatible with 1.8!
      *
-     * @param players Receivers of the BossBar
-     * @param message Message of the BossBar (JSON)
-     * @param color {@link org.inventivetalent.bossbar.BossBarAPI.Color}
-     * @param style {@link org.inventivetalent.bossbar.BossBarAPI.Style}
-     * @param progress progress (0.0 - 1.0)
+     * @param players    Receivers of the BossBar
+     * @param message    Message of the BossBar (JSON)
+     * @param color      {@link org.inventivetalent.bossbar.BossBarAPI.Color}
+     * @param style      {@link org.inventivetalent.bossbar.BossBarAPI.Style}
+     * @param progress   progress (0.0 - 1.0)
      * @param properties {@link org.inventivetalent.bossbar.BossBarAPI.Property}
      * @return the new {@link BossBar} instance
      */
@@ -71,11 +49,11 @@ public class BossBarAPI implements Listener {
     /**
      * Not compatible with 1.8!
      *
-     * @param players Receivers of the BossBar
-     * @param component displayed message
-     * @param color {@link org.inventivetalent.bossbar.BossBarAPI.Color}
-     * @param style {@link org.inventivetalent.bossbar.BossBarAPI.Style}
-     * @param progress progress (0.0 - 1.0)
+     * @param players    Receivers of the BossBar
+     * @param component  displayed message
+     * @param color      {@link org.inventivetalent.bossbar.BossBarAPI.Color}
+     * @param style      {@link org.inventivetalent.bossbar.BossBarAPI.Style}
+     * @param progress   progress (0.0 - 1.0)
      * @param properties {@link org.inventivetalent.bossbar.BossBarAPI.Property}
      * @return the new {@link BossBar} instance
      */
@@ -91,13 +69,13 @@ public class BossBarAPI implements Listener {
     /**
      * Not compatible with 1.8!
      *
-     * @param players Receivers of the BossBar
-     * @param component displayed message
-     * @param color {@link org.inventivetalent.bossbar.BossBarAPI.Color}
-     * @param style {@link org.inventivetalent.bossbar.BossBarAPI.Style}
-     * @param progress progress (0.0 - 1.0)
-     * @param timeout time until the bar disappears
-     * @param interval interval of the "countdown"
+     * @param players    Receivers of the BossBar
+     * @param component  displayed message
+     * @param color      {@link org.inventivetalent.bossbar.BossBarAPI.Color}
+     * @param style      {@link org.inventivetalent.bossbar.BossBarAPI.Style}
+     * @param progress   progress (0.0 - 1.0)
+     * @param timeout    time until the bar disappears
+     * @param interval   interval of the "countdown"
      * @param properties {@link org.inventivetalent.bossbar.BossBarAPI.Property}
      * @return the new {@link BossBar} instance
      */
@@ -111,15 +89,15 @@ public class BossBarAPI implements Listener {
     /**
      * Compatible with 1.8
      *
-     * @param player Receiver of the BossBar
-     * @param component displayed message
-     * @param color {@link org.inventivetalent.bossbar.BossBarAPI.Color}
-     * (1.9-only)
-     * @param style {@link org.inventivetalent.bossbar.BossBarAPI.Style}
-     * (1.9-only)
-     * @param progress progress (0.0 - 1.0)
+     * @param player     Receiver of the BossBar
+     * @param component  displayed message
+     * @param color      {@link org.inventivetalent.bossbar.BossBarAPI.Color}
+     *                   (1.9-only)
+     * @param style      {@link org.inventivetalent.bossbar.BossBarAPI.Style}
+     *                   (1.9-only)
+     * @param progress   progress (0.0 - 1.0)
      * @param properties {@link org.inventivetalent.bossbar.BossBarAPI.Property}
-     * (1.9-only)
+     *                   (1.9-only)
      * @return the new {@link BossBar} instance
      * @see #setMessage(Player, String, float)
      */
@@ -137,17 +115,17 @@ public class BossBarAPI implements Listener {
     /**
      * Compatible with 1.8
      *
-     * @param player Receiver of the BossBar
-     * @param component displayed message
-     * @param color {@link org.inventivetalent.bossbar.BossBarAPI.Color}
-     * (1.9-only)
-     * @param style {@link org.inventivetalent.bossbar.BossBarAPI.Style}
-     * (1.9-only)
-     * @param progress progress (0.0-1.0)
-     * @param timeout time until the bar disappears
-     * @param interval interval of the "countdown"
+     * @param player     Receiver of the BossBar
+     * @param component  displayed message
+     * @param color      {@link org.inventivetalent.bossbar.BossBarAPI.Color}
+     *                   (1.9-only)
+     * @param style      {@link org.inventivetalent.bossbar.BossBarAPI.Style}
+     *                   (1.9-only)
+     * @param progress   progress (0.0-1.0)
+     * @param timeout    time until the bar disappears
+     * @param interval   interval of the "countdown"
      * @param properties {@link org.inventivetalent.bossbar.BossBarAPI.Property}
-     * (1.9-only)
+     *                   (1.9-only)
      * @return the new {@link BossBar} instance
      */
     public static BossBar addBar(Player player, BaseComponent component, Color color, Style style, float progress, int timeout, long interval, Property... properties) {
@@ -164,10 +142,10 @@ public class BossBarAPI implements Listener {
     /**
      * Not compatible with 1.8! Adds a BossBar without displaying it to a player
      *
-     * @param component displayed message
-     * @param color {@link org.inventivetalent.bossbar.BossBarAPI.Color}
-     * @param style {@link org.inventivetalent.bossbar.BossBarAPI.Style}
-     * @param progress progress (0.0 - 1.0)
+     * @param component  displayed message
+     * @param color      {@link org.inventivetalent.bossbar.BossBarAPI.Color}
+     * @param style      {@link org.inventivetalent.bossbar.BossBarAPI.Style}
+     * @param progress   progress (0.0 - 1.0)
      * @param properties {@link org.inventivetalent.bossbar.BossBarAPI.Property}
      * @return the new {@link BossBar} instance
      */
@@ -214,11 +192,10 @@ public class BossBarAPI implements Listener {
         }
     }
 
-    //// Deprecated (< 1.9) methods
     /**
      * Sets the boss-bar message for the specified player
      *
-     * @param player Receiver of the message
+     * @param player  Receiver of the message
      * @param message Message content
      */
     @Deprecated
@@ -229,8 +206,8 @@ public class BossBarAPI implements Listener {
     /**
      * Sets the boss-bar message for the specified player
      *
-     * @param player Receiver of the message
-     * @param message Message content
+     * @param player     Receiver of the message
+     * @param message    Message content
      * @param percentage Health percentage
      */
     @Deprecated
@@ -238,13 +215,15 @@ public class BossBarAPI implements Listener {
         setMessage(player, message, percentage, 0);
     }
 
+    //// Deprecated (< 1.9) methods
+
     /**
      * Sets the boss-bar message for the specified player
      *
-     * @param player Receiver of the message
-     * @param message Message content
+     * @param player     Receiver of the message
+     * @param message    Message content
      * @param percentage Health percentage
-     * @param timeout Amount of seconds until the bar is removed
+     * @param timeout    Amount of seconds until the bar is removed
      */
     @Deprecated
     public static void setMessage(Player player, String message, float percentage, int timeout) {
@@ -254,11 +233,11 @@ public class BossBarAPI implements Listener {
     /**
      * Sets the boss-bar message for the specified player
      *
-     * @param player Receiver of the message
-     * @param message Message content
+     * @param player     Receiver of the message
+     * @param message    Message content
      * @param percentage Health percentage
-     * @param timeout Amount of seconds until the bar is removed
-     * @param minHealth minimum health (100 by default)
+     * @param timeout    Amount of seconds until the bar is removed
+     * @param minHealth  minimum health (100 by default)
      */
     @Deprecated
     public static void setMessage(Player player, String message, float percentage, int timeout, float minHealth) {
@@ -324,7 +303,7 @@ public class BossBarAPI implements Listener {
     /**
      * Changes the displayed health of the bar
      *
-     * @param player {@link Player}
+     * @param player     {@link Player}
      * @param percentage Health percentage
      */
     @Deprecated
@@ -453,7 +432,29 @@ public class BossBarAPI implements Listener {
         }
     }
 
-    public BossBarAPI() {
+    public enum Color {
+        PINK,
+        BLUE,
+        RED,
+        GREEN,
+        YELLOW,
+        PURPLE,
+        WHITE;
+    }
+
+    public enum Style {
+        PROGRESS,
+        NOTCHED_6,
+        NOTCHED_10,
+        NOTCHED_12,
+        NOTCHED_20;
+    }
+
+    public enum Property {
+        DARKEN_SKY,
+        PLAY_MUSIC,
+        //This seems to be the only property implemented client-side currently
+        CREATE_FOG;
     }
 
 }

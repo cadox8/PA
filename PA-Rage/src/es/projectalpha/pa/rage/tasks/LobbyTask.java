@@ -1,26 +1,25 @@
 package es.projectalpha.pa.rage.tasks;
 
+import es.projectalpha.pa.core.utils.GameState;
 import es.projectalpha.pa.core.utils.Utils;
 import es.projectalpha.pa.rage.RageGames;
-import es.projectalpha.pa.core.utils.GameState;
 import org.bukkit.Sound;
 import org.bukkit.scheduler.BukkitRunnable;
 
 public class LobbyTask extends BukkitRunnable {
 
     private final RageGames plugin;
+    private int count = 40;
 
     public LobbyTask(RageGames instance) {
         this.plugin = instance;
     }
 
-    private int count = 40;
-
     @Override
     public void run() {
         if (plugin.getGm().getPlaying().size() < plugin.getAm().getMinPlayers()) {
             plugin.getGm().setCheckStart(true);
-            plugin.getServer().getOnlinePlayers().forEach(pl ->  pl.setLevel(0));
+            plugin.getServer().getOnlinePlayers().forEach(pl -> pl.setLevel(0));
             GameState.setState(GameState.LOBBY);
             cancel();
             return;
@@ -28,7 +27,7 @@ public class LobbyTask extends BukkitRunnable {
 
         plugin.getGm().getPlaying().forEach(p -> p.sendActionBar("&a&lEl juego empieza en: " + count));
 
-        switch (count){
+        switch (count) {
             case 30:
                 Utils.broadcastMsg("&7El juego empezará en &c30 &7segundos");
                 break;

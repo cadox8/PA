@@ -1,15 +1,16 @@
 package es.projectalpha.pa.core.utils;
 
 import lombok.Getter;
-import org.bukkit.block.Chest;
 import org.bukkit.entity.Player;
 
 import java.util.HashMap;
 
 public class Cooldown {
 
-    @Getter private final int time;
-    @Getter private final HashMap<String, Long> cooldowns;
+    @Getter
+    private final int time;
+    @Getter
+    private final HashMap<String, Long> cooldowns;
 
     public Cooldown(int time) {
         this.time = time;
@@ -20,7 +21,7 @@ public class Cooldown {
         getCooldowns().put(player.getName(), System.currentTimeMillis());
     }
 
-    public void removeCooldown(Player player){
+    public void removeCooldown(Player player) {
         getCooldowns().remove(player.getName());
     }
 

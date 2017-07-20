@@ -56,6 +56,9 @@ public class DataWatcher {
     static MethodResolver TIntObjectMapMethodResolver = new MethodResolver(TIntObjectMap);
     static MethodResolver DataWatcherMethodResolver = new MethodResolver(DataWatcher);
 
+    private DataWatcher() {
+    }
+
     public static Object newDataWatcher(Object entity) throws ReflectiveOperationException {
         return DataWacherConstructorResolver.resolve(new Class[]{Entity}).newInstance(entity);
     }
@@ -387,9 +390,9 @@ public class DataWatcher {
                 WatchableObjectConstructorResolver = new ConstructorResolver(WatchableObject);
             }
             return WatchableObjectConstructorResolver.resolve(new Class[]{
-                int.class,
-                int.class,
-                Object.class}).newInstance(type, index, value);
+                    int.class,
+                    int.class,
+                    Object.class}).newInstance(type, index, value);
         }
 
         public static Object setValue(Object dataWatcher, int index, Object value) throws ReflectiveOperationException {
@@ -428,8 +431,5 @@ public class DataWatcher {
             return WatchableObjectFieldResolver.resolve("c").get(object);
         }
 
-    }
-
-    private DataWatcher() {
     }
 }

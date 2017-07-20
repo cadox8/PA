@@ -7,5 +7,7 @@ public enum GameState {
 
     LOBBY, COUNTDOWN, INGAME, FINISHED;
 
-    @Getter @Setter private static GameState state;
+    @Getter
+    @Setter
+    private static GameState state;
 }

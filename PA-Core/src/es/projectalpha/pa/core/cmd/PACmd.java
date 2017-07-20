@@ -3,8 +3,8 @@ package es.projectalpha.pa.core.cmd;
 import es.projectalpha.pa.core.PACore;
 import es.projectalpha.pa.core.api.PAData;
 import es.projectalpha.pa.core.api.PAServer;
-import es.projectalpha.pa.core.utils.Utils;
 import es.projectalpha.pa.core.api.PAUser;
+import es.projectalpha.pa.core.utils.Utils;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import org.bukkit.command.Command;
@@ -17,14 +17,15 @@ import java.util.List;
 
 public abstract class PACmd {
 
-    @Getter private final transient String name;
-    @Getter private transient Grupo group = Grupo.Usuario;
-    @Getter private final transient List<String> aliases;
-
-
     protected static transient PACore plugin = PACore.getInstance();
     protected static transient PAServer server = new PAServer();
     protected static transient Utils utils = PACore.getInstance().getUtils();
+    @Getter
+    private final transient String name;
+    @Getter
+    private final transient List<String> aliases;
+    @Getter
+    private transient Grupo group = Grupo.Usuario;
 
     public PACmd(final String name, final Grupo grupo, final List<String> aliases) {
         this.name = name.toLowerCase();
@@ -36,7 +37,7 @@ public abstract class PACmd {
         this(name, grupo, Arrays.asList(aliases));
     }
 
-    public PACmd(final String name, final Grupo grupo){
+    public PACmd(final String name, final Grupo grupo) {
         this(name, grupo, "");
     }
 
@@ -56,11 +57,11 @@ public abstract class PACmd {
         return new ArrayList<>();
     }
 
-    public String formatedCMD(String... args){
+    public String formatedCMD(String... args) {
         return "&e/" + Utils.colorize(Utils.buildString(args));
     }
 
-    public void userNotOnline(PAUser user){
+    public void userNotOnline(PAUser user) {
         user.sendMessage(PAData.CORE.getPrefix() + "&cEL jugador debe estar conectado");
     }
 
@@ -78,8 +79,8 @@ public abstract class PACmd {
 
         private final int rank;
 
-        public static char groupColor(Grupo grupo){
-            switch (grupo){
+        public static char groupColor(Grupo grupo) {
+            switch (grupo) {
                 case DEV:
                     return 'd';
                 case Admin:

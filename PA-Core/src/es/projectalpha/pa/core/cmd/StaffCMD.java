@@ -9,12 +9,12 @@ import org.bukkit.inventory.Inventory;
 
 public class StaffCMD extends PACmd {
 
-    public StaffCMD(){
+    public StaffCMD() {
         super("staff", Grupo.Usuario);
     }
 
     @Override
-    public void run(PAUser user, String label, String[] args){
+    public void run(PAUser user, String label, String[] args) {
         if (args.length == 0) {
             user.getPlayer().closeInventory();
             user.getPlayer().openInventory(staffInv());

@@ -2,13 +2,10 @@ package es.projectalpha.pa.rage.manager;
 
 import es.projectalpha.pa.core.utils.Utils;
 import es.projectalpha.pa.rage.RageGames;
-import es.projectalpha.pa.rage.api.RagePlayer;
 import lombok.Getter;
-import lombok.Setter;
 import org.bukkit.Difficulty;
 import org.bukkit.Location;
 import org.bukkit.World;
-import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.EntityType;
 
 import java.util.ArrayList;
@@ -18,8 +15,10 @@ public class ArenaManager {
 
     private RageGames plugin;
 
-    @Getter private int minPlayers = 2;
-    @Getter private int maxPlayers = 8;
+    @Getter
+    private int minPlayers = 2;
+    @Getter
+    private int maxPlayers = 8;
 
     private ArrayList<Location> spawns = new ArrayList<>();
 

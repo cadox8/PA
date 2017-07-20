@@ -8,7 +8,6 @@ import org.bukkit.inventory.meta.BannerMeta;
 import org.bukkit.inventory.meta.BookMeta;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.SkullMeta;
-import org.bukkit.material.Wool;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -17,9 +16,11 @@ import java.util.List;
 public class ItemUtil {
 
 
+    public static String[] pages = new String[]{"", ""};
+
     public static ItemStack createHeadPlayer(String displayname, String username, List<String> lore) {
         ItemStack playerHead = new ItemStack(Material.SKULL_ITEM, 1, (short) 3);
-        SkullMeta sm = (SkullMeta)playerHead.getItemMeta();
+        SkullMeta sm = (SkullMeta) playerHead.getItemMeta();
         sm.setOwner(username);
         ArrayList<String> colorLore = new ArrayList<>();
         if (lore != null) {
@@ -38,7 +39,7 @@ public class ItemUtil {
         return createBanner(name, Arrays.asList(lore), color);
     }
 
-    public static ItemStack createBanner(String name, List<String> lore, DyeColor color){
+    public static ItemStack createBanner(String name, List<String> lore, DyeColor color) {
         ItemStack banner = new ItemStack(Material.BANNER);
         BannerMeta itemMeta = (BannerMeta) banner.getItemMeta();
         itemMeta.addItemFlags(ItemFlag.HIDE_POTION_EFFECTS, ItemFlag.HIDE_ATTRIBUTES,
@@ -75,6 +76,4 @@ public class ItemUtil {
 
         return book;
     }
-
-    public static String[] pages = new String[]{"", ""};
 }

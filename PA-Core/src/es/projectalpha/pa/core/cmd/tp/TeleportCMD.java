@@ -13,11 +13,11 @@ import java.util.Arrays;
 import java.util.List;
 
 public class TeleportCMD extends PACmd {
-    
+
     public TeleportCMD() {
         super("tp", Grupo.Builder, Arrays.asList("teleport", "tppos", "tploc"));
     }
-    
+
     @Override
     public void run(PAUser user, String label, String[] args) {
         switch (args.length) {
@@ -42,7 +42,7 @@ public class TeleportCMD extends PACmd {
                 from.getPlayer().teleport(to.getPlayer().getLocation(), PlayerTeleportEvent.TeleportCause.COMMAND);
                 user.sendMessage(PAData.CORE.getPrefix() + "&c" + user.getName() + " &6se ha teletransportado hacia tí");
                 from.sendMessage(PAData.CORE.getPrefix() + "&6Teletransportado a &c" + user.getName());
-                break;   
+                break;
             case 3: //mandar sender a unas coordenadas
                 Double x, y, z;
                 try {
@@ -62,9 +62,9 @@ public class TeleportCMD extends PACmd {
                 user.sendMessage("¡");
                 user.sendMessage("¡");
                 break;
-        }    
+        }
     }
-    
+
     @Override
     public List<String> onTabComplete(CommandSender cs, Command cmd, String alias, String[] args, String curs, Integer curn) {
         return null;

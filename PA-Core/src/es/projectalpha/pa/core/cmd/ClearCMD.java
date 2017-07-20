@@ -28,7 +28,7 @@ public class ClearCMD extends PACmd {
 
         PAUser target = PAServer.getUser(plugin.getServer().getPlayer(args[0]));
 
-        if (target == null || !target.isOnline()){
+        if (target == null || !target.isOnline()) {
             user.sendMessage(PAData.CORE.getPrefix() + "&cEL jugador debe estar conectado");
             return;
         }

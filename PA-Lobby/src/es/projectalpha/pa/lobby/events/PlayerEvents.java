@@ -4,11 +4,11 @@ import es.projectalpha.pa.core.api.PAServer;
 import es.projectalpha.pa.core.api.PAUser;
 import es.projectalpha.pa.core.cmd.PACmd;
 import es.projectalpha.pa.core.utils.Utils;
+import es.projectalpha.pa.lobby.PALobby;
 import es.projectalpha.pa.lobby.files.Files;
 import es.projectalpha.pa.lobby.utils.Helpers;
 import es.projectalpha.pa.lobby.utils.LobbyMenu;
 import es.projectalpha.pa.lobby.utils.LobbyTeams;
-import es.projectalpha.pa.lobby.PALobby;
 import org.bukkit.Material;
 import org.bukkit.block.BlockFace;
 import org.bukkit.entity.ArmorStand;
@@ -28,30 +28,30 @@ import java.util.Random;
 
 public class PlayerEvents implements Listener {
 
-    private PALobby plugin;
     Files files;
+    private PALobby plugin;
 
-    public PlayerEvents(PALobby instance){
+    public PlayerEvents(PALobby instance) {
         this.plugin = instance;
     }
 
     @EventHandler
-    public void onLoggin(PlayerLoginEvent e){
+    public void onLoggin(PlayerLoginEvent e) {
         PAUser u = PAServer.getUser(e.getPlayer());
 
-        if (u.isOnRank(PACmd.Grupo.ORIGIN) && plugin.getServer().getOnlinePlayers().size() == plugin.getServer().getMaxPlayers()){
+        if (u.isOnRank(PACmd.Grupo.ORIGIN) && plugin.getServer().getOnlinePlayers().size() == plugin.getServer().getMaxPlayers()) {
             getRandomUser().getPlayer().kickPlayer(Utils.colorize("&cUn jugador con rango Origin o más ha entrado al servidor, por lo que has sido kickeado"));
         }
     }
 
-    private PAUser getRandomUser(){
+    private PAUser getRandomUser() {
         PAUser d = PAServer.users.get(new Random().nextInt(PAServer.users.size()));
         if (d.isOnRank(PACmd.Grupo.ORIGIN)) getRandomUser();
         return d;
     }
 
     @EventHandler
-    public void onJoin(PlayerJoinEvent e){
+    public void onJoin(PlayerJoinEvent e) {
         PAUser u = PAServer.getUser(e.getPlayer());
         Helpers h = new Helpers(u);
 
@@ -63,28 +63,28 @@ public class PlayerEvents implements Listener {
     }
 
     @EventHandler
-    public void onLeave(PlayerQuitEvent e){
+    public void onLeave(PlayerQuitEvent e) {
         PAUser u = PAServer.getUser(e.getPlayer());
 
         u.save();
     }
 
     @EventHandler
-    public void onBreak(BlockBreakEvent e){
+    public void onBreak(BlockBreakEvent e) {
         PAUser u = PAServer.getUser(e.getPlayer());
 
         if (!u.isOnRank(PACmd.Grupo.Builder)) e.setCancelled(true);
     }
 
     @EventHandler
-    public void onPlace(BlockPlaceEvent e){
+    public void onPlace(BlockPlaceEvent e) {
         PAUser u = PAServer.getUser(e.getPlayer());
 
         if (!u.isOnRank(PACmd.Grupo.Builder)) e.setCancelled(true);
     }
 
     @EventHandler
-    public void onInteract(PlayerInteractEvent e){
+    public void onInteract(PlayerInteractEvent e) {
         PAUser u = PAServer.getUser(e.getPlayer());
 
         if (e.getAction() == Action.RIGHT_CLICK_AIR || e.getAction() == Action.RIGHT_CLICK_BLOCK) {
@@ -94,7 +94,7 @@ public class PlayerEvents implements Listener {
             }
         }
 
-        if (!u.isOnRank(PACmd.Grupo.Builder)){
+        if (!u.isOnRank(PACmd.Grupo.Builder)) {
             if (e.getClickedBlock() != null) {
                 if (e.getClickedBlock().getType().equals(Material.TRAP_DOOR) || e.getClickedBlock().getType().equals(Material.IRON_TRAPDOOR)
                         || e.getClickedBlock().getType().equals(Material.FENCE_GATE) || e.getClickedBlock().getType().equals(Material.FIRE)
@@ -134,12 +134,12 @@ public class PlayerEvents implements Listener {
     }
 
     @EventHandler
-    public void onDamage(EntityDamageByEntityEvent e){
+    public void onDamage(EntityDamageByEntityEvent e) {
         e.setCancelled(true);
     }
 
     @EventHandler
-    public void onCombust(EntityCombustEvent e){
+    public void onCombust(EntityCombustEvent e) {
         e.setCancelled(true);
     }
 

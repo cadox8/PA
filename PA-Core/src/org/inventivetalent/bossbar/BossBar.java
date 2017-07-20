@@ -50,7 +50,7 @@ public interface BossBar {
      * Modify a property
      *
      * @param property {@link org.inventivetalent.bossbar.BossBarAPI.Property}
-     * @param flag whether to enable the property
+     * @param flag     whether to enable the property
      */
     void setProperty(BossBarAPI.Property property, boolean flag);
 
@@ -59,15 +59,18 @@ public interface BossBar {
      */
     String getMessage();
 
-    /**
-     * @param flag whether the BossBar is visible
-     */
-    void setVisible(boolean flag);
+    @Deprecated
+    void setMessage(String message);
 
     /**
      * @return whether the BossBar is visible
      */
     boolean isVisible();
+
+    /**
+     * @param flag whether the BossBar is visible
+     */
+    void setVisible(boolean flag);
 
     /**
      * @return the progress (0.0 - 1.0)
@@ -83,13 +86,10 @@ public interface BossBar {
     float getMaxHealth();
 
     @Deprecated
-    void setHealth(float percentage);
-
-    @Deprecated
     float getHealth();
 
     @Deprecated
-    void setMessage(String message);
+    void setHealth(float percentage);
 
     @Deprecated
     Player getReceiver();

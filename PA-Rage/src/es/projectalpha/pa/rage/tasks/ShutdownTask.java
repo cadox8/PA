@@ -9,12 +9,11 @@ import org.bukkit.scheduler.BukkitRunnable;
 public class ShutdownTask extends BukkitRunnable {
 
     private final RageGames plugin;
+    private int count = 10;
 
     public ShutdownTask(RageGames instance) {
         this.plugin = instance;
     }
-
-    private int count = 10;
 
     public void run() {
         switch (count) {
@@ -33,7 +32,7 @@ public class ShutdownTask extends BukkitRunnable {
     }
 
     private void removeAll() {
-        plugin.getGm().getPlaying().forEach(p ->{
+        plugin.getGm().getPlaying().forEach(p -> {
             plugin.getGm().removePlayerFromGame(p);
         });
         RageGames.players.forEach(RagePlayer::sendToLobby);

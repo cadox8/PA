@@ -15,6 +15,7 @@ public class LobbyTeams {
     public static Team tMod;
     public static Team tAdmin;
     public static Team tDev;
+    private static Team t;
 
     public static void initTeams() {
         board = Bukkit.getScoreboardManager().getMainScoreboard();
@@ -38,25 +39,31 @@ public class LobbyTeams {
 
     public static void setScoreboardTeam(PAUser user) {
         removeScoreboardTeam(user);
-        switch(user.getUserData().getGrupo()) {
+        switch (user.getUserData().getGrupo()) {
             case Admin:
-                tAdmin.addEntry(user.getName()); break;
+                tAdmin.addEntry(user.getName());
+                break;
             case Mod:
-                tMod.addEntry(user.getName()); break;
+                tMod.addEntry(user.getName());
+                break;
             case DEV:
-                tDev.addEntry(user.getName()); break;
+                tDev.addEntry(user.getName());
+                break;
             case Builder:
-                tBuilder.addEntry(user.getName()); break;
+                tBuilder.addEntry(user.getName());
+                break;
             case ORIGIN:
-                tOrigin.addEntry(user.getName()); break;
+                tOrigin.addEntry(user.getName());
+                break;
             case VIP:
-                tVip.addEntry(user.getName()); break;
+                tVip.addEntry(user.getName());
+                break;
             default:
-                tUsuario.addEntry(user.getName()); break;
+                tUsuario.addEntry(user.getName());
+                break;
         }
     }
 
-    private static Team t;
     public static void removeScoreboardTeam(PAUser user) {
         board.getTeams().forEach(team -> {
             if (team.getEntries().contains(user.getName())) t = team;

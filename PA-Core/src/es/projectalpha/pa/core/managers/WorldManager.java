@@ -22,7 +22,7 @@ public class WorldManager {
 
     private PACore plugin;
 
-    public WorldManager(PACore Main){
+    public WorldManager(PACore Main) {
         this.plugin = Main;
     }
 
@@ -31,35 +31,35 @@ public class WorldManager {
      *
      * @param name the name of the world to create
      */
-    public void createWorld(String name){
+    public void createWorld(String name) {
         createWorld(name, World.Environment.NORMAL, false);
     }
 
     /**
      * Create World.
      *
-     * @param name the name of the world to create
+     * @param name        the name of the world to create
      * @param preGenerate if the world is loaded or not
      */
-    public void createWorld(String name, boolean preGenerate){
+    public void createWorld(String name, boolean preGenerate) {
         createWorld(name, World.Environment.NORMAL, preGenerate);
     }
 
     /**
      * Create World.
      *
-     * @param name the name of the world to create
+     * @param name        the name of the world to create
      * @param environment the world Environment
      * @param preGenerate if the world is loaded or not
      */
-    public void createWorld(@NonNull String name, @NonNull World.Environment environment, boolean preGenerate){
+    public void createWorld(@NonNull String name, @NonNull World.Environment environment, boolean preGenerate) {
         if (existWorld(name)) {
             plugin.debugLog("Este mundo ya existe");
             return;
         }
         World w = plugin.getServer().createWorld(new WorldCreator(name).environment(environment));
         plugin.debugLog("Mundo creado " + name);
-        if (preGenerate){
+        if (preGenerate) {
             generateWorld(w, 500);
         }
         //More
@@ -76,7 +76,7 @@ public class WorldManager {
         deleteWorld(Utils.getWorld(name).getWorldFolder());
     }
 
-    private void deleteWorld(@NonNull File world){
+    private void deleteWorld(@NonNull File world) {
         File files[] = world.listFiles();
 
         if (files == null) return;
@@ -89,7 +89,7 @@ public class WorldManager {
                     f.delete();
                 }
             });
-        }catch(NullPointerException e){
+        } catch (NullPointerException e) {
             Log.log(Log.Level.WARNING, "Imposible borrar el mundo");
             plugin.debugLog("Causa: " + e.getCause());
             return;
@@ -103,12 +103,12 @@ public class WorldManager {
      *
      * @param name the name of the world to unload.
      */
-    public void unloadWorld(String name){
+    public void unloadWorld(String name) {
         World world = Utils.getWorld(name);
         if (!existWorld(name)) return;
         world.getEntities().forEach(e -> {
-            if (e instanceof Player){ //Mandar jugadores al spawn principal
-                PAUser user = PAServer.getUser((Player)e);
+            if (e instanceof Player) { //Mandar jugadores al spawn principal
+                PAUser user = PAServer.getUser((Player) e);
                 user.teleport(Utils.stringToLocation(plugin.getConfig().getString("spawn")));
                 user.sendMessage(PAData.CORE.getPrefix() + "&2Has sido sacado del mundo &e" + name);
             }
@@ -122,7 +122,7 @@ public class WorldManager {
      *
      * @param name the name of the world to unload.
      */
-    public void loadWorld(String name){
+    public void loadWorld(String name) {
         plugin.getServer().createWorld(new WorldCreator(name));
     }
     //
@@ -130,10 +130,10 @@ public class WorldManager {
     /**
      * TP World.
      *
-     * @param name the name of the world to teleport.
+     * @param name   the name of the world to teleport.
      * @param player the player to teleport
      */
-    public void changeWorld(String name, Player player){
+    public void changeWorld(String name, Player player) {
         if (!existWorld(name)) return;
         changeWorld(Utils.getWorld(name), PAServer.getUser(player));
     }
@@ -142,9 +142,9 @@ public class WorldManager {
      * TP World.
      *
      * @param world the world to teleport.
-     * @param user the user to teleport
+     * @param user  the user to teleport
      */
-    public void changeWorld(World world, PAUser user){
+    public void changeWorld(World world, PAUser user) {
         user.teleport(world);
     }
     //
@@ -152,10 +152,10 @@ public class WorldManager {
     /**
      * Generate World.
      *
-     * @param name the name of the world to generate.
+     * @param name   the name of the world to generate.
      * @param radius the number of the area to generate
      */
-    public void generateWorld(String name, double radius){
+    public void generateWorld(String name, double radius) {
         if (!existWorld(name)) return;
         generateWorld(Utils.getWorld(name), radius);
     }
@@ -163,10 +163,10 @@ public class WorldManager {
     /**
      * Generate World.
      *
-     * @param world the world to generate.
+     * @param world  the world to generate.
      * @param radius the number of the area to generate
      */
-    public void generateWorld(World world, double radius){
+    public void generateWorld(World world, double radius) {
         plugin.debugLog("Pre-Generando mundo, radio: " + radius);
         Utils.getCircle(world.getSpawnLocation(), radius, 300).forEach(l -> {
             world.loadChunk(world.getChunkAt(l));
@@ -180,14 +180,13 @@ public class WorldManager {
      *
      * @param name the name of the world to check.
      * @return if the world exists or not
-     *
-     * @exception NullWorldException the world doesn´t exist
+     * @throws NullWorldException the world doesn´t exist
      */
-    private boolean existWorld(String name){
+    private boolean existWorld(String name) {
         World world = Utils.getWorld(name);
         try {
             if (world == null) throw new NullWorldException("El mundo no existe");
-        } catch(NullWorldException e){
+        } catch (NullWorldException e) {
             plugin.debugLog("Causa: " + e.getCause());
             return false;
         }

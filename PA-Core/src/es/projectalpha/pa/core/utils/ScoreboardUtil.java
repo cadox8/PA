@@ -13,13 +13,14 @@ import java.util.HashMap;
 
 public class ScoreboardUtil {
 
-    @Getter private final Scoreboard scoreboard;
+    @Getter
+    private final Scoreboard scoreboard;
 
     private final Objective objective;
-
-    @Getter @Setter private boolean reset;
-
     private final HashMap<Integer, String> scores;
+    @Getter
+    @Setter
+    private boolean reset;
 
     public ScoreboardUtil(String displayName, String score) {
         this.scoreboard = Bukkit.getScoreboardManager().getNewScoreboard();

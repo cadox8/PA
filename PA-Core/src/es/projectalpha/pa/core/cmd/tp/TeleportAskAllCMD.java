@@ -1,8 +1,8 @@
 package es.projectalpha.pa.core.cmd.tp;
 
 import es.projectalpha.pa.core.api.PAServer;
-import es.projectalpha.pa.core.cmd.PACmd;
 import es.projectalpha.pa.core.api.PAUser;
+import es.projectalpha.pa.core.cmd.PACmd;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
@@ -27,9 +27,9 @@ public class TeleportAskAllCMD extends PACmd {
             }
 
             PAServer.getTeleportRequests().keySet().stream()
-                .filter(u -> PAServer.getTeleportRequests().get(u).equals(target.getUuid()))
-                .forEach(u -> PAServer.removeTeleportRequest(u)
-            );
+                    .filter(u -> PAServer.getTeleportRequests().get(u).equals(target.getUuid()))
+                    .forEach(u -> PAServer.removeTeleportRequest(u)
+                    );
 
             target.sendMessage("");
 
@@ -39,9 +39,9 @@ public class TeleportAskAllCMD extends PACmd {
         //Eliminar petición a los 2 minutos
         plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> {
             targets.stream()
-                .filter(t -> PAServer.getTeleportHereRequests().containsKey(t) && PAServer.getTeleportHereRequests().get(t).equals(user.getUuid()))
-                .forEach(t -> PAServer.removeTeleportHereRequest(t)
-            );
+                    .filter(t -> PAServer.getTeleportHereRequests().containsKey(t) && PAServer.getTeleportHereRequests().get(t).equals(user.getUuid()))
+                    .forEach(t -> PAServer.removeTeleportHereRequest(t)
+                    );
             user.sendMessage("");
         }, 120 * 20L);
     }

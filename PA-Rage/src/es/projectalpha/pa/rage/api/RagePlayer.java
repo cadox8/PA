@@ -5,8 +5,8 @@ import es.projectalpha.pa.core.api.PAData;
 import es.projectalpha.pa.core.api.PAUser;
 import es.projectalpha.pa.core.utils.GameState;
 import es.projectalpha.pa.core.utils.ScoreboardUtil;
-import es.projectalpha.pa.rage.utils.Items;
 import es.projectalpha.pa.rage.RageGames;
+import es.projectalpha.pa.rage.utils.Items;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.UUID;
@@ -15,7 +15,7 @@ public class RagePlayer extends PAUser {
 
     private RageGames plugin = RageGames.getInstance();
 
-    public RagePlayer(UUID uuid){
+    public RagePlayer(UUID uuid) {
         super(uuid);
     }
 

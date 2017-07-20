@@ -7,11 +7,11 @@ import net.md_5.bungee.api.plugin.Command;
 
 public class CommandAlert extends Command {
 
-    public CommandAlert(){
+    public CommandAlert() {
         super("gritar", "bungee.alert", "alert");
     }
 
-    public void execute(CommandSender sender, String[] args){
+    public void execute(CommandSender sender, String[] args) {
         if (args.length == 0) {
             sender.sendMessage(ChatColor.RED + "Tienes que añadir un mensaje!");
         } else {

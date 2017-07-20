@@ -11,24 +11,25 @@ import java.util.ArrayList;
 
 public class PassManager {
 
-    @Getter private ArrayList<PAUser> logged;
+    @Getter
+    private ArrayList<PAUser> logged;
 
     private PAAntium plugin;
     private MySQL mysql;
 
-    public PassManager(PAAntium instance){
+    public PassManager(PAAntium instance) {
         this.plugin = instance;
         logged = new ArrayList<>();
         mysql = plugin.getMysql();
     }
 
-    public void register(PAUser u, String pass, String pass2){
-        if (isLogged(u)){
+    public void register(PAUser u, String pass, String pass2) {
+        if (isLogged(u)) {
             u.sendMessage(PAData.ANTIUM.getPrefix() + "&cYa estas loggeado");
             return;
         }
 
-        if (!pass.equalsIgnoreCase(pass2)){
+        if (!pass.equalsIgnoreCase(pass2)) {
             u.sendMessage(PAData.ANTIUM.getPrefix() + "&cLas contraseñas no coinciden");
             return;
         }
@@ -37,8 +38,8 @@ public class PassManager {
         u.sendMessage(PAData.ANTIUM.getPrefix() + "&3Registrado correctamente. &Contraseña: &c" + pass + " &2Contraseña encriptada: &c" + encryptedPass);
     }
 
-    public void login(PAUser u, String pass){
-        if (isLogged(u)){
+    public void login(PAUser u, String pass) {
+        if (isLogged(u)) {
             u.sendMessage(PAData.ANTIUM.getPrefix() + "&cYa estas loggeado");
             return;
         }
@@ -50,16 +51,16 @@ public class PassManager {
         u.sendMessage(PAData.ANTIUM.getPrefix() + "&cContraseña erronea");
     }
 
-    public void removeLogged(PAUser u){
+    public void removeLogged(PAUser u) {
         if (isLogged(u)) logged.remove(u);
     }
 
-    public boolean isLogged(PAUser u){
+    public boolean isLogged(PAUser u) {
         return logged.contains(u);
     }
 
     @Deprecated
-    public void updateEmail(PAUser u, String email){
+    public void updateEmail(PAUser u, String email) {
         //DISABLED
     }
 }

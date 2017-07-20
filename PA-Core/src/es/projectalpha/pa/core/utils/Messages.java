@@ -23,7 +23,8 @@ public enum Messages {
     SEND("&3Serás enviado al lobby en %t% segundos");
 
 
-    @Getter private String message;
+    @Getter
+    private String message;
 
     public static String getMessage(Messages m, PAData pl) {
         return Utils.colorize(pl.getPrefix() + ChatColor.RESET + m.getMessage());

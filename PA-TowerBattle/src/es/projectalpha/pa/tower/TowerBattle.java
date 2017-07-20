@@ -11,28 +11,13 @@ import java.util.ArrayList;
 
 public class TowerBattle extends JavaPlugin {
 
-    @Getter private static TowerBattle instance;
-
     public static ArrayList<TowerPlayer> players = new ArrayList<>();
-
-    @Getter private GameManager gm;
-    @Getter private ArenaManager am;
-
-    public void onEnable() {
-        instance = this;
-
-        registerClasses();
-        registerEvents();
-    }
-
-    private void registerClasses(){
-        gm = new GameManager(instance);
-        am = new ArenaManager();
-    }
-
-    private void registerEvents() {
-    }
-
+    @Getter
+    private static TowerBattle instance;
+    @Getter
+    private GameManager gm;
+    @Getter
+    private ArenaManager am;
 
     public static TowerPlayer getPlayer(OfflinePlayer p) {
         for (TowerPlayer pl : players) {
@@ -42,6 +27,21 @@ public class TowerBattle extends JavaPlugin {
         TowerPlayer us = new TowerPlayer(p.getUniqueId());
         if (us.isOnline()) players.add(us);
         return us;
+    }
+
+    public void onEnable() {
+        instance = this;
+
+        registerClasses();
+        registerEvents();
+    }
+
+    private void registerClasses() {
+        gm = new GameManager(instance);
+        am = new ArenaManager();
+    }
+
+    private void registerEvents() {
     }
 
 }

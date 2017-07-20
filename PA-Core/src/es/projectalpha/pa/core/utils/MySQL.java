@@ -2,7 +2,6 @@ package es.projectalpha.pa.core.utils;
 
 import com.mysql.jdbc.CommunicationsException;
 import es.projectalpha.pa.core.PACore;
-import es.projectalpha.pa.core.api.PAServer;
 import es.projectalpha.pa.core.api.PAUser;
 import es.projectalpha.pa.core.cmd.PACmd;
 import org.bukkit.entity.Player;
@@ -17,9 +16,8 @@ import java.util.UUID;
  */
 public class MySQL {
 
-    protected Connection connection;
-
     private final String user, database, password, port, hostname;
+    protected Connection connection;
 
     public MySQL(String hostname, String database, String username, String password) {
         this.hostname = hostname;
@@ -128,9 +126,8 @@ public class MySQL {
     }
 
 
-
     //Sólo para Antium
-    public void register(PAUser u, String pass, String email){
+    public void register(PAUser u, String pass, String email) {
         PACore.getInstance().getServer().getScheduler().runTaskAsynchronously(PACore.getInstance(), () -> {
             Player p = u.getPlayer();
             try {
@@ -151,7 +148,7 @@ public class MySQL {
         });
     }
 
-    public boolean login(PAUser u, String inPass){
+    public boolean login(PAUser u, String inPass) {
         PAUser.UserData data = new PAUser.UserData();
         try {
             PreparedStatement statementDatos = openConnection().prepareStatement("SELECT `pass` FROM `pa_antium` WHERE `uuid` = ?");

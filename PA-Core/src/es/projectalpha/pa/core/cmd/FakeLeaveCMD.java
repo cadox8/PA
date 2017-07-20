@@ -7,16 +7,16 @@ import es.projectalpha.pa.core.utils.Utils;
 
 public class FakeLeaveCMD extends PACmd {
 
-    public FakeLeaveCMD(){
+    public FakeLeaveCMD() {
         super("fakeleave", Grupo.Admin, "fl");
     }
 
-    public void run(PAUser user, String label, String[] args){
-        if (args.length == 0){
+    public void run(PAUser user, String label, String[] args) {
+        if (args.length == 0) {
             user.sendMessage(Messages.getMessage(Messages.NEED_ARGS, PAData.CORE));
             return;
         }
-        if (args.length == 1){
+        if (args.length == 1) {
             Utils.broadcastMsg(Messages.getMessage(Messages.LEFT, PAData.CORE, "%player%", args[0]));
             return;
         }

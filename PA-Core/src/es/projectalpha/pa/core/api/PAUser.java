@@ -30,8 +30,11 @@ public class PAUser {
 
     private PACore plugin = PACore.getInstance();
 
-    @Getter private UUID uuid;
-    @Getter @Setter private UserData userData;
+    @Getter
+    private UUID uuid;
+    @Getter
+    @Setter
+    private UserData userData;
 
     public PAUser(OfflinePlayer p) {
         this(p.getUniqueId());
@@ -45,6 +48,7 @@ public class PAUser {
     public OfflinePlayer getOfflinePlayer() {
         return plugin.getServer().getOfflinePlayer(uuid);
     }
+
     public Player getPlayer() {
         return plugin.getServer().getPlayer(uuid);
     }
@@ -59,43 +63,52 @@ public class PAUser {
     //
 
     /**
-    * Getters/Setters
-    */
+     * Getters/Setters
+     */
     public String getName() {
         return getOfflinePlayer().getName();
     }
+
     public boolean isOnline() {
         return getOfflinePlayer().isOnline();
     }
+
     public boolean isOnRank(PACmd.Grupo rank) {
         return rank.getRank() <= getUserData().getGrupo().getRank();
     }
+
     public Location getLoc() {
         return getPlayer().getLocation();
     }
 
     /**
-    * Methods
-    */
-    public void sendDiv(){
+     * Methods
+     */
+    public void sendDiv() {
         getPlayer().sendMessage(Utils.colorize("&e====================="));
     }
+
     public void sendMessage(String str) {
         getPlayer().sendMessage(Utils.colorize(str));
     }
-    public void sendSound(Sound sound){
+
+    public void sendSound(Sound sound) {
         getPlayer().playSound(getPlayer().getLocation(), sound, 4, 4);
     }
-    public void teleport(Location location){
+
+    public void teleport(Location location) {
         getPlayer().teleport(location, PlayerTeleportEvent.TeleportCause.COMMAND);
     }
-    public void teleport(Entity entity){
+
+    public void teleport(Entity entity) {
         getPlayer().teleport(entity, PlayerTeleportEvent.TeleportCause.COMMAND);
     }
-    public void teleport(World world){
+
+    public void teleport(World world) {
         teleport(world.getSpawnLocation());
     }
-    public void removeItemInHand(){
+
+    public void removeItemInHand() {
         getPlayer().getInventory().setItemInHand(new ItemStack(Material.AIR));
     }
 
@@ -110,8 +123,8 @@ public class PAUser {
         }
     }
 
-    public void toggleFly(){
-        if (getPlayer().isFlying()){
+    public void toggleFly() {
+        if (getPlayer().isFlying()) {
             sendMessage(PAData.CORE.getPrefix() + "&cVuelo desactivado");
             getPlayer().setAllowFlight(false);
         } else {
@@ -119,7 +132,6 @@ public class PAUser {
             getPlayer().setAllowFlight(true);
         }
     }
-
 
 
     /**
@@ -166,28 +178,28 @@ public class PAUser {
             pingField.setAccessible(true);
 
             return pingField.getInt(entityPlayer);
-        } catch (NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchFieldException e) {}
+        } catch (NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchFieldException e) {
+        }
         return -1;
     }
 
 
     /**
-    * Json
-    */
-    public void jsonURL(String text, String hover, String url){
+     * Json
+     */
+    public void jsonURL(String text, String hover, String url) {
         TextComponent message = new TextComponent(Utils.colorize(text));
         message.setClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, url));
         message.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(Utils.colorize(hover)).create()));
         getPlayer().spigot().sendMessage(message);
     }
 
-    public void jsonMessages(String text, String hover, String command){
+    public void jsonMessages(String text, String hover, String command) {
         TextComponent message = new TextComponent(Utils.colorize(text));
         message.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, command));
         message.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(Utils.colorize(hover)).create()));
         getPlayer().spigot().sendMessage(message);
     }
-
 
 
     /**
@@ -205,11 +217,14 @@ public class PAUser {
         sendToServer("lobby");
     }
 
-
+    @Override
+    public String toString() {
+        return "PAUser{name: " + getName() + ", uuid: " + getUuid() + ", group: + " + getUserData().getGrupo() + "}";
+    }
 
     /**
-    * UserData (Cremita para nosotros)
-    */
+     * UserData (Cremita para nosotros)
+     */
     @Data
     public static class UserData {
         PACmd.Grupo grupo = PACmd.Grupo.Usuario;
@@ -222,12 +237,7 @@ public class PAUser {
         Integer coins = 0;
         InetSocketAddress ip = null;
 
-        public UserData() {}
-    }
-
-
-    @Override
-    public String toString() {
-        return "PAUser{name: " + getName() + ", uuid: " + getUuid() + ", group: + " + getUserData().getGrupo() + "}";
+        public UserData() {
+        }
     }
 }

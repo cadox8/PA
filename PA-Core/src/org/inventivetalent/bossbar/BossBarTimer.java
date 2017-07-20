@@ -5,8 +5,8 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 public class BossBarTimer extends BukkitRunnable {
 
-    private PacketBossBar bossBar;
     final float progressMinus;
+    private PacketBossBar bossBar;
 
     public BossBarTimer(PacketBossBar packetBossBar, float progress, int timeout) {
         this.bossBar = packetBossBar;

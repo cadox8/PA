@@ -36,7 +36,7 @@ public class PABungee extends Plugin implements Listener {
     }
 
     @EventHandler
-    public void onProxyPing(ProxyPingEvent e){
+    public void onProxyPing(ProxyPingEvent e) {
         ServerPing ping = e.getResponse();
         ServerPing.Protocol version = ping.getVersion();
         version.setName("ProjectAlpha.es");

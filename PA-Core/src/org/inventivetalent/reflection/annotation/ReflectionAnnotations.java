@@ -136,9 +136,9 @@ public class ReflectionAnnotations {
      * that don't match the version, but keeps the original order for matching
      * names.
      *
-     * @param clazz Class of the annotation
+     * @param clazz      Class of the annotation
      * @param annotation annotation
-     * @param <A> annotation type
+     * @param <A>        annotation type
      * @return a list of matching names
      */
     <A extends Annotation> List<String> parseAnnotationVersions(java.lang.Class<A> clazz, A annotation) {

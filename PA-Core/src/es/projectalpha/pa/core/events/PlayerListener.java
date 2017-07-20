@@ -13,7 +13,7 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.*;
 
-public class PlayerListener implements Listener{
+public class PlayerListener implements Listener {
 
     private final PACore plugin;
 
@@ -22,7 +22,7 @@ public class PlayerListener implements Listener{
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
-    public void onLogin(PlayerLoginEvent e){
+    public void onLogin(PlayerLoginEvent e) {
         Player p = e.getPlayer();
 /*
         if (plugin.isMaintenance()){
@@ -45,7 +45,7 @@ public class PlayerListener implements Listener{
     }
 
     @EventHandler(priority = EventPriority.LOW)
-    public void onPlayerJoin(PlayerJoinEvent e){
+    public void onPlayerJoin(PlayerJoinEvent e) {
         Player p = e.getPlayer();
         PAUser u = PAServer.getUser(p);
 
@@ -60,7 +60,7 @@ public class PlayerListener implements Listener{
     }
 
     @EventHandler(priority = EventPriority.LOW)
-    public void onPlayerQuit(PlayerQuitEvent e){
+    public void onPlayerQuit(PlayerQuitEvent e) {
         PAUser u = PAServer.getUser(e.getPlayer());
 
         e.setQuitMessage(Messages.getMessage(Messages.LEFT, PAData.CORE, "%player%", e.getPlayer().getName()));
@@ -91,12 +91,12 @@ public class PlayerListener implements Listener{
      * Prevenir ver plugins
      */
     @EventHandler(priority = EventPriority.HIGHEST)
-    public void onCommand(PlayerCommandPreprocessEvent e){
+    public void onCommand(PlayerCommandPreprocessEvent e) {
         PAUser p = PAServer.getUser(e.getPlayer());
 
 
         if (e.getMessage().startsWith("/?") || e.getMessage().startsWith("/bukkit:") || e.getMessage().startsWith("/pl") || e.getMessage().startsWith("/plugins") || e.getMessage().startsWith("/minecraft:")) {
-            if(!p.isOnRank(PACmd.Grupo.Builder)) return;
+            if (!p.isOnRank(PACmd.Grupo.Builder)) return;
             p.sendMessage(PAData.CORE.getPrefix() + "&cLos plugins de este servidor ha sido creados por los desarrolladores del mismo, es por eso por lo que no tenemos" +
                     "ningún problema en decirlos: &6PA-Core. &cAhora, te invito a que los crees tu mismo, puesto que el código " +
                     "de los plugins sólo lo tenemos nosotros :D");

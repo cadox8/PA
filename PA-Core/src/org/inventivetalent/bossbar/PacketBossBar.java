@@ -56,6 +56,10 @@ public class PacketBossBar implements BossBar {
         this(ComponentSerializer.toString(message), color, style, progress, properties);
     }
 
+    static Object serialize(String json) throws ReflectiveOperationException {
+        return ChatSerializerMethodResolver.resolve(new ResolverQuery("a", String.class)).invoke(null, json);
+    }
+
     @Override
     public Collection<? extends Player> getPlayers() {
         return new ArrayList<>(this.receivers);
@@ -209,13 +213,13 @@ public class PacketBossBar implements BossBar {
     }
 
     @Override
-    public void setHealth(float percentage) {
-        setProgress(percentage / 100F);
+    public float getHealth() {
+        return getProgress() * 100F;
     }
 
     @Override
-    public float getHealth() {
-        return getProgress() * 100F;
+    public void setHealth(float percentage) {
+        setProgress(percentage / 100F);
     }
 
     @Override
@@ -230,9 +234,5 @@ public class PacketBossBar implements BossBar {
 
     @Override
     public void updateMovement() {
-    }
-
-    static Object serialize(String json) throws ReflectiveOperationException {
-        return ChatSerializerMethodResolver.resolve(new ResolverQuery("a", String.class)).invoke(null, json);
     }
 }

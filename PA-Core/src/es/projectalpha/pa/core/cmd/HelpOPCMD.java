@@ -8,15 +8,15 @@ import es.projectalpha.pa.core.utils.Utils;
 
 public class HelpOPCMD extends PACmd {
 
+    private final Cooldown temp = new Cooldown(30);
+
     public HelpOPCMD() {
         super("helpop", Grupo.Usuario, "hp");
     }
 
-    private final Cooldown temp = new Cooldown(30);
-
     @Override
     public void run(PAUser user, String label, String[] args) {
-        if (temp.isCoolingDown(user.getName())){
+        if (temp.isCoolingDown(user.getName())) {
             user.sendMessage(PAData.CORE.getPrefix() + "&cEl comando está en cooldown");
             return;
         }
@@ -27,7 +27,7 @@ public class HelpOPCMD extends PACmd {
         user.sendMessage(PAData.CORE.getPrefix() + "&2El mensaje ha sido enviado al Staff");
     }
 
-    private void hp(PAUser user, String msg){
+    private void hp(PAUser user, String msg) {
         plugin.getServer().getOnlinePlayers().forEach(p -> {
             PAUser u = PAServer.getUser(p);
             if (u.isOnRank(Grupo.Admin)) {

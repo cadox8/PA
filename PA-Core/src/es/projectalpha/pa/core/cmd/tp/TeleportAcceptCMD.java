@@ -9,11 +9,11 @@ import org.bukkit.event.player.PlayerTeleportEvent;
 import java.util.Arrays;
 
 public class TeleportAcceptCMD extends PACmd {
-    
+
     public TeleportAcceptCMD() {
         super("tpaccept", Grupo.Usuario, Arrays.asList("teleportaccept", "tpaacept"));
     }
-    
+
     @Override
     public void run(PAUser user, String label, String[] args) {
         if (PAServer.getTeleportHereRequests().containsKey(user.getUuid())) {
@@ -39,5 +39,5 @@ public class TeleportAcceptCMD extends PACmd {
                 PAServer.removeTeleportRequest(user.getUuid());
             }
         }
-    }  
+    }
 }

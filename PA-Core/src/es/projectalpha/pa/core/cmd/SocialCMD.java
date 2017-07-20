@@ -6,12 +6,12 @@ import java.util.Arrays;
 
 public class SocialCMD extends PACmd {
 
-    public SocialCMD(){
+    public SocialCMD() {
         super("social", Grupo.Usuario, Arrays.asList("web", "twitter", "tienda", "foro"));
     }
 
-    public void run(PAUser user, String label, String[] args){
-        if (args.length >= 0){
+    public void run(PAUser user, String label, String[] args) {
+        if (args.length >= 0) {
             user.sendDiv();
             user.sendMessage("&cDa click para acceder a las páginas");
             user.jsonURL("&6Web", "&6Web", "http://projectalpha.es");
