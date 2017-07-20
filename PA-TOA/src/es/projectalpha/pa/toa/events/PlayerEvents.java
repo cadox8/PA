@@ -1,11 +1,8 @@
 package es.projectalpha.pa.toa.events;
 
 import es.projectalpha.pa.core.api.PAData;
-import es.projectalpha.pa.core.api.PAServer;
-import es.projectalpha.pa.core.api.PAUser;
 import es.projectalpha.pa.core.utils.CuboidZone;
 import es.projectalpha.pa.core.utils.ItemUtil;
-import es.projectalpha.pa.core.utils.ItemUtils;
 import es.projectalpha.pa.core.utils.Utils;
 import es.projectalpha.pa.toa.TOA;
 import es.projectalpha.pa.toa.api.TOAUser;
@@ -19,12 +16,9 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
-import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
-import org.bukkit.inventory.Inventory;
-import org.bukkit.inventory.PlayerInventory;
 
 public class PlayerEvents implements Listener {
 

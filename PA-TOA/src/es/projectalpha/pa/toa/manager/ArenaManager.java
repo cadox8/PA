@@ -4,17 +4,14 @@ import es.projectalpha.pa.core.utils.Utils;
 import es.projectalpha.pa.toa.TOA;
 import es.projectalpha.pa.toa.mobs.Mob;
 import es.projectalpha.pa.toa.mobs.MobType;
-import lombok.Getter;
 import org.bukkit.Location;
-import org.bukkit.configuration.ConfigurationSection;
 
 import java.util.ArrayList;
 
 public class ArenaManager {
 
-    private TOA plugin;
-
     public ArrayList<Mob> mobs = new ArrayList<>();
+    private TOA plugin;
 
     public ArenaManager(TOA instance) {
         this.plugin = instance;
