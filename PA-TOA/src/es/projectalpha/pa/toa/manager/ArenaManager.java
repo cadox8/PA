@@ -20,9 +20,10 @@ public class ArenaManager {
 
     private void initArena() {
         for (String key : plugin.getConfig().getConfigurationSection("Mobs").getKeys(false)) {
-            Location l = Utils.stringToLocation(plugin.getConfig().getString(key + ".loc"));
-            int level = plugin.getConfig().getInt(key + ".level");
-            MobType mt = MobType.parseMobType(plugin.getConfig().getInt(key + ".type"));
+            System.out.println(plugin.getConfig().getString("Mobs." + key + ".loc"));
+            Location l = Utils.stringToLocation(plugin.getConfig().getString("Mobs." + key + ".loc"));
+            int level = plugin.getConfig().getInt("Mobs." + key + ".level");
+            MobType mt = MobType.parseMobType(plugin.getConfig().getInt("Mobs." + key + ".type"));
             mobs.add(new Mob(level, mt, l));
         }
     }

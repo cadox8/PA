@@ -1,7 +1,9 @@
 package es.projectalpha.pa.toa;
 
+import es.projectalpha.pa.core.PACommands;
 import es.projectalpha.pa.toa.api.TOAUser;
 import es.projectalpha.pa.toa.atribs.Health;
+import es.projectalpha.pa.toa.cmd.MobsCMD;
 import es.projectalpha.pa.toa.drops.DropsManager;
 import es.projectalpha.pa.toa.events.BagEvents;
 import es.projectalpha.pa.toa.events.GameEvents;
@@ -33,18 +35,12 @@ public class TOA extends JavaPlugin {
 
     @Getter private SpawnTask spawnTask;
 
-    public static TOAUser getPlayer(OfflinePlayer p) {
-        for (TOAUser pl : users) {
-            if (pl.getUuid() == null) continue;
-            if (pl.getUuid().equals(p.getUniqueId())) return pl;
-        }
-        TOAUser us = new TOAUser(p.getUniqueId());
-        if (us.isOnline()) users.add(us);
-        return us;
-    }
-
     public void onEnable() {
         instance = this;
+
+        if (getServer().getPluginManager().getPlugin("PA-Core") == null) getServer().getPluginManager().disablePlugin(this);
+
+        PACommands.register(new MobsCMD());
         FileUtils.init();
         registerClasses();
         registerEvents();
@@ -66,5 +62,16 @@ public class TOA extends JavaPlugin {
         pm.registerEvents(new BagEvents(instance), instance);
         pm.registerEvents(new GameEvents(instance), instance);
         pm.registerEvents(new PlayerEvents(instance), instance);
+    }
+
+
+    public static TOAUser getPlayer(OfflinePlayer p) {
+        for (TOAUser pl : users) {
+            if (pl.getUuid() == null) continue;
+            if (pl.getUuid().equals(p.getUniqueId())) return pl;
+        }
+        TOAUser us = new TOAUser(p.getUniqueId());
+        if (us.isOnline()) users.add(us);
+        return us;
     }
 }
