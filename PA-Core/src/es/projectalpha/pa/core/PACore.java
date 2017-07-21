@@ -21,18 +21,14 @@ import java.util.Arrays;
 
 public class PACore extends JavaPlugin {
 
-    @Getter
-    private static final String IP = "&bmc.projectalpha.es";
-    @Getter
-    private static PACore instance;
-    @Getter
-    private static ViaAPI api = Via.getAPI();
-    @Getter
-    private Utils utils;
-    @Getter
-    private WorldManager worldManager;
-    @Getter
-    private MySQL mysql = null;
+    @Getter private static final String IP = "&bmc.projectalpha.es";
+    @Getter private static PACore instance;
+
+    @Getter private static ViaAPI api = Via.getAPI();
+
+    @Getter private Utils utils;
+    @Getter private WorldManager worldManager;
+    @Getter private MySQL mysql = null;
     private Connection connection = null;
 
     @Override
@@ -107,20 +103,7 @@ public class PACore extends JavaPlugin {
         return true;
     }
 
-    public boolean isDebug() {
-        return getConfig().getBoolean("debug");
-    }
-
     public void debugLog(String msg) {
         Log.debugLog(msg);
-    }
-
-    //Maintenance/Pruebas
-    public boolean isMaintenance() {
-        return getConfig().getBoolean("maintenance");
-    }
-
-    public boolean isPruebas() {
-        return getConfig().getBoolean("pruebas");
     }
 }

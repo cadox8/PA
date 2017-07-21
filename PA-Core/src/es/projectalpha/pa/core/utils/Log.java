@@ -9,11 +9,10 @@ public class Log {
     private static PACore plugin = PACore.getInstance();
 
     public static void log(Level level, String msg) {
-        plugin.getServer().getConsoleSender().sendMessage(Utils.colorize(level.getPrefix() + " &" + level.getPrefix() + msg));
+        plugin.getServer().getConsoleSender().sendMessage(Utils.colorize(level.getPrefix() + " &" + level.getColor() + msg));
     }
 
     public static void debugLog(String msg) {
-        if (!plugin.isDebug()) return;
         log(Level.DEBUG, msg);
     }
 

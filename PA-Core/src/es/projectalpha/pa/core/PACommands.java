@@ -50,6 +50,7 @@ public class PACommands implements TabCompleter {
         cmds.add(new KillCMD());
         cmds.add(new PingCMD());
         cmds.add(new SetGroupCMD());
+        cmds.add(new SpeedCMD());
         cmds.add(new SocialCMD());
         cmds.add(new StaffCMD());
         cmds.add(new WeatherCMD());

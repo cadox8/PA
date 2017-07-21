@@ -5,23 +5,25 @@ import net.md_5.bungee.api.ChatColor;
 
 public class SpeedCMD extends PACmd {
 
-    public SpeedCMD(String name, Grupo grupo, String... aliases) {
+    public SpeedCMD() {
         super("speed", Grupo.Builder, "velocidad", "speedygonzalez");
     }
 
     public void run(PAUser user, String label, String... args) {
         if (args.length == 0) {
-            user.sendMessage(ChatColor.RED + "Falta argumentos. (/speed int)");
+            user.sendMessage(ChatColor.RED + "Falta argumentos. (/speed <numero>)");
         }
         if (args.length == 1) {
-            if (args[1].equals("1")) {
-                user.getPlayer().setFlySpeed(0.1f);
-                user.getPlayer().setWalkSpeed(0.1f);
+            if (args[0].equals("1")) {
+                user.getPlayer().setFlySpeed(0.2f);
+                user.getPlayer().setWalkSpeed(0.2f);
+                return;
             }
-            user.getPlayer().setFlySpeed(Float.parseFloat(args[1]) / 10);
+            user.getPlayer().setFlySpeed((Float.parseFloat(args[0]) + 1) / 10);
+            user.getPlayer().setWalkSpeed((Float.parseFloat(args[0]) + 1) / 10);
         }
         if (args.length >= 2) {
-            user.sendMessage(ChatColor.RED + "Demasiados argumentos. (/speed int)");
+            user.sendMessage(ChatColor.RED + "Demasiados argumentos. (/speed <numero>)");
         }
     }
 }

@@ -24,25 +24,10 @@ public class PlayerListener implements Listener {
     @EventHandler(priority = EventPriority.LOWEST)
     public void onLogin(PlayerLoginEvent e) {
         Player p = e.getPlayer();
-/*
-        if (plugin.isMaintenance()){
-            if (!user.isOnRank(PACmd.Grupo.Builder)){
-                e.setResult(PlayerLoginEvent.Result.KICK_OTHER);
-                user.getPlayer().kickPlayer(Utils.colorize("&cEl servidor está en mantenimiento, lo sentimos"));
-            }
-        }
 
-        if (plugin.isPruebas()){
-            if (!user.isOnRank(PACmd.Grupo.VIP)){
-                e.setResult(PlayerLoginEvent.Result.KICK_OTHER);
-                user.getPlayer().kickPlayer(Utils.colorize("&cEl servidor está en pruebas, lo sentimos"));
-            }
-        }*/
-
-        if (e.getResult() == PlayerLoginEvent.Result.ALLOWED) {
-            plugin.getMysql().setupTable(p);
-        }
+        if (e.getResult() == PlayerLoginEvent.Result.ALLOWED) plugin.getMysql().setupTable(p);
     }
+
 
     @EventHandler(priority = EventPriority.LOW)
     public void onPlayerJoin(PlayerJoinEvent e) {
@@ -53,8 +38,8 @@ public class PlayerListener implements Listener {
         u.getUserData().setTimeJoin(System.currentTimeMillis());
         u.getUserData().setIp(u.getPlayer().getAddress());
         u.save();
-        u.getPlayer().setFlySpeed(0.1f);
-        u.getPlayer().setWalkSpeed(0.1f);
+        u.getPlayer().setFlySpeed(0.2f);
+        u.getPlayer().setWalkSpeed(0.2f);
 
         e.setJoinMessage(Messages.getMessage(Messages.JOIN, PAData.CORE, "%player%", e.getPlayer().getName()));
     }
@@ -65,7 +50,7 @@ public class PlayerListener implements Listener {
 
         e.setQuitMessage(Messages.getMessage(Messages.LEFT, PAData.CORE, "%player%", e.getPlayer().getName()));
         u.save();
-        PAServer.users.remove(u);
+        if (PAServer.users.contains(u)) PAServer.users.remove(u);
     }
 
     /*

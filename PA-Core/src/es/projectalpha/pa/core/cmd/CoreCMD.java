@@ -18,17 +18,8 @@ public class CoreCMD extends PACmd {
             }
 
             switch (args[0].toLowerCase()) {
-                case "debug":
-                    toggleDebug(user);
-                    break;
                 case "reload":
                     reloadConfig(user);
-                    break;
-                case "mantenimiento":
-                    toggleMaintenance(user);
-                    break;
-                case "pruebas":
-                    togglePruebas(user);
                     break;
             }
             return;
@@ -37,35 +28,11 @@ public class CoreCMD extends PACmd {
     }
 
     private void def(PAUser user) {
-        user.sendMessage(PAData.CORE.getPrefix() + "&aFunciona con PACore " + "&7v" + plugin.getDescription().getVersion());
-    }
-
-    private void toggleDebug(PAUser user) {
-        plugin.getConfig().set("debug", !plugin.isDebug());
-        plugin.saveConfig();
-
-        String debug = (plugin.isDebug()) ? "&aActivado" : "&cDesactivado";
-        user.sendMessage("&eHas cambiado el modo debug del PACore a: " + debug);
+        user.sendMessage(PAData.CORE.getPrefix() + "&aFunciona con &cPACore " + "&7v" + plugin.getDescription().getVersion());
     }
 
     private void reloadConfig(PAUser user) {
         plugin.reloadConfig();
         user.sendMessage("&eConfiguración recargada");
-    }
-
-    private void toggleMaintenance(PAUser user) {
-        plugin.getConfig().set("maintenance", !plugin.isMaintenance());
-        plugin.saveConfig();
-
-        String main = (plugin.isMaintenance()) ? "&aActivado" : "&cDesactivado";
-        user.sendMessage("&eHas cambiado el modo Mantenimiento del PACore a: " + main);
-    }
-
-    private void togglePruebas(PAUser user) {
-        plugin.getConfig().set("pruebas", !plugin.isPruebas());
-        plugin.saveConfig();
-
-        String pruebas = (plugin.isPruebas()) ? "&aActivado" : "&cDesactivado";
-        user.sendMessage("&eHas cambiado el modo Mantenimiento del PACore a: " + pruebas);
     }
 }
