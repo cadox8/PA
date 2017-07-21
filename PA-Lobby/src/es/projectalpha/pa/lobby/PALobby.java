@@ -24,7 +24,7 @@ public class PALobby extends JavaPlugin {
     public void onEnable() {
         instance = this;
 
-        if (getServer().getPluginManager().getPlugin("PA-Core") == null) getServer().shutdown();
+        if (getServer().getPluginManager().getPlugin("PA-Core") == null) getServer().getPluginManager().disablePlugin(this);
 
         registerEvents();
         LobbyTeams.initTeams();
