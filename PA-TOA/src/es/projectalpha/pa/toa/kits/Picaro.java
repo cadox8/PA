@@ -7,7 +7,7 @@ import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemFlag;
 
-public class Picaro extends Kit {
+public class Picaro extends Race {
 
     public Picaro(int id, int health) {
         super(id, "Picaro", health);

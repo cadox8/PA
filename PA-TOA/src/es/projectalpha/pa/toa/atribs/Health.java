@@ -2,10 +2,9 @@ package es.projectalpha.pa.toa.atribs;
 
 import es.projectalpha.pa.toa.TOA;
 import es.projectalpha.pa.toa.api.TOAUser;
-import es.projectalpha.pa.toa.kits.Kit;
+import es.projectalpha.pa.toa.kits.Race;
 
 import java.util.HashMap;
-import java.util.Map;
 
 public class Health {
 
@@ -19,6 +18,14 @@ public class Health {
     }
 
     public void setHealth(TOAUser u, int value) {
+        if (value >= healthPerLevel(u)) {
+            health.put(u, healthPerLevel(u));
+            return;
+        }
+        if (value <= 0) {
+            u.death();
+            return;
+        }
         health.put(u, value);
     }
 
@@ -41,11 +48,11 @@ public class Health {
     public int healthPerLevel(TOAUser u) {
         switch (u.getToaUserData().getKit()) {
             case 0:
-                return 85 * u.getToaUserData().getLvl() + Kit.WARRIOR.getHealth();
+                return 85 * u.getToaUserData().getLvl() + Race.WARRIOR.getHealth();
             case 1:
-                return 76 * u.getToaUserData().getLvl() + Kit.PICARO.getHealth();
+                return 76 * u.getToaUserData().getLvl() + Race.PICARO.getHealth();
             case 2:
-                return 70 * u.getToaUserData().getLvl() + Kit.ARCHER.getHealth();
+                return 70 * u.getToaUserData().getLvl() + Race.ARCHER.getHealth();
             default:
                 return 0;
         }

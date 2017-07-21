@@ -8,6 +8,7 @@ import es.projectalpha.pa.toa.drops.DropsManager;
 import es.projectalpha.pa.toa.events.BagEvents;
 import es.projectalpha.pa.toa.events.GameEvents;
 import es.projectalpha.pa.toa.events.PlayerEvents;
+import es.projectalpha.pa.toa.kits.Race;
 import es.projectalpha.pa.toa.manager.ArenaManager;
 import es.projectalpha.pa.toa.manager.GameManager;
 import es.projectalpha.pa.toa.tasks.SpawnTask;
@@ -40,7 +41,6 @@ public class TOA extends JavaPlugin {
 
         if (getServer().getPluginManager().getPlugin("PA-Core") == null) getServer().getPluginManager().disablePlugin(this);
 
-        PACommands.register(new MobsCMD());
         FileUtils.init();
         registerClasses();
         registerEvents();
@@ -55,6 +55,8 @@ public class TOA extends JavaPlugin {
         drops = new DropsManager();
         spawnTask = new SpawnTask(instance);
         health = new Health(instance);
+        Race.registerRaces();
+        PACommands.register(new MobsCMD());
     }
 
     private void registerEvents() {

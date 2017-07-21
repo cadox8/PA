@@ -6,7 +6,7 @@ import es.projectalpha.pa.core.api.PAUser;
 import es.projectalpha.pa.core.utils.ScoreboardUtil;
 import es.projectalpha.pa.core.utils.Title;
 import es.projectalpha.pa.toa.TOA;
-import es.projectalpha.pa.toa.kits.Kit;
+import es.projectalpha.pa.toa.kits.Race;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
@@ -44,12 +44,12 @@ public class TOAUser extends PAUser {
                     cancel();
                     return;
                 }
-                String kit = Kit.parseKit(getToaUserData().getKit()) == null ? "Ninguna" : Kit.parseKit(getToaUserData().getKit()).getName();
+                String kit = Race.parseRace(getToaUserData().getKit()) == null ? "Ninguna" : Race.parseRace(getToaUserData().getKit()).getName();
 
                 board.setName(PAData.RG.getOldPrefix());
                 board.text(4, "Zenys: §b" + getToaUserData().getZeny());
                 board.text(3, "§e ");
-                board.text(2, "Clase: §e" + kit);
+                board.text(2, "Race: §e" + kit);
                 board.text(1, "§e ");
                 board.text(0, PACore.getIP());
                 if (getPlayer() != null) board.build(getPlayer());
@@ -79,19 +79,20 @@ public class TOAUser extends PAUser {
     }
 
     private void respawn() {
-        getPlayer().setGameMode(GameMode.ADVENTURE);
-        sendToCity();
         int zenys = (int) (getToaUserData().getZeny() * 0.02);
 
+        getPlayer().setGameMode(GameMode.ADVENTURE);
+        sendToCity();
+        plugin.getHealth().ajustHealth(this);
         getToaUserData().setZeny(getToaUserData().getZeny() - zenys);
         sendMessage(PAData.TOA.getPrefix() + "&2Has perdido &6" + zenys + "&2 zenys");
     }
 
-    public void setKit(Kit kit) {
+    public void setRace(Race race) {
         getPlayer().getInventory().clear();
-        kit.setItems(getPlayer());
+        race.setItems(getPlayer());
         sendToCity();
-        plugin.getHealth().setHealth(this, kit.getHealth());
+        plugin.getHealth().setHealth(this, race.getHealth());
         Title.sendTitle(getPlayer(), 0, 3, 0, "", "&cTu aventura comienza ahora");
     }
 

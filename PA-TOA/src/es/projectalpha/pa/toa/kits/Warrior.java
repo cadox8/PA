@@ -4,7 +4,7 @@ import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
-public class Warrior extends Kit {
+public class Warrior extends Race {
 
     public Warrior(int id, int health) {
         super(id, "Caballero", health);

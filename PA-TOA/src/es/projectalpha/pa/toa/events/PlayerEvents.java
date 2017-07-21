@@ -6,12 +6,10 @@ import es.projectalpha.pa.core.utils.ItemUtil;
 import es.projectalpha.pa.core.utils.Utils;
 import es.projectalpha.pa.toa.TOA;
 import es.projectalpha.pa.toa.api.TOAUser;
-import es.projectalpha.pa.toa.kits.Kit;
+import es.projectalpha.pa.toa.kits.Race;
 import org.bukkit.Location;
 import org.bukkit.block.Block;
-import org.bukkit.entity.ArmorStand;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.Player;
+import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
@@ -31,7 +29,7 @@ public class PlayerEvents implements Listener {
     @EventHandler
     public void onJoin(PlayerJoinEvent e) {
         TOAUser u = TOA.getPlayer(e.getPlayer());
-        Kit k = Kit.parseKit(u.getToaUserData().getKit());
+        Race k = Race.parseRace(u.getToaUserData().getKit());
 
         u.sendToCity();
         if (k != null) {
@@ -49,6 +47,12 @@ public class PlayerEvents implements Listener {
 
             if (u.getPlayer().getHealth() - e.getDamage() <= 0) u.death();
         }
+
+        if (e.getEntity() instanceof Monster && e.getDamager() instanceof Snowball) {
+            Monster m = (Monster) e.getEntity();
+            TOAUser u = TOA.getPlayer((Player)((Snowball) e.getDamager()).getShooter());
+
+        }
     }
 
     @EventHandler(priority = EventPriority.HIGHEST)
@@ -61,14 +65,14 @@ public class PlayerEvents implements Listener {
 
             switch (ar.getItemInHand().getType()) {
                 case DIAMOND_SWORD:
-                    u.setKit(Kit.WARRIOR);
+                    u.setRace(Race.WARRIOR);
                     break;
                 case BOW:
                     u.sendMessage(PAData.TOA.getPrefix() + "&cClase no disponible por el momento");
-                    //u.setKit(Kit.ARCHER);
+                    //u.setRace(Race.ARCHER);
                     break;
                 case SHEARS:
-                    u.setKit(Kit.PICARO);
+                    u.setRace(Race.PICARO);
                     break;
             }
         }
