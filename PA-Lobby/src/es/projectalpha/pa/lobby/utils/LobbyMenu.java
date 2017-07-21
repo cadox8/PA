@@ -14,7 +14,7 @@ public class LobbyMenu {
 
     public LobbyMenu(PALobby instance) {
         this.plugin = instance;
-        servers = plugin.getServer().createInventory(null, 54, "Servidores");
+        servers = plugin.getServer().createInventory(null, 27, "Servidores");
 
         servers.addItem(new ItemStack(Material.APPLE));
     }

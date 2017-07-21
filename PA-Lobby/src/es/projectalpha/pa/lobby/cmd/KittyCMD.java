@@ -27,6 +27,8 @@ public class KittyCMD extends PACmd {
         o.setCustomNameVisible(true);
         o.setNoDamageTicks(Integer.MAX_VALUE);
 
+        o.setVelocity(user.getPlayer().getVelocity().multiply(2));
+
         plugin.getServer().getScheduler().runTaskLater(plugin, () -> {
             PAServer.users.forEach(u -> u.sendSound(Sound.EXPLODE));
             ParticleEffect.EXPLOSION_HUGE.send(plugin.getServer().getOnlinePlayers(), o.getLocation(), 0, 0, 0, 1, 20, 50);

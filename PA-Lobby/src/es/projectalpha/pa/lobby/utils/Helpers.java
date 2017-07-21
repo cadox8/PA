@@ -7,15 +7,12 @@ import es.projectalpha.pa.core.cmd.PACmd;
 import es.projectalpha.pa.core.utils.ScoreboardUtil;
 import es.projectalpha.pa.core.utils.Utils;
 import es.projectalpha.pa.lobby.PALobby;
-import es.projectalpha.pa.lobby.files.Files;
 import lombok.Getter;
 import org.bukkit.scheduler.BukkitRunnable;
 
 public class Helpers {
 
-    Files files;
-    @Getter
-    private PAUser u;
+    @Getter private PAUser u;
 
     public Helpers(PAUser u) {
         this.u = u;
@@ -26,7 +23,17 @@ public class Helpers {
         new BukkitRunnable() {
             @Override
             public void run() {
-                if (u.getPlayer() == null) cancel();
+                if (u.getPlayer() == null) {
+                    board.reset();
+                    cancel();
+                    return;
+                }
+
+                if (!u.isOnline()) {
+                    board.reset();
+                    cancel();
+                    return;
+                }
 
                 board.setName(PAData.LOBBY.getOldPrefix());
                 board.text(3, "§d ");
@@ -39,6 +46,6 @@ public class Helpers {
     }
 
     public void sendToSpawn() {
-        u.teleport(Utils.stringToLocation(files.getConfig().getString("spawn.point")));
+        u.teleport(Utils.stringToLocation(PALobby.getInstance().getConfig().getString("spawn")));
     }
 }

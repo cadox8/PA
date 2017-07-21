@@ -5,7 +5,6 @@ import es.projectalpha.pa.core.api.PAUser;
 import es.projectalpha.pa.core.cmd.PACmd;
 import es.projectalpha.pa.core.utils.Utils;
 import es.projectalpha.pa.lobby.PALobby;
-import es.projectalpha.pa.lobby.files.Files;
 import es.projectalpha.pa.lobby.utils.Helpers;
 import es.projectalpha.pa.lobby.utils.LobbyMenu;
 import es.projectalpha.pa.lobby.utils.LobbyTeams;
@@ -28,7 +27,6 @@ import java.util.Random;
 
 public class PlayerEvents implements Listener {
 
-    Files files;
     private PALobby plugin;
 
     public PlayerEvents(PALobby instance) {
@@ -57,7 +55,7 @@ public class PlayerEvents implements Listener {
 
         h.lobbyScoreboard();
         LobbyTeams.setScoreboardTeam(u);
-        u.teleport(Utils.stringToLocation(files.getConfig().getString("spawn.point")));
+        new Helpers(u).sendToSpawn();
 
         u.sendMessage("&6Actualmente hay &2" + PAServer.users.size() + " &6usuarios en línea");
     }
@@ -67,6 +65,7 @@ public class PlayerEvents implements Listener {
         PAUser u = PAServer.getUser(e.getPlayer());
 
         u.save();
+        if (PAServer.users.contains(u)) PAServer.users.remove(u);
     }
 
     @EventHandler
@@ -88,6 +87,7 @@ public class PlayerEvents implements Listener {
         PAUser u = PAServer.getUser(e.getPlayer());
 
         if (e.getAction() == Action.RIGHT_CLICK_AIR || e.getAction() == Action.RIGHT_CLICK_BLOCK) {
+            if (e.getItem() == null) return;
             if (e.getItem().getType() == Material.NETHER_STAR) {
                 e.setCancelled(true);
                 LobbyMenu.openMenu(u, LobbyMenu.MenuType.SERVERS);
@@ -114,13 +114,16 @@ public class PlayerEvents implements Listener {
         }
     }
 
-    @EventHandler(priority = EventPriority.HIGHEST)
+    @EventHandler
     public void onPlayerInteractEntity(PlayerInteractEntityEvent e) {
         PAUser u = PAServer.getUser(e.getPlayer());
         Entity en = e.getRightClicked();
 
+        e.setCancelled(true);
+
         if (en instanceof ArmorStand) {
             ArmorStand ar = (ArmorStand) en;
+            e.setCancelled(true);
 
             switch (ar.getItemInHand().getType()) {
                 case IRON_AXE:

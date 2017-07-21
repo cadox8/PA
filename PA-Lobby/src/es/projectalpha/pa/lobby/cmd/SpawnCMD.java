@@ -17,9 +17,6 @@ public class SpawnCMD extends PACmd {
             new Helpers(user).sendToSpawn();
             return;
         }
-        if (args.length >= 1) {
-            user.sendMessage(Messages.getMessage(Messages.BUFF_ARGS, PAData.CORE));
-            return;
-        }
+        user.sendMessage(Messages.getMessage(Messages.BUFF_ARGS, PAData.CORE));
     }
 }

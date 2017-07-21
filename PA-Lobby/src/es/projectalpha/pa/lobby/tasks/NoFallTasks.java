@@ -16,6 +16,10 @@ public class NoFallTasks extends BukkitRunnable {
     public void run() {
         if (PAServer.users.isEmpty()) return;
         PAServer.users.forEach(l -> {
+            if (l == null || !l.isOnline()) {
+                PAServer.users.remove(l);
+                return;
+            }
             if (l.getLoc().getY() <= 0) new Helpers(l).sendToSpawn();
         });
     }
