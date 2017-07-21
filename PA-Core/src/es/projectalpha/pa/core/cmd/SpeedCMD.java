@@ -17,10 +17,20 @@ public class SpeedCMD extends PACmd {
             if (args[0].equals("1")) {
                 user.getPlayer().setFlySpeed(0.2f);
                 user.getPlayer().setWalkSpeed(0.2f);
+                user.getPlayer().sendMessage(ChatColor.GRAY + "Velocidad cambiada a: " + args[0]);
                 return;
             }
+
+            if (args[0].equals("10")) {//aaaaaaaaaa
+                user.getPlayer().setFlySpeed(1f);
+                user.getPlayer().setWalkSpeed(1f);
+                user.getPlayer().sendMessage(ChatColor.GRAY + "Velocidad cambiada a: " + args[0]);
+                return;
+            }
+
             user.getPlayer().setFlySpeed((Float.parseFloat(args[0]) + 1) / 10);
             user.getPlayer().setWalkSpeed((Float.parseFloat(args[0]) + 1) / 10);
+            user.getPlayer().sendMessage(ChatColor.GRAY + "Velocidad cambiada a: " + args[0]);
         }
         if (args.length >= 2) {
             user.sendMessage(ChatColor.RED + "Demasiados argumentos. (/speed <numero>)");
