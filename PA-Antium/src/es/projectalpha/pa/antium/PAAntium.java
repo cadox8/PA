@@ -17,6 +17,9 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.logging.Filter;
+import java.util.logging.LogRecord;
+import java.util.logging.Logger;
 
 public class PAAntium extends JavaPlugin {
 
@@ -31,6 +34,11 @@ public class PAAntium extends JavaPlugin {
 
     public void onEnable() {
         instance = this;
+
+        if (getServer().getPluginManager().getPlugin("PA-Core") == null) getServer().getPluginManager().disablePlugin(this);
+
+        filter();
+
         plugin = PACore.getInstance();
         plugin.debugLog("Registrando clases, eventos y permisos...");
 
@@ -51,5 +59,21 @@ public class PAAntium extends JavaPlugin {
 
     private void registerCommands() {
         PACommands.register(new LoginCMD(), new RegisterCMD(), new AntiumCMD());
+    }
+
+    private void filter() {
+        Filter f = new Filter() {
+            public boolean isLoggable(LogRecord line) {
+                return !(line.getMessage().toLowerCase().startsWith("/login") || line.getMessage().toLowerCase().startsWith("/register"));
+            }
+
+            public String doFilter(String arg0) {
+                return null;
+            }
+            public String doFilterUrl(String arg0) {
+                return null;
+            }
+        };
+        getLogger().setFilter(f);
     }
 }
