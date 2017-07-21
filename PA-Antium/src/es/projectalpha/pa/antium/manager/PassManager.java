@@ -1,11 +1,15 @@
 package es.projectalpha.pa.antium.manager;
 
 import es.projectalpha.pa.antium.PAAntium;
+import es.projectalpha.pa.core.PACore;
 import es.projectalpha.pa.core.api.PAData;
 import es.projectalpha.pa.core.api.PAUser;
+import es.projectalpha.pa.core.utils.ItemMaker;
 import es.projectalpha.pa.core.utils.MySQL;
 import es.projectalpha.pa.core.utils.ProtectPass;
 import lombok.Getter;
+import org.bukkit.Material;
+import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
 
@@ -20,7 +24,7 @@ public class PassManager {
     public PassManager(PAAntium instance) {
         this.plugin = instance;
         logged = new ArrayList<>();
-        mysql = plugin.getMysql();
+        mysql = PACore.getInstance().getMysql();
     }
 
     public void register(PAUser u, String pass, String pass2) {
@@ -36,6 +40,7 @@ public class PassManager {
         String encryptedPass = ProtectPass.encodePass(pass);
         mysql.register(u, encryptedPass, "");
         u.sendMessage(PAData.ANTIUM.getPrefix() + "&3Registrado correctamente. &Contraseña: &c" + pass + " &2Contraseña encriptada: &c" + encryptedPass);
+        updateInv(u.getPlayer());
     }
 
     public void login(PAUser u, String pass) {
@@ -46,6 +51,7 @@ public class PassManager {
         if (mysql.login(u, pass)) {
             u.sendMessage(PAData.ANTIUM.getPrefix() + "&3Has entrado correctamente");
             logged.add(u);
+            updateInv(u.getPlayer());
             return;
         }
         u.sendMessage(PAData.ANTIUM.getPrefix() + "&cContraseña erronea");
@@ -62,5 +68,10 @@ public class PassManager {
     @Deprecated
     public void updateEmail(PAUser u, String email) {
         //DISABLED
+    }
+
+    private void updateInv(Player p) {
+        p.getInventory().setItem(0, new ItemMaker(Material.NETHER_STAR).setDisplayName("&cJuegos").build());
+        p.updateInventory();
     }
 }

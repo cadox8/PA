@@ -20,18 +20,10 @@ import java.sql.SQLException;
 
 public class PAAntium extends JavaPlugin {
 
-    @Getter
-    private static PACore plugin = PACore.getInstance();
-    @Getter
-    private static PAAntium instance;
+    @Getter private static PACore plugin;
+    @Getter private static PAAntium instance;
 
-    @Getter
-    private PassManager passManager;
-
-    @Getter
-    private MySQL mysql = null;
-    @Getter
-    private Connection connection = null;
+    @Getter private PassManager passManager;
 
     public static PAUser getUser(OfflinePlayer p) {
         return PAServer.getUser(p);
@@ -39,31 +31,12 @@ public class PAAntium extends JavaPlugin {
 
     public void onEnable() {
         instance = this;
-
-        plugin.debugLog("Cargando MySQL...");
-        try {
-            mysql = new MySQL("projectalpha.es", "projectalpha", "root", "vivalapepa123");
-            connection = mysql.openConnection();
-        } catch (SQLException | ClassNotFoundException exc) {
-            getLogger().severe("Error al abrir la conexion MySQL!");
-            plugin.debugLog("Causa: " + exc.toString());
-            getLogger().severe("PACore desactivado por imposibilidad de conexiones");
-            getServer().getPluginManager().disablePlugin(this); //Desactivar si no hay MySQL (Solo dará errores si esta activo)
-        }
-
+        plugin = PACore.getInstance();
         plugin.debugLog("Registrando clases, eventos y permisos...");
+
         registerClasses();
         registerEvents();
         registerCommands();
-    }
-
-    public void onDisable() {
-        if (connection != null) {
-            try {
-                connection.close();
-            } catch (SQLException ex) {
-            }
-        }
     }
 
     private void registerClasses() {

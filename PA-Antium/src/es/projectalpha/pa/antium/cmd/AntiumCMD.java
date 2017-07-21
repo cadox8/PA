@@ -1,6 +1,7 @@
 package es.projectalpha.pa.antium.cmd;
 
 import es.projectalpha.pa.antium.PAAntium;
+import es.projectalpha.pa.core.PACore;
 import es.projectalpha.pa.core.api.PAData;
 import es.projectalpha.pa.core.api.PAServer;
 import es.projectalpha.pa.core.api.PAUser;
@@ -38,7 +39,7 @@ public class AntiumCMD extends PACmd {
                     userNotOnline(u);
                     return;
                 }
-                if (PAAntium.getInstance().getMysql().deleteUserAntium(target)) {
+                if (PACore.getInstance().getMysql().deleteUserAntium(target)) {
                     u.sendMessage(PAData.ANTIUM.getPrefix() + "&5" + target.getName() + " &6ha sido eliminado correctamente");
                 } else {
                     u.sendMessage(PAData.ANTIUM.getPrefix() + "&5" + target.getName() + " &cNO ha sido eliminado correctamente");

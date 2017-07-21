@@ -19,7 +19,7 @@ public class RegisterCMD extends PACmd {
             u.sendMessage(PAData.ANTIUM.getPrefix() + syntax);
             return;
         }
-        if (args.length == 1) {
+        if (args.length == 2) {
             PAAntium.getInstance().getPassManager().register(u, args[0], args[1]);
         }
     }
