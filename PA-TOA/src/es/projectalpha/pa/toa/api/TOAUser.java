@@ -49,7 +49,7 @@ public class TOAUser extends PAUser {
                 board.setName(PAData.RG.getOldPrefix());
                 board.text(4, "Zenys: §b" + getToaUserData().getZeny());
                 board.text(3, "§e ");
-                board.text(2, "Race: §e" + kit);
+                board.text(2, "Raza: §e" + "");
                 board.text(1, "§e ");
                 board.text(0, PACore.getIP());
                 if (getPlayer() != null) board.build(getPlayer());
@@ -65,7 +65,7 @@ public class TOAUser extends PAUser {
     public void sendToCity() {
         plugin.getGm().leaveTower(this);
         teleport(plugin.getAm().getCity());
-        setCity();
+        //setCity();
     }
 
 

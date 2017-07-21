@@ -60,8 +60,12 @@ public class PlayerEvents implements Listener {
         TOAUser u = TOA.getPlayer(e.getPlayer());
         Entity en = e.getRightClicked();
 
+        System.out.println("Entidad");
+
         if (en instanceof ArmorStand) {
             ArmorStand ar = (ArmorStand) en;
+
+            System.out.println(ar.getItemInHand().getType().toString());
 
             switch (ar.getItemInHand().getType()) {
                 case DIAMOND_SWORD:

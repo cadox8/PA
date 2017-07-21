@@ -19,6 +19,7 @@ public class MobsCMD extends PACmd {
             return;
         }
         int id = TOA.getInstance().getConfig().getInt("id");
+        int lastID = id;
 
         TOA.getInstance().getConfig().set("Mobs." + id + ".loc", Utils.locationToString(u.getLoc()));
         TOA.getInstance().getConfig().set("Mobs." + id + ".type", Utils.isInt(args[0]) ? Integer.parseInt(args[0]) : 1);
@@ -28,6 +29,6 @@ public class MobsCMD extends PACmd {
         TOA.getInstance().getConfig().set("id", id);
         TOA.getInstance().saveConfig();
 
-        u.sendMessage("&cPunto de spawn guardado &7(&d" + id-- + "&7)");
+        u.sendMessage("&cPunto de spawn guardado &7(&d" + lastID + "&7)");
     }
 }

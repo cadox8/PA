@@ -4,6 +4,7 @@ import es.projectalpha.pa.core.PACommands;
 import es.projectalpha.pa.toa.api.TOAUser;
 import es.projectalpha.pa.toa.atribs.Health;
 import es.projectalpha.pa.toa.cmd.MobsCMD;
+import es.projectalpha.pa.toa.cmd.RaceCMD;
 import es.projectalpha.pa.toa.drops.DropsManager;
 import es.projectalpha.pa.toa.events.BagEvents;
 import es.projectalpha.pa.toa.events.GameEvents;
@@ -56,7 +57,7 @@ public class TOA extends JavaPlugin {
         spawnTask = new SpawnTask(instance);
         health = new Health(instance);
         Race.registerRaces();
-        PACommands.register(new MobsCMD());
+        PACommands.register(new MobsCMD(), new RaceCMD());
     }
 
     private void registerEvents() {
