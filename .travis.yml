@@ -5,3 +5,8 @@ jdk:
 notifications:
   webhooks: https://fathomless-fjord-24024.herokuapp.com/notify?secret=123abc4d
   email: false
+cache:
+  directories:
+  - $HOME/.m2
+after_success:
+    "bash deploy.sh"
