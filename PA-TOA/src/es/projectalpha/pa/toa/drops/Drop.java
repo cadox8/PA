@@ -15,14 +15,10 @@ public class Drop {
 
     private TOA plugin = TOA.getInstance();
 
-    @Getter
-    private MobType mt;
-    @Getter
-    private int kit;
-    @Getter
-    private int dropPercent;
-    @Getter
-    private ItemStack item;
+    @Getter private MobType mt;
+    @Getter private int kit;
+    @Getter private int dropPercent;
+    @Getter private ItemStack item;
 
     public Drop(MobType mt, ItemStack item) {
         this(mt, 10, 100, item);

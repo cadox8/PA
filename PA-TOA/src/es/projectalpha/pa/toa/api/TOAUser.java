@@ -19,17 +19,14 @@ public class TOAUser extends PAUser {
 
     private TOA plugin = TOA.getInstance();
 
-    @Getter
-    @Setter
-    private TOAUserData toaUserData;
-
     public TOAUser(UUID uuid) {
         super(uuid);
     }
 
-
-    public void save() {
-
+    public void reset() {
+        save();
+        TOA.users.remove(this);
+        TOA.getPlayer(plugin.getServer().getOfflinePlayer(getUuid()));
     }
 
     private void setCity() {
@@ -44,10 +41,10 @@ public class TOAUser extends PAUser {
                     cancel();
                     return;
                 }
-                String kit = Race.parseRace(getToaUserData().getKit()) == null ? "Ninguna" : Race.parseRace(getToaUserData().getKit()).getName();
+                String kit = Race.parseRace(getUserData().getKit()) == null ? "Ninguna" : Race.parseRace(getUserData().getKit()).getName();
 
                 board.setName(PAData.RG.getOldPrefix());
-                board.text(4, "Zenys: §b" + getToaUserData().getZeny());
+                board.text(4, "Zenys: §b" + getUserData().getZeny());
                 board.text(3, "§e ");
                 board.text(2, "Raza: §e" + "");
                 board.text(1, "§e ");
@@ -65,7 +62,7 @@ public class TOAUser extends PAUser {
     public void sendToCity() {
         plugin.getGm().leaveTower(this);
         teleport(plugin.getAm().getCity());
-        //setCity();
+        setCity();
     }
 
 
@@ -79,12 +76,12 @@ public class TOAUser extends PAUser {
     }
 
     private void respawn() {
-        int zenys = (int) (getToaUserData().getZeny() * 0.02);
+        int zenys = (int) (getUserData().getZeny() * 0.02);
 
         getPlayer().setGameMode(GameMode.ADVENTURE);
         sendToCity();
         plugin.getHealth().ajustHealth(this);
-        getToaUserData().setZeny(getToaUserData().getZeny() - zenys);
+        getUserData().setZeny(getUserData().getZeny() - zenys);
         sendMessage(PAData.TOA.getPrefix() + "&2Has perdido &6" + zenys + "&2 zenys");
     }
 
@@ -94,25 +91,7 @@ public class TOAUser extends PAUser {
         sendToCity();
         plugin.getHealth().setHealth(this, race.getHealth());
         Title.sendTitle(getPlayer(), 0, 3, 0, "", "&cTu aventura comienza ahora");
-    }
-
-
-    @Data
-    public static class TOAUserData {
-        Integer piso = 0;
-        Integer maxPiso = 0;
-
-        Integer exp = 0;
-        Integer lvl = 1;
-
-        Integer zeny = 0;
-
-        Integer kills = 0;
-        Integer deaths = 0;
-
-        Integer kit = -1;
-
-        public TOAUserData() {
-        }
+        getUserData().setKit(race.getId());
+        reset();
     }
 }

@@ -46,13 +46,13 @@ public class Health {
     }
 
     public int healthPerLevel(TOAUser u) {
-        switch (u.getToaUserData().getKit()) {
+        switch (u.getUserData().getKit()) {
             case 0:
-                return 85 * u.getToaUserData().getLvl() + Race.WARRIOR.getHealth();
+                return 85 * u.getUserData().getLvl() + Race.WARRIOR.getHealth();
             case 1:
-                return 76 * u.getToaUserData().getLvl() + Race.PICARO.getHealth();
+                return 76 * u.getUserData().getLvl() + Race.PICARO.getHealth();
             case 2:
-                return 70 * u.getToaUserData().getLvl() + Race.ARCHER.getHealth();
+                return 70 * u.getUserData().getLvl() + Race.ARCHER.getHealth();
             default:
                 return 0;
         }

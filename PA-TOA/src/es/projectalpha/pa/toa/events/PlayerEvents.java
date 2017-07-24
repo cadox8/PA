@@ -29,7 +29,7 @@ public class PlayerEvents implements Listener {
     @EventHandler
     public void onJoin(PlayerJoinEvent e) {
         TOAUser u = TOA.getPlayer(e.getPlayer());
-        Race k = Race.parseRace(u.getToaUserData().getKit());
+        Race k = Race.parseRace(u.getUserData().getKit());
 
         u.sendToCity();
         if (k != null) {
