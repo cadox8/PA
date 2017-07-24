@@ -228,14 +228,33 @@ public class PAUser {
     @Data
     public static class UserData {
         PACmd.Grupo grupo = PACmd.Grupo.Usuario;
+
         Location lastLocation = null;
+
         Boolean god = false;
+
         Long lastConnect = 0L;
         Long timeJoin = 0L;
         Long timePlayed = 0L;
+
         String nickname = null;
+
         Integer coins = 0;
+
         InetSocketAddress ip = null;
+
+        //TOA
+        Integer maxPiso = 0;
+
+        Integer exp = 0;
+        Integer lvl = 1;
+
+        Integer zeny = 0;
+
+        Integer kills = 0;
+        Integer deaths = 0;
+
+        Integer kit = -1;
 
         public UserData() {
         }

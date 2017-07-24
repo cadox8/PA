@@ -7,6 +7,7 @@ import es.projectalpha.pa.core.cmd.PACmd;
 import org.bukkit.entity.Player;
 
 import java.sql.*;
+import java.util.HashMap;
 import java.util.UUID;
 
 /**
@@ -56,6 +57,7 @@ public class MySQL {
 
     // -----------------
     public void setupTable(Player p) {
+        //Datos
         PACore.getInstance().getServer().getScheduler().runTaskAsynchronously(PACore.getInstance(), () -> {
             try {
                 PreparedStatement statement = openConnection().prepareStatement("SELECT `id` FROM `pa_datos` WHERE `uuid` = ?");
@@ -72,20 +74,47 @@ public class MySQL {
                 ex.printStackTrace();
             }
         });
+
+        //TOA
+        PACore.getInstance().getServer().getScheduler().runTaskAsynchronously(PACore.getInstance(), () -> {
+            try {
+                PreparedStatement statement = openConnection().prepareStatement("SELECT `id` FROM `pa_toa` WHERE `uuid` = ?");
+                statement.setString(1, p.getUniqueId().toString());
+                ResultSet rs = statement.executeQuery();
+                if (!rs.next()) { //No hay filas encontradas, insertar nuevos datos
+                    PreparedStatement inserDatos = openConnection().prepareStatement("INSERT INTO `pa_toa` (`uuid`, `name`) VALUES (?, ?)");
+                    inserDatos.setString(1, p.getUniqueId().toString());
+                    inserDatos.setString(2, p.getName());
+                    inserDatos.executeUpdate();
+                }
+            } catch (SQLException | ClassNotFoundException ex) {
+                ex.printStackTrace();
+            }
+        });
     }
 
     public void saveUser(PAUser u) {
         PACore.getInstance().getServer().getScheduler().runTaskAsynchronously(PACore.getInstance(), () -> {
             PAUser.UserData data = u.getUserData();
             try {
-                PreparedStatement statementDatos = openConnection().prepareStatement("UPDATE `pa_datos` SET `grupo`=?,`god`=?,`coins`=?,`lastConnect`=?,`ip`=?,`nick`=? WHERE `uuid`=?");
+                PreparedStatement statementDatos = openConnection().prepareStatement("UPDATE `pa_datos` SET `grupo`=?,`god`=?,`coins`=?," +
+                        "`lastConnect`=?,`ip`=?,`nick`=?,/*7*/`maxPiso`=?,`exp`=?,`lvl`=?,`zeny`=?,`kills`=?,`deaths`=?,`kit`=? WHERE `uuid`=?");
                 statementDatos.setInt(1, data.getGrupo() != null ? data.getGrupo().getRank() : 0);
                 statementDatos.setBoolean(2, data.getGod() == null ? false : data.getGod());
                 statementDatos.setInt(3, data.getCoins() == null ? 0 : data.getCoins());
                 statementDatos.setTimestamp(4, new java.sql.Timestamp(new java.util.Date().getTime()));
                 statementDatos.setString(5, data.getIp() == null ? "" : data.getIp().getAddress().getHostAddress());
                 statementDatos.setString(6, data.getNickname() == null ? "" : data.getNickname());
-                statementDatos.setString(7, u.getUuid().toString());
+
+                statementDatos.setInt(7, data.getMaxPiso() == null ? 0 : data.getMaxPiso());
+                statementDatos.setInt(8, data.getExp() == null ? 0 : data.getExp());
+                statementDatos.setInt(9, data.getLvl() == null ? 0 : data.getLvl());
+                statementDatos.setInt(10, data.getZeny() == null ? 0 : data.getZeny());
+                statementDatos.setInt(11, data.getKills() == null ? 0 : data.getKills());
+                statementDatos.setInt(12, data.getDeaths() == null ? 0 : data.getDeaths());
+                statementDatos.setInt(13, data.getKit() == null ? -1 : data.getKit());
+
+                statementDatos.setString(14, u.getUuid().toString());
                 statementDatos.executeUpdate();
             } catch (Exception ex) {
                 System.out.println("Ha ocurrido un error guardando los datos de " + u.getName());
@@ -97,7 +126,8 @@ public class MySQL {
     public PAUser.UserData loadUserData(UUID id) {
         PAUser.UserData data = new PAUser.UserData();
         try {
-            PreparedStatement statementDatos = openConnection().prepareStatement("SELECT `timeJoin`,`grupo`,`god`,`coins`,`lastConnect` FROM `pa_datos` WHERE `uuid` = ?");
+            PreparedStatement statementDatos = openConnection().prepareStatement("SELECT `timeJoin`,`grupo`,`god`,`coins`,`lastConnect`," +
+                    "`maxPiso`,`exp`,`lvl`,`zeny`,`kills`,`deaths`,`kit` FROM `pa_datos` WHERE `uuid` = ?");
             statementDatos.setString(1, id.toString());
             ResultSet rsDatos = statementDatos.executeQuery();
 
@@ -108,6 +138,14 @@ public class MySQL {
                 data.setGod(rsDatos.getBoolean("god"));
                 data.setCoins(rsDatos.getInt("coins"));
                 data.setLastConnect(rsDatos.getLong("lastConnect"));
+
+                data.setMaxPiso(rsDatos.getInt("maxPiso"));
+                data.setExp(rsDatos.getInt("exp"));
+                data.setLvl(rsDatos.getInt("lvl"));
+                data.setZeny(rsDatos.getInt("zeny"));
+                data.setKills(rsDatos.getInt("kills"));
+                data.setDeaths(rsDatos.getInt("deaths"));
+                data.setKit(rsDatos.getInt("kit"));
             }
         } catch (CommunicationsException ex) {
             PACore.getInstance().debugLog(ex.toString());
