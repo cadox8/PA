@@ -1,6 +1,7 @@
 package es.projectalpha.pa.rage;
 
 import es.projectalpha.pa.core.PACommands;
+import es.projectalpha.pa.core.utils.Log;
 import es.projectalpha.pa.rage.api.RagePlayer;
 import es.projectalpha.pa.rage.cmd.PointSetCMD;
 import es.projectalpha.pa.rage.events.GameEvents;
@@ -12,6 +13,7 @@ import org.bukkit.OfflinePlayer;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.io.File;
 import java.util.ArrayList;
 
 public class RageGames extends JavaPlugin {
@@ -19,7 +21,7 @@ public class RageGames extends JavaPlugin {
     public static ArrayList<RagePlayer> players = new ArrayList<>();
 
     @Getter private static RageGames instance;
-
+    public static File config;
     @Getter private GameManager gm;
     @Getter private ArenaManager am;
 
@@ -29,6 +31,17 @@ public class RageGames extends JavaPlugin {
         PACommands.register(new PointSetCMD());
         registerClasses();
         registerEvents();
+
+        config = new File(getDataFolder(), "config.yml");
+        if (!config.exists()) {
+            try {
+                getConfig().options().copyDefaults(true);
+                saveConfig();
+                Log.debugLog("Generando archivo config.yml correctamente");
+            } catch (Exception e) {
+                Log.log(Log.Level.WARNING, "Fallo al generar el config.yml!");
+            }
+        }
     }
 
     private void registerClasses() {
