@@ -19,16 +19,6 @@ public class TowerBattle extends JavaPlugin {
     @Getter
     private ArenaManager am;
 
-    public static TowerPlayer getPlayer(OfflinePlayer p) {
-        for (TowerPlayer pl : players) {
-            if (pl.getUuid() == null) continue;
-            if (pl.getUuid().equals(p.getUniqueId())) return pl;
-        }
-        TowerPlayer us = new TowerPlayer(p.getUniqueId());
-        if (us.isOnline()) players.add(us);
-        return us;
-    }
-
     public void onEnable() {
         instance = this;
 
@@ -44,4 +34,14 @@ public class TowerBattle extends JavaPlugin {
     private void registerEvents() {
     }
 
+
+    public static TowerPlayer getPlayer(OfflinePlayer p) {
+        for (TowerPlayer pl : players) {
+            if (pl.getName() == null) continue;
+            if (pl.getName().equalsIgnoreCase(p.getName())) return pl;
+        }
+        TowerPlayer us = new TowerPlayer(p.getName());
+        if (us.isOnline()) players.add(us);
+        return us;
+    }
 }
