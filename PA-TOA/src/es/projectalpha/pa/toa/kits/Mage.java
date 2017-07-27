@@ -13,7 +13,7 @@ public class Mage extends Race {
     }
 
     public void setItems(Player p) {
-        p.getInventory().setItem(0, new ItemMaker(Material.WRITTEN_BOOK).setDisplayName("&dLibro del conocimiento").build());
+        p.getInventory().setItem(0, new ItemMaker(Material.ENCHANTED_BOOK).setDisplayName("&dLibro del conocimiento").build());
     }
 
     public void addEffects(TOAUser u) {}
