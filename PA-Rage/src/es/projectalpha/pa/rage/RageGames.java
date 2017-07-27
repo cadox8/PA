@@ -2,6 +2,7 @@ package es.projectalpha.pa.rage;
 
 import es.projectalpha.pa.core.PACommands;
 import es.projectalpha.pa.core.utils.Log;
+import es.projectalpha.pa.rage.Files.Files;
 import es.projectalpha.pa.rage.api.RagePlayer;
 import es.projectalpha.pa.rage.cmd.PointSetCMD;
 import es.projectalpha.pa.rage.events.GameEvents;
@@ -21,7 +22,7 @@ public class RageGames extends JavaPlugin {
     public static ArrayList<RagePlayer> players = new ArrayList<>();
 
     @Getter private static RageGames instance;
-    public static File config;
+    @Getter private Files files;
     @Getter private GameManager gm;
     @Getter private ArenaManager am;
 
@@ -31,17 +32,8 @@ public class RageGames extends JavaPlugin {
         PACommands.register(new PointSetCMD());
         registerClasses();
         registerEvents();
+        files.setupFiles();
 
-        config = new File(getDataFolder(), "config.yml");
-        if (!config.exists()) {
-            try {
-                getConfig().options().copyDefaults(true);
-                saveConfig();
-                Log.debugLog("Generando archivo config.yml correctamente");
-            } catch (Exception e) {
-                Log.log(Log.Level.WARNING, "Fallo al generar el config.yml!");
-            }
-        }
     }
 
     private void registerClasses() {
