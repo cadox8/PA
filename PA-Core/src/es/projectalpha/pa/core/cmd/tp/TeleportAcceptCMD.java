@@ -14,7 +14,7 @@ public class TeleportAcceptCMD extends PACmd {
         super("tpaccept", Grupo.Usuario, Arrays.asList("teleportaccept", "tpaacept"));
     }
 
-    @Override
+   /* @Override
     public void run(PAUser user, String label, String[] args) {
         if (PAServer.getTeleportHereRequests().containsKey(user.getUuid())) {
             PAUser target = PAServer.getUser(PAServer.getTeleportHereRequests().get(user.getUuid()));
@@ -39,5 +39,5 @@ public class TeleportAcceptCMD extends PACmd {
                 PAServer.removeTeleportRequest(user.getUuid());
             }
         }
-    }
+    }*/
 }
