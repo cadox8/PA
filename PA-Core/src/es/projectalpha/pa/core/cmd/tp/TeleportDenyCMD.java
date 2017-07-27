@@ -13,7 +13,7 @@ public class TeleportDenyCMD extends PACmd {
         super("tpadeny", Grupo.Usuario, Arrays.asList("teleportdeny"));
     }
 
-    @Override
+  /*  @Override
     public void run(PAUser user, String label, String[] args) {
         if (PAServer.getTeleportRequests().containsKey(user.getUuid()) || PAServer.getTeleportHereRequests().containsKey(user.getUuid())) {
             PAUser t1 = PAServer.getUser(PAServer.getTeleportRequests().get(user.getUuid()));
@@ -27,5 +27,5 @@ public class TeleportDenyCMD extends PACmd {
         } else {
             user.sendMessage("");
         }
-    }
+    }*/
 }

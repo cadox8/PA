@@ -15,8 +15,8 @@ public class RagePlayer extends PAUser {
 
     private RageGames plugin = RageGames.getInstance();
 
-    public RagePlayer(UUID uuid) {
-        super(uuid);
+    public RagePlayer(String name) {
+        super(name);
     }
 
     public void setLobby() {

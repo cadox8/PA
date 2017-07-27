@@ -15,7 +15,7 @@ public class TeleportAskAllCMD extends PACmd {
         super("tpaall", Grupo.Mod, Arrays.asList("teleportaskall"));
     }
 
-    @Override
+   /* @Override
     public void run(PAUser user, String label, String[] args) {
         final ArrayList<UUID> targets = new ArrayList<>();
 
@@ -44,5 +44,5 @@ public class TeleportAskAllCMD extends PACmd {
                     );
             user.sendMessage("");
         }, 120 * 20L);
-    }
+    }*/
 }

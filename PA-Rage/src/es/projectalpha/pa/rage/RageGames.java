@@ -58,10 +58,10 @@ public class RageGames extends JavaPlugin {
 
     public static RagePlayer getPlayer(OfflinePlayer p) {
         for (RagePlayer pl : players) {
-            if (pl.getUuid() == null) continue;
-            if (pl.getUuid().equals(p.getUniqueId())) return pl;
+            if (pl.getName() == null) continue;
+            if (pl.getName().equalsIgnoreCase(p.getName())) return pl;
         }
-        RagePlayer us = new RagePlayer(p.getUniqueId());
+        RagePlayer us = new RagePlayer(p.getName());
         if (us.isOnline()) players.add(us);
         return us;
     }

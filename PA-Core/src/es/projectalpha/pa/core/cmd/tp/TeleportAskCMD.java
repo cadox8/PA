@@ -15,7 +15,7 @@ public class TeleportAskCMD extends PACmd {
         super("tpa", Grupo.Builder, Arrays.asList("teleportask"));
     }
 
-    @Override
+   /* @Override
     public void run(PAUser user, String label, String[] args) {
         if (args.length == 0) {
             user.sendMessage("");
@@ -52,5 +52,5 @@ public class TeleportAskCMD extends PACmd {
     @Override
     public List<String> onTabComplete(CommandSender cs, Command cmd, String alias, String[] args, String curs, Integer curn) {
         return null;
-    }
+    }*/
 }

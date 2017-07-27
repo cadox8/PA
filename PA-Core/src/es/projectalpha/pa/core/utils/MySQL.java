@@ -60,14 +60,13 @@ public class MySQL {
         //Datos
         PACore.getInstance().getServer().getScheduler().runTaskAsynchronously(PACore.getInstance(), () -> {
             try {
-                PreparedStatement statement = openConnection().prepareStatement("SELECT `id` FROM `pa_datos` WHERE `uuid` = ?");
-                statement.setString(1, p.getUniqueId().toString());
+                PreparedStatement statement = openConnection().prepareStatement("SELECT `id` FROM `pa_datos` WHERE `name` = ?");
+                statement.setString(1, p.getName());
                 ResultSet rs = statement.executeQuery();
                 if (!rs.next()) { //No hay filas encontradas, insertar nuevos datos
-                    PreparedStatement inserDatos = openConnection().prepareStatement("INSERT INTO `pa_datos` (`uuid`, `name`, `grupo`) VALUES (?, ?, ?)");
-                    inserDatos.setString(1, p.getUniqueId().toString());
-                    inserDatos.setString(2, p.getName());
-                    inserDatos.setInt(3, 0);
+                    PreparedStatement inserDatos = openConnection().prepareStatement("INSERT INTO `pa_datos` (`name`, `grupo`) VALUES (?, ?)");
+                    inserDatos.setString(1, p.getName());
+                    inserDatos.setInt(2, 0);
                     inserDatos.executeUpdate();
                 }
             } catch (SQLException | ClassNotFoundException ex) {
@@ -78,13 +77,12 @@ public class MySQL {
         //TOA
         PACore.getInstance().getServer().getScheduler().runTaskAsynchronously(PACore.getInstance(), () -> {
             try {
-                PreparedStatement statement = openConnection().prepareStatement("SELECT `id` FROM `pa_toa` WHERE `uuid` = ?");
-                statement.setString(1, p.getUniqueId().toString());
+                PreparedStatement statement = openConnection().prepareStatement("SELECT `id` FROM `pa_toa` WHERE `name` = ?");
+                statement.setString(1, p.getName());
                 ResultSet rs = statement.executeQuery();
                 if (!rs.next()) { //No hay filas encontradas, insertar nuevos datos
-                    PreparedStatement inserDatos = openConnection().prepareStatement("INSERT INTO `pa_toa` (`uuid`, `name`) VALUES (?, ?)");
-                    inserDatos.setString(1, p.getUniqueId().toString());
-                    inserDatos.setString(2, p.getName());
+                    PreparedStatement inserDatos = openConnection().prepareStatement("INSERT INTO `pa_toa` (`name`) VALUES (?)");
+                    inserDatos.setString(1, p.getName());
                     inserDatos.executeUpdate();
                 }
             } catch (SQLException | ClassNotFoundException ex) {
@@ -98,7 +96,7 @@ public class MySQL {
             PAUser.UserData data = u.getUserData();
             try {
                 PreparedStatement statementDatos = openConnection().prepareStatement("UPDATE `pa_datos` SET `grupo`=?,`god`=?,`coins`=?," +
-                        "`lastConnect`=?,`ip`=?,`nick`=?,/*7*/`maxPiso`=?,`exp`=?,`lvl`=?,`zeny`=?,`kills`=?,`deaths`=?,`kit`=? WHERE `uuid`=?");
+                        "`lastConnect`=?,`ip`=?,`nick`=?,/*7*/`maxPiso`=?,`exp`=?,`lvl`=?,`zeny`=?,`kills`=?,`deaths`=?,`kit`=? WHERE `name`=?");
                 statementDatos.setInt(1, data.getGrupo() != null ? data.getGrupo().getRank() : 0);
                 statementDatos.setBoolean(2, data.getGod() == null ? false : data.getGod());
                 statementDatos.setInt(3, data.getCoins() == null ? 0 : data.getCoins());
@@ -114,7 +112,7 @@ public class MySQL {
                 statementDatos.setInt(12, data.getDeaths() == null ? 0 : data.getDeaths());
                 statementDatos.setInt(13, data.getKit() == null ? -1 : data.getKit());
 
-                statementDatos.setString(14, u.getUuid().toString());
+                statementDatos.setString(14, u.getName());
                 statementDatos.executeUpdate();
             } catch (Exception ex) {
                 System.out.println("Ha ocurrido un error guardando los datos de " + u.getName());
@@ -123,12 +121,12 @@ public class MySQL {
         });
     }
 
-    public PAUser.UserData loadUserData(UUID id) {
+    public PAUser.UserData loadUserData(String id) {
         PAUser.UserData data = new PAUser.UserData();
         try {
             PreparedStatement statementDatos = openConnection().prepareStatement("SELECT `timeJoin`,`grupo`,`god`,`coins`,`lastConnect`," +
-                    "`maxPiso`,`exp`,`lvl`,`zeny`,`kills`,`deaths`,`kit` FROM `pa_datos` WHERE `uuid` = ?");
-            statementDatos.setString(1, id.toString());
+                    "`maxPiso`,`exp`,`lvl`,`zeny`,`kills`,`deaths`,`kit` FROM `pa_datos` WHERE `name` = ?");
+            statementDatos.setString(1, id);
             ResultSet rsDatos = statementDatos.executeQuery();
 
             if (rsDatos.next()) {
@@ -169,15 +167,14 @@ public class MySQL {
         PACore.getInstance().getServer().getScheduler().runTaskAsynchronously(PACore.getInstance(), () -> {
             Player p = u.getPlayer();
             try {
-                PreparedStatement statement = openConnection().prepareStatement("SELECT `id` FROM `pa_antium` WHERE `uuid` = ?");
+                PreparedStatement statement = openConnection().prepareStatement("SELECT `id` FROM `pa_antium` WHERE `name` = ?");
                 statement.setString(1, p.getUniqueId().toString());
                 ResultSet rs = statement.executeQuery();
                 if (!rs.next()) { //No hay filas encontradas, insertar nuevos datos
-                    PreparedStatement inserDatos = openConnection().prepareStatement("INSERT INTO `pa_antium` (`uuid`, `name`, `pass`, `email`) VALUES (?, ?, ?, ?)");
-                    inserDatos.setString(1, p.getUniqueId().toString());
-                    inserDatos.setString(2, p.getName());
-                    inserDatos.setString(3, pass);
-                    inserDatos.setString(4, email);
+                    PreparedStatement inserDatos = openConnection().prepareStatement("INSERT INTO `pa_antium` (`name`, `pass`, `email`) VALUES (?, ?, ?)");
+                    inserDatos.setString(1, p.getName());
+                    inserDatos.setString(2, pass);
+                    inserDatos.setString(3, email);
                     inserDatos.executeUpdate();
                 }
             } catch (SQLException | ClassNotFoundException ex) {
@@ -189,8 +186,8 @@ public class MySQL {
     public boolean login(PAUser u, String inPass) {
         PAUser.UserData data = new PAUser.UserData();
         try {
-            PreparedStatement statementDatos = openConnection().prepareStatement("SELECT `pass` FROM `pa_antium` WHERE `uuid` = ?");
-            statementDatos.setString(1, u.getUuid().toString());
+            PreparedStatement statementDatos = openConnection().prepareStatement("SELECT `pass` FROM `pa_antium` WHERE `name` = ?");
+            statementDatos.setString(1, u.getName());
             ResultSet rsDatos = statementDatos.executeQuery();
 
             if (rsDatos.next()) {
@@ -215,8 +212,8 @@ public class MySQL {
 
     public boolean isRegistered(PAUser u) {
         try {
-            PreparedStatement statement = openConnection().prepareStatement("SELECT * FROM `pa_antium` WHERE `uuid` =?");
-            statement.setString(1, u.getUuid().toString());
+            PreparedStatement statement = openConnection().prepareStatement("SELECT * FROM `pa_antium` WHERE `name` =?");
+            statement.setString(1, u.getName());
             ResultSet rs = statement.executeQuery();
             if (!rs.next()) return false;
             return true;
@@ -228,8 +225,8 @@ public class MySQL {
 
     public boolean deleteUserAntium(PAUser u) {
         try {
-            PreparedStatement statement = openConnection().prepareStatement("DELETE * FROM `pa_antium` WHERE `uuid` =?");
-            statement.setString(1, u.getUuid().toString());
+            PreparedStatement statement = openConnection().prepareStatement("DELETE * FROM `pa_antium` WHERE `name` =?");
+            statement.setString(1, u.getName());
             statement.executeQuery();
             return true;
         } catch (SQLException | ClassNotFoundException e) {

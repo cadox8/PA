@@ -71,10 +71,10 @@ public class TOA extends JavaPlugin {
 
     public static TOAUser getPlayer(OfflinePlayer p) {
         for (TOAUser pl : users) {
-            if (pl.getUuid() == null) continue;
-            if (pl.getUuid().equals(p.getUniqueId())) return pl;
+            if (pl.getName() == null) continue;
+            if (pl.getName().equalsIgnoreCase(p.getName())) return pl;
         }
-        TOAUser us = new TOAUser(p.getUniqueId());
+        TOAUser us = new TOAUser(p.getName());
         if (us.isOnline()) users.add(us);
         return us;
     }

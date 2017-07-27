@@ -19,14 +19,14 @@ public class TOAUser extends PAUser {
 
     private TOA plugin = TOA.getInstance();
 
-    public TOAUser(UUID uuid) {
-        super(uuid);
+    public TOAUser(String name) {
+        super(name);
     }
 
     public void reset() {
         save();
         TOA.users.remove(this);
-        TOA.getPlayer(plugin.getServer().getOfflinePlayer(getUuid()));
+        TOA.getPlayer(plugin.getServer().getOfflinePlayer(getName()));
     }
 
     private void setCity() {

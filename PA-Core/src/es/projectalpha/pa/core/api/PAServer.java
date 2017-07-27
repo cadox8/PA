@@ -10,22 +10,17 @@ import java.util.UUID;
 
 public class PAServer {
 
-    private static final HashMap<UUID, UUID> tp = new HashMap<>();
-    private static final HashMap<UUID, UUID> tph = new HashMap<>();
+/*    private static final HashMap<UUID, UUID> tp = new HashMap<>();
+    private static final HashMap<UUID, UUID> tph = new HashMap<>();*/
     public static ArrayList<PAUser> users = new ArrayList<>();
     public static ArrayList<PAUser> afkMode = new ArrayList<>();
     private static PACore plugin = PACore.getInstance();
-    @Getter
-    private static ArrayList<PAUser> adminChatMode = new ArrayList<>();
+    @Getter private static ArrayList<PAUser> adminChatMode = new ArrayList<>();
 
-    public static PAUser getUser(String user) {
-        return getUser(plugin.getServer().getPlayer(user).getUniqueId());
-    }
-
-    public static PAUser getUser(UUID id) {
+    public static PAUser getUser(String id) {
         for (PAUser pl : users) {
-            if (pl.getUuid() == null) continue;
-            if (pl.getUuid().equals(id)) return pl;
+            if (pl.getName() == null) continue;
+            if (pl.getName().equalsIgnoreCase(id)) return pl;
         }
         PAUser us = new PAUser(id);
         if (us.isOnline()) users.add(us);
@@ -33,10 +28,10 @@ public class PAServer {
     }
 
     public static PAUser getUser(OfflinePlayer p) {
-        return getUser(p.getUniqueId());
+        return getUser(p.getName());
     }
 
-    public static HashMap<UUID, UUID> getTeleportRequests() {
+/*    public static HashMap<UUID, UUID> getTeleportRequests() {
         return tp;
     }
 
@@ -58,7 +53,7 @@ public class PAServer {
 
     public static void removeTeleportHereRequest(UUID u) {
         tph.remove(u);
-    }
+    }*/
 
 
 }

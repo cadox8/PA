@@ -30,34 +30,31 @@ public class PAUser {
 
     private PACore plugin = PACore.getInstance();
 
-    @Getter
-    private UUID uuid;
-    @Getter
-    @Setter
-    private UserData userData;
+    @Getter private String name;
+    @Getter @Setter private UserData userData;
 
     public PAUser(OfflinePlayer p) {
-        this(p.getUniqueId());
+        this(p.getName());
     }
 
-    public PAUser(UUID id) {
-        uuid = id;
-        setUserData(plugin.getMysql().loadUserData(uuid));
+    public PAUser(String name) {
+        this.name = name;
+        setUserData(plugin.getMysql().loadUserData(name));
     }
 
     public OfflinePlayer getOfflinePlayer() {
-        return plugin.getServer().getOfflinePlayer(uuid);
+        return plugin.getServer().getOfflinePlayer(name);
     }
 
     public Player getPlayer() {
-        return plugin.getServer().getPlayer(uuid);
+        return plugin.getServer().getPlayer(name);
     }
 
 
     public void save() {
         plugin.getMysql().saveUser(this);
         PAServer.users.remove(this);
-        plugin.getMysql().loadUserData(uuid);
+        plugin.getMysql().loadUserData(name);
         PAServer.users.add(this);
     }
     //
@@ -219,7 +216,7 @@ public class PAUser {
 
     @Override
     public String toString() {
-        return "PAUser{name: " + getName() + ", uuid: " + getUuid() + ", group: + " + getUserData().getGrupo() + "}";
+        return "PAUser{name: " + getName() + ",  group: + " + getUserData().getGrupo() + "}";
     }
 
     /**
