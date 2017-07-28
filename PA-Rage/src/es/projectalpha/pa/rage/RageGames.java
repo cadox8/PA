@@ -30,10 +30,10 @@ public class RageGames extends JavaPlugin {
         instance = this;
 
         PACommands.register(new PointSetCMD());
+        files.setupFiles();
         registerClasses();
         registerEvents();
         System.out.println("Cargando archivos desde el onEnable");
-        files.setupFiles();
         am.prepareWorld(Bukkit.getWorld("rga1"));
         GameState.setState(GameState.LOBBY);
     }

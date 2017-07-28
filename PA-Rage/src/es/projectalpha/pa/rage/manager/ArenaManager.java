@@ -15,10 +15,8 @@ public class ArenaManager {
 
     private RageGames plugin;
 
-    @Getter
-    private int minPlayers = 2;
-    @Getter
-    private int maxPlayers = 8;
+    @Getter private int minPlayers = 2;
+    @Getter private int maxPlayers = 8;
 
     private ArrayList<Location> spawns = new ArrayList<>();
 
@@ -37,8 +35,8 @@ public class ArenaManager {
         w.setAutoSave(false);
     }
 
-    public void initArena() {
-        for (String str : plugin.getConfig().getConfigurationSection("Rage.spawns").getKeys(false)) {
+    private void initArena() {
+        for (String str : plugin.getConfig().getConfigurationSection("spawns").getKeys(false)) {
             spawns.add(Utils.stringToLocation(str));
         }
     }

@@ -27,6 +27,7 @@ public class PlayerEvents implements Listener {
         e.setJoinMessage(null);
 
         if (plugin.getGm().isInLobby()) {
+            plugin.getGm().addPlayerToGame(RageGames.getPlayer(player));
             plugin.getServer().getOnlinePlayers().forEach(p -> player.showPlayer(p));
             plugin.getServer().getOnlinePlayers().forEach(p -> p.showPlayer(player));
             player.teleport(plugin.getAm().getRandomSpawn());
@@ -34,7 +35,6 @@ public class PlayerEvents implements Listener {
             Utils.broadcastMsg("&7Ha entrado al juego &e" + player.getDisplayName() + " &3(&b" + plugin.getGm().getPlaying().size() + "&d/&b" + plugin.getAm().getMaxPlayers() + "&3)");
             plugin.getGm().checkStart();
         }
-        plugin.getGm().addPlayerToGame(RageGames.getPlayer(player));
     }
 
     @EventHandler
