@@ -96,14 +96,13 @@ public class MySQL {
             PAUser.UserData data = u.getUserData();
             try {
                 PreparedStatement statementDatos = openConnection().prepareStatement("UPDATE `pa_datos` SET `grupo`=?,`god`=?,`coins`=?," +
-                        "`lastConnect`=?,`ip`=?,`nick`=?,/*7*/`maxPiso`=?,`exp`=?,`lvl`=?,`zeny`=?,`kills`=?,`deaths`=?,`kit`=? WHERE `name`=?");
+                        "`lastConnect`=?,`ip`=?,`nick`=?,`maxPiso`=?,`exp`=?,`lvl`=?,`zeny`=?,`kills`=?,`deaths`=?,`kit`=? WHERE `name`=?");
                 statementDatos.setInt(1, data.getGrupo() != null ? data.getGrupo().getRank() : 0);
                 statementDatos.setBoolean(2, data.getGod() == null ? false : data.getGod());
                 statementDatos.setInt(3, data.getCoins() == null ? 0 : data.getCoins());
                 statementDatos.setTimestamp(4, new java.sql.Timestamp(new java.util.Date().getTime()));
                 statementDatos.setString(5, data.getIp() == null ? "" : data.getIp().getAddress().getHostAddress());
                 statementDatos.setString(6, data.getNickname() == null ? "" : data.getNickname());
-
                 statementDatos.setInt(7, data.getMaxPiso() == null ? 0 : data.getMaxPiso());
                 statementDatos.setInt(8, data.getExp() == null ? 0 : data.getExp());
                 statementDatos.setInt(9, data.getLvl() == null ? 0 : data.getLvl());
