@@ -18,12 +18,12 @@ public class Race {
     private static ArrayList<Race> races = new ArrayList<>();
 
     @Getter private String name;
-    @Getter private RaceType id;
+    @Getter private RaceType raceType;
     @Getter private int health;
 
-    public Race(RaceType id, String name, int health) {
+    public Race(RaceType raceType, String name, int health) {
         this.name = name;
-        this.id = id;
+        this.raceType = raceType;
         this.health = health;
     }
 
@@ -47,7 +47,7 @@ public class Race {
 
 
     public static Race parseRace(int id) {
-        for (Race k : races) if (k.getId().getId() == id) return k;
+        for (Race k : races) if (k.getRaceType().getId() == id) return k;
         return null;
     }
 

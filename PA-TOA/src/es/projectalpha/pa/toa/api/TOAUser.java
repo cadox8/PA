@@ -86,7 +86,7 @@ public class TOAUser extends PAUser {
         sendToCity();
         plugin.getHealth().setHealth(this, race.getHealth());
         Title.sendTitle(getPlayer(), 0, 3, 0, "", "&cTu aventura comienza ahora");
-        getUserData().setKit(race.getId());
+        getUserData().setKit(race.getRaceType().getId());
         reset();
     }
 }
