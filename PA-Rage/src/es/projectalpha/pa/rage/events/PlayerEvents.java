@@ -3,6 +3,7 @@ package es.projectalpha.pa.rage.events;
 import es.projectalpha.pa.core.cmd.PACmd;
 import es.projectalpha.pa.core.utils.Utils;
 import es.projectalpha.pa.rage.RageGames;
+import es.projectalpha.pa.rage.api.RagePlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -33,6 +34,7 @@ public class PlayerEvents implements Listener {
             Utils.broadcastMsg("&7Ha entrado al juego &e" + player.getDisplayName() + " &3(&b" + plugin.getGm().getPlaying().size() + "&d/&b" + plugin.getAm().getMaxPlayers() + "&3)");
             plugin.getGm().checkStart();
         }
+        plugin.getGm().addPlayerToGame(RageGames.getPlayer(player));
     }
 
     @EventHandler

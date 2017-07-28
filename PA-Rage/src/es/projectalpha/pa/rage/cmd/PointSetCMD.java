@@ -14,14 +14,13 @@ public class PointSetCMD extends PACmd {
     }
 
     private RageGames plugin = RageGames.getInstance();
-
+    int p;
     @Override
     public void run(PAUser user, String label, String[] args) {
         if (args.length == 0) {
-            int p = this.plugin.getFiles().getConfig().getInt("puntos");
-
+            p = this.plugin.getFiles().getConfig().getInt("puntos") + 1;
             this.plugin.getFiles().getConfig().set("puntos", p);
-            this.plugin.getFiles().getConfig().set("puntos." + p, Utils.locationToString(user.getLoc()));
+            this.plugin.getFiles().getConfig().set("spawns." + p, Utils.locationToString(user.getLoc()));
             this.plugin.getFiles().saveFiles();
             user.sendMessage("&aPunto puesto satisfactoriamente " + "&6" + p);
         }

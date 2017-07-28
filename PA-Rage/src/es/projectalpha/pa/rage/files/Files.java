@@ -29,7 +29,9 @@ public class Files {
     public void saveFiles() {
         try {
             config.save(fileConfig);
+            System.out.println("Guardando archivos");
             config.load(fileConfig);
+            System.out.println("Cargando archivos");
         } catch (IOException | InvalidConfigurationException e) {
             e.printStackTrace();
         }
