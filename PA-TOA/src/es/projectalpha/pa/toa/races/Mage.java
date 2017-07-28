@@ -1,14 +1,13 @@
-package es.projectalpha.pa.toa.kits;
+package es.projectalpha.pa.toa.races;
 
 import es.projectalpha.pa.core.utils.ItemMaker;
 import es.projectalpha.pa.toa.api.TOAUser;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
 
 public class Mage extends Race {
 
-    public Mage(int id, int health) {
+    public Mage(RaceType id, int health) {
         super(id,"Mago", health);
     }
 

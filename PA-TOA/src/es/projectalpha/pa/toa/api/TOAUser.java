@@ -6,14 +6,9 @@ import es.projectalpha.pa.core.api.PAUser;
 import es.projectalpha.pa.core.utils.ScoreboardUtil;
 import es.projectalpha.pa.core.utils.Title;
 import es.projectalpha.pa.toa.TOA;
-import es.projectalpha.pa.toa.kits.Race;
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
+import es.projectalpha.pa.toa.races.Race;
 import org.bukkit.GameMode;
 import org.bukkit.scheduler.BukkitRunnable;
-
-import java.util.UUID;
 
 public class TOAUser extends PAUser {
 

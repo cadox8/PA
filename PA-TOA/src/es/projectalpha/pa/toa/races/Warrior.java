@@ -1,4 +1,4 @@
-package es.projectalpha.pa.toa.kits;
+package es.projectalpha.pa.toa.races;
 
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -6,7 +6,7 @@ import org.bukkit.inventory.ItemStack;
 
 public class Warrior extends Race {
 
-    public Warrior(int id, int health) {
+    public Warrior(RaceType id, int health) {
         super(id, "Caballero", health);
     }
 

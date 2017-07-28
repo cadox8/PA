@@ -10,7 +10,7 @@ import es.projectalpha.pa.toa.drops.DropsManager;
 import es.projectalpha.pa.toa.events.BagEvents;
 import es.projectalpha.pa.toa.events.GameEvents;
 import es.projectalpha.pa.toa.events.PlayerEvents;
-import es.projectalpha.pa.toa.kits.Race;
+import es.projectalpha.pa.toa.races.Race;
 import es.projectalpha.pa.toa.manager.ArenaManager;
 import es.projectalpha.pa.toa.manager.GameManager;
 import es.projectalpha.pa.toa.tasks.SpawnTask;

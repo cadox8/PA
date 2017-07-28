@@ -6,7 +6,7 @@ import es.projectalpha.pa.core.utils.ItemUtil;
 import es.projectalpha.pa.core.utils.Utils;
 import es.projectalpha.pa.toa.TOA;
 import es.projectalpha.pa.toa.api.TOAUser;
-import es.projectalpha.pa.toa.kits.Race;
+import es.projectalpha.pa.toa.races.Race;
 import org.bukkit.Location;
 import org.bukkit.block.Block;
 import org.bukkit.entity.*;

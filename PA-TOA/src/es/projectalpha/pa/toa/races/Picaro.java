@@ -1,4 +1,4 @@
-package es.projectalpha.pa.toa.kits;
+package es.projectalpha.pa.toa.races;
 
 import es.projectalpha.pa.core.utils.ItemMaker;
 import es.projectalpha.pa.toa.TOA;
@@ -6,11 +6,10 @@ import es.projectalpha.pa.toa.api.TOAUser;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemFlag;
-import org.bukkit.inventory.ItemStack;
 
 public class Picaro extends Race {
 
-    public Picaro(int id, int health) {
+    public Picaro(RaceType id, int health) {
         super(id, "Picaro", health);
     }
 

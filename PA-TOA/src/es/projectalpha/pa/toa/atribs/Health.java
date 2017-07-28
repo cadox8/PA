@@ -2,7 +2,7 @@ package es.projectalpha.pa.toa.atribs;
 
 import es.projectalpha.pa.toa.TOA;
 import es.projectalpha.pa.toa.api.TOAUser;
-import es.projectalpha.pa.toa.kits.Race;
+import es.projectalpha.pa.toa.races.Race;
 
 import java.util.HashMap;
 

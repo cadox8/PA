@@ -1,4 +1,4 @@
-package es.projectalpha.pa.toa.kits;
+package es.projectalpha.pa.toa.races;
 
 import es.projectalpha.pa.core.utils.ItemMaker;
 import org.bukkit.Material;
@@ -7,7 +7,7 @@ import org.bukkit.entity.Player;
 
 public class Archer extends Race {
 
-    public Archer(int id, int health) {
+    public Archer(RaceType id, int health) {
         super(id, "Arquero", health);
     }
 
