@@ -3,9 +3,7 @@ package es.projectalpha.pa.rage.cmd;
 import es.projectalpha.pa.core.api.PAUser;
 import es.projectalpha.pa.core.cmd.PACmd;
 import es.projectalpha.pa.core.utils.Utils;
-import es.projectalpha.pa.rage.Files.Files;
 import es.projectalpha.pa.rage.RageGames;
-import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.util.Arrays;
 
@@ -21,9 +19,11 @@ public class PointSetCMD extends PACmd {
     @Override
     public void run(PAUser user, String label, String[] args) {
         if (args.length == 0) {
-            p = Integer.parseInt(plugin.getConfig().getString("Rage.puntos")) + 1;
-            plugin.getConfig().set("Rage.puntos", p);
-            plugin.getConfig().set("Rage.spawns." + p, Utils.locationToString(user.getLoc()));
+            p = Integer.parseInt(this.plugin.getFiles().getConfig().getString("Rage.puntos"));
+            p =+ 1;
+            this.plugin.getFiles().getConfig().set("Rage.puntos", p);
+            this.plugin.getFiles().getConfig().set("Rage.puntos." + p, Utils.locationToString(user.getLoc()));
+            this.plugin.getFiles().saveFiles();
             user.sendMessage("&aPunto puesto satisfactoriamente " + "&6" + p);
         }
     }

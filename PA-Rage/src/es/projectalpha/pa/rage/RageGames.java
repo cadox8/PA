@@ -1,8 +1,7 @@
 package es.projectalpha.pa.rage;
 
 import es.projectalpha.pa.core.PACommands;
-import es.projectalpha.pa.core.utils.Log;
-import es.projectalpha.pa.rage.Files.Files;
+import es.projectalpha.pa.rage.files.Files;
 import es.projectalpha.pa.rage.api.RagePlayer;
 import es.projectalpha.pa.rage.cmd.PointSetCMD;
 import es.projectalpha.pa.rage.events.GameEvents;
@@ -14,7 +13,6 @@ import org.bukkit.OfflinePlayer;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.io.File;
 import java.util.ArrayList;
 
 public class RageGames extends JavaPlugin {
@@ -32,13 +30,14 @@ public class RageGames extends JavaPlugin {
         PACommands.register(new PointSetCMD());
         registerClasses();
         registerEvents();
+        System.out.println("Cargando archivos desde el onEnable");
         files.setupFiles();
-
     }
 
     private void registerClasses() {
         gm = new GameManager(instance);
         am = new ArenaManager(instance);
+        files = new Files();
     }
 
     private void registerEvents() {
