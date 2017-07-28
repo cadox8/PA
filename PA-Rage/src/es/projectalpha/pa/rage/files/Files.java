@@ -11,15 +11,14 @@ import java.io.IOException;
 public class Files {
 
     @Getter private File fileConfig = new File("plugins/PA-Rage/", "config.yml");
-    private YamlConfiguration config;
+    private YamlConfiguration config = YamlConfiguration.loadConfiguration(fileConfig);
 
     public void setupFiles() {
         System.out.println("SetupFiles antes de detectar fileConfig");
         if (!fileConfig.exists()) {
             System.out.println("SetupFiles generandose");
             fileConfig.mkdir();
-            config = YamlConfiguration.loadConfiguration(fileConfig);
-            config.set("puntos", 0);
+            //config.set("puntos", 0);
         }
         System.out.println("SetupFiles detectado, no se regenera");
         saveFiles();
