@@ -52,7 +52,7 @@ public class PlayerEvents implements Listener {
     public void onMove(PlayerMoveEvent e) {
         PAUser u = PAAntium.getUser(e.getPlayer());
 
-        if (!plugin.getPassManager().getLogged().contains(u)) e.setCancelled(true);
+        if (!plugin.getPassManager().getLogged().contains(u)) u.teleport(e.getFrom());
     }
 
     @EventHandler(priority = EventPriority.HIGHEST)
