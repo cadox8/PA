@@ -10,22 +10,22 @@ import java.io.IOException;
 
 public class Files {
 
-    @Getter
-    private File fileConfig = new File("plugins/PA-Rage/", "config.yml");
-    @Getter
-    private YamlConfiguration config = YamlConfiguration.loadConfiguration(fileConfig);
+    @Getter private File fileConfig = new File("plugins/PA-Rage/", "config.yml");
+    private YamlConfiguration config;
 
     public void setupFiles() {
         System.out.println("SetupFiles antes de detectar fileConfig");
         if (!fileConfig.exists()) {
             System.out.println("SetupFiles generandose");
             fileConfig.mkdir();
-            config.set("Rage.puntos", 0);
+            config = YamlConfiguration.loadConfiguration(fileConfig);
+            config.set("puntos", 0);
         }
         System.out.println("SetupFiles detectado, no se regenera");
         saveFiles();
         System.out.println("Archivo guardado y cargados, setupFiles finalizado.");
     }
+
     public void saveFiles() {
         try {
             config.save(fileConfig);
@@ -33,5 +33,9 @@ public class Files {
         } catch (IOException | InvalidConfigurationException e) {
             e.printStackTrace();
         }
+    }
+
+    public YamlConfiguration getConfig() {
+        return YamlConfiguration.loadConfiguration(fileConfig);
     }
 }

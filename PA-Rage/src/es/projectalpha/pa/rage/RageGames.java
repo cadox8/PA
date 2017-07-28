@@ -1,11 +1,11 @@
 package es.projectalpha.pa.rage;
 
 import es.projectalpha.pa.core.PACommands;
-import es.projectalpha.pa.rage.files.Files;
 import es.projectalpha.pa.rage.api.RagePlayer;
 import es.projectalpha.pa.rage.cmd.PointSetCMD;
 import es.projectalpha.pa.rage.events.GameEvents;
 import es.projectalpha.pa.rage.events.PlayerEvents;
+import es.projectalpha.pa.rage.files.Files;
 import es.projectalpha.pa.rage.manager.ArenaManager;
 import es.projectalpha.pa.rage.manager.GameManager;
 import lombok.Getter;
