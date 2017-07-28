@@ -22,7 +22,7 @@ public class RageGames extends JavaPlugin {
     public static ArrayList<RagePlayer> players = new ArrayList<>();
 
     @Getter private static RageGames instance;
-    @Getter private Files files;
+    @Getter private Files files = new Files();
     @Getter private GameManager gm;
     @Getter private ArenaManager am;
 
@@ -41,12 +41,10 @@ public class RageGames extends JavaPlugin {
     private void registerClasses() {
         gm = new GameManager(instance);
         am = new ArenaManager(instance);
-        files = new Files();
     }
 
     private void registerEvents() {
         PluginManager pm = getServer().getPluginManager();
-
         pm.registerEvents(new PlayerEvents(instance), instance);
         pm.registerEvents(new GameEvents(instance), instance);
     }
