@@ -6,6 +6,8 @@ import es.projectalpha.pa.core.api.PAUser;
 import es.projectalpha.pa.core.utils.GameState;
 import es.projectalpha.pa.core.utils.ScoreboardUtil;
 import es.projectalpha.pa.rage.RageGames;
+import es.projectalpha.pa.rage.tasks.GameTask;
+import es.projectalpha.pa.rage.tasks.LobbyTask;
 import es.projectalpha.pa.rage.utils.Items;
 import org.bukkit.scheduler.BukkitRunnable;
 
@@ -18,6 +20,7 @@ public class RagePlayer extends PAUser {
     public RagePlayer(String name) {
         super(name);
     }
+    private LobbyTask gt = new LobbyTask(plugin);
 
     public void setLobby() {
         ScoreboardUtil board = new ScoreboardUtil(PAData.RG.getOldPrefix(), "lobby");
@@ -25,25 +28,37 @@ public class RagePlayer extends PAUser {
             @Override
             public void run() {
                 if (getPlayer() == null) cancel();
-
-                if (plugin.getGm().acceptPlayers()) {
-                    board.setName(PAData.RG.getOldPrefix());
-                    board.text(5, "§d ");
-                    board.text(4, "§6" + plugin.getGm().getPlaying().size() + "§d/§6" + plugin.getAm().getMaxPlayers());
-                    board.text(3, "§a ");
-                    board.text(2, "§eEsperando...");
-                    board.text(1, "§e ");
-                    board.text(0, "§b" + PACore.getIP());
-                    if (getPlayer() != null) board.build(getPlayer());
-                } else {
-                    board.reset();
-                    cancel();
+                if(plugin.rage.get("rage").equals(true)){
+                    if (plugin.getGm().acceptPlayers()) {
+                        board.setName(PAData.RG.getOldPrefix());
+                        board.text(5, "§d ");
+                        board.text(4, "§6" + plugin.getGm().getPlaying().size() + "§d/§6" + plugin.getAm().getMaxPlayers());
+                        board.text(3, "§a ");
+                        board.text(2, "§eEsperando...");
+                        board.text(1, "§e ");
+                        board.text(0, "§b" + PACore.getIP());
+                        if (getPlayer() != null) board.build(getPlayer());
+                    } else {
+                        board.reset();
+                        cancel();
+                    }
                 }
+
+                if(plugin.rage.get("rage").equals(false)){
+                    System.out.println("Detectado el lobby task, ejecutando la otra sb");
+                    board.reset();
+                    board.setName(PAData.RG.getOldPrefix());
+                    plugin.getGm().getScore().keySet().forEach(u -> board.text(plugin.getGm().getScore().get(u), u.getName()));
+                    board.text(-1, "§e ");
+                    board.text(-2, PACore.getIP());
+                    if (getPlayer() != null) board.build(getPlayer());
+                }
+
             }
         }.runTaskTimer(plugin, 0, 20);
     }
 
-    public void setGame() {
+    /*public void setGame() {
         ScoreboardUtil board = new ScoreboardUtil(PAData.RG.getOldPrefix(), "game");
         new BukkitRunnable() {
             @Override
@@ -63,7 +78,7 @@ public class RagePlayer extends PAUser {
             }
         }.runTaskTimer(plugin, 0, 20);
     }
-
+*/
     public void resetPlayer() {
         getPlayer().setHealth(getPlayer().getMaxHealth());
         getPlayer().getInventory().clear();

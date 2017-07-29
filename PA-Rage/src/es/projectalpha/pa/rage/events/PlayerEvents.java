@@ -26,8 +26,10 @@ public class PlayerEvents implements Listener {
     public void onJoin(PlayerJoinEvent e) {
         Player player = e.getPlayer();
         e.setJoinMessage(null);
-
+            System.out.println(RageGames.getPlayer(player.getPlayer()));
+        plugin.getGm().getPlaying().forEach(p -> { System.out.println(p.getPlayer() + " " + p.getPlayer().getName()); });
         if (plugin.getGm().isInLobby()) {
+            player.getInventory().clear();
             plugin.getGm().addPlayerToGame(RageGames.getPlayer(player));
             plugin.getServer().getOnlinePlayers().forEach(p -> player.showPlayer(p));
             plugin.getServer().getOnlinePlayers().forEach(p -> p.showPlayer(player));

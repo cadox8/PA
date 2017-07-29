@@ -16,10 +16,12 @@ import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class RageGames extends JavaPlugin {
 
     public static ArrayList<RagePlayer> players = new ArrayList<>();
+    public HashMap<String, Boolean> rage = new HashMap<>();
 
     @Getter private static RageGames instance;
     @Getter private Files files = new Files();
@@ -31,6 +33,7 @@ public class RageGames extends JavaPlugin {
 
         PACommands.register(new PointSetCMD());
         files.setupFiles();
+        rage.put("rage", true);
         registerClasses();
         registerEvents();
         System.out.println("Cargando archivos desde el onEnable");

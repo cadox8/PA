@@ -3,15 +3,17 @@ package es.projectalpha.pa.rage.tasks;
 import es.projectalpha.pa.core.utils.GameState;
 import es.projectalpha.pa.core.utils.Utils;
 import es.projectalpha.pa.rage.RageGames;
+import es.projectalpha.pa.rage.api.RagePlayer;
 import es.projectalpha.pa.rage.manager.GameManager;
 import org.bukkit.Sound;
 import org.bukkit.scheduler.BukkitRunnable;
 
+import java.util.HashMap;
+
 public class LobbyTask extends BukkitRunnable {
 
     private final RageGames plugin;
-    private int count = 40;
-    private GameTask gt;
+    public int count = 40;
 
     public LobbyTask(RageGames instance) {
         this.plugin = instance;
@@ -44,6 +46,7 @@ public class LobbyTask extends BukkitRunnable {
             case 0:
                 plugin.getGm().getPlaying().forEach(p -> plugin.getGm().getScore().put(p, 0));
                 new GameTask(plugin).runTaskTimer(plugin, 0, 20);
+                plugin.rage.put("rage", false);
                 cancel();
                 break;
         }
