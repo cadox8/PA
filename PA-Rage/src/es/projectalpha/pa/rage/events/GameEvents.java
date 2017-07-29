@@ -31,6 +31,10 @@ public class GameEvents implements Listener {
             Player d = (Player) e.getDamager();
             Player a = (Player) e.getEntity();
 
+            if(d.getInventory().getItemInHand() == null){
+                e.setCancelled(true);
+            }
+
             if (d.getInventory().getItemInHand().getType() == Material.IRON_SWORD) {
                 e.setCancelled(true);
                 Utils.broadcastMsg(ChatColor.GOLD + d.getName() + ChatColor.GREEN + " ha matado a " + ChatColor.GOLD + a.getName() + ChatColor.GREEN + " usando " + Items.getKnife().getItemMeta().getDisplayName());
