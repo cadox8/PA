@@ -2,6 +2,7 @@ package es.projectalpha.pa.rage.manager;
 
 import es.projectalpha.pa.core.utils.Utils;
 import es.projectalpha.pa.rage.RageGames;
+import es.projectalpha.pa.rage.files.Files;
 import lombok.Getter;
 import org.bukkit.Difficulty;
 import org.bukkit.Location;
@@ -36,8 +37,8 @@ public class ArenaManager {
     }
 
     private void initArena() {
-        for (String str : plugin.getConfig().getConfigurationSection("spawns").getKeys(false)) {
-            spawns.add(Utils.stringToLocation(str));
+        for(int p = 1; p < Files.config.getInt("puntos"); p++){
+                spawns.add(Utils.stringToLocation(Files.config.getString("spawns." + p)));
         }
     }
 

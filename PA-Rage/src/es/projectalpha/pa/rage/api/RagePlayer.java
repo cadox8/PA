@@ -33,7 +33,7 @@ public class RagePlayer extends PAUser {
                     board.text(3, "§a ");
                     board.text(2, "§eEsperando...");
                     board.text(1, "§e ");
-                    board.text(0, PACore.getIP());
+                    board.text(0, "§b" + PACore.getIP());
                     if (getPlayer() != null) board.build(getPlayer());
                 } else {
                     board.reset();

@@ -2,6 +2,7 @@ package es.projectalpha.pa.rage.tasks;
 
 import es.projectalpha.pa.core.utils.BossBarUtils;
 import es.projectalpha.pa.rage.RageGames;
+import es.projectalpha.pa.rage.api.RagePlayer;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -15,6 +16,7 @@ public class GameTask extends BukkitRunnable {
 
     private final RageGames plugin;
     private int count = 180;
+    private RagePlayer rp;
 
     //El GameManager accedes por plugin.getGm()
 
@@ -25,6 +27,9 @@ public class GameTask extends BukkitRunnable {
     public void run() {
         plugin.getGm().getPlaying().forEach(p -> {
             BossBarUtils.create(p.getPlayer(), "&cTiempo restante: &6" + count, BossBarAPI.Color.BLUE, BossBarAPI.Style.PROGRESS);
+            RageGames.getPlayer(p.getPlayer()).setGame();
+            p.teleport(plugin.getAm().getRandomSpawn());
+            RageGames.getPlayer(p.getPlayer()).resetPlayer();
         });
 
         switch (count) {
