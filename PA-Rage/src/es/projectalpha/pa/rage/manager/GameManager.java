@@ -8,21 +8,19 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 
 public class GameManager {
 
     private RageGames plugin;
 
-    @Getter
-    private ArrayList<RagePlayer> playing = new ArrayList<>();
-    @Getter
-    private HashMap<RagePlayer, Integer> score = new HashMap<>();
+    @Getter private ArrayList<RagePlayer> playing = new ArrayList<>();
+    @Getter private HashMap<RagePlayer, Integer> score = new HashMap<>();
     @Getter private ArrayList<RagePlayer> top = new ArrayList<>();
 
-    @Getter
-    @Setter
-    private boolean checkStart = true;
+    @Getter @Setter private boolean checkStart = true;
 
     public GameManager(RageGames instance) {
         this.plugin = instance;
@@ -58,8 +56,6 @@ public class GameManager {
             int pf = score.get(u) - v;
             System.out.println(pf);
             score.put(u, pf);
-        } else {
-            return;
         }
     }
 
@@ -70,5 +66,15 @@ public class GameManager {
 
     public boolean isInLobby() {
         return GameState.getState() == GameState.LOBBY;
+    }
+
+    public void reorder() {
+        if (!top.isEmpty()) top.clear();
+        List<Integer> list = new ArrayList<>(score.values());
+        Collections.sort(list, Collections.reverseOrder());
+
+        score.keySet().forEach(k -> list.subList(0, 10).forEach(v -> {
+            if (score.get(k).equals(v)) top.add(k);
+        }));
     }
 }

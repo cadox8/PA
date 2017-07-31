@@ -44,9 +44,9 @@ public class LobbyTask extends BukkitRunnable {
                 plugin.getGm().getPlaying().forEach(p -> p.sendSound(Sound.NOTE_PLING));
                 break;
             case 0:
-                plugin.getGm().getPlaying().forEach(p -> plugin.getGm().getScore().put(p, 0));
+                plugin.getGm().getPlaying().forEach(RagePlayer::sendToGame);
+                GameState.setState(GameState.INGAME);
                 new GameTask(plugin).runTaskTimer(plugin, 0, 20);
-                plugin.rage.put("rage", false);
                 cancel();
                 break;
         }
