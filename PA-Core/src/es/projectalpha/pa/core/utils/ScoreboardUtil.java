@@ -18,9 +18,7 @@ public class ScoreboardUtil {
 
     private final Objective objective;
     private final HashMap<Integer, String> scores;
-    @Getter
-    @Setter
-    private boolean reset;
+    @Getter @Setter private boolean reset;
 
     public ScoreboardUtil(String displayName, String score) {
         this.scoreboard = Bukkit.getScoreboardManager().getNewScoreboard();
@@ -57,10 +55,8 @@ public class ScoreboardUtil {
     }
 
     public void reset() {
-        if (!(isReset())) {
-            for (int x : scores.keySet()) {
-                getScoreboard().resetScores(scores.get(x));
-            }
+        if (!isReset()) {
+            for (int x : scores.keySet()) getScoreboard().resetScores(scores.get(x));
             scores.clear();
             setReset(true);
         }
