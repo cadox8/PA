@@ -33,6 +33,7 @@ public class GameEvents implements Listener {
 
             if(d.getInventory().getItemInHand() == null){
                 e.setCancelled(true);
+                e.setDamage(0);
             }
 
             if (d.getInventory().getItemInHand().getType() == Material.IRON_SWORD) {
@@ -50,6 +51,7 @@ public class GameEvents implements Listener {
             Projectile a = (Projectile) e.getDamager();
 
             if (a instanceof Arrow) {
+                e.setCancelled(true);
                 s.getInventory().setItem(9, Items.getArrow());
                 Utils.broadcastMsg(ChatColor.GOLD + h.getName() + ChatColor.GREEN + " ha matado a " + ChatColor.GOLD + s.getName() + ChatColor.GREEN + " usando " + Items.getArrow().getItemMeta().getDisplayName());
 
@@ -59,6 +61,7 @@ public class GameEvents implements Listener {
             }
 
             if (a instanceof Snowball) {
+                e.setCancelled(true);
                 Utils.broadcastMsg(ChatColor.GOLD + h.getName() + ChatColor.GREEN + " ha matado a " + ChatColor.GOLD + s.getName() + ChatColor.GREEN + " usando " + Items.getAxe().getItemMeta().getDisplayName());
 
                 h.teleport(plugin.getAm().getRandomSpawn());

@@ -49,12 +49,15 @@ public class GameManager {
     }
 
     public void addPoint(RagePlayer u, int v) {
+        System.out.println(v);
         score.put(u, score.get(u) + v);
     }
 
     public void removePoint(RagePlayer u, int v) {
         if (score.get(u) != 0) {
-            score.put(u, score.get(u) - v);
+            int pf = score.get(u) - v;
+            System.out.println(pf);
+            score.put(u, pf);
         } else {
             return;
         }

@@ -9,8 +9,12 @@ import es.projectalpha.pa.rage.RageGames;
 import es.projectalpha.pa.rage.tasks.GameTask;
 import es.projectalpha.pa.rage.tasks.LobbyTask;
 import es.projectalpha.pa.rage.utils.Items;
+import org.bukkit.Bukkit;
 import org.bukkit.scheduler.BukkitRunnable;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.UUID;
 
 public class RagePlayer extends PAUser {
@@ -45,17 +49,37 @@ public class RagePlayer extends PAUser {
                 }
 
                 if(plugin.rage.get("rage").equals(false)){
-                    System.out.println("Detectado el lobby task, ejecutando la otra sb");
                     board.reset();
-                    board.setName(PAData.RG.getOldPrefix());
-                    plugin.getGm().getScore().keySet().forEach(u -> board.text(plugin.getGm().getScore().get(u), u.getName()));
-                    board.text(-1, "§e ");
-                    board.text(-2, PACore.getIP());
-                    if (getPlayer() != null) board.build(getPlayer());
+                    for(int p = 1; p <= Bukkit.getOnlinePlayers().size(); p++) {
+                        System.out.println(p);
+                        final int s = p;
+                        List<Integer> list = new ArrayList<>(plugin.getGm().getScore().values());
+                        Collections.sort(list, Collections.reverseOrder());
+                        plugin.getGm().getScore().keySet().forEach(k -> list.subList(0, s).forEach(v -> {
+                            board.setName(PAData.RG.getOldPrefix());
+                            plugin.getGm().getScore().keySet().forEach(u ->{
+                                System.out.println(s);
+                                System.out.println(plugin.getGm().getTop().get(0).getName() + ": " + plugin.getGm().getScore().get(plugin.getGm().getTop().get(0)));
+                                board.text(0, plugin.getGm().getTop().get(7).getName() + ": " + plugin.getGm().getScore().get(plugin.getGm().getTop().get(7)));
+                                board.text(1, plugin.getGm().getTop().get(6).getName() + ": " + plugin.getGm().getScore().get(plugin.getGm().getTop().get(6)));
+                                board.text(2, plugin.getGm().getTop().get(5).getName() + ": " + plugin.getGm().getScore().get(plugin.getGm().getTop().get(5)));
+                                board.text(3, plugin.getGm().getTop().get(4).getName() + ": " + plugin.getGm().getScore().get(plugin.getGm().getTop().get(4)));
+                                board.text(4, plugin.getGm().getTop().get(3).getName() + ": " + plugin.getGm().getScore().get(plugin.getGm().getTop().get(3)));
+                                board.text(5, plugin.getGm().getTop().get(2).getName() + ": " + plugin.getGm().getScore().get(plugin.getGm().getTop().get(2)));
+                                board.text(6, plugin.getGm().getTop().get(1).getName() + ": " + plugin.getGm().getScore().get(plugin.getGm().getTop().get(1)));
+                                board.text(7, plugin.getGm().getTop().get(0).getName() + ": " + plugin.getGm().getScore().get(plugin.getGm().getTop().get(0)));
+                                    });
+                            board.text(-1, "§e ");
+                            board.text(-2, "§b" + PACore.getIP());
+                            if (getPlayer() != null) board.build(getPlayer());
+                        }));
+                    }
+
+
                 }
 
             }
-        }.runTaskTimer(plugin, 0, 20);
+        }.runTaskTimer(plugin, 0, 10);
     }
 
     /*public void setGame() {

@@ -35,14 +35,14 @@ public class GameTask extends BukkitRunnable {
         switch (count) {
             case 210:
                 plugin.getGm().getPlaying().forEach(p -> {
-                    //RageGames.getPlayer(p.getPlayer()).setGame();
+                    plugin.getGm().addPoint(p,0);
                     p.teleport(plugin.getAm().getRandomSpawn());
                     RageGames.getPlayer(p.getPlayer()).resetPlayer();
                 });
                 break;
             case 180:
                 plugin.getGm().getPlaying().forEach(p -> {
-                    //RageGames.getPlayer(p.getPlayer()).setGame();
+                    plugin.getGm().addPoint(p,0);
                     p.teleport(plugin.getAm().getRandomSpawn());
                     RageGames.getPlayer(p.getPlayer()).resetPlayer();
                 });
@@ -61,16 +61,16 @@ public class GameTask extends BukkitRunnable {
     private void checkWinner() { //And StopGame
         List<Integer> list = new ArrayList<>(plugin.getGm().getScore().values());
         Collections.sort(list, Collections.reverseOrder());
-
+        System.out.println(list);
         plugin.getGm().getScore().keySet().forEach(k -> list.subList(0, 2).forEach(v -> {
             if (plugin.getGm().getScore().get(k).equals(v)) plugin.getGm().getTop().add(k);
         }));
         Bukkit.broadcastMessage("------------------------");
         Bukkit.broadcastMessage("");
-        Bukkit.broadcastMessage("1º " + plugin.getGm().getTop().get(0) + ": " + plugin.getGm().getScore().get(plugin.getGm().getTop().get(0)) + " puntos.");
-        Bukkit.broadcastMessage("2º " + plugin.getGm().getTop().get(1) + ": " + plugin.getGm().getScore().get(plugin.getGm().getTop().get(1)) + " puntos.");
-        if(plugin.getGm().getTop().get(2) != null) {
-            Bukkit.broadcastMessage("3º " + plugin.getGm().getTop().get(2) + ": " + plugin.getGm().getScore().get(plugin.getGm().getTop().get(2)) + " puntos.");
+        Bukkit.broadcastMessage("1º " + plugin.getGm().getTop().get(0).getName() + ": " + plugin.getGm().getScore().get(plugin.getGm().getTop().get(0)) + " puntos.");
+        Bukkit.broadcastMessage("2º " + plugin.getGm().getTop().get(1).getName() + ": " + plugin.getGm().getScore().get(plugin.getGm().getTop().get(1)) + " puntos.");
+        if(plugin.getGm().getTop().get(2).getName() != null) {
+            Bukkit.broadcastMessage("3º " + plugin.getGm().getTop().get(2).getName() + ": " + plugin.getGm().getScore().get(plugin.getGm().getTop().get(2)) + " puntos.");
         }
         Bukkit.broadcastMessage("");
         Bukkit.broadcastMessage("------------------------");
