@@ -21,6 +21,7 @@ import java.util.HashMap;
 public class RageGames extends JavaPlugin {
 
     public static ArrayList<RagePlayer> players = new ArrayList<>();
+    public static HashMap<String, Boolean> gs = new HashMap<>();
 
     @Getter private static RageGames instance;
     @Getter private Files files = new Files();
@@ -29,12 +30,11 @@ public class RageGames extends JavaPlugin {
 
     public void onEnable() {
         instance = this;
-
+        gs.put("rage", false);
         PACommands.register(new PointSetCMD());
         files.setupFiles();
         registerClasses();
         registerEvents();
-        System.out.println("Cargando archivos desde el onEnable");
         am.prepareWorld(Bukkit.getWorld("rga1"));
         GameState.setState(GameState.LOBBY);
     }

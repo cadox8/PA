@@ -10,6 +10,8 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.HashMap;
 
+import static es.projectalpha.pa.rage.RageGames.gs;
+
 public class LobbyTask extends BukkitRunnable {
 
     private final RageGames plugin;
@@ -46,6 +48,7 @@ public class LobbyTask extends BukkitRunnable {
             case 0:
                 plugin.getGm().getPlaying().forEach(RagePlayer::sendToGame);
                 GameState.setState(GameState.INGAME);
+                gs.put("rage", true);
                 new GameTask(plugin).runTaskTimer(plugin, 0, 20);
                 cancel();
                 break;

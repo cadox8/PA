@@ -31,7 +31,7 @@ public class RagePlayer extends PAUser {
             @Override
             public void run() {
                 if (getPlayer() == null) cancel();
-                if(GameState.getState() == GameState.LOBBY){
+                if(RageGames.gs.get("rage").equals(false)){
                     if (plugin.getGm().acceptPlayers()) {
                         board.setName(PAData.RG.getOldPrefix());
                         board.text(5, "§d ");
@@ -46,7 +46,7 @@ public class RagePlayer extends PAUser {
                         cancel();
                     }
                 }
-                if(GameState.getState() == GameState.INGAME){
+                if(RageGames.gs.get("rage").equals(true)){
                     ScoreboardUtil board = new ScoreboardUtil(PAData.RG.getOldPrefix(), "game");
                     if (getPlayer() == null) cancel();
                     plugin.getGm().reorder();

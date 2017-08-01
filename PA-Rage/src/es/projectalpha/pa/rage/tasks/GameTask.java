@@ -6,7 +6,9 @@ import es.projectalpha.pa.core.utils.ScoreboardUtil;
 import es.projectalpha.pa.core.utils.Title;
 import es.projectalpha.pa.rage.RageGames;
 import es.projectalpha.pa.rage.api.RagePlayer;
+import es.projectalpha.pa.rage.manager.ArenaManager;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scoreboard.DisplaySlot;
@@ -25,6 +27,8 @@ public class GameTask extends BukkitRunnable {
         this.plugin = instance;
     }
 
+
+
     public void run() {
         plugin.getGm().getPlaying().forEach(p -> {
             BossBarUtils.create(p.getPlayer(), "&cTiempo restante: &6" + count, BossBarAPI.Color.BLUE, BossBarAPI.Style.PROGRESS);
@@ -34,15 +38,17 @@ public class GameTask extends BukkitRunnable {
             case 210:
                 plugin.getGm().getPlaying().forEach(p -> {
                     Title tl = new Title();
-                    tl.sendTitle(p.getPlayer(),1,2,1,"Ronda de calentamiento","");
+                    p.teleport(plugin.getAm().getRandomSpawn());
+                    tl.sendTitle(p.getPlayer(),1,2,1, ChatColor.GREEN + "Ronda de calentamiento","");
                 });
 
                 break;
             case 180:
                 plugin.getGm().getPlaying().forEach(p -> {
                     plugin.getGm().resetPoint(p);
+                    p.teleport(plugin.getAm().getRandomSpawn());
                     Title tl = new Title();
-                    tl.sendTitle(p.getPlayer(),1,2,1,"¡Empieza el juego!","");
+                    tl.sendTitle(p.getPlayer(),1,2,1,ChatColor.RED + "¡Empieza el juego!","");
                 });
                 break;
             case 3:
