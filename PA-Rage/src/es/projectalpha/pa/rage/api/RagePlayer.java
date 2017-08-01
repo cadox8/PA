@@ -29,7 +29,7 @@ public class RagePlayer extends PAUser {
         new BukkitRunnable() {
             @Override
             public void run() {
-                if(RageGames.gs.get("rage").equals(false)){
+                if(GameState.getState() == GameState.LOBBY){
                     ScoreboardUtil lboard = new ScoreboardUtil(PAData.RG.getOldPrefix(), "lobby");
                     if (getPlayer() == null) cancel();
                     if (plugin.getGm().acceptPlayers()) {
@@ -46,7 +46,8 @@ public class RagePlayer extends PAUser {
                         cancel();
                     }
                 }
-                if(RageGames.gs.get("rage").equals(true)) {
+
+                if(GameState.getState() == GameState.INGAME) {
                     ScoreboardUtil gboard = new ScoreboardUtil(PAData.RG.getOldPrefix(), "game");
                     if (getPlayer() == null) cancel();
                     if (GameState.getState() == GameState.INGAME) {

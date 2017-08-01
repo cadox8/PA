@@ -30,7 +30,6 @@ public class RageGames extends JavaPlugin {
 
     public void onEnable() {
         instance = this;
-        gs.put("rage", false);
         PACommands.register(new PointSetCMD());
         files.setupFiles();
         registerClasses();

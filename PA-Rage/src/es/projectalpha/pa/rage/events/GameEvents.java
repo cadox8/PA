@@ -31,7 +31,7 @@ public class GameEvents implements Listener {
             Player a = (Player) e.getEntity();
 
             e.setDamage(0);
-
+            if(d == a) return;
             if(d.getInventory().getItemInHand() == null) e.setDamage(0);
 
             if (d.getInventory().getItemInHand().getType() == Material.IRON_SWORD) {
