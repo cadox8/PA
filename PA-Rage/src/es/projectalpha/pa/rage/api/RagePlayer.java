@@ -26,45 +26,47 @@ public class RagePlayer extends PAUser {
     }
 
     public void setLobby() {
-        ScoreboardUtil board = new ScoreboardUtil(PAData.RG.getOldPrefix(), "lobby");
+        ScoreboardUtil lboard = new ScoreboardUtil(PAData.RG.getOldPrefix(), "lobby");
+        ScoreboardUtil gboard = new ScoreboardUtil(PAData.RG.getOldPrefix(), "game");
         new BukkitRunnable() {
             @Override
             public void run() {
-                if (getPlayer() == null) cancel();
                 if(RageGames.gs.get("rage").equals(false)){
+                    if (getPlayer() == null) cancel();
                     if (plugin.getGm().acceptPlayers()) {
-                        board.setName(PAData.RG.getOldPrefix());
-                        board.text(5, "§d ");
-                        board.text(4, "§6" + plugin.getGm().getPlaying().size() + "§d/§6" + plugin.getAm().getMaxPlayers());
-                        board.text(3, "§a ");
-                        board.text(2, "§eEsperando...");
-                        board.text(1, "§e ");
-                        board.text(0, "§b" + PACore.getIP());
-                        if (getPlayer() != null) board.build(getPlayer());
+                    lboard.setName(PAData.RG.getOldPrefix());
+                        lboard.text(5, "§d ");
+                        lboard.text(4, "§6" + plugin.getGm().getPlaying().size() + "§d/§6" + plugin.getAm().getMaxPlayers());
+                        lboard.text(3, "§a ");
+                        lboard.text(2, "§eEsperando...");
+                        lboard.text(1, "§e ");
+                        lboard.text(0, "§b" + PACore.getIP());
+                        if (getPlayer() != null) lboard.build(getPlayer());
                     } else {
-                        board.reset();
+                    lboard.reset();
                         cancel();
                     }
                 }
                 if(RageGames.gs.get("rage").equals(true)){
-                    ScoreboardUtil board = new ScoreboardUtil(PAData.RG.getOldPrefix(), "game");
+
                     if (getPlayer() == null) cancel();
+                    lboard.reset();
                     plugin.getGm().reorder();
-                    board.setName(PAData.RG.getOldPrefix());
+                    gboard.setName(PAData.RG.getOldPrefix());
 
                     int x = 0;
                     for (RagePlayer u : plugin.getGm().getTop()) {
 
-                        board.text(x, u.getName() + ": " + plugin.getGm().getScore().get(u));
+                        gboard.text(x, u.getName() + ": " + plugin.getGm().getScore().get(u));
 
                         x++;
                     }
-                    board.text(-1, "§e ");
-                    board.text(-2, "§b" + PACore.getIP());
+                    gboard.text(-1, "§e ");
+                    gboard.text(-2, "§b" + PACore.getIP());
 
-                    if (getPlayer() != null) board.build(getPlayer());
+                    if (getPlayer() != null) gboard.build(getPlayer());
                 } else {
-                    board.reset();
+                    gboard.reset();
                     cancel();
                 }
 

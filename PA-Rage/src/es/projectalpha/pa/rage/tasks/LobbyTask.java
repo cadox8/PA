@@ -1,6 +1,7 @@
 package es.projectalpha.pa.rage.tasks;
 
 import es.projectalpha.pa.core.utils.GameState;
+import es.projectalpha.pa.core.utils.Title;
 import es.projectalpha.pa.core.utils.Utils;
 import es.projectalpha.pa.rage.RageGames;
 import es.projectalpha.pa.rage.api.RagePlayer;
@@ -42,6 +43,8 @@ public class LobbyTask extends BukkitRunnable {
             case 3:
             case 2:
             case 1:
+                plugin.getGm().getPlaying().forEach(p ->
+                Title.sendTitle(p.getPlayer(), 0, 1, 0, String.valueOf(count), ""));
                 Utils.broadcastMsg("&7El juego empezará en &c" + count + " &7segundos");
                 plugin.getGm().getPlaying().forEach(p -> p.sendSound(Sound.NOTE_PLING));
                 break;

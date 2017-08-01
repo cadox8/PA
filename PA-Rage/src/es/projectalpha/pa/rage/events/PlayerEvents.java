@@ -9,6 +9,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
+import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerPickupItemEvent;
@@ -55,6 +56,14 @@ public class PlayerEvents implements Listener {
     @EventHandler
     public void onBlockPlace(BlockPlaceEvent e) {
         if (!RageGames.getPlayer(e.getPlayer()).isOnRank(PACmd.Grupo.Admin)) e.setCancelled(true);
+    }
+    @EventHandler
+    public void onDeath(PlayerDeathEvent e){
+        Player p = e.getEntity();
+
+        p.teleport(plugin.getAm().getRandomSpawn());
+        RageGames.getPlayer(p).resetPlayer();
+
     }
 
     @EventHandler
