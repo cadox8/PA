@@ -22,6 +22,7 @@ import java.util.Arrays;
 public class PACore extends JavaPlugin {
 
     @Getter private static final String IP = "&bmc.projectalpha.es";
+    @Getter private static final String OLD_IP = "§bmc.projectalpha.es";
     @Getter private static PACore instance;
 
     @Getter private static ViaAPI api = Via.getAPI();
