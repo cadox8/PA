@@ -3,6 +3,7 @@ package es.projectalpha.pa.rage.tasks;
 import es.projectalpha.pa.core.api.PAData;
 import es.projectalpha.pa.core.utils.BossBarUtils;
 import es.projectalpha.pa.core.utils.ScoreboardUtil;
+import es.projectalpha.pa.core.utils.Title;
 import es.projectalpha.pa.rage.RageGames;
 import es.projectalpha.pa.rage.api.RagePlayer;
 import org.bukkit.Bukkit;
@@ -30,6 +31,20 @@ public class GameTask extends BukkitRunnable {
         });
 
         switch (count) {
+            case 210:
+                plugin.getGm().getPlaying().forEach(p -> {
+                    Title tl = new Title();
+                    tl.sendTitle(p.getPlayer(),1,2,1,"Ronda de calentamiento","");
+                });
+
+                break;
+            case 180:
+                plugin.getGm().getPlaying().forEach(p -> {
+                    plugin.getGm().resetPoint(p);
+                    Title tl = new Title();
+                    tl.sendTitle(p.getPlayer(),1,2,1,"¡Empieza el juego!","");
+                });
+                break;
             case 3:
                 checkWinner();
                 break;

@@ -46,15 +46,17 @@ public class GameManager {
         playing.remove(p);
     }
 
+    public void resetPoint(RagePlayer u) {
+        score.put(u, 0);
+    }
+
     public void addPoint(RagePlayer u, int v) {
-        System.out.println(v);
         score.put(u, score.get(u) + v);
     }
 
     public void removePoint(RagePlayer u, int v) {
         if (score.get(u) != 0) {
             int pf = score.get(u) - v;
-            System.out.println(pf);
             score.put(u, pf);
         }
     }
@@ -73,7 +75,7 @@ public class GameManager {
         List<Integer> list = new ArrayList<>(score.values());
         Collections.sort(list, Collections.reverseOrder());
 
-        score.keySet().forEach(k -> list.subList(0, 10).forEach(v -> {
+        score.keySet().forEach(k -> list.subList(0, 7).forEach(v -> {
             if (score.get(k).equals(v)) top.add(k);
         }));
     }

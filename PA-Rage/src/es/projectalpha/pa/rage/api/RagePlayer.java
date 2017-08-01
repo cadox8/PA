@@ -46,11 +46,33 @@ public class RagePlayer extends PAUser {
                         cancel();
                     }
                 }
+                if(GameState.getState() == GameState.INGAME){
+                    ScoreboardUtil board = new ScoreboardUtil(PAData.RG.getOldPrefix(), "game");
+                    if (getPlayer() == null) cancel();
+                    plugin.getGm().reorder();
+                    board.setName(PAData.RG.getOldPrefix());
+
+                    int x = 0;
+                    for (RagePlayer u : plugin.getGm().getTop()) {
+
+                        board.text(x, u.getName() + ": " + plugin.getGm().getScore().get(u));
+
+                        x++;
+                    }
+                    board.text(-1, "§e ");
+                    board.text(-2, "§b" + PACore.getIP());
+
+                    if (getPlayer() != null) board.build(getPlayer());
+                } else {
+                    board.reset();
+                    cancel();
+                }
+
             }
         }.runTaskTimer(plugin, 0, 10);
     }
 
-    public void setGame() {
+    /*public void setGame() {
         ScoreboardUtil board = new ScoreboardUtil(PAData.RG.getOldPrefix(), "game");
         new BukkitRunnable() {
             @Override
@@ -77,7 +99,7 @@ public class RagePlayer extends PAUser {
                 }
             }
         }.runTaskTimer(plugin, 0, 20);
-    }
+    }*/
 
     public void sendToGame() {
         resetPlayer();
