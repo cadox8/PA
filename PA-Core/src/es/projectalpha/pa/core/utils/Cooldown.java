@@ -1,16 +1,16 @@
 package es.projectalpha.pa.core.utils;
 
 import lombok.Getter;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
+import org.bukkit.event.player.PlayerInteractEvent;
 
 import java.util.HashMap;
 
 public class Cooldown {
 
-    @Getter
-    private final int time;
-    @Getter
-    private final HashMap<String, Long> cooldowns;
+    @Getter private final int time;
+    @Getter private final HashMap<String, Long> cooldowns;
 
     public Cooldown(int time) {
         this.time = time;
@@ -33,14 +33,8 @@ public class Cooldown {
         return (int) (((getCooldowns().get(str) - (System.currentTimeMillis() - (getTime() * 1000))) / 1000) + 1);
     }
 
-    public boolean isCoolingDown(Player player) {
-        return isCoolingDown(player.getName());
-    }
-
     public boolean isCoolingDown(String str) {
-        if (!getCooldowns().containsKey(str)) {
-            return false;
-        }
+        if (!getCooldowns().containsKey(str)) return false;
         return getCooldowns().get(str) >= (System.currentTimeMillis() - (getTime() * 1000));
     }
 }

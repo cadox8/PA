@@ -65,17 +65,17 @@ public class PAUser {
     public String getName() {
         return getOfflinePlayer().getName();
     }
-
     public boolean isOnline() {
         return getOfflinePlayer().isOnline();
     }
-
     public boolean isOnRank(PACmd.Grupo rank) {
         return rank.getRank() <= getUserData().getGrupo().getRank();
     }
-
     public Location getLoc() {
         return getPlayer().getLocation();
+    }
+    public World getWorld() {
+        return getPlayer().getWorld();
     }
 
     /**
