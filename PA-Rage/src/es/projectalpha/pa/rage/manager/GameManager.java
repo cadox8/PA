@@ -75,7 +75,7 @@ public class GameManager {
         List<Integer> list = new ArrayList<>(score.values());
         Collections.sort(list, Collections.reverseOrder());
 
-        score.keySet().forEach(k -> list.subList(0, 7).forEach(v -> {
+        score.keySet().forEach(k -> list.subList(0, playing.size() < 7 ? playing.size() : 7).forEach(v -> {
             if (score.get(k).equals(v)) top.add(k);
         }));
     }

@@ -45,6 +45,7 @@ public class GameTask extends BukkitRunnable {
             case 180:
                 plugin.getGm().getPlaying().forEach(p -> {
                     plugin.getGm().resetPoint(p);
+                    p.resetPlayer();
                     p.teleport(plugin.getAm().getRandomSpawn());
                     Title.sendTitle(p.getPlayer(),1,2,1,ChatColor.RED + "¡Empieza el juego!","");
                 });
