@@ -28,7 +28,6 @@ public class TOA extends JavaPlugin {
     public static ArrayList<TOAUser> users = new ArrayList<>();
 
     @Getter private static TOA instance;
-    @Getter private static String prefix = ChatColor.GRAY + " || " + ChatColor.RED + "TOA" + ChatColor.GRAY + " || ";
 
     @Getter private ArenaManager am;
     @Getter private GameManager gm;
@@ -47,7 +46,7 @@ public class TOA extends JavaPlugin {
         registerClasses();
         registerEvents();
 
-        spawnTask.runTaskTimer(instance, 0, 20);
+        spawnTask.runTaskTimer(instance, 20, 20);
     }
 
     private void registerClasses() {
@@ -57,7 +56,9 @@ public class TOA extends JavaPlugin {
         drops = new DropsManager();
         spawnTask = new SpawnTask(instance);
         health = new Health(instance);
+
         Race.registerRaces();
+
         PACommands.register(new MobsCMD(), new RaceCMD(), new MochilaCMD());
     }
 

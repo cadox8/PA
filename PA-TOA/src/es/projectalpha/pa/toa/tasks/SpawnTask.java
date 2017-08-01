@@ -9,16 +9,14 @@ public class SpawnTask extends BukkitRunnable {
 
     private TOA plugin;
 
-    @Getter
-    @Setter
-    private int count = 0;
+    @Getter @Setter private int count = 0;
 
     public SpawnTask(TOA instance) {
         this.plugin = instance;
     }
 
     public void run() {
-        if (count >= 300 || TOA.users.isEmpty()) return; //Solo con gente y con límite
+        if (count >= 300 || TOA.users.isEmpty()) return;
 
         plugin.getAm().mobs.forEach(m -> {
             count++;

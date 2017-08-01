@@ -5,8 +5,6 @@ import org.bukkit.Location;
 
 public class Mob {
 
-    private final int HEALTH_BASE = 50;
-
     @Getter private int level;
     @Getter private MobType mobType;
     @Getter private Location l;
@@ -20,6 +18,7 @@ public class Mob {
     public void spawn() {
         Mobs mobs = new Mobs(l, level);
         int health = getHealth(mobType);
+
         switch (mobType) {
             case ZOMBIE:
                 mobs.spawnZombie(health);
@@ -37,6 +36,7 @@ public class Mob {
 
     private int getHealth(MobType mt) {
         int mob = 0;
+        final int HEALTH_BASE = 50;
 
         switch (mt) {
             case ZOMBIE:
@@ -53,7 +53,7 @@ public class Mob {
     }
 
     public static int getXP(int level) {
-        int XP_BASE = 10;
+        final int XP_BASE = 10;
         return (int)((XP_BASE * level) + ((XP_BASE * level) * 0.08));
     }
 }

@@ -42,7 +42,6 @@ public class PlayerEvents implements Listener {
             k.addEffects(u);
             return;
         }
-
         u.getPlayer().getInventory().setItem(5, ItemUtil.createBook(PAData.TOA.getPrefix(), "&7libro de información", ItemUtil.pages));
     }
 

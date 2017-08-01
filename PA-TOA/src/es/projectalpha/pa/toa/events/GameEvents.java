@@ -61,7 +61,7 @@ public class GameEvents implements Listener {
 
         e.setCancelled(true);
 
-        if (e.getItem() == null) return;
+        if (e.getItem() == null || !plugin.getGm().getInTower().contains(u)) return;
         Ability.useAbility(u, e.getItem().getType());
     }
 }
