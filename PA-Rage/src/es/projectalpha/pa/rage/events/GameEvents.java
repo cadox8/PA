@@ -31,11 +31,11 @@ public class GameEvents implements Listener {
             Player a = (Player) e.getEntity();
 
             e.setDamage(0);
-            if(d == a) return;
+
             if(d.getInventory().getItemInHand() == null) e.setDamage(0);
 
             if (d.getInventory().getItemInHand().getType() == Material.IRON_SWORD) {
-                Utils.broadcastMsg(ChatColor.GOLD + d.getName() + ChatColor.GREEN + " ha matado a " + ChatColor.GOLD + a.getName() + ChatColor.GREEN + " usando " + Items.getKnife().getItemMeta().getDisplayName());
+                Utils.broadcastMsg(ChatColor.GOLD + d.getName() + ChatColor.GREEN + " ha matado a " + ChatColor.GOLD + a.getName() + ChatColor.GREEN + " usando " + Items.getKnife().getItemMeta().getDisplayName() + ChatColor.GREEN + " (+20 puntos)");
                 RageGames.getPlayer(a).resetPlayer();
                 a.teleport(plugin.getAm().getRandomSpawn());
                 plugin.getGm().addPoint(RageGames.getPlayer(d), 20);
@@ -49,7 +49,7 @@ public class GameEvents implements Listener {
 
             if (a instanceof Arrow) {
                 s.getInventory().setItem(9, Items.getArrow());
-                Utils.broadcastMsg(ChatColor.GOLD + h.getName() + ChatColor.GREEN + " ha matado a " + ChatColor.GOLD + s.getName() + ChatColor.GREEN + " usando " + Items.getArrow().getItemMeta().getDisplayName());
+                Utils.broadcastMsg(ChatColor.GOLD + h.getName() + ChatColor.GREEN + " ha matado a " + ChatColor.GOLD + s.getName() + ChatColor.GREEN + " usando " + Items.getArrow().getItemMeta().getDisplayName() + ChatColor.GREEN +  " (+30 puntos)");
 
                 h.teleport(plugin.getAm().getRandomSpawn());
                 RageGames.getPlayer(h).resetPlayer();
@@ -57,7 +57,7 @@ public class GameEvents implements Listener {
             }
 
             if (a instanceof Snowball) {
-                Utils.broadcastMsg(ChatColor.GOLD + h.getName() + ChatColor.GREEN + " ha matado a " + ChatColor.GOLD + s.getName() + ChatColor.GREEN + " usando " + Items.getAxe().getItemMeta().getDisplayName());
+                Utils.broadcastMsg(ChatColor.GOLD + h.getName() + ChatColor.GREEN + " ha matado a " + ChatColor.GOLD + s.getName() + ChatColor.GREEN + " usando " + Items.getAxe().getItemMeta().getDisplayName() + ChatColor.GREEN + " (+50 puntos)");
 
                 h.teleport(plugin.getAm().getRandomSpawn());
                 RageGames.getPlayer(h).resetPlayer();
