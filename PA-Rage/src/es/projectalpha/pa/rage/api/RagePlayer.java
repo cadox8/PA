@@ -26,12 +26,11 @@ public class RagePlayer extends PAUser {
     }
 
     public void setLobby() {
-        ScoreboardUtil lboard = new ScoreboardUtil(PAData.RG.getOldPrefix(), "lobby");
-        ScoreboardUtil gboard = new ScoreboardUtil(PAData.RG.getOldPrefix(), "game");
         new BukkitRunnable() {
             @Override
             public void run() {
                 if(RageGames.gs.get("rage").equals(false)){
+                    ScoreboardUtil lboard = new ScoreboardUtil(PAData.RG.getOldPrefix(), "lobby");
                     if (getPlayer() == null) cancel();
                     if (plugin.getGm().acceptPlayers()) {
                     lboard.setName(PAData.RG.getOldPrefix());
@@ -47,29 +46,27 @@ public class RagePlayer extends PAUser {
                         cancel();
                     }
                 }
-                if(RageGames.gs.get("rage").equals(true)){
-
+                if(RageGames.gs.get("rage").equals(true)) {
+                    ScoreboardUtil gboard = new ScoreboardUtil(PAData.RG.getOldPrefix(), "game");
                     if (getPlayer() == null) cancel();
-                    lboard.reset();
-                    plugin.getGm().reorder();
-                    gboard.setName(PAData.RG.getOldPrefix());
+                    if (GameState.getState() == GameState.INGAME) {
+                        plugin.getGm().reorder();
+                        gboard.setName(PAData.RG.getOldPrefix());
 
-                    int x = 0;
-                    for (RagePlayer u : plugin.getGm().getTop()) {
+                        int x = 0;
+                        for (RagePlayer u : plugin.getGm().getTop()) {
+                            gboard.text(x, u.getName() + ": " + plugin.getGm().getScore().get(u));
+                            x++;
+                        }
+                        gboard.text(-1, "§e ");
+                        gboard.text(-2, "§b" + PACore.getIP());
 
-                        gboard.text(x, u.getName() + ": " + plugin.getGm().getScore().get(u));
-
-                        x++;
+                        if (getPlayer() != null) gboard.build(getPlayer());
+                    } else {
+                        gboard.reset();
+                        cancel();
                     }
-                    gboard.text(-1, "§e ");
-                    gboard.text(-2, "§b" + PACore.getIP());
-
-                    if (getPlayer() != null) gboard.build(getPlayer());
-                } else {
-                    gboard.reset();
-                    cancel();
                 }
-
             }
         }.runTaskTimer(plugin, 0, 10);
     }

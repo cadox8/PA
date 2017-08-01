@@ -32,9 +32,7 @@ public class ShutdownTask extends BukkitRunnable {
     }
 
     private void removeAll() {
-        plugin.getGm().getPlaying().forEach(p -> {
-            plugin.getGm().removePlayerFromGame(p);
-        });
+        plugin.getGm().getPlaying().forEach(p -> plugin.getGm().removePlayerFromGame(p));
         RageGames.players.forEach(RagePlayer::sendToLobby);
     }
 }

@@ -43,16 +43,17 @@ public class LobbyTask extends BukkitRunnable {
             case 3:
             case 2:
             case 1:
-                plugin.getGm().getPlaying().forEach(p ->
-                Title.sendTitle(p.getPlayer(), 0, 1, 0, String.valueOf(count), ""));
+                plugin.getGm().getPlaying().forEach(p -> Title.sendTitle(p.getPlayer(), 0, 1, 0, String.valueOf(count), ""));
                 Utils.broadcastMsg("&7El juego empezará en &c" + count + " &7segundos");
                 plugin.getGm().getPlaying().forEach(p -> p.sendSound(Sound.NOTE_PLING));
                 break;
             case 0:
+                System.out.println(GameState.getState());
                 plugin.getGm().getPlaying().forEach(RagePlayer::sendToGame);
                 GameState.setState(GameState.INGAME);
                 gs.put("rage", true);
                 new GameTask(plugin).runTaskTimer(plugin, 0, 20);
+                System.out.println(GameState.getState());
                 cancel();
                 break;
         }

@@ -4,6 +4,7 @@ import es.projectalpha.pa.core.cmd.PACmd;
 import es.projectalpha.pa.core.utils.Utils;
 import es.projectalpha.pa.rage.RageGames;
 import es.projectalpha.pa.rage.api.RagePlayer;
+import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -25,19 +26,21 @@ public class PlayerEvents implements Listener {
 
     @EventHandler
     public void onJoin(PlayerJoinEvent e) {
-        Player player = e.getPlayer();
+        RagePlayer u = RageGames.getPlayer(e.getPlayer());
         e.setJoinMessage(null);
-            System.out.println(RageGames.getPlayer(player.getPlayer()));
-        plugin.getGm().getPlaying().forEach(p -> { System.out.println(p.getPlayer() + " " + p.getPlayer().getName()); });
+
         if (plugin.getGm().isInLobby()) {
-            player.getInventory().clear();
-            plugin.getGm().addPlayerToGame(RageGames.getPlayer(player));
-            plugin.getServer().getOnlinePlayers().forEach(p -> player.showPlayer(p));
-            plugin.getServer().getOnlinePlayers().forEach(p -> p.showPlayer(player));
-            player.teleport(plugin.getAm().getRandomSpawn());
-            RageGames.getPlayer(player).setLobby();
-            Utils.broadcastMsg("&7Ha entrado al juego &e" + player.getDisplayName() + " &3(&b" + plugin.getGm().getPlaying().size() + "&d/&b" + plugin.getAm().getMaxPlayers() + "&3)");
+            u.getPlayer().getInventory().clear();
+            plugin.getGm().addPlayerToGame(u);
+            plugin.getServer().getOnlinePlayers().forEach(p -> u.getPlayer().showPlayer(p));
+            plugin.getServer().getOnlinePlayers().forEach(p -> p.showPlayer(u.getPlayer()));
+            u.teleport(plugin.getAm().getRandomSpawn());
+            u.setLobby();
+            Utils.broadcastMsg("&7Ha entrado al juego &e" + u.getName() + " &3(&b" + plugin.getGm().getPlaying().size() + "&d/&b" + plugin.getAm().getMaxPlayers() + "&3)");
             plugin.getGm().checkStart();
+        } else {
+            u.getPlayer().setGameMode(GameMode.SPECTATOR);
+            plugin.getServer().getScheduler().runTaskTimer(plugin, () -> u.sendActionBar("&cEstas en modo espectador"), 0, 20);
         }
     }
 
