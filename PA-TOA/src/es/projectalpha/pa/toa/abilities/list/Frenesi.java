@@ -4,6 +4,8 @@ import es.projectalpha.pa.toa.abilities.Ability;
 import es.projectalpha.pa.toa.api.TOAUser;
 import es.projectalpha.pa.toa.races.Race;
 import org.bukkit.Material;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 
 public class Frenesi extends Ability {
 
@@ -14,9 +16,8 @@ public class Frenesi extends Ability {
     public void play(TOAUser u) {
         if (!canUse(u)) return;
 
+        u.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.FAST_DIGGING, 100, 1, true, false));
         u.getPlayer().setWalkSpeed(0.4f);
-        plugin.getServer().getScheduler().runTaskLater(plugin, () -> {
-            Race.parseRace(getRace().getId()).addEffects(u);
-        }, 100);
+        plugin.getServer().getScheduler().runTaskLater(plugin, () -> Race.parseRace(getRace().getId()).addEffects(u), 100);
     }
 }

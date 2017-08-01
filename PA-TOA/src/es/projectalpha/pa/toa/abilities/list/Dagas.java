@@ -20,26 +20,20 @@ public class Dagas extends Ability {
         if (!canUse(u)) return;
         int lvl = u.getUserData().getLvl();
 
-        final Item d1 = u.getLoc().getWorld().dropItemNaturally(u.getLoc(), new ItemStack(Material.IRON_SWORD));
-        final Item d2 = u.getLoc().getWorld().dropItemNaturally(u.getLoc(), new ItemStack(Material.IRON_SWORD));
+        for (int x = 0; x < r.nextInt(4) + 2; x++) {
+            final Item d1 = u.getLoc().getWorld().dropItemNaturally(u.getLoc(), new ItemStack(Material.IRON_SWORD));
 
-        d1.setVelocity(u.getPlayer().getVelocity().multiply(2));
-        d2.setVelocity(u.getPlayer().getVelocity().multiply(2));
+            d1.setVelocity(u.getPlayer().getVelocity().multiply(2));
 
-        plugin.getServer().getScheduler().runTaskTimer(plugin, () -> {
-            World w = d1.getLocation().getWorld();
+            plugin.getServer().getScheduler().runTaskTimer(plugin, () -> {
+                World w = d1.getLocation().getWorld();
 
-            w.getNearbyEntities(d1.getLocation(), 1, 1, 1).stream()
-                    .filter(en -> !en.getType().equals(EntityType.PLAYER)).forEach(en -> {
-                if (en instanceof Monster) ((Monster) en).damage(40 + (lvl * 0.7));
-                d1.remove();
-            });
-            w.getNearbyEntities(d2.getLocation(), 1, 1, 1).stream()
-                    .filter(en -> !en.getType().equals(EntityType.PLAYER)).forEach(en -> {
-                if (en instanceof Monster) ((Monster) en).damage(40 + (lvl * 0.7));
-                d2.remove();
-            });
-
-        }, 0, 20);
+                w.getNearbyEntities(d1.getLocation(), 1, 1, 1).stream()
+                        .filter(en -> !en.getType().equals(EntityType.PLAYER)).forEach(en -> {
+                    if (en instanceof Monster) ((Monster) en).damage(40 + (lvl * 0.7));
+                    d1.remove();
+                });
+            }, 0, 20);
+        }
     }
 }

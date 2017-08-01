@@ -5,9 +5,12 @@ import es.projectalpha.pa.core.utils.CuboidZone;
 import es.projectalpha.pa.core.utils.ItemUtil;
 import es.projectalpha.pa.core.utils.Utils;
 import es.projectalpha.pa.toa.TOA;
+import es.projectalpha.pa.toa.abilities.Ability;
 import es.projectalpha.pa.toa.api.TOAUser;
 import es.projectalpha.pa.toa.races.Race;
+import org.bukkit.ChatColor;
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
@@ -17,6 +20,9 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
+import org.bukkit.inventory.ItemStack;
+
+import java.text.DecimalFormat;
 
 public class PlayerEvents implements Listener {
 
@@ -42,16 +48,44 @@ public class PlayerEvents implements Listener {
 
     @EventHandler
     public void onPlayerDie(EntityDamageByEntityEvent e) {
-        if (e.getEntity() instanceof Player) {
-            TOAUser u = TOA.getPlayer((Player) e.getEntity());
+        DecimalFormat df = new DecimalFormat("0.00");
 
-            if (u.getPlayer().getHealth() - e.getDamage() <= 0) u.death();
+        if (e.getEntity() instanceof Player && e.getDamager() instanceof Monster) {
+            TOAUser u = TOA.getPlayer((Player) e.getEntity());
+            String name = e.getEntity().getCustomName().split(" ")[1];
+            int level = Utils.isInt(name) ? Integer.parseInt(name) : 0;
+            double damage = 10 + (level * 0.8);
+
+            if (plugin.getHealth().getHealth(u) - damage <= 0) {
+                u.death();
+                return;
+            }
+            plugin.getHealth().remHealth(u, Double.valueOf(df.format(damage)));
         }
 
-        if (e.getEntity() instanceof Monster && e.getDamager() instanceof Snowball) {
-            Monster m = (Monster) e.getEntity();
-            TOAUser u = TOA.getPlayer((Player)((Snowball) e.getDamager()).getShooter());
+        if (e.getEntity() instanceof Monster && e.getDamager() instanceof Player) {
+            TOAUser u = TOA.getPlayer((Player) e.getDamager());
+            ItemStack i = u.getPlayer().getItemInHand() != null ? u.getPlayer().getItemInHand() : new ItemStack(Material.AIR);
+            int damage = i.getItemMeta().hasLore() ? Integer.parseInt(ChatColor.stripColor(i.getItemMeta().getLore().get(1))) : 0;
 
+            e.setDamage(Double.valueOf(df.format(damage + (damage * u.getUserData().getLvl() * 0.2))));
+        }
+
+        if (e.getEntity() instanceof Monster && e.getDamager() instanceof Arrow) {
+            Monster m = (Monster) e.getEntity();
+            TOAUser u = TOA.getPlayer((Player)((Arrow) e.getDamager()).getShooter());
+            int multi = 0;
+
+            if (Ability.getFireArrow().contains(u)) {
+                m.setFireTicks(40);
+                multi = 1;
+            }
+
+            double damage = (u.getUserData().getLvl() * 0.2) + 20;
+
+            damage = multi != 0 ? damage + (damage * 0.1) : damage;
+
+            e.setDamage(Double.valueOf(df.format(damage)));
         }
     }
 
@@ -72,8 +106,7 @@ public class PlayerEvents implements Listener {
                     u.setRace(Race.WARRIOR);
                     break;
                 case BOW:
-                    u.sendMessage(PAData.TOA.getPrefix() + "&cClase no disponible por el momento");
-                    //u.setRace(Race.ARCHER);
+                    u.setRace(Race.ARCHER);
                     break;
                 case SHEARS:
                     u.setRace(Race.PICARO);

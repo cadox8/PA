@@ -8,7 +8,7 @@ import java.util.HashMap;
 
 public class Health {
 
-    private HashMap<TOAUser, Integer> health;
+    private HashMap<TOAUser, Double> health;
 
     private TOA plugin;
 
@@ -17,7 +17,7 @@ public class Health {
         health = new HashMap<>();
     }
 
-    public void setHealth(TOAUser u, int value) {
+    public void setHealth(TOAUser u, double value) {
         if (value >= healthPerLevel(u)) {
             health.put(u, healthPerLevel(u));
             return;
@@ -29,23 +29,23 @@ public class Health {
         health.put(u, value);
     }
 
-    public void addHealth(TOAUser u, int value) {
+    public void addHealth(TOAUser u, double value) {
         setHealth(u, getHealth(u) + value);
     }
 
-    public void remHealth(TOAUser u, int value) {
+    public void remHealth(TOAUser u, double value) {
         setHealth(u, getHealth(u) - value);
     }
 
-    public int getHealth(TOAUser u) {
-        return health.getOrDefault(u, -1);
+    public double getHealth(TOAUser u) {
+        return health.getOrDefault(u, 0D);
     }
 
     public void ajustHealth(TOAUser u) {
         setHealth(u, healthPerLevel(u));
     }
 
-    public int healthPerLevel(TOAUser u) {
+    public double healthPerLevel(TOAUser u) {
         switch (u.getUserData().getKit()) {
             case 0:
                 return 85 * u.getUserData().getLvl() + Race.WARRIOR.getHealth();

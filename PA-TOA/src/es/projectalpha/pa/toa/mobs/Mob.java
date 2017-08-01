@@ -5,7 +5,7 @@ import org.bukkit.Location;
 
 public class Mob {
 
-    private final int HEALTH_BASE = 500;
+    private final int HEALTH_BASE = 50;
 
     @Getter private int level;
     @Getter private MobType mobType;

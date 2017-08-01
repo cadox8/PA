@@ -4,10 +4,13 @@ import es.projectalpha.pa.core.utils.Utils;
 import es.projectalpha.pa.toa.TOA;
 import es.projectalpha.pa.toa.abilities.Ability;
 import es.projectalpha.pa.toa.api.TOAUser;
+import es.projectalpha.pa.toa.drops.DropsManager;
+import es.projectalpha.pa.toa.mobs.MobType;
 import es.projectalpha.pa.toa.races.Race;
 import es.projectalpha.pa.toa.manager.Experience;
 import es.projectalpha.pa.toa.mobs.Mob;
 import org.bukkit.Material;
+import org.bukkit.Sound;
 import org.bukkit.World;
 import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
@@ -29,13 +32,17 @@ public class GameEvents implements Listener {
 
     @EventHandler
     public void onEntityDeath(EntityDeathEvent e) {
-        TOAUser u;
         if (e.getEntity() instanceof Monster && e.getEntity().getKiller() instanceof Player) {
-            u = TOA.getPlayer(e.getEntity().getKiller());
+            TOAUser u = TOA.getPlayer(e.getEntity().getKiller());
             String name = e.getEntity().getCustomName().split(" ")[1];
             int level = Utils.isInt(name) ? Integer.parseInt(name) : 0;
 
             new Experience(u).addExp(Mob.getXP(level));
+
+            DropsManager.drop(MobType.parseMobType(e.getEntityType()), u.getUserData().getKit()).forEach(d -> {
+                BagEvents.addItem(u, d);
+                u.sendSound(Sound.ITEM_PICKUP);
+            });
 
             if (plugin.getSpawnTask().getCount() == 0) return;
             plugin.getSpawnTask().setCount(plugin.getSpawnTask().getCount() - 1);

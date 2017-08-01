@@ -9,9 +9,16 @@ import es.projectalpha.pa.toa.races.Race;
 import lombok.Getter;
 import org.bukkit.Material;
 
+import java.util.ArrayList;
+import java.util.Random;
+
 public class Ability {
 
     protected TOA plugin = TOA.getInstance();
+
+    protected Random r = new Random();
+
+    @Getter private static ArrayList<TOAUser> fireArrow = new ArrayList<>();
 
     @Getter private String name;
     @Getter private Race.RaceType race;

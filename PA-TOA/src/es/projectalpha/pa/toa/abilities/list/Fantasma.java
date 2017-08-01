@@ -17,5 +17,7 @@ public class Fantasma extends Ability {
         if (!canUse(u)) return;
 
         u.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY, 100, 0, true, false));
+        u.getPlayer().setWalkSpeed(0.4f);
+        plugin.getServer().getScheduler().runTaskLater(plugin, () -> Race.parseRace(getRace().getId()).addEffects(u), 100);
     }
 }

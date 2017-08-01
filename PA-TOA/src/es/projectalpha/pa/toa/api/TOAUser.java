@@ -81,6 +81,11 @@ public class TOAUser extends PAUser {
     }
 
     public void setRace(Race race) {
+        if (!race.enabled()) {
+            sendMessage(PAData.TOA.getPrefix() + "&cEsta clase no está disponible por el momento");
+            return;
+        }
+
         getPlayer().getInventory().clear();
         race.setItems(getPlayer());
         sendToCity();

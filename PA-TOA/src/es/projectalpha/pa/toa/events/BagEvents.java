@@ -186,7 +186,6 @@ public class BagEvents implements Listener {
     public void onPickUp(PlayerPickupItemEvent e) {
         TOAUser p = TOA.getPlayer(e.getPlayer());
         Item it = e.getItem();
-        ItemStack item = it.getItemStack();
 
         if (p.isOnRank(PACmd.Grupo.Admin)) {
             e.setCancelled(false);
@@ -194,11 +193,19 @@ public class BagEvents implements Listener {
         }
         if (plugin.getGm().getInTower().contains(p)) {
             e.setCancelled(true);
-            if ((it.getCustomName() != null) && (getFreeSlots(p, getInventory(p)) != 0)) {
-                item.removeEnchantment(Enchantment.ARROW_DAMAGE);
-                checkItem(p, item);
-                it.remove();
-            }
+            addItem(p, it);
         }
+    }
+
+    public static void addItem(TOAUser u, Item i) {
+        if ((i.getCustomName() != null) && (getFreeSlots(u, getInventory(u)) != 0)) {
+            i.getItemStack().removeEnchantment(Enchantment.ARROW_DAMAGE);
+            checkItem(u, i.getItemStack());
+            i.remove();
+        }
+    }
+
+    public static void addItem(TOAUser u, ItemStack i) {
+        if (getFreeSlots(u, getInventory(u)) != 0) checkItem(u, i);
     }
 }
