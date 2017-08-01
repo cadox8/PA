@@ -26,23 +26,23 @@ public class RagePlayer extends PAUser {
     }
 
     public void setLobby() {
-        ScoreboardUtil lboard = new ScoreboardUtil(PAData.RG.getOldPrefix(), "lobby");
+        ScoreboardUtil board = new ScoreboardUtil(PAData.RG.getOldPrefix(), "lobby");
         new BukkitRunnable() {
             @Override
             public void run() {
                 if(GameState.getState() == GameState.LOBBY){
                     if (getPlayer() == null) cancel();
                     if (plugin.getGm().acceptPlayers()) {
-                        lboard.setName(PAData.RG.getOldPrefix());
-                        lboard.text(5, "§d ");
-                        lboard.text(4, "§6" + plugin.getGm().getPlaying().size() + "§d/§6" + plugin.getAm().getMaxPlayers());
-                        lboard.text(3, "§a ");
-                        lboard.text(2, "§eEsperando...");
-                        lboard.text(1, "§e ");
-                        lboard.text(0, "§b" + PACore.getOLD_IP());
-                        if (getPlayer() != null) lboard.build(getPlayer());
+                        board.setName(PAData.RG.getOldPrefix());
+                        board.text(5, "§d ");
+                        board.text(4, "§6" + plugin.getGm().getPlaying().size() + "§d/§6" + plugin.getAm().getMaxPlayers());
+                        board.text(3, "§a ");
+                        board.text(2, "§eEsperando...");
+                        board.text(1, "§e ");
+                        board.text(0, PACore.getOLD_IP());
+                        if (getPlayer() != null) board.build(getPlayer());
                     } else {
-                        lboard.reset();
+                        board.reset();
                         cancel();
                     }
                 }
@@ -60,13 +60,15 @@ public class RagePlayer extends PAUser {
                     plugin.getGm().reorder();
                     board.setName(PAData.RG.getOldPrefix());
 
+                    board.text(plugin.getGm().getTop().size() + 1, "§e ");
+
                     int x = 0;
                     for (RagePlayer u : plugin.getGm().getTop()) {
-                        board.text(x, u.getName() + ": " + plugin.getGm().getScore().get(u));
+                        board.text(x, "§e" + u.getName() + ": §r" + plugin.getGm().getScore().get(u));
                         x++;
                     }
                     board.text(-1, "§e ");
-                    board.text(-2, "§b" + PACore.getOLD_IP());
+                    board.text(-2, PACore.getOLD_IP());
 
                     if (getPlayer() != null) board.build(getPlayer());
                 } else {
@@ -85,7 +87,7 @@ public class RagePlayer extends PAUser {
     }
 
     public void resetPlayer() {
-        getPlayer().setHealth(getPlayer().getMaxHealth());
+        getPlayer().setHealth(20);
         getPlayer().getInventory().clear();
         getPlayer().getInventory().setItem(0, Items.getKnife());
         getPlayer().getInventory().setItem(1, Items.getBow());

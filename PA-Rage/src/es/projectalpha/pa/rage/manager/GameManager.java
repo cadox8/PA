@@ -76,7 +76,7 @@ public class GameManager {
         Collections.sort(list, Collections.reverseOrder());
 
         score.keySet().forEach(k -> list.subList(0, playing.size() < 7 ? playing.size() : 7).forEach(v -> {
-            if (score.get(k).equals(v)) top.add(k);
+            if (score.get(k).equals(v) && !top.contains(k)) top.add(k);
         }));
     }
 }
