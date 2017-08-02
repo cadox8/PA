@@ -94,11 +94,11 @@ public class PAUser {
     }
 
     public void teleport(Location location) {
-        getPlayer().teleport(location, PlayerTeleportEvent.TeleportCause.COMMAND);
+        getPlayer().teleport(location);
     }
 
     public void teleport(Entity entity) {
-        getPlayer().teleport(entity, PlayerTeleportEvent.TeleportCause.COMMAND);
+        getPlayer().teleport(entity);
     }
 
     public void teleport(World world) {

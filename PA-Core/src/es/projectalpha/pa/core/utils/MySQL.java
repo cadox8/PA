@@ -73,22 +73,6 @@ public class MySQL {
                 ex.printStackTrace();
             }
         });
-
-        //TOA
-        PACore.getInstance().getServer().getScheduler().runTaskAsynchronously(PACore.getInstance(), () -> {
-            try {
-                PreparedStatement statement = openConnection().prepareStatement("SELECT `id` FROM `pa_toa` WHERE `name` = ?");
-                statement.setString(1, p.getName());
-                ResultSet rs = statement.executeQuery();
-                if (!rs.next()) { //No hay filas encontradas, insertar nuevos datos
-                    PreparedStatement inserDatos = openConnection().prepareStatement("INSERT INTO `pa_toa` (`name`) VALUES (?)");
-                    inserDatos.setString(1, p.getName());
-                    inserDatos.executeUpdate();
-                }
-            } catch (SQLException | ClassNotFoundException ex) {
-                ex.printStackTrace();
-            }
-        });
     }
 
     public void saveUser(PAUser u) {

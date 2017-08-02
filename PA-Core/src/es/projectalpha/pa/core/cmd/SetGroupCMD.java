@@ -28,7 +28,7 @@ public class SetGroupCMD extends PACmd {
         if (args.length == 1) {
             Integer i;
             try {
-                i = Integer.parseInt(args[1]);
+                i = Integer.parseInt(args[0]);
             } catch (NumberFormatException ex) {
                 user.sendMessage(PAData.CORE.getPrefix() + "&cEl rango no es un número");
                 return;
@@ -42,6 +42,7 @@ public class SetGroupCMD extends PACmd {
             user.getUserData().setGrupo(Grupo.values()[i]);
             user.save();
             user.sendMessage(PAData.CORE.getPrefix() + "&3Rango cambiado : &" + Grupo.groupColor(Grupo.values()[i]) + Grupo.values()[i].toString());
+            return;
         }
 
         Integer i;

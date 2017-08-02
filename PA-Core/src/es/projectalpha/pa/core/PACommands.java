@@ -42,6 +42,7 @@ public class PACommands implements TabCompleter {
         cmds.add(new FakeJoinCMD());
         cmds.add(new FakeLeaveCMD());
         cmds.add(new FeedCMD());
+        cmds.add(new FlyCMD());
         cmds.add(new GamemodeCMD());
         cmds.add(new HealCMD());
         cmds.add(new HelpOPCMD());

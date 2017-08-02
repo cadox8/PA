@@ -20,7 +20,7 @@ public class KillAllCMD extends PACmd {
     public void run(PAUser user, String label, String[] args) {
         if (args.length == 0) {
             user.sendDiv();
-            formatedCMD(label, " <Entity> [-n]", " &7-> &2Elimina las entidades del mundo");
+            user.sendMessage(formatedCMD(label, " <Entity> [-n]", " &7-> &2Elimina las entidades del mundo"));
             user.sendMessage("&3-n &7-> &cParámetro para no comprobar el nombre");
             user.sendDiv();
         }
