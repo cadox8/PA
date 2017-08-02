@@ -33,6 +33,7 @@ public class GameTask extends BukkitRunnable {
     public void run() {
         plugin.getGm().getPlaying().forEach(p -> {
             BossBarUtils.create(p.getPlayer(), "&cTiempo restante: &6" + count, BossBarAPI.Color.BLUE, BossBarAPI.Style.PROGRESS);
+            p.getPlayer().setFireTicks(0);
         });
 
         switch (count) {
@@ -40,6 +41,7 @@ public class GameTask extends BukkitRunnable {
                 plugin.getGm().getPlaying().forEach(p -> {
                     p.teleport(plugin.getAm().getRandomSpawn());
                     Title.sendTitle(p.getPlayer(),1,2,1, ChatColor.GREEN + "Ronda de calentamiento","");
+                    p.getPlayer().setWalkSpeed(0.3f);
                 });
                 break;
             case 180:
@@ -48,6 +50,13 @@ public class GameTask extends BukkitRunnable {
                     p.resetPlayer();
                     p.teleport(plugin.getAm().getRandomSpawn());
                     Title.sendTitle(p.getPlayer(),1,2,1,ChatColor.RED + "¡Empieza el juego!","");
+                    p.getPlayer().setWalkSpeed(0.3f);
+                });
+                break;
+            case 60:
+                plugin.getGm().getPlaying().forEach(p -> {
+                    Title.sendTitle(p.getPlayer(),1,2,1,ChatColor.RED + "¡60 segundos!","Velocidad multiplicada por 2.");
+                    p.getPlayer().setWalkSpeed(0.5f);
                 });
                 break;
             case 3:

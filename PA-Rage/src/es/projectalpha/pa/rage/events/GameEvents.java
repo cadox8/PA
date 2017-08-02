@@ -1,16 +1,17 @@
 package es.projectalpha.pa.rage.events;
 
+import com.sun.deploy.config.PluginClientConfig;
+import es.projectalpha.pa.core.utils.GameState;
 import es.projectalpha.pa.core.utils.Utils;
 import es.projectalpha.pa.rage.RageGames;
 import es.projectalpha.pa.rage.utils.Items;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
-import org.bukkit.entity.Arrow;
-import org.bukkit.entity.Player;
-import org.bukkit.entity.Projectile;
-import org.bukkit.entity.Snowball;
+import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.Action;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
@@ -68,15 +69,40 @@ public class GameEvents implements Listener {
         }
     }
 
-    @EventHandler
+    /*@EventHandler
     public void onInteract(PlayerInteractEvent e) {
         Player p = e.getPlayer();
 
         if (p.getInventory().getItemInHand().getType() == Material.IRON_AXE) {
             final Snowball sb = p.launchProjectile(Snowball.class);
             sb.setPassenger(p.getWorld().dropItem(p.getLocation(), new ItemStack(Material.IRON_AXE)));
+
             p.getInventory().setItemInHand(null);
             sb.setShooter(p);
+        }
+    }*/
+
+    public void OnInteract(PlayerInteractEvent event) {
+        Player l = event.getPlayer();
+        if (event.getAction() == Action.RIGHT_CLICK_BLOCK || event.getAction() == Action.RIGHT_CLICK_AIR || event.getAction() == Action.LEFT_CLICK_BLOCK || event.getAction() == Action.LEFT_CLICK_AIR) {
+            if (GameState.getState() == GameState.INGAME) {
+                if (l.getInventory().getItemInHand().getType() == Material.IRON_AXE) {
+
+                    Item item = l.getWorld().dropItem(l.getEyeLocation(), l.getInventory().getItemInHand());
+                    l.getInventory().remove(Items.getAxe());
+                    item.setVelocity(l.getLocation().getDirection().multiply(2D));
+
+                    item.getWorld().getNearbyEntities(item.getLocation(), 1d, 1d, 1d).stream().filter(e -> e.getType().equals(EntityType.PLAYER)).forEach(e->{
+                        if(e.equals(l)) return;
+                        Utils.broadcastMsg(ChatColor.GOLD + l.getName() + ChatColor.GREEN + " ha matado a " + ChatColor.GOLD + e.getName() + ChatColor.GREEN + " usando " + Items.getAxe().getItemMeta().getDisplayName() + ChatColor.GREEN + " (+50 puntos)");
+                        plugin.getGm().addPoint(RageGames.getPlayer(l), 50);
+                        plugin.getGm().removePoint(RageGames.getPlayer((Player) e), 25);
+                        e.teleport(plugin.getAm().getRandomSpawn());
+                        RageGames.getPlayer((Player) e).resetPlayer();
+                    });
+
+                }
+            }
         }
     }
 }
