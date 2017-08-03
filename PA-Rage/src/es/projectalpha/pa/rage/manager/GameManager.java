@@ -4,7 +4,6 @@ import es.projectalpha.pa.core.utils.GameState;
 import es.projectalpha.pa.rage.RageGames;
 import es.projectalpha.pa.rage.api.RagePlayer;
 import es.projectalpha.pa.rage.tasks.LobbyTask;
-import es.projectalpha.pa.rage.utils.ScoreComparator;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -17,7 +16,6 @@ public class GameManager {
 
     @Getter private ArrayList<RagePlayer> playing = new ArrayList<>();
     @Getter private HashMap<RagePlayer, Integer> score = new HashMap<>();
-    @Getter private ArrayList<RagePlayer> top = new ArrayList<>();
 
     @Getter @Setter private boolean checkStart = true;
 
@@ -69,23 +67,7 @@ public class GameManager {
         return GameState.getState() == GameState.LOBBY;
     }
 
-    public void reorder() {
-        if (!top.isEmpty()) top.clear();
-        List<Integer> list = new ArrayList<>(score.values());
-        Collections.sort(list, Collections.reverseOrder());
-
-        score.keySet().forEach(k -> list.subList(0, playing.size() < 7 ? playing.size() : 7).forEach(v -> {
-            if (score.get(k).equals(v) && !top.contains(k)) top.add(k);
-        }));
-    }
-
-    public <K, V extends Comparable<? super V>> Map<RagePlayer, Integer> reorder2() {
+    public <K, V extends Comparable<? super V>> Map<RagePlayer, Integer> reorder() {
         return score.entrySet().stream().sorted(Map.Entry.comparingByValue(Collections.reverseOrder())).collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e1, LinkedHashMap::new));
-    }
-
-    public SortedSet reorder3() {
-        SortedSet sorted = new TreeSet<>(new ScoreComparator());
-        sorted.addAll(score.values());
-        return sorted;
     }
 }
