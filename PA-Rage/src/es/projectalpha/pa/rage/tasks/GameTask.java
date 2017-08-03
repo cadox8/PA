@@ -31,6 +31,7 @@ public class GameTask extends BukkitRunnable {
         plugin.getGm().getPlaying().forEach(p -> {
             BossBarUtils.create(p.getPlayer(), "&cTiempo restante: &6" + count, BossBarAPI.Color.BLUE, BossBarAPI.Style.PROGRESS);
             p.getPlayer().setFireTicks(0);
+
         });
 
         switch (count) {
@@ -52,8 +53,8 @@ public class GameTask extends BukkitRunnable {
                 break;
             case 60:
                 plugin.getGm().getPlaying().forEach(p -> {
-                    Title.sendTitle(p.getPlayer(),1,2,1,ChatColor.RED + "¡60 segundos!","Velocidad multiplicada por 2.");
-                    p.getPlayer().setWalkSpeed(0.5f);
+                    Title.sendTitle(p.getPlayer(),1,2,1,ChatColor.RED + "¡60 segundos!",ChatColor.GOLD + "¡Velocidad x2!");
+                    p.getPlayer().setWalkSpeed(0.4f);
                 });
                 break;
             case 3:

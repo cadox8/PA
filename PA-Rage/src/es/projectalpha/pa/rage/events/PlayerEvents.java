@@ -31,7 +31,7 @@ public class PlayerEvents implements Listener {
         e.setJoinMessage(null);
 
         if (plugin.getGm().isInLobby()) {
-            u.getPlayer().setWalkSpeed(0.3f);
+            u.getPlayer().setWalkSpeed(0.2f);
             u.getPlayer().getInventory().clear();
             plugin.getGm().addPlayerToGame(u);
             plugin.getServer().getOnlinePlayers().forEach(p -> u.getPlayer().showPlayer(p));
