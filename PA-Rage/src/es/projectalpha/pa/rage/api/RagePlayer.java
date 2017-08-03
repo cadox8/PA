@@ -60,13 +60,18 @@ public class RagePlayer extends PAUser {
                     plugin.getGm().reorder();
                     board.setName(PAData.RG.getOldPrefix());
 
-                    board.text(plugin.getGm().getTop().size() + 1, "§e ");
+                    board.text(plugin.getGm().getScore().keySet().size() + 1, "§e ");
 
                     int x = 0;
                     for (RagePlayer u : plugin.getGm().getTop()) {
                         board.text(x, "§e" + u.getName() + ": §r" + plugin.getGm().getScore().get(u));
                         x++;
                     }
+
+                    System.out.println("Reorder "  + plugin.getGm().getTop().toString());
+                    System.out.println("Reorder 2 " + plugin.getGm().reorder2().toString());
+                    System.out.println("Reorder 3" + plugin.getGm().reorder3().toString());
+
                     board.text(-1, "§e ");
                     board.text(-2, PACore.getOLD_IP());
 

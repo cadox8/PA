@@ -4,13 +4,12 @@ import es.projectalpha.pa.core.utils.GameState;
 import es.projectalpha.pa.rage.RageGames;
 import es.projectalpha.pa.rage.api.RagePlayer;
 import es.projectalpha.pa.rage.tasks.LobbyTask;
+import es.projectalpha.pa.rage.utils.ScoreComparator;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class GameManager {
 
@@ -78,5 +77,15 @@ public class GameManager {
         score.keySet().forEach(k -> list.subList(0, playing.size() < 7 ? playing.size() : 7).forEach(v -> {
             if (score.get(k).equals(v) && !top.contains(k)) top.add(k);
         }));
+    }
+
+    public <K, V extends Comparable<? super V>> Map<RagePlayer, Integer> reorder2() {
+        return score.entrySet().stream().sorted(Map.Entry.comparingByValue(Collections.reverseOrder())).collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e1, LinkedHashMap::new));
+    }
+
+    public SortedSet reorder3() {
+        SortedSet sorted = new TreeSet<>(new ScoreComparator());
+        sorted.addAll(score.values());
+        return sorted;
     }
 }

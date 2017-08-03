@@ -1,10 +1,7 @@
 package es.projectalpha.pa.rage.tasks;
 
 import es.projectalpha.pa.core.api.PAData;
-import es.projectalpha.pa.core.utils.BossBarUtils;
-import es.projectalpha.pa.core.utils.ScoreboardUtil;
-import es.projectalpha.pa.core.utils.Title;
-import es.projectalpha.pa.core.utils.Utils;
+import es.projectalpha.pa.core.utils.*;
 import es.projectalpha.pa.rage.RageGames;
 import es.projectalpha.pa.rage.api.RagePlayer;
 import es.projectalpha.pa.rage.manager.ArenaManager;
@@ -64,6 +61,7 @@ public class GameTask extends BukkitRunnable {
                 break;
             case 0:
                 new ShutdownTask(plugin).runTaskTimer(plugin, 0, 20);
+                GameState.setState(GameState.FINISHED);
                 cancel();
                 break;
         }
