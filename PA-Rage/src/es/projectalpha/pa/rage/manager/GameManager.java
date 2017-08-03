@@ -83,4 +83,9 @@ public class GameManager {
         return score.entrySet().stream().sorted(Map.Entry.comparingByValue(Collections.reverseOrder())).collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e1, LinkedHashMap::new));
     }
 
+    public SortedSet reorder3() {
+        SortedSet sorted = new TreeSet<>(new ScoreComparator());
+        sorted.addAll(score.values());
+        return sorted;
+    }
 }

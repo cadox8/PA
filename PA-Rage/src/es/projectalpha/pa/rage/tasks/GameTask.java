@@ -70,14 +70,15 @@ public class GameTask extends BukkitRunnable {
     }
 
     private void checkWinner() {
-        plugin.getGm().reorder();
+        RagePlayer[] users = plugin.getGm().reorder().keySet().toArray(new RagePlayer[plugin.getGm().reorder().size()]);
+
         Utils.broadcastMsg("------------------------");
         Utils.broadcastMsg("");
-        Utils.broadcastMsg("1º " + plugin.getGm().getTop().get(0).getName() + ": " + plugin.getGm().getScore().get(plugin.getGm().getTop().get(0)) + " puntos.");
-        Utils.broadcastMsg("2º " + plugin.getGm().getTop().get(1).getName() + ": " + plugin.getGm().getScore().get(plugin.getGm().getTop().get(1)) + " puntos.");
+        Utils.broadcastMsg("1º " + users[0].getName() + ": " + plugin.getGm().getScore().get(users[0]) + " puntos.");
+        Utils.broadcastMsg("2º " + users[1].getName() + ": " + plugin.getGm().getScore().get(users[1]) + " puntos.");
 
-        if(plugin.getGm().getTop().get(2).getName() != null) {
-            Utils.broadcastMsg("3º " + plugin.getGm().getTop().get(2).getName() + ": " + plugin.getGm().getScore().get(plugin.getGm().getTop().get(2)) + " puntos.");
+        if(users[2] != null) {
+            Utils.broadcastMsg("3º " + users[2].getName() + ": " + plugin.getGm().getScore().get(users[2]) + " puntos.");
         }
 
         Utils.broadcastMsg("");
