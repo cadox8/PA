@@ -70,6 +70,7 @@ public class PlayerEvents implements Listener {
     }
     @EventHandler
     public void onDamage(EntityDamageEvent e){
+        if(!(e.getEntity() instanceof Player)) return;
         Player p = (Player) e.getEntity();
         if(e.getCause() == EntityDamageEvent.DamageCause.LAVA){
         p.teleport(plugin.getAm().getRandomSpawn());

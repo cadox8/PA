@@ -5,9 +5,13 @@ import es.projectalpha.pa.core.utils.*;
 import es.projectalpha.pa.rage.RageGames;
 import es.projectalpha.pa.rage.api.RagePlayer;
 import es.projectalpha.pa.rage.manager.ArenaManager;
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
-import org.bukkit.GameMode;
+import es.projectalpha.pa.rage.utils.Items;
+import org.bukkit.*;
+import org.bukkit.block.Block;
+import org.bukkit.entity.Arrow;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.Item;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scoreboard.DisplaySlot;
 import org.inventivetalent.bossbar.BossBarAPI;
@@ -24,8 +28,6 @@ public class GameTask extends BukkitRunnable {
     public GameTask(RageGames instance) {
         this.plugin = instance;
     }
-
-
 
     public void run() {
         plugin.getGm().getPlaying().forEach(p -> {
@@ -50,12 +52,21 @@ public class GameTask extends BukkitRunnable {
                     Title.sendTitle(p.getPlayer(),1,2,1,ChatColor.RED + "¡Empieza el juego!","");
                     p.getPlayer().setWalkSpeed(0.3f);
                 });
+                removeItems();
+                break;
+            case 150:
+            case 120:
+                removeItems();
                 break;
             case 60:
                 plugin.getGm().getPlaying().forEach(p -> {
                     Title.sendTitle(p.getPlayer(),1,2,1,ChatColor.RED + "¡60 segundos!",ChatColor.GOLD + "¡Velocidad x2!");
                     p.getPlayer().setWalkSpeed(0.4f);
                 });
+                removeItems();
+                break;
+            case 30:
+                removeItems();
                 break;
             case 3:
                 checkWinner();
@@ -89,4 +100,18 @@ public class GameTask extends BukkitRunnable {
             p.getPlayer().setGameMode(GameMode.SPECTATOR);
         });
     }
+
+    private void removeItems(){
+        World world = plugin.getServer().getWorld("world");
+        List<Entity> entList = world.getEntities();
+
+        for(Entity current : entList){
+            if (current instanceof Item || current instanceof Arrow) {
+                if (current.getLocation().getBlock().getType() != Material.AIR ) {
+                    current.remove();
+                }
+            }
+        }
+    }
+
 }

@@ -29,8 +29,8 @@ public class GameEvents implements Listener {
             Player a = (Player) e.getEntity();
             if(d.equals(a)) return;
             e.setDamage(0);
+
             if(GameState.getState() == GameState.LOBBY) e.setCancelled(true);
-            if(d.getInventory().getItemInHand() == null) e.setDamage(0);
 
             if (d.getInventory().getItemInHand().getType() == Material.IRON_SWORD) {
                 Utils.broadcastMsg(ChatColor.GOLD + d.getName() + ChatColor.GREEN + " ha matado a " + ChatColor.GOLD + a.getName() + ChatColor.GREEN + " usando " + Items.getKnife().getItemMeta().getDisplayName() + ChatColor.GREEN + " (+20 puntos)");
@@ -66,18 +66,6 @@ public class GameEvents implements Listener {
         }
     }
 
-    /*@EventHandler
-    public void onInteract(PlayerInteractEvent e) {
-        Player p = e.getPlayer();
-
-        if (p.getInventory().getItemInHand().getType() == Material.IRON_AXE) {
-            final Snowball sb = p.launchProjectile(Snowball.class);
-            sb.setPassenger(p.getWorld().dropItem(p.getLocation(), new ItemStack(Material.IRON_AXE)));
-
-            p.getInventory().setItemInHand(null);
-            sb.setShooter(p);
-        }
-    }*/
     @EventHandler
     public void OnInteract(PlayerInteractEvent event) {
         Player l = event.getPlayer();
@@ -88,13 +76,11 @@ public class GameEvents implements Listener {
 
                     item.getWorld().getNearbyEntities(item.getLocation(), 1d, 1d, 1d).stream().filter(e -> e.getType().equals(EntityType.PLAYER)).forEach(e->{
                         if(e.equals(l)) return;
-                        System.out.println("iron axe funca");
                         Utils.broadcastMsg(ChatColor.GOLD + l.getName() + ChatColor.GREEN + " ha matado a " + ChatColor.GOLD + e.getName() + ChatColor.GREEN + " usando " + Items.getAxe().getItemMeta().getDisplayName() + ChatColor.GREEN + " (+50 puntos)");
                         plugin.getGm().addPoint(RageGames.getPlayer(l), 50);
                         plugin.getGm().removePoint(RageGames.getPlayer((Player) e), 25);
                         e.teleport(plugin.getAm().getRandomSpawn());
                         RageGames.getPlayer((Player) e).resetPlayer();
-                        System.out.println("Finalizado oninteract");
                     });
 
                 }
