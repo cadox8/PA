@@ -77,7 +77,7 @@ public class GameTask extends BukkitRunnable {
         Utils.broadcastMsg("1º " + users[0].getName() + ": " + plugin.getGm().getScore().get(users[0]) + " puntos.");
         Utils.broadcastMsg("2º " + users[1].getName() + ": " + plugin.getGm().getScore().get(users[1]) + " puntos.");
 
-        if(users[2] != null) {
+        if(users.length >= 3) {
             Utils.broadcastMsg("3º " + users[2].getName() + ": " + plugin.getGm().getScore().get(users[2]) + " puntos.");
         }
 

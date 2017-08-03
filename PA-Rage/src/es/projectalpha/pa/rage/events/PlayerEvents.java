@@ -25,25 +25,30 @@ public class PlayerEvents implements Listener {
     public PlayerEvents(RageGames instance) {
         this.plugin = instance;
     }
-    private Location loc = new Location(this.plugin.getServer().getWorld("lm"), 1,57,0,179,-20);
+
     @EventHandler
     public void onJoin(PlayerJoinEvent e) {
         RagePlayer u = RageGames.getPlayer(e.getPlayer());
         e.setJoinMessage(null);
 
+        u.getPlayer().setFlySpeed(0.2f);
+        u.getPlayer().setWalkSpeed(0.2f);
+
         if (plugin.getGm().isInLobby()) {
-            u.getPlayer().setWalkSpeed(0.2f);
             u.getPlayer().getInventory().clear();
             plugin.getGm().addPlayerToGame(u);
             plugin.getServer().getOnlinePlayers().forEach(p -> u.getPlayer().showPlayer(p));
             plugin.getServer().getOnlinePlayers().forEach(p -> p.showPlayer(u.getPlayer()));
-            u.teleport(loc);
+            u.teleport(Utils.stringToLocation("lm%1%57%0%179%-20"));
             u.setLobby();
             Utils.broadcastMsg("&7Ha entrado al juego &e" + u.getName() + " &3(&b" + plugin.getGm().getPlaying().size() + "&d/&b" + plugin.getAm().getMaxPlayers() + "&3)");
             plugin.getGm().checkStart();
         } else {
             u.getPlayer().setGameMode(GameMode.SPECTATOR);
-            plugin.getServer().getScheduler().runTaskTimer(plugin, () -> u.sendActionBar("&cEstas en modo espectador"), 0, 20);
+            plugin.getServer().getScheduler().runTaskTimer(plugin, () -> {
+                u.sendActionBar("&cEstas en modo espectador");
+                if (u.getPlayer().getGameMode() != GameMode.SPECTATOR) u.getPlayer().setGameMode(GameMode.SPECTATOR);
+            }, 0, 20);
         }
     }
 
