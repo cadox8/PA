@@ -12,6 +12,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.scheduler.BukkitRunnable;
 
 public class GameEvents implements Listener {
 
@@ -53,36 +54,37 @@ public class GameEvents implements Listener {
                 RageGames.getPlayer(h).resetPlayer();
                 plugin.getGm().addPoint(RageGames.getPlayer(s), 30);
             }
-
-            if (a instanceof Snowball) {
-                Utils.broadcastMsg(ChatColor.GOLD + h.getName() + ChatColor.GREEN + " ha matado a " + ChatColor.GOLD + s.getName() + ChatColor.GREEN + " usando " + Items.getAxe().getItemMeta().getDisplayName() + ChatColor.GREEN + " (+50 puntos)");
-
-                h.teleport(plugin.getAm().getRandomSpawn());
-                RageGames.getPlayer(h).resetPlayer();
-                a.getPassenger().remove();
-                plugin.getGm().addPoint(RageGames.getPlayer(s), 50);
-                plugin.getGm().removePoint(RageGames.getPlayer(h), 25);
-            }
         }
     }
 
     @EventHandler
     public void OnInteract(PlayerInteractEvent event) {
         Player l = event.getPlayer();
-                if (l.getInventory().getItemInHand().getType() == Material.IRON_AXE) {
-                    Item item = l.getWorld().dropItem(l.getEyeLocation(), Items.getAxe());
-                    l.getInventory().remove(Items.getAxe());
-                    item.setVelocity(l.getLocation().getDirection().multiply(2D));
 
-                    item.getWorld().getNearbyEntities(item.getLocation(), 1d, 1d, 1d).stream().filter(e -> e.getType().equals(EntityType.PLAYER)).forEach(e->{
-                        if(e.equals(l)) return;
+        if (l.getInventory().getItemInHand().getType() == Material.IRON_AXE) {
+            final Item item = l.getWorld().dropItem(l.getEyeLocation(), Items.getAxe());
+            l.getInventory().remove(Items.getAxe());
+            item.setVelocity(l.getLocation().getDirection().multiply(2D));
+
+            new BukkitRunnable() {
+                @Override
+                public void run() {
+                    if (item.isOnGround()) {
+                        item.remove();
+                        cancel();
+                        return;
+                    }
+
+                    item.getWorld().getNearbyEntities(item.getLocation(), 1d, 1d, 1d).stream().filter(e -> e.getType().equals(EntityType.PLAYER)).forEach(e -> {
+                        if (e.equals(l)) return;
                         Utils.broadcastMsg(ChatColor.GOLD + l.getName() + ChatColor.GREEN + " ha matado a " + ChatColor.GOLD + e.getName() + ChatColor.GREEN + " usando " + Items.getAxe().getItemMeta().getDisplayName() + ChatColor.GREEN + " (+50 puntos)");
                         plugin.getGm().addPoint(RageGames.getPlayer(l), 50);
                         plugin.getGm().removePoint(RageGames.getPlayer((Player) e), 25);
                         e.teleport(plugin.getAm().getRandomSpawn());
                         RageGames.getPlayer((Player) e).resetPlayer();
                     });
-
                 }
+            }.runTaskTimer(plugin, 0,1);
+        }
     }
 }
