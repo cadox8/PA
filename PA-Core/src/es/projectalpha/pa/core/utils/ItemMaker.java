@@ -29,6 +29,11 @@ public class ItemMaker {
         return itemStack;
     }
 
+    public ItemMaker setEnchant(Enchantment enchantment, int level){
+        this.itemStack.addEnchantment(enchantment, level);
+        return this;
+    }
+
     public ItemMaker setType(Material type) {
         itemStack.setType(type);
         return this;
