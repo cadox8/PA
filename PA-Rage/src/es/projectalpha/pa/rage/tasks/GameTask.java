@@ -33,7 +33,6 @@ public class GameTask extends BukkitRunnable {
         plugin.getGm().getPlaying().forEach(p -> {
             BossBarUtils.create(p.getPlayer(), "&cTiempo restante: &6" + count, BossBarAPI.Color.BLUE, BossBarAPI.Style.PROGRESS);
             p.getPlayer().setFireTicks(0);
-
         });
 
         switch (count) {
@@ -52,21 +51,13 @@ public class GameTask extends BukkitRunnable {
                     Title.sendTitle(p.getPlayer(),1,2,1,ChatColor.RED + "¡Empieza el juego!","");
                     p.getPlayer().setWalkSpeed(0.3f);
                 });
-                removeItems();
-                break;
-            case 150:
-            case 120:
-                removeItems();
                 break;
             case 60:
                 plugin.getGm().getPlaying().forEach(p -> {
                     Title.sendTitle(p.getPlayer(),1,2,1,ChatColor.RED + "¡60 segundos!",ChatColor.GOLD + "¡Velocidad x2!");
                     p.getPlayer().setWalkSpeed(0.4f);
                 });
-                removeItems();
-                break;
-            case 30:
-                removeItems();
+
                 break;
             case 3:
                 checkWinner();
@@ -100,18 +91,4 @@ public class GameTask extends BukkitRunnable {
             p.getPlayer().setGameMode(GameMode.SPECTATOR);
         });
     }
-
-    private void removeItems(){
-        World world = plugin.getServer().getWorld("world");
-        List<Entity> entList = world.getEntities();
-
-        for(Entity current : entList){
-            if (current instanceof Item || current instanceof Arrow) {
-                if (current.getLocation().getBlock().getType() != Material.AIR ) {
-                    current.remove();
-                }
-            }
-        }
-    }
-
 }

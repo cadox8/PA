@@ -1,19 +1,19 @@
-package es.projectalpha.pa.tower;
+package es.projectalpha.pa.nexus;
 
-import es.projectalpha.pa.tower.api.TowerPlayer;
-import es.projectalpha.pa.tower.managers.ArenaManager;
-import es.projectalpha.pa.tower.managers.GameManager;
+import es.projectalpha.pa.nexus.api.TowerPlayer;
+import es.projectalpha.pa.nexus.managers.ArenaManager;
+import es.projectalpha.pa.nexus.managers.GameManager;
 import lombok.Getter;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.ArrayList;
 
-public class TowerBattle extends JavaPlugin {
+public class NexusSiege extends JavaPlugin {
 
     public static ArrayList<TowerPlayer> players = new ArrayList<>();
     @Getter
-    private static TowerBattle instance;
+    private static NexusSiege instance;
     @Getter
     private GameManager gm;
     @Getter
