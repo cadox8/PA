@@ -1,6 +1,6 @@
 package es.projectalpha.pa.nexus;
 
-import es.projectalpha.pa.nexus.api.TowerPlayer;
+import es.projectalpha.pa.nexus.api.NexusPlayer;
 import es.projectalpha.pa.nexus.managers.ArenaManager;
 import es.projectalpha.pa.nexus.managers.GameManager;
 import lombok.Getter;
@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 public class NexusSiege extends JavaPlugin {
 
-    public static ArrayList<TowerPlayer> players = new ArrayList<>();
+    public static ArrayList<NexusPlayer> players = new ArrayList<>();
     @Getter
     private static NexusSiege instance;
     @Getter
@@ -35,12 +35,12 @@ public class NexusSiege extends JavaPlugin {
     }
 
 
-    public static TowerPlayer getPlayer(OfflinePlayer p) {
-        for (TowerPlayer pl : players) {
+    public static NexusPlayer getPlayer(OfflinePlayer p) {
+        for (NexusPlayer pl : players) {
             if (pl.getName() == null) continue;
             if (pl.getName().equalsIgnoreCase(p.getName())) return pl;
         }
-        TowerPlayer us = new TowerPlayer(p.getName());
+        NexusPlayer us = new NexusPlayer(p.getName());
         if (us.isOnline()) players.add(us);
         return us;
     }

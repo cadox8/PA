@@ -2,9 +2,9 @@ package es.projectalpha.pa.nexus.api;
 
 import es.projectalpha.pa.core.api.PAUser;
 
-public class TowerPlayer extends PAUser {
+public class NexusPlayer extends PAUser {
 
-    public TowerPlayer(String name) {
+    public NexusPlayer(String name) {
         super(name);
     }
 }
