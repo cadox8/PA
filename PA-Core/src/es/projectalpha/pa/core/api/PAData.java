@@ -14,16 +14,18 @@ public enum PAData {
 
     RG(4, "&cRageGames"),
     TOA(5, "&aTOA"),
-    TB(6, "&eTowerBattle");
+    NS(6, "&eNexus&bSiege");
 
     @Getter
     private int id;
     private String prefix;
 
+    public String getName() {
+        return prefix;
+    }
     public String getPrefix() {
         return ChatColor.GRAY + " || " + prefix + ChatColor.GRAY + " || ";
     }
-
     public String getOldPrefix() {
         return "§7 || " + prefix.replace('&', '§') + "§7 || ";
     }

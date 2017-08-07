@@ -14,18 +14,17 @@ import org.bukkit.command.ConsoleCommandSender;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Random;
 
 public abstract class PACmd {
 
     protected static transient PACore plugin = PACore.getInstance();
     protected static transient PAServer server = new PAServer();
     protected static transient Utils utils = PACore.getInstance().getUtils();
-    @Getter
-    private final transient String name;
-    @Getter
-    private final transient List<String> aliases;
-    @Getter
-    private transient Grupo group = Grupo.Usuario;
+    protected static transient Random r = new Random();
+    @Getter private final transient String name;
+    @Getter private final transient List<String> aliases;
+    @Getter private transient Grupo group = Grupo.Usuario;
 
     public PACmd(final String name, final Grupo grupo, final List<String> aliases) {
         this.name = name.toLowerCase();
