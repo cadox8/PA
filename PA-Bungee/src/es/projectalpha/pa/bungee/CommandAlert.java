@@ -25,7 +25,7 @@ public class CommandAlert extends Command {
             }
             String message = builder.substring(0, builder.length() - 1);
 
-            ProxyServer.getInstance().getPlayers().forEach(p -> p.sendMessage(ChatColor.AQUA + sender.getName() + ChatColor.RESET + ": " + message));
+            ProxyServer.getInstance().getPlayers().forEach(p -> p.sendMessage(ChatColor.AQUA + sender.getName() + ChatColor.RESET + ": " + ChatColor.translateAlternateColorCodes('&', message)));
         }
     }
 }
