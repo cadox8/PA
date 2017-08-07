@@ -29,11 +29,6 @@ public class ItemMaker {
         return itemStack;
     }
 
-    public ItemMaker setEnchant(Enchantment enchantment, int level){
-        this.itemStack.addEnchantment(enchantment, level);
-        return this;
-    }
-
     public ItemMaker setType(Material type) {
         itemStack.setType(type);
         return this;
@@ -88,14 +83,7 @@ public class ItemMaker {
         return this;
     }
 
-    public ItemMaker addEnchant(Enchantment ench, int level, boolean ignoreLevelRestriction) {
-        ItemMeta itemMeta = this.itemStack.getItemMeta();
-        itemMeta.addEnchant(ench, level, ignoreLevelRestriction);
-        this.itemStack.setItemMeta(itemMeta);
-        return this;
-    }
-
-    public ItemMaker addUnsafeEnchant(Enchantment ench, int level) {
+    public ItemMaker addEnchant(Enchantment ench, int level) {
         this.itemStack.addUnsafeEnchantment(ench, level);
         return this;
     }

@@ -12,7 +12,7 @@ public class Archer extends Race {
     }
 
     public void setItems(Player p) {
-        p.getInventory().addItem(new ItemMaker(Material.BOW).addUnsafeEnchant(Enchantment.ARROW_INFINITE, 1).setUnbreakable().build());
+        p.getInventory().addItem(new ItemMaker(Material.BOW).addEnchant(Enchantment.ARROW_INFINITE, 1).setUnbreakable().build());
     }
 
     public boolean enabled() {
