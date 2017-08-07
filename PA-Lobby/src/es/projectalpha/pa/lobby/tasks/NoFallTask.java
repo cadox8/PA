@@ -5,11 +5,11 @@ import es.projectalpha.pa.lobby.PALobby;
 import es.projectalpha.pa.lobby.utils.Helpers;
 import org.bukkit.scheduler.BukkitRunnable;
 
-public class NoFallTasks extends BukkitRunnable {
+public class NoFallTask extends BukkitRunnable {
 
     private PALobby plugin;
 
-    public NoFallTasks(PALobby instance) {
+    public NoFallTask(PALobby instance) {
         this.plugin = instance;
     }
 

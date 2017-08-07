@@ -7,7 +7,7 @@ import es.projectalpha.pa.lobby.cmd.SetSpawnCMD;
 import es.projectalpha.pa.lobby.cmd.SpawnCMD;
 import es.projectalpha.pa.lobby.events.InventoryEvents;
 import es.projectalpha.pa.lobby.events.PlayerEvents;
-import es.projectalpha.pa.lobby.tasks.NoFallTasks;
+import es.projectalpha.pa.lobby.tasks.NoFallTask;
 import es.projectalpha.pa.lobby.utils.LobbyMenu;
 import es.projectalpha.pa.lobby.utils.LobbyTeams;
 import lombok.Getter;
@@ -42,7 +42,7 @@ public class PALobby extends JavaPlugin {
 
         PACommands.register(new SpawnCMD(), new KittyCMD(), new SetSpawnCMD());
         new LobbyMenu(instance);
-        new NoFallTasks(instance).runTaskTimer(instance, 0, 20);
+        new NoFallTask(instance).runTaskTimer(instance, 0, 20);
     }
 
 

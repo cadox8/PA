@@ -19,15 +19,16 @@ public class KittyCMD extends PACmd {
 
     public void run(PAUser user, String label, String... args) {
         final Ocelot o = (Ocelot) user.getLoc().getWorld().spawnEntity(user.getLoc(), EntityType.OCELOT);
-        o.setCatType(Ocelot.Type.values()[new Random().nextInt(Ocelot.Type.values().length)]);
+        o.setCatType(Ocelot.Type.values()[r.nextInt(Ocelot.Type.values().length)]);
         o.setSitting(true);
         o.setTamed(true);
-        o.setAge(new Random().nextInt(2));
+        o.setAge(r.nextInt(2));
         o.setCustomName(Utils.colorize("&dGateteeeeeee"));
         o.setCustomNameVisible(true);
         o.setNoDamageTicks(Integer.MAX_VALUE);
+        o.setVelocity(user.getPlayer().getLocation().getDirection().multiply(2));
 
-        o.setVelocity(user.getPlayer().getVelocity().multiply(2));
+        PAServer.users.forEach(u -> u.sendSound(Sound.CAT_MEOW));
 
         plugin.getServer().getScheduler().runTaskLater(plugin, () -> {
             PAServer.users.forEach(u -> u.sendSound(Sound.EXPLODE));

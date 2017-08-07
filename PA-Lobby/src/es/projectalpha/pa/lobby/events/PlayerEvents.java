@@ -1,8 +1,10 @@
 package es.projectalpha.pa.lobby.events;
 
+import es.projectalpha.pa.core.api.PAData;
 import es.projectalpha.pa.core.api.PAServer;
 import es.projectalpha.pa.core.api.PAUser;
 import es.projectalpha.pa.core.cmd.PACmd;
+import es.projectalpha.pa.core.utils.ItemMaker;
 import es.projectalpha.pa.core.utils.Utils;
 import es.projectalpha.pa.lobby.PALobby;
 import es.projectalpha.pa.lobby.utils.Helpers;
@@ -57,6 +59,9 @@ public class PlayerEvents implements Listener {
         LobbyTeams.setScoreboardTeam(u);
         new Helpers(u).sendToSpawn();
 
+        u.getPlayer().getInventory().setItem(0, new ItemMaker(Material.NETHER_STAR).setDisplayName("&cServidores").build());
+        u.getPlayer().getInventory().setItem(4, new ItemMaker(Material.BED).setDisplayName("&dCosmeticos").build());
+
         u.sendMessage("&6Actualmente hay &2" + PAServer.users.size() + " &6usuarios en línea");
     }
 
@@ -65,6 +70,7 @@ public class PlayerEvents implements Listener {
         PAUser u = PAServer.getUser(e.getPlayer());
 
         u.save();
+        LobbyTeams.removeScoreboardTeam(u);
         if (PAServer.users.contains(u)) PAServer.users.remove(u);
     }
 
@@ -88,10 +94,22 @@ public class PlayerEvents implements Listener {
 
         if (e.getAction() == Action.RIGHT_CLICK_AIR || e.getAction() == Action.RIGHT_CLICK_BLOCK) {
             if (e.getItem() == null) return;
-            if (e.getItem().getType() == Material.NETHER_STAR) {
-                e.setCancelled(true);
-                LobbyMenu.openMenu(u, LobbyMenu.MenuType.SERVERS);
+
+            switch (e.getItem().getType()) {
+                case NETHER_STAR:
+                    e.setCancelled(true);
+                    LobbyMenu.openMenu(u, LobbyMenu.MenuType.SERVERS);
+                    break;
+                case BED:
+                    e.setCancelled(true);
+                    LobbyMenu.openMenu(u, LobbyMenu.MenuType.COSMETICOS);
+                    break;
             }
+        }
+
+        if (e.getClickedBlock().getType() == Material.ENCHANTMENT_TABLE) {
+            e.setCancelled(true);
+            u.sendMessage(PAData.LOBBY.getPrefix() + "&cActualmente estamos trabajando en esto, disculpen las molestias");
         }
 
         if (!u.isOnRank(PACmd.Grupo.Builder)) {
@@ -106,8 +124,7 @@ public class PlayerEvents implements Listener {
                         || e.getClickedBlock().getType() == Material.ANVIL || e.getClickedBlock().getType() == Material.DARK_OAK_FENCE_GATE
                         || e.getClickedBlock().getType() == Material.SPRUCE_FENCE_GATE || e.getClickedBlock().getType() == Material.FURNACE
                         || e.getClickedBlock().getType() == Material.BURNING_FURNACE || e.getClickedBlock().getType() == Material.HOPPER
-                        || e.getClickedBlock().getType() == Material.ENCHANTMENT_TABLE || e.getClickedBlock().getType() == Material.STONE_BUTTON
-                        || e.getClickedBlock().getType() == Material.WOOD_BUTTON) {
+                        || e.getClickedBlock().getType() == Material.STONE_BUTTON || e.getClickedBlock().getType() == Material.WOOD_BUTTON) {
                     e.setCancelled(true);
                 }
             }
