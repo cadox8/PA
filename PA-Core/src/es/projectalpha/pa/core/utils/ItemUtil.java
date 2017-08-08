@@ -16,7 +16,8 @@ import java.util.List;
 public class ItemUtil {
 
 
-    public static String[] pages = new String[]{"", ""};
+    public static String[] pages = new String[]{"&6Tower &rOf &cAthone\n\n &rTower Of Athone (TOA) es un modo de juego propio de &bProjectAlpha.\n &rAntes de empejar a jugar recomiendo leer este libro.",
+            ""};
 
     public static ItemStack createHeadPlayer(String displayname, String username, List<String> lore) {
         ItemStack playerHead = new ItemStack(Material.SKULL_ITEM, 1, (short) 3);
