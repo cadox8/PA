@@ -15,8 +15,7 @@ import java.util.ArrayList;
 
 public class PassManager {
 
-    @Getter
-    private ArrayList<PAUser> logged;
+    @Getter private ArrayList<PAUser> logged;
 
     private PAAntium plugin;
     private MySQL mysql;
@@ -39,8 +38,9 @@ public class PassManager {
         }
         String encryptedPass = ProtectPass.encodePass(pass);
         mysql.register(u, encryptedPass, "");
-        u.sendMessage(PAData.ANTIUM.getPrefix() + "&3Registrado correctamente. &Contraseña: &c" + pass + " &2Contraseña encriptada: &c" + encryptedPass);
-        updateInv(u.getPlayer());
+        u.sendMessage(PAData.ANTIUM.getPrefix() + "&3Registrado correctamente.");
+        u.sendToLobby();
+        logged.add(u);
     }
 
     public void login(PAUser u, String pass) {
@@ -51,7 +51,7 @@ public class PassManager {
         if (mysql.login(u, pass)) {
             u.sendMessage(PAData.ANTIUM.getPrefix() + "&3Has entrado correctamente");
             logged.add(u);
-            updateInv(u.getPlayer());
+            u.sendToLobby();
             return;
         }
         u.sendMessage(PAData.ANTIUM.getPrefix() + "&cContraseña erronea");
@@ -68,10 +68,5 @@ public class PassManager {
     @Deprecated
     public void updateEmail(PAUser u, String email) {
         //DISABLED
-    }
-
-    private void updateInv(Player p) {
-        p.getInventory().setItem(0, new ItemMaker(Material.NETHER_STAR).setDisplayName("&cJuegos").build());
-        p.updateInventory();
     }
 }

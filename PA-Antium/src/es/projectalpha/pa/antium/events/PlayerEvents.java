@@ -20,7 +20,7 @@ public class PlayerEvents implements Listener {
         this.plugin = instance;
     }
 
-    @EventHandler(priority = EventPriority.HIGHEST)
+    @EventHandler(priority = EventPriority.HIGH)
     public void onJoin(PlayerJoinEvent e) {
         PAUser u = PAAntium.getUser(e.getPlayer());
 
@@ -33,7 +33,7 @@ public class PlayerEvents implements Listener {
         u.sendMessage(PAData.ANTIUM.getPrefix() + "&3Por favor, escribe &c/register <contraseña> <contraseña> &3para acceder al servidor");
     }
 
-    @EventHandler(priority = EventPriority.HIGHEST)
+    @EventHandler(priority = EventPriority.HIGH)
     public void onLeave(PlayerQuitEvent e) {
         PAUser u = PAAntium.getUser(e.getPlayer());
 
