@@ -137,10 +137,13 @@ public class PlayerEvents implements Listener {
         Entity en = e.getRightClicked();
 
         e.setCancelled(true);
+        System.out.println("Entidad encontrada");
 
         if (en instanceof ArmorStand) {
             ArmorStand ar = (ArmorStand) en;
             e.setCancelled(true);
+
+            System.out.println(ar.getItemInHand().getType());
 
             switch (ar.getItemInHand().getType()) {
                 case IRON_AXE:

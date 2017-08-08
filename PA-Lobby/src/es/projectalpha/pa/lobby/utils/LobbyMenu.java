@@ -21,7 +21,7 @@ public class LobbyMenu {
         //Servidores
         servers = plugin.getServer().createInventory(null, 9, "Servidores");
         servers.setItem(0, new ItemMaker(Material.BOW).setDisplayName(PAData.RG.getName()).build());
-        servers.setItem(4, new ItemMaker(Material.IRON_AXE).setDisplayName("&6Tower&rOf&cAncients").build());
+        servers.setItem(4, new ItemMaker(Material.IRON_AXE).setDisplayName("&6Tower &rOf &cAncients").build());
         servers.setItem(8, new ItemMaker(Material.TNT).setDisplayName(PAData.NS.getName()).build());
 
         //Cosmeticos
