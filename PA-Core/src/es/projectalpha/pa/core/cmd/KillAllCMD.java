@@ -13,7 +13,7 @@ import java.util.List;
 public class KillAllCMD extends PACmd {
 
     public KillAllCMD() {
-        super("killall", Grupo.DEV, Arrays.asList("kall"));
+        super("killall", Grupo.Admin, Arrays.asList("kall"));
     }
 
     @Override
@@ -26,23 +26,23 @@ public class KillAllCMD extends PACmd {
         }
 
         if (args.length == 1) {
-            EntityType entity = EntityType.valueOf(args[0]);
+            EntityType entity = EntityType.valueOf(args[0].toUpperCase());
 
             if (entity == null || entity == EntityType.UNKNOWN) return;
 
             int mobs = worldEntities(user.getPlayer().getWorld(), entity).size();
-            worldEntities(user.getPlayer().getWorld(), entity).forEach(e -> e.remove());
+            worldEntities(user.getPlayer().getWorld(), entity).forEach(Entity::remove);
             user.sendMessage(PAData.CORE.getPrefix() + "&6Eliminados &c" + mobs + " &6mobs");
         }
 
         if (args.length == 2) {
             if (args[1].equalsIgnoreCase("-n")) {
-                EntityType entity = EntityType.valueOf(args[0]);
+                EntityType entity = EntityType.valueOf(args[0].toUpperCase());
 
                 if (entity == null || entity == EntityType.UNKNOWN) return;
 
                 int mobs = worldEntities(user.getPlayer().getWorld(), entity).size();
-                worldClassEntities(user.getPlayer().getWorld(), entity).forEach(e -> e.remove());
+                worldClassEntities(user.getPlayer().getWorld(), entity).forEach(Entity::remove);
                 user.sendMessage(PAData.CORE.getPrefix() + "&6Eliminados &c" + mobs + " &6mobs");
             }
         }

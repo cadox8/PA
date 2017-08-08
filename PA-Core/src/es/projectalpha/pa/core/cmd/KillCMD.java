@@ -10,7 +10,7 @@ import java.util.List;
 public class KillCMD extends PACmd {
 
     public KillCMD() {
-        super("kill", Grupo.DEV, "matar");
+        super("kill", Grupo.Admin, "matar");
     }
 
     @Override
