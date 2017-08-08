@@ -60,7 +60,7 @@ public class PlayerEvents implements Listener {
         new Helpers(u).sendToSpawn();
 
         u.getPlayer().getInventory().setItem(0, new ItemMaker(Material.NETHER_STAR).setDisplayName("&cJuegos").build());
-        u.getPlayer().getInventory().setItem(4, new ItemMaker(Material.BED).setDisplayName("&7Cosmeticos").build());
+        u.getPlayer().getInventory().setItem(4, new ItemMaker(Material.PISTON_STICKY_BASE).setDisplayName("&7Cosmeticos").build());
         u.getPlayer().updateInventory();
 
         u.sendMessage("&6Actualmente hay &2" + PAServer.users.size() + " &6usuarios en línea");
@@ -101,9 +101,10 @@ public class PlayerEvents implements Listener {
                     e.setCancelled(true);
                     LobbyMenu.openMenu(u, LobbyMenu.MenuType.SERVERS);
                     break;
-                case BED:
+                case PISTON_STICKY_BASE:
                     e.setCancelled(true);
-                    LobbyMenu.openMenu(u, LobbyMenu.MenuType.COSMETICOS);
+                    u.sendMessage(PAData.LOBBY.getPrefix() + "&cEstamos trabajando en esto :D");
+                    //LobbyMenu.openMenu(u, LobbyMenu.MenuType.COSMETICOS);
                     break;
             }
 

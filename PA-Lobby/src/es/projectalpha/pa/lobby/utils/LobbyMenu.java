@@ -11,6 +11,7 @@ import org.bukkit.inventory.Inventory;
 public class LobbyMenu {
 
     private static Inventory servers;
+    private static Inventory rg;
     private static Inventory cometicos;
 
     private PALobby plugin = PALobby.getInstance();
@@ -23,6 +24,15 @@ public class LobbyMenu {
         servers.setItem(0, new ItemMaker(Material.BOW).setDisplayName(PAData.RG.getName()).build());
         servers.setItem(4, new ItemMaker(Material.IRON_AXE).setDisplayName("&6Tower &rOf &cAncients").build());
         servers.setItem(8, new ItemMaker(Material.TNT).setDisplayName(PAData.NS.getName()).build());
+
+        //RageGames
+        rg = plugin.getServer().createInventory(null, 9, "RageGames");
+        rg.setItem(0, new ItemMaker(Material.BOW).setDisplayName(PAData.RG.getName() + " &r1").build());
+        rg.setItem(1, new ItemMaker(Material.BOW).setDisplayName(PAData.RG.getName() + " &r2").build());
+        rg.setItem(2, new ItemMaker(Material.BOW).setDisplayName(PAData.RG.getName() + " &r3").build());
+        rg.setItem(3, new ItemMaker(Material.BOW).setDisplayName(PAData.RG.getName() + " &r4").build());
+        rg.setItem(8, new ItemMaker(Material.COMPASS).setDisplayName("&cModalidad").build());
+
 
         //Cosmeticos
         cometicos = plugin.getServer().createInventory(null, 27, "Cosmeticos");
@@ -48,6 +58,6 @@ public class LobbyMenu {
     }
 
     public enum MenuType {
-        SERVERS, COSMETICOS
+        SERVERS, COSMETICOS, RG
     }
 }
