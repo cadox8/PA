@@ -4,6 +4,7 @@ import es.projectalpha.pa.core.api.PAData;
 import es.projectalpha.pa.core.api.PAServer;
 import es.projectalpha.pa.core.api.PAUser;
 import es.projectalpha.pa.core.cmd.PACmd;
+import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -15,7 +16,7 @@ import java.util.List;
 public class TeleportCMD extends PACmd {
 
     public TeleportCMD() {
-        super("tp", Grupo.Builder, Arrays.asList("teleport", "tppos", "tploc"));
+        super("tp", Grupo.Builder, Arrays.asList("teleport"));
     }
 
     @Override
@@ -43,24 +44,8 @@ public class TeleportCMD extends PACmd {
                 user.sendMessage(PAData.CORE.getPrefix() + "&c" + user.getName() + " &6se ha teletransportado hacia tí");
                 from.sendMessage(PAData.CORE.getPrefix() + "&6Teletransportado a &c" + user.getName());
                 break;
-            case 3: //mandar sender a unas coordenadas
-                Double x, y, z;
-                try {
-                    x = Double.parseDouble(args[0]);
-                    y = Double.parseDouble(args[1]);
-                    z = Double.parseDouble(args[2]);
-                } catch (NumberFormatException e) {
-                    user.sendMessage("");
-                    return;
-                }
-                Location loc = new Location(user.getPlayer().getWorld(), x, y, z);
-
-                user.getPlayer().teleport(loc, PlayerTeleportEvent.TeleportCause.COMMAND);
-                user.sendMessage("");
-                break;
             default:
-                user.sendMessage("¡");
-                user.sendMessage("¡");
+                user.sendMessage(ChatColor.RED + "Error :D");
                 break;
         }
     }

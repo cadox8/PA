@@ -1,7 +1,9 @@
 package es.projectalpha.pa.core.cmd.tp;
 
+import es.projectalpha.pa.core.api.PAData;
 import es.projectalpha.pa.core.api.PAUser;
 import es.projectalpha.pa.core.cmd.PACmd;
+import es.projectalpha.pa.core.utils.Messages;
 import org.bukkit.Location;
 import org.bukkit.event.player.PlayerTeleportEvent;
 
@@ -10,13 +12,13 @@ import java.util.Arrays;
 public class TeleportPosCMD extends PACmd {
 
     public TeleportPosCMD() {
-        super("tppos", Grupo.Admin, Arrays.asList("tploc"));
+        super("tppos", Grupo.Admin, "tploc");
     }
 
     @Override
     public void run(PAUser user, String label, String[] args) {
         if (args.length != 3) {
-            user.sendMessage("&eUsa: /" + label + " <x> <y> <z>");
+            user.sendMessage(Messages.getMessage(Messages.BUFF_ARGS, PAData.CORE));
             return;
         }
 
