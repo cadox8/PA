@@ -9,12 +9,12 @@ import org.bukkit.inventory.ItemFlag;
 
 public class Picaro extends Race {
 
-    public Picaro(RaceType id, int health) {
+    public Picaro(RaceType id, double health) {
         super(id, "Picaro", health);
     }
 
     public void setItems(Player p) {
-        p.getInventory().setItem(1, new ItemMaker(Material.SHEARS).setDisplayName("&bChas Chas Chas").setLores("&dDaño:", "&734").addItemFlag(ItemFlag.values()).setUnbreakable().build());
+        p.getInventory().setItem(0, new ItemMaker(Material.SHEARS).setDisplayName("&bChas Chas Chas").setLores("&dDaño:", "&726").addItemFlag(ItemFlag.values()).setUnbreakable().build());
 
         p.getInventory().setItem(2, new ItemMaker(Material.ARMOR_STAND).setDisplayName("&eLadrón").build());
         p.getInventory().setItem(3, new ItemMaker(Material.SUGAR).setDisplayName("&eFrenesí").build());

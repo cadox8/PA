@@ -1,9 +1,7 @@
 package es.projectalpha.pa.toa.abilities;
 
 import es.projectalpha.pa.toa.TOA;
-import es.projectalpha.pa.toa.abilities.list.Dagas;
-import es.projectalpha.pa.toa.abilities.list.Fantasma;
-import es.projectalpha.pa.toa.abilities.list.Frenesi;
+import es.projectalpha.pa.toa.abilities.list.*;
 import es.projectalpha.pa.toa.api.TOAUser;
 import es.projectalpha.pa.toa.races.Race;
 import lombok.Getter;
@@ -45,6 +43,11 @@ public class Ability {
             case FEATHER:
                 new Dagas().play(u);
                 break;
+            case BLAZE_POWDER:
+                new Fenix().play(u);
+            case POTION:
+                new Guerrillero().play(u);
+
 
             default:
                 break;

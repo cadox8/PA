@@ -2,6 +2,7 @@ package es.projectalpha.pa.toa;
 
 import es.projectalpha.pa.core.PACommands;
 import es.projectalpha.pa.toa.api.TOAUser;
+import es.projectalpha.pa.toa.atribs.Armor;
 import es.projectalpha.pa.toa.atribs.Health;
 import es.projectalpha.pa.toa.cmd.MobsCMD;
 import es.projectalpha.pa.toa.cmd.MochilaCMD;
@@ -34,6 +35,7 @@ public class TOA extends JavaPlugin {
     @Getter private DropsManager drops;
     @Getter private FileUtils fileUtils;
     @Getter private Health health;
+    @Getter private Armor armor;
 
     @Getter private SpawnTask spawnTask;
 
@@ -56,6 +58,7 @@ public class TOA extends JavaPlugin {
         drops = new DropsManager();
         spawnTask = new SpawnTask(instance);
         health = new Health(instance);
+        armor = new Armor(instance);
 
         Race.registerRaces();
 

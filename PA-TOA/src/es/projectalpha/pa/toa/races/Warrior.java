@@ -6,12 +6,12 @@ import org.bukkit.inventory.ItemStack;
 
 public class Warrior extends Race {
 
-    public Warrior(RaceType id, int health) {
+    public Warrior(RaceType id, double health) {
         super(id, "Caballero", health);
     }
 
     public void setItems(Player p) {
-        p.getInventory().addItem(new ItemStack(Material.DIAMOND_SWORD));
+        p.getInventory().setItem(0, new ItemStack(Material.DIAMOND_SWORD));
 
         p.getInventory().setHelmet(new ItemStack(Material.IRON_HELMET));
         p.getInventory().setChestplate(new ItemStack(Material.IRON_CHESTPLATE));

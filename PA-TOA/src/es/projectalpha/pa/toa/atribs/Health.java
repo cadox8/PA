@@ -29,12 +29,13 @@ public class Health {
         health.put(u, value);
     }
 
-    public void addHealth(TOAUser u, double value) {
+    public void regen(TOAUser u, double value) {
         setHealth(u, getHealth(u) + value);
     }
 
-    public void remHealth(TOAUser u, double value) {
-        setHealth(u, getHealth(u) - value);
+    public void damage(TOAUser u, double value) {
+        double realValue = value - plugin.getArmor().armorPerLevel(u);
+        setHealth(u, getHealth(u) - realValue);
     }
 
     public double getHealth(TOAUser u) {
@@ -48,11 +49,13 @@ public class Health {
     public double healthPerLevel(TOAUser u) {
         switch (u.getUserData().getKit()) {
             case 0:
-                return 85 * u.getUserData().getLvl() + Race.WARRIOR.getHealth();
+                return 38 * u.getUserData().getLvl() + Race.WARRIOR.getHealth();
             case 1:
-                return 76 * u.getUserData().getLvl() + Race.PICARO.getHealth();
+                return 35 * u.getUserData().getLvl() + Race.PICARO.getHealth();
             case 2:
-                return 70 * u.getUserData().getLvl() + Race.ARCHER.getHealth();
+                return 33 * u.getUserData().getLvl() + Race.ARCHER.getHealth();
+            case 3:
+                return 27 * u.getUserData().getLvl() + Race.MAGE.getHealth();
             default:
                 return 0;
         }

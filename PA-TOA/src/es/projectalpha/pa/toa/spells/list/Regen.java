@@ -11,6 +11,6 @@ public class Regen extends Spell {
 
     public void spell(TOAUser u) {
         int percent = (int)(plugin.getHealth().healthPerLevel(u) * (20 + (u.getUserData().getLvl() * 0.2)));
-        plugin.getHealth().addHealth(u, percent);
+        plugin.getHealth().regen(u, percent);
     }
 }

@@ -11,17 +11,17 @@ public class Race {
 
     //ToDo: Punto de spawn por cada clase
 
-    public static final Race WARRIOR = new Warrior(RaceType.WARRIOR, 1130);
-    public static final Race PICARO = new Picaro(RaceType.PICARO, 1034);
-    public static final Race ARCHER = new Archer(RaceType.ARCHER, 1014);
-    public static final Race MAGE = new Mage(RaceType.MAGE, 1000);
+    public static final Race WARRIOR = new Warrior(RaceType.WARRIOR, 113);
+    public static final Race PICARO = new Picaro(RaceType.PICARO, 103.4);
+    public static final Race ARCHER = new Archer(RaceType.ARCHER, 101.4);
+    public static final Race MAGE = new Mage(RaceType.MAGE, 100);
     private static ArrayList<Race> races = new ArrayList<>();
 
     @Getter private String name;
     @Getter private RaceType raceType;
-    @Getter private int health;
+    @Getter private double health;
 
-    public Race(RaceType raceType, String name, int health) {
+    public Race(RaceType raceType, String name, double health) {
         this.name = name;
         this.raceType = raceType;
         this.health = health;

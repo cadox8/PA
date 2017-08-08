@@ -7,6 +7,8 @@ import es.projectalpha.pa.core.utils.Utils;
 import es.projectalpha.pa.toa.TOA;
 import es.projectalpha.pa.toa.abilities.Ability;
 import es.projectalpha.pa.toa.api.TOAUser;
+import es.projectalpha.pa.toa.mobs.boss.Boss;
+import es.projectalpha.pa.toa.mobs.boss.BossAttacks;
 import es.projectalpha.pa.toa.races.Race;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -49,6 +51,7 @@ public class PlayerEvents implements Listener {
     public void onPlayerDie(EntityDamageByEntityEvent e) {
         DecimalFormat df = new DecimalFormat("0.00");
 
+        //You hit me, bitch
         if (e.getEntity() instanceof Player && e.getDamager() instanceof Monster) {
             TOAUser u = TOA.getPlayer((Player) e.getEntity());
             String name = e.getEntity().getCustomName().split(" ")[1];
@@ -59,17 +62,26 @@ public class PlayerEvents implements Listener {
                 u.death();
                 return;
             }
-            plugin.getHealth().remHealth(u, Double.valueOf(df.format(damage)));
+            plugin.getHealth().damage(u, Double.valueOf(df.format(damage)));
         }
 
+
+        //Normal
         if (e.getEntity() instanceof Monster && e.getDamager() instanceof Player) {
             TOAUser u = TOA.getPlayer((Player) e.getDamager());
             ItemStack i = u.getPlayer().getItemInHand() != null ? u.getPlayer().getItemInHand() : new ItemStack(Material.AIR);
             int damage = i.getItemMeta().hasLore() ? Integer.parseInt(ChatColor.stripColor(i.getItemMeta().getLore().get(1))) : 0;
 
             e.setDamage(Double.valueOf(df.format(damage + (damage * u.getUserData().getLvl() * 0.2))));
+
+            if (e.getEntity() instanceof Giant) { //Boss Attack
+                BossAttacks.giantAttacks((Giant) e.getEntity(), u.getPlayer());
+                return;
+            }
         }
 
+
+        //Archer
         if (e.getEntity() instanceof Monster && e.getDamager() instanceof Arrow) {
             Monster m = (Monster) e.getEntity();
             TOAUser u = TOA.getPlayer((Player)((Arrow) e.getDamager()).getShooter());
@@ -119,7 +131,7 @@ public class PlayerEvents implements Listener {
         TOAUser u = TOA.getPlayer(e.getPlayer());
         Location l = u.getLoc();
 
-        if (!plugin.getGm().getInTower().contains(u)) return;
+        if (plugin.getGm().getInTower().contains(u)) return;
 
         Block b1 = l.getWorld().getBlockAt(Utils.cuboidToLocation(plugin.getConfig().getString("JoinTower"), 0));
         Block b2 = l.getWorld().getBlockAt(Utils.cuboidToLocation(plugin.getConfig().getString("JoinTower"), 1));
