@@ -2,18 +2,20 @@ package es.projectalpha.pa.nexus.clases;
 
 import es.projectalpha.pa.core.utils.ItemMaker;
 import es.projectalpha.pa.nexus.api.NexusPlayer;
+import lombok.Getter;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
 public final class MagoClass {
-    ItemStack item1 = new ItemMaker(Material.STICK).setDisplayName("Varita").setLores("&5Harry Potter quedría esta varita.").build();
-    ItemStack item2 = new ItemMaker(Material.BOOK).setDisplayName("Libro de hechizos").build();
-    ItemStack item3 = new ItemMaker(Material.BARRIER).setDisplayName("Próximamente").build();
+    @Getter
+    private ItemStack item1 = new ItemMaker(Material.STICK).setDisplayName("Varita").setLores("&5Harry Potter quedría esta varita.").build();
+    @Getter private ItemStack item2 = new ItemMaker(Material.BOOK).setDisplayName("Libro de hechizos").build();
+    @Getter private ItemStack item3 = new ItemMaker(Material.BARRIER).setDisplayName("Próximamente").build();
 
-    ItemStack armor1 = new ItemMaker(Material.LEATHER_HELMET).setDisplayName("Casco del mago").build();
-    ItemStack armor2 = new ItemMaker(Material.LEATHER_CHESTPLATE).setDisplayName("Peto del mago").build();
-    ItemStack armor3 = new ItemMaker(Material.LEATHER_LEGGINGS).setDisplayName("Pantalones del mago").build();
-    ItemStack armor4 = new ItemMaker(Material.LEATHER_BOOTS).setDisplayName("Botas del mago").build();
+    private ItemStack armor1 = new ItemMaker(Material.LEATHER_HELMET).setDisplayName("Casco del mago").build();
+    private ItemStack armor2 = new ItemMaker(Material.LEATHER_CHESTPLATE).setDisplayName("Peto del mago").build();
+    private ItemStack armor3 = new ItemMaker(Material.LEATHER_LEGGINGS).setDisplayName("Pantalones del mago").build();
+    private ItemStack armor4 = new ItemMaker(Material.LEATHER_BOOTS).setDisplayName("Botas del mago").build();
 
     public void giveMago(NexusPlayer p){
 
@@ -38,8 +40,6 @@ public final class MagoClass {
         p.getPlayer().getInventory().remove(armor2);
         p.getPlayer().getInventory().remove(armor3);
         p.getPlayer().getInventory().remove(armor4);
-
-        p.sendMessage("&7Eliminado el kit del mago.");
 
     }
 
