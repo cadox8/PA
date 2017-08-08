@@ -1,5 +1,8 @@
 package es.projectalpha.pa.bungee;
 
+import es.projectalpha.pa.bungee.cmd.CommandAlert;
+import es.projectalpha.pa.bungee.cmd.CommandLobby;
+import lombok.Getter;
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.ServerPing;
 import net.md_5.bungee.api.chat.TextComponent;
@@ -16,11 +19,15 @@ public class PABungee extends Plugin implements Listener {
 
     private String pluginChannel = "PA";
 
+    @Getter private static PABungee instance;
+
     @Override
     public void onEnable() {
+        instance = this;
         getProxy().registerChannel(pluginChannel);
         getProxy().getPluginManager().registerListener(this, this);
         getProxy().getPluginManager().registerCommand(this, new CommandAlert());
+        getProxy().getPluginManager().registerCommand(this, new CommandLobby());
     }
 
     @EventHandler
@@ -45,7 +52,7 @@ public class PABungee extends Plugin implements Listener {
         ping.setDescriptionComponent(new TextComponent(ChatColor.translateAlternateColorCodes('&', motd)));
     }
 
-    private ServerInfo getLobby() {
+    public ServerInfo getLobby() {
         return getProxy().getServerInfo("lobby");
     }
 }
