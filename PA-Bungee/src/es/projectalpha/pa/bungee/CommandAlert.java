@@ -8,7 +8,7 @@ import net.md_5.bungee.api.plugin.Command;
 public class CommandAlert extends Command {
 
     public CommandAlert() {
-        super("gritar", "bungee.alert", "alert");
+        super("gritar", "bungee.alert", "alert, alertar");
     }
 
     public void execute(CommandSender sender, String[] args) {
