@@ -93,7 +93,7 @@ public class PlayerEvents implements Listener {
         PAUser u = PAServer.getUser(e.getPlayer());
 
         if (e.getAction() == Action.RIGHT_CLICK_AIR || e.getAction() == Action.RIGHT_CLICK_BLOCK) {
-            if (e.getItem() == null) return;
+            if (e.getItem() == null || e.getClickedBlock() == null) return;
 
             switch (e.getItem().getType()) {
                 case NETHER_STAR:
@@ -105,11 +105,11 @@ public class PlayerEvents implements Listener {
                     LobbyMenu.openMenu(u, LobbyMenu.MenuType.COSMETICOS);
                     break;
             }
-        }
 
-        if (e.getClickedBlock().getType() == Material.ENCHANTMENT_TABLE) {
-            e.setCancelled(true);
-            u.sendMessage(PAData.LOBBY.getPrefix() + "&cActualmente estamos trabajando en esto, disculpen las molestias");
+            if (e.getClickedBlock().getType() == Material.ENCHANTMENT_TABLE) {
+                e.setCancelled(true);
+                u.sendMessage(PAData.LOBBY.getPrefix() + "&cActualmente estamos trabajando en esto, disculpen las molestias");
+            }
         }
 
         if (!u.isOnRank(PACmd.Grupo.Builder)) {
@@ -204,5 +204,10 @@ public class PlayerEvents implements Listener {
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onDeath(PlayerDeathEvent e) {
         e.setDeathMessage("");
+    }
+
+    @EventHandler
+    public void onSpawn(CreatureSpawnEvent e){
+        e.setCancelled(true);
     }
 }
