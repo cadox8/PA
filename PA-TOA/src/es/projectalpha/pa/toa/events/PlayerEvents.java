@@ -19,6 +19,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.entity.FoodLevelChangeEvent;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
@@ -138,5 +139,10 @@ public class PlayerEvents implements Listener {
         CuboidZone cz = new CuboidZone(b1, b2);
 
         if (cz.toLocations().contains(l)) u.sendToTower();
+    }
+
+    @EventHandler(ignoreCancelled = true, priority = EventPriority.HIGHEST)
+    public void onFoodLevelChange(FoodLevelChangeEvent e) {
+        e.setCancelled(true);
     }
 }
