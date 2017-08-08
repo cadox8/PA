@@ -50,7 +50,7 @@ public class PlayerEvents implements Listener {
         return d;
     }
 
-    @EventHandler
+    @EventHandler(priority = EventPriority.HIGHEST)
     public void onJoin(PlayerJoinEvent e) {
         PAUser u = PAServer.getUser(e.getPlayer());
         Helpers h = new Helpers(u);
@@ -59,13 +59,14 @@ public class PlayerEvents implements Listener {
         LobbyTeams.setScoreboardTeam(u);
         new Helpers(u).sendToSpawn();
 
-        u.getPlayer().getInventory().setItem(0, new ItemMaker(Material.NETHER_STAR).setDisplayName("&cServidores").build());
-        u.getPlayer().getInventory().setItem(4, new ItemMaker(Material.BED).setDisplayName("&dCosmeticos").build());
+        u.getPlayer().getInventory().setItem(0, new ItemMaker(Material.NETHER_STAR).setDisplayName("&cJuegos").build());
+        u.getPlayer().getInventory().setItem(4, new ItemMaker(Material.BED).setDisplayName("&7Cosmeticos").build());
+        u.getPlayer().updateInventory();
 
         u.sendMessage("&6Actualmente hay &2" + PAServer.users.size() + " &6usuarios en línea");
     }
 
-    @EventHandler
+    @EventHandler(priority = EventPriority.HIGHEST)
     public void onLeave(PlayerQuitEvent e) {
         PAUser u = PAServer.getUser(e.getPlayer());
 
