@@ -2,7 +2,6 @@ package es.projectalpha.pa.core;
 
 import es.projectalpha.pa.core.api.PAServer;
 import es.projectalpha.pa.core.events.PlayerListener;
-import es.projectalpha.pa.core.managers.WorldManager;
 import es.projectalpha.pa.core.utils.Log;
 import es.projectalpha.pa.core.utils.MySQL;
 import es.projectalpha.pa.core.utils.Utils;
@@ -28,7 +27,6 @@ public class PACore extends JavaPlugin {
     @Getter private static ViaAPI api = Via.getAPI();
 
     @Getter private Utils utils;
-    @Getter private WorldManager worldManager;
     @Getter private MySQL mysql = null;
     private Connection connection = null;
 
@@ -89,7 +87,6 @@ public class PACore extends JavaPlugin {
 
     private void register() {
         utils = new Utils(this);
-        worldManager = new WorldManager(this);
     }
 
 
