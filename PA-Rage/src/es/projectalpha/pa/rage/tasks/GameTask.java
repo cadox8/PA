@@ -33,6 +33,7 @@ public class GameTask extends BukkitRunnable {
         plugin.getGm().getPlaying().forEach(p -> {
             BossBarUtils.create(p.getPlayer(), "&cTiempo restante: &6" + count, BossBarAPI.Color.BLUE, BossBarAPI.Style.PROGRESS);
             p.getPlayer().setFireTicks(0);
+            p.getPlayer().setHealthScale(20d);
         });
 
         switch (count) {

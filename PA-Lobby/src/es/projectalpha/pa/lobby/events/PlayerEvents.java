@@ -58,7 +58,7 @@ public class PlayerEvents implements Listener {
         h.lobbyScoreboard();
         LobbyTeams.setScoreboardTeam(u);
         new Helpers(u).sendToSpawn();
-
+        u.getPlayer().getInventory().clear();
         u.getPlayer().getInventory().setItem(0, new ItemMaker(Material.NETHER_STAR).setDisplayName("&cJuegos").build());
         u.getPlayer().getInventory().setItem(4, new ItemMaker(Material.BED).setDisplayName("&7Cosmeticos").build());
         u.getPlayer().updateInventory();
