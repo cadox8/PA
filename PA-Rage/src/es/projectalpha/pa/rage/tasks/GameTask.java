@@ -36,6 +36,8 @@ public class GameTask extends BukkitRunnable {
             p.getPlayer().setHealthScale(20d);
         });
 
+        hasEnoughPlayers();
+
         switch (count) {
             case 210:
                 plugin.getGm().getPlaying().forEach(p -> {
@@ -64,9 +66,7 @@ public class GameTask extends BukkitRunnable {
                 checkWinner();
                 break;
             case 0:
-                new ShutdownTask(plugin).runTaskTimer(plugin, 0, 20);
-                GameState.setState(GameState.FINISHED);
-                cancel();
+                end();
                 break;
         }
         count--;
@@ -75,13 +75,15 @@ public class GameTask extends BukkitRunnable {
     private void checkWinner() {
         RagePlayer[] users = plugin.getGm().reorder().keySet().toArray(new RagePlayer[plugin.getGm().reorder().size()]);
 
+        if (users.length == 0) return;
+
         Utils.broadcastMsg("------------------------");
         Utils.broadcastMsg("");
-        Utils.broadcastMsg("1º " + users[0].getName() + ": " + plugin.getGm().getScore().get(users[0]) + " puntos.");
-        Utils.broadcastMsg("2º " + users[1].getName() + ": " + plugin.getGm().getScore().get(users[1]) + " puntos.");
+        Utils.broadcastMsg("1º &c" + users[0].getName() + "&7: &6" + plugin.getGm().getScore().get(users[0]) + " puntos.");
+        Utils.broadcastMsg("2º &c" + users[1].getName() + "&7: &6" + plugin.getGm().getScore().get(users[1]) + " puntos.");
 
         if(users.length >= 3) {
-            Utils.broadcastMsg("3º " + users[2].getName() + ": " + plugin.getGm().getScore().get(users[2]) + " puntos.");
+            Utils.broadcastMsg("3º &c" + users[2].getName() + "&7: &6" + plugin.getGm().getScore().get(users[2]) + " puntos.");
         }
 
         Utils.broadcastMsg("");
@@ -91,5 +93,22 @@ public class GameTask extends BukkitRunnable {
             p.getPlayer().getInventory().clear();
             p.getPlayer().setGameMode(GameMode.SPECTATOR);
         });
+    }
+
+    private void hasEnoughPlayers() {
+        if (plugin.getGm().getPlaying().size() > 1) return;
+
+        plugin.getGm().getPlaying().forEach(u -> {
+            u.sendMessage(PAData.RG.getPrefix() + "&cEl juego se ha acabado puesto que no hay jugadores");
+            u.sendSound(Sound.LEVEL_UP);
+        });
+        checkWinner();
+        end();
+    }
+
+    private void end() {
+        new ShutdownTask(plugin).runTaskTimer(plugin, 0, 20);
+        GameState.setState(GameState.FINISHED);
+        cancel();
     }
 }

@@ -28,12 +28,14 @@ public class GameEvents implements Listener {
         if (e.getDamager() instanceof Player && e.getEntity() instanceof Player) {
             Player d = (Player) e.getDamager();
             Player a = (Player) e.getEntity();
+
             if(d.equals(a)) return;
-            e.setDamage(0);
 
             if(GameState.getState() == GameState.LOBBY) e.setCancelled(true);
 
             if (d.getInventory().getItemInHand().getType() == Material.IRON_SWORD) {
+                e.setCancelled(true);
+                a.damage(0);
                 Utils.broadcastMsg(ChatColor.GOLD + d.getName() + ChatColor.GREEN + " ha matado a " + ChatColor.GOLD + a.getName() + ChatColor.GREEN + " usando " + Items.getKnife().getItemMeta().getDisplayName() + ChatColor.GREEN + " (+20 puntos)");
                 RageGames.getPlayer(a).resetPlayer();
                 a.teleport(plugin.getAm().getRandomSpawn());
@@ -45,8 +47,12 @@ public class GameEvents implements Listener {
             Player s = (Player) ((Projectile) e.getDamager()).getShooter();
             Player h = (Player) e.getEntity();
             Projectile a = (Projectile) e.getDamager();
+
             if(s.equals(h)) return;
+
             if (a instanceof Arrow) {
+                e.setCancelled(true);
+                h.damage(0);
                 s.getInventory().setItem(9, Items.getArrow());
                 Utils.broadcastMsg(ChatColor.GOLD + h.getName() + ChatColor.GREEN + " ha matado a " + ChatColor.GOLD + s.getName() + ChatColor.GREEN + " usando " + Items.getArrow().getItemMeta().getDisplayName() + ChatColor.GREEN +  " (+30 puntos)");
 

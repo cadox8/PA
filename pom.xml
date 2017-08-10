@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>es.projectalpha</groupId>
     <artifactId>PA</artifactId>
-    <version>0.5.0</version>
+    <version>1.0</version>
     <packaging>pom</packaging>
     <modules>
 
@@ -17,6 +17,9 @@
 
         <!-- Lobby -->
         <module>PA-Lobby</module>
+
+        <!-- Survival -->
+        <module>PA-Survival</module>
 
         <!-- Juegos -->
         <module>PA-Rage</module>

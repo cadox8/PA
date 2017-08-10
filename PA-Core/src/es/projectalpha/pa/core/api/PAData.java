@@ -24,9 +24,9 @@ public enum PAData {
         return prefix;
     }
     public String getPrefix() {
-        return ChatColor.GRAY + " || " + prefix + ChatColor.GRAY + " || ";
+        return "&7 || " + prefix + "&7 || &r";
     }
     public String getOldPrefix() {
-        return "§7 || " + prefix.replace('&', '§') + "§7 || ";
+        return "§7 || " + prefix.replace('&', '§') + "§7 || §r";
     }
 }

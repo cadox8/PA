@@ -5,14 +5,9 @@ import es.projectalpha.pa.core.utils.Title;
 import es.projectalpha.pa.core.utils.Utils;
 import es.projectalpha.pa.rage.RageGames;
 import es.projectalpha.pa.rage.api.RagePlayer;
-import es.projectalpha.pa.rage.manager.GameManager;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Sound;
 import org.bukkit.scheduler.BukkitRunnable;
-
-import java.util.HashMap;
-
-import static es.projectalpha.pa.rage.RageGames.gs;
 
 public class LobbyTask extends BukkitRunnable {
 
