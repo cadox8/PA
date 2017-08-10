@@ -18,6 +18,9 @@
         <!-- Lobby -->
         <module>PA-Lobby</module>
 
+        <!-- Survival -->
+        <module>PA-Survival</module>
+
         <!-- Juegos -->
         <module>PA-Rage</module>
         <module>PA-NexusSiege</module>
