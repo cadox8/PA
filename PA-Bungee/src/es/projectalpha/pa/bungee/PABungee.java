@@ -33,7 +33,7 @@ public class PABungee extends Plugin implements Listener {
     @EventHandler
     public void onPlayerJoin(PostLoginEvent e) {
         ProxiedPlayer p = e.getPlayer();
-        p.connect(getLobby());
+        p.connect(getLogin());
     }
 
     @EventHandler
@@ -45,7 +45,7 @@ public class PABungee extends Plugin implements Listener {
     @EventHandler
     public void onProxyPing(ProxyPingEvent e) {
         ServerPing ping = e.getResponse();
-        String motd = "&7&l&k||||&r&9&l ProjectAlpha &r&7&l&k||||&r&7   [&91.8 - 1.12.1&7]  &r&7Alpha\\n     Beta: 11/08/2017           ";
+        String motd = "&7&l&k||||&r&9&l ProjectAlpha &r&7&l&k||||&r&7   [&91.8 - 1.12.1&7]  &r&7Alpha\n       Beta: 11/08/2017           ";
         // "&7&l&k||||&r&9&l ProjectAlpha &r&7&l&k||||&r&7   [&91.8 - 1.12.1&7]  &r&7Alpha\\\n" +
         //"      \\ 0.5    \\n&r&bRageGames, &2Survival &6y mucho más!           "
 
@@ -54,5 +54,8 @@ public class PABungee extends Plugin implements Listener {
 
     public ServerInfo getLobby() {
         return getProxy().getServerInfo("lobby");
+    }
+    private ServerInfo getLogin() {
+        return getProxy().getServerInfo("login");
     }
 }
