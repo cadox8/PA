@@ -13,6 +13,7 @@ import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
+import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerPickupItemEvent;
@@ -68,15 +69,23 @@ public class PlayerEvents implements Listener {
     public void onBlockPlace(BlockPlaceEvent e) {
         if (!RageGames.getPlayer(e.getPlayer()).isOnRank(PACmd.Grupo.Admin)) e.setCancelled(true);
     }
+
     @EventHandler
     public void onDamage(EntityDamageEvent e){
         if(!(e.getEntity() instanceof Player)) return;
         Player p = (Player) e.getEntity();
-        if(e.getCause() == EntityDamageEvent.DamageCause.LAVA){
-        p.teleport(plugin.getAm().getRandomSpawn());
-        RageGames.getPlayer(p).resetPlayer();
-        p.setHealth(20d);
-        p.setFireTicks(0);
+
+        switch (e.getCause()) {
+            case LAVA:
+                e.setCancelled(true);
+                p.teleport(plugin.getAm().getRandomSpawn());
+                RageGames.getPlayer(p).resetPlayer();
+                p.setHealth(20d);
+                p.setFireTicks(0);
+                break;
+            case FALL:
+                e.setCancelled(true);
+                break;
         }
     }
 
@@ -87,6 +96,11 @@ public class PlayerEvents implements Listener {
 
     @EventHandler
     public void onPickUp(PlayerPickupItemEvent e) {
+        e.setCancelled(true);
+    }
+
+    @EventHandler
+    public void inventoryClick(InventoryClickEvent e) {
         e.setCancelled(true);
     }
 }
