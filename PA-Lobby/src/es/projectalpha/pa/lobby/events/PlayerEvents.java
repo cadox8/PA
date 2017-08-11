@@ -24,6 +24,7 @@ import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.*;
 import org.bukkit.event.inventory.InventoryMoveItemEvent;
 import org.bukkit.event.player.*;
+import org.bukkit.event.weather.WeatherChangeEvent;
 
 import java.util.Random;
 
@@ -94,7 +95,7 @@ public class PlayerEvents implements Listener {
         PAUser u = PAServer.getUser(e.getPlayer());
 
         if (e.getAction() == Action.RIGHT_CLICK_AIR || e.getAction() == Action.RIGHT_CLICK_BLOCK) {
-            if (e.getItem() == null || e.getClickedBlock() == null) return;
+            if (e.getItem() == null) return;
 
             switch (e.getItem().getType()) {
                 case NETHER_STAR:
@@ -107,6 +108,8 @@ public class PlayerEvents implements Listener {
                     //LobbyMenu.openMenu(u, LobbyMenu.MenuType.COSMETICOS);
                     break;
             }
+
+            if (e.getClickedBlock() == null) return;
 
             if (e.getClickedBlock().getType() == Material.ENCHANTMENT_TABLE) {
                 e.setCancelled(true);
@@ -210,6 +213,11 @@ public class PlayerEvents implements Listener {
 
     @EventHandler
     public void onSpawn(CreatureSpawnEvent e){
+        e.setCancelled(true);
+    }
+
+    @EventHandler(priority = EventPriority.HIGH)
+    public void onWeather(WeatherChangeEvent e) {
         e.setCancelled(true);
     }
 }

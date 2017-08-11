@@ -6,13 +6,11 @@ import es.projectalpha.pa.core.cmd.PACmd;
 import es.projectalpha.pa.core.utils.Utils;
 import es.projectalpha.pa.lobby.PALobby;
 import es.projectalpha.pa.lobby.utils.LobbyMenu;
-import org.bukkit.GameMode;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
-import org.bukkit.event.inventory.InventoryType;
 
 public class InventoryEvents implements Listener {
 
@@ -34,6 +32,7 @@ public class InventoryEvents implements Listener {
                 e.setCancelled(true);
                 switch (e.getSlot()) {
                     case 0:
+                        u.getPlayer().closeInventory();
                         LobbyMenu.openMenu(u, LobbyMenu.MenuType.RG);
                         break;
                     case 4:

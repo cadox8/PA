@@ -12,9 +12,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
-import org.bukkit.event.entity.FoodLevelChangeEvent;
 import org.bukkit.event.player.*;
-import org.bukkit.event.weather.WeatherChangeEvent;
 
 public class PlayerListener implements Listener {
 
@@ -90,15 +88,5 @@ public class PlayerListener implements Listener {
                     "de los plugins sólo lo tenemos nosotros :D");
             e.setCancelled(true);
         }
-    }
-
-    @EventHandler(priority = EventPriority.HIGH)
-    public void onFood(FoodLevelChangeEvent e) {
-        e.setCancelled(true);
-    }
-
-    @EventHandler(priority = EventPriority.HIGH)
-    public void onWeather(WeatherChangeEvent e) {
-        e.setCancelled(true);
     }
 }

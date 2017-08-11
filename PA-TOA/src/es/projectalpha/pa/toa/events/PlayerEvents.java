@@ -7,7 +7,6 @@ import es.projectalpha.pa.core.utils.Utils;
 import es.projectalpha.pa.toa.TOA;
 import es.projectalpha.pa.toa.abilities.Ability;
 import es.projectalpha.pa.toa.api.TOAUser;
-import es.projectalpha.pa.toa.mobs.boss.Boss;
 import es.projectalpha.pa.toa.mobs.boss.BossAttacks;
 import es.projectalpha.pa.toa.races.Race;
 import org.bukkit.ChatColor;
@@ -23,6 +22,7 @@ import org.bukkit.event.entity.FoodLevelChangeEvent;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
+import org.bukkit.event.weather.WeatherChangeEvent;
 import org.bukkit.inventory.ItemStack;
 
 import java.text.DecimalFormat;
@@ -141,8 +141,13 @@ public class PlayerEvents implements Listener {
         if (cz.toLocations().contains(l)) u.sendToTower();
     }
 
-    @EventHandler(ignoreCancelled = true, priority = EventPriority.HIGHEST)
-    public void onFoodLevelChange(FoodLevelChangeEvent e) {
+    @EventHandler(priority = EventPriority.HIGH)
+    public void onFood(FoodLevelChangeEvent e) {
+        e.setCancelled(true);
+    }
+
+    @EventHandler(priority = EventPriority.HIGH)
+    public void onWeather(WeatherChangeEvent e) {
         e.setCancelled(true);
     }
 }
