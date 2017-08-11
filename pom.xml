@@ -21,6 +21,9 @@
         <!-- Survival -->
         <module>PA-Survival</module>
 
+        <!-- Creativo -->
+        <module>PA-Creativo</module>
+
         <!-- Juegos -->
         <module>PA-Rage</module>
         <module>PA-NexusSiege</module>

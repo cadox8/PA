@@ -46,6 +46,9 @@ public class LobbyMenu {
             case SERVERS:
                 clon = servers;
                 break;
+            case RG:
+                clon = rg;
+                break;
             case COSMETICOS:
                 clon = cometicos;
                 break;
