@@ -47,6 +47,7 @@ public class PlayerEvents implements Listener {
             plugin.getGm().checkStart();
         } else {
             u.getPlayer().setGameMode(GameMode.SPECTATOR);
+            u.getPlayer().teleport(plugin.getAm().getRandomSpawn());
             plugin.getServer().getScheduler().runTaskTimer(plugin, () -> {
                 u.sendActionBar("&cEstas en modo espectador");
                 if (u.getPlayer().getGameMode() != GameMode.SPECTATOR) u.getPlayer().setGameMode(GameMode.SPECTATOR);
