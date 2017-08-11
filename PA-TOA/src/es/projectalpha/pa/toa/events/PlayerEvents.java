@@ -17,6 +17,7 @@ import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.FoodLevelChangeEvent;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
@@ -40,11 +41,12 @@ public class PlayerEvents implements Listener {
         TOAUser u = TOA.getPlayer(e.getPlayer());
         Race k = Race.parseRace(u.getUserData().getKit());
 
-        u.sendToCity();
         if (k != null) {
             k.addEffects(u);
+            u.sendToCity();
             return;
         }
+        u.teleport(plugin.getAm().getSpawn());
         u.getPlayer().getInventory().setItem(5, ItemUtil.createBook(PAData.TOA.getPrefix(), "&7libro de información", ItemUtil.pages));
     }
 
@@ -149,5 +151,10 @@ public class PlayerEvents implements Listener {
     @EventHandler(priority = EventPriority.HIGH)
     public void onWeather(WeatherChangeEvent e) {
         e.setCancelled(true);
+    }
+
+    @EventHandler
+    public void onBreak(BlockBreakEvent e) {
+
     }
 }

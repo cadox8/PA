@@ -1,7 +1,12 @@
 JoinTower: world%0.0%0.0%0.0%0.0%0.0;world%0.0%0.0%0.0%0.0%0.0
 Spawns:
   city: world%-49.5%48.%102.5%-127.4%10.2
+  spawn: world%0.0%0.0%0.0%0.0%0.0
   tower: world%0.0%0.0%0.0%0.0%0.0
+  warrior: world%0.0%0.0%0.0%0.0%0.0
+  archer: world%0.0%0.0%0.0%0.0%0.0
+  mage: world%0.0%0.0%0.0%0.0%0.0
+  picaro: world%0.0%0.0%0.0%0.0%0.0
 
 id: 0
 Mobs:

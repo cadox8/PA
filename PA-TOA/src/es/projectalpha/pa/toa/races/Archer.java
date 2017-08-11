@@ -1,10 +1,10 @@
 package es.projectalpha.pa.toa.races;
 
 import es.projectalpha.pa.core.utils.ItemMaker;
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
 
 public class Archer extends Race {
 
@@ -25,5 +25,9 @@ public class Archer extends Race {
         p.getInventory().setChestplate(new ItemMaker(Material.CHAINMAIL_CHESTPLATE).build());
         p.getInventory().setLeggings(new ItemMaker(Material.CHAINMAIL_LEGGINGS).build());
         p.getInventory().setBoots(new ItemMaker(Material.CHAINMAIL_BOOTS).build());
+    }
+
+    public Location spawn(){
+        return plugin.getAm().getArcher();
     }
 }

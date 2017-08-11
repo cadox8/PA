@@ -1,13 +1,17 @@
 package es.projectalpha.pa.toa.races;
 
+import es.projectalpha.pa.toa.TOA;
 import es.projectalpha.pa.toa.api.TOAUser;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
 
 public class Race {
+
+    protected TOA plugin = TOA.getInstance();
 
     //ToDo: Punto de spawn por cada clase
 
@@ -38,6 +42,10 @@ public class Race {
     }
 
     public void addEffects(TOAUser u) {
+    }
+
+    public Location spawn(){
+        return null;
     }
 
     public boolean enabled() {

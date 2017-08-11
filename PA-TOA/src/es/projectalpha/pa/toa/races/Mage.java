@@ -2,6 +2,7 @@ package es.projectalpha.pa.toa.races;
 
 import es.projectalpha.pa.core.utils.ItemMaker;
 import es.projectalpha.pa.toa.api.TOAUser;
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 
@@ -16,4 +17,9 @@ public class Mage extends Race {
     }
 
     public void addEffects(TOAUser u) {}
+
+
+    public Location spawn(){
+        return plugin.getAm().getMage();
+    }
 }

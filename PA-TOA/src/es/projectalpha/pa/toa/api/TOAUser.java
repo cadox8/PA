@@ -41,12 +41,12 @@ public class TOAUser extends PAUser {
                 board.setName(PAData.RG.getOldPrefix());
                 board.text(4, "Zenys: §b" + getUserData().getZeny());
                 board.text(3, "§e ");
-                board.text(2, "Raza: §e" + "");
+                board.text(2, "Raza: §e" + kit);
                 board.text(1, "§e ");
                 board.text(0, PACore.getIP());
                 if (getPlayer() != null) board.build(getPlayer());
             }
-        }.runTaskTimer(plugin, 0, 20);
+        }.runTaskTimer(plugin, 1, 20);
     }
 
     public void sendToTower() {
@@ -88,7 +88,7 @@ public class TOAUser extends PAUser {
 
         getPlayer().getInventory().clear();
         race.setItems(getPlayer());
-        sendToCity();
+        teleport(race.spawn());
         plugin.getHealth().setHealth(this, race.getHealth());
         Title.sendTitle(getPlayer(), 0, 3, 0, "", "&cTu aventura comienza ahora");
         getUserData().setKit(race.getRaceType().getId());
