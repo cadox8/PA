@@ -4,6 +4,8 @@ import es.projectalpha.pa.antium.PAAntium;
 import es.projectalpha.pa.core.PACore;
 import es.projectalpha.pa.core.api.PAData;
 import es.projectalpha.pa.core.api.PAUser;
+import es.projectalpha.pa.core.utils.Utils;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
@@ -23,9 +25,10 @@ public class PlayerEvents implements Listener {
     @EventHandler(priority = EventPriority.HIGH)
     public void onJoin(PlayerJoinEvent e) {
         PAUser u = PAAntium.getUser(e.getPlayer());
+        Player p = e.getPlayer();
 
         u.getPlayer().getInventory().clear();
-
+        p.getPlayer().teleport(Utils.stringToLocation("login%8%32%-9%0%0"));
         if (PACore.getInstance().getMysql().isRegistered(u)) {
             u.sendMessage(PAData.ANTIUM.getPrefix() + "&3Por favor, escribe &c/login <contraseña> &3para acceder al servidor");
             return;
