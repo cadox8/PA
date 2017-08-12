@@ -32,6 +32,7 @@ public class PlayerEvents implements Listener {
     public void onJoin(PlayerJoinEvent e) {
         RagePlayer u = RageGames.getPlayer(e.getPlayer());
         e.setJoinMessage(null);
+        Player j = e.getPlayer();
 
         u.getPlayer().setFlySpeed(0.2f);
         u.getPlayer().setWalkSpeed(0.2f);
@@ -41,7 +42,7 @@ public class PlayerEvents implements Listener {
             plugin.getGm().addPlayerToGame(u);
             plugin.getServer().getOnlinePlayers().forEach(p -> u.getPlayer().showPlayer(p));
             plugin.getServer().getOnlinePlayers().forEach(p -> p.showPlayer(u.getPlayer()));
-            u.teleport(Utils.stringToLocation("lm%1%57%0%179%-20"));
+            j.teleport(Utils.stringToLocation("lm%1%57%0%179%-20"));
             u.setLobby();
             Utils.broadcastMsg("&7Ha entrado al juego &e" + u.getName() + " &3(&b" + plugin.getGm().getPlaying().size() + "&d/&b" + plugin.getAm().getMaxPlayers() + "&3)");
             plugin.getGm().checkStart();

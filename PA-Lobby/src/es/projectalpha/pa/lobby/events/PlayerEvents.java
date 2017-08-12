@@ -14,6 +14,7 @@ import org.bukkit.Material;
 import org.bukkit.block.BlockFace;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Entity;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
@@ -54,11 +55,13 @@ public class PlayerEvents implements Listener {
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onJoin(PlayerJoinEvent e) {
         PAUser u = PAServer.getUser(e.getPlayer());
+        Player p = e.getPlayer();
         Helpers h = new Helpers(u);
 
         h.lobbyScoreboard();
         LobbyTeams.setScoreboardTeam(u);
-        new Helpers(u).sendToSpawn();
+        p.teleport(Utils.stringToLocation(plugin.getConfig().getString("spawn")));
+        //new Helpers(u).sendToSpawn();
         u.getPlayer().getInventory().clear();
         u.getPlayer().getInventory().setItem(0, new ItemMaker(Material.NETHER_STAR).setDisplayName("&cJuegos").build());
         u.getPlayer().getInventory().setItem(4, new ItemMaker(Material.PISTON_STICKY_BASE).setDisplayName("&7Cosmeticos").build());
