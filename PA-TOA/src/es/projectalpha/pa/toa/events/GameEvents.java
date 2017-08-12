@@ -1,26 +1,24 @@
 package es.projectalpha.pa.toa.events;
 
+import es.projectalpha.pa.core.cmd.PACmd;
 import es.projectalpha.pa.core.utils.Utils;
 import es.projectalpha.pa.toa.TOA;
-import es.projectalpha.pa.toa.abilities.Ability;
 import es.projectalpha.pa.toa.api.TOAUser;
 import es.projectalpha.pa.toa.drops.DropsManager;
-import es.projectalpha.pa.toa.mobs.MobType;
-import es.projectalpha.pa.toa.races.Race;
 import es.projectalpha.pa.toa.manager.Experience;
 import es.projectalpha.pa.toa.mobs.Mob;
+import es.projectalpha.pa.toa.mobs.MobType;
 import org.bukkit.Material;
 import org.bukkit.Sound;
-import org.bukkit.World;
-import org.bukkit.entity.*;
+import org.bukkit.block.BlockFace;
+import org.bukkit.entity.Animals;
+import org.bukkit.entity.Monster;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.entity.EntitySpawnEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.potion.PotionEffect;
-import org.bukkit.potion.PotionEffectType;
 
 public class GameEvents implements Listener {
 
@@ -54,16 +52,31 @@ public class GameEvents implements Listener {
         if (e.getEntity() instanceof Animals) e.setCancelled(true);
     }
 
-
     @EventHandler
     public void onInteract(PlayerInteractEvent e) {
         final TOAUser u = TOA.getPlayer(e.getPlayer());
-        System.out.println(e.getClickedBlock().getType());
+
+        if (!u.isOnRank(PACmd.Grupo.Builder)) {
+            if (e.getClickedBlock() != null) {
+                if (e.getClickedBlock().getType().equals(Material.TRAP_DOOR) || e.getClickedBlock().getType().equals(Material.IRON_TRAPDOOR)
+                        || e.getClickedBlock().getType().equals(Material.FENCE_GATE) || e.getClickedBlock().getType().equals(Material.FIRE)
+                        || e.getClickedBlock().getType().equals(Material.CAULDRON) || e.getClickedBlock().getRelative(BlockFace.UP).getType().equals(Material.FIRE)
+                        || e.getClickedBlock().getType() == Material.CHEST || e.getClickedBlock().getType() == Material.TRAPPED_CHEST
+                        || e.getClickedBlock().getType() == Material.DROPPER || e.getClickedBlock().getType() == Material.DISPENSER
+                        || e.getClickedBlock().getType() == Material.BED_BLOCK || e.getClickedBlock().getType() == Material.BED
+                        || e.getClickedBlock().getType() == Material.WORKBENCH || e.getClickedBlock().getType() == Material.BREWING_STAND
+                        || e.getClickedBlock().getType() == Material.ANVIL || e.getClickedBlock().getType() == Material.DARK_OAK_FENCE_GATE
+                        || e.getClickedBlock().getType() == Material.SPRUCE_FENCE_GATE || e.getClickedBlock().getType() == Material.FURNACE
+                        || e.getClickedBlock().getType() == Material.BURNING_FURNACE || e.getClickedBlock().getType() == Material.HOPPER
+                        || e.getClickedBlock().getType() == Material.STONE_BUTTON || e.getClickedBlock().getType() == Material.WOOD_BUTTON) {
+                    e.setCancelled(true);
+                }
+            }
+        }
+
         if(e.getClickedBlock() == null) return;
         if(e.getClickedBlock().getType() == Material.WALL_SIGN) return;
         e.setCancelled(true);
 
-        if (e.getItem() == null || !plugin.getGm().getInTower().contains(u)) return;
-        Ability.useAbility(u, e.getItem().getType());
     }
 }

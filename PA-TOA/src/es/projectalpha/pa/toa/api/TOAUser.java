@@ -80,6 +80,7 @@ public class TOAUser extends PAUser {
         sendMessage(PAData.TOA.getPrefix() + "&2Has perdido &6" + zenys + "&2 zenys");
     }
 
+    private int count = 0;
     public void setRace(Race race) {
         if (!race.enabled()) {
             sendMessage(PAData.TOA.getPrefix() + "&cEsta clase no está disponible por el momento");
@@ -93,5 +94,10 @@ public class TOAUser extends PAUser {
         Title.sendTitle(getPlayer(), 0, 3, 0, "", "&cTu aventura comienza ahora");
         getUserData().setKit(race.getRaceType().getId());
         reset();
+
+        if (getUserData().getKit() == -1) {
+            getUserData().setKit(race.getRaceType().getId());
+            reset();
+        }
     }
 }

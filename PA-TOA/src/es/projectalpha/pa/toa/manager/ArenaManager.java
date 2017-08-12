@@ -33,6 +33,7 @@ public class ArenaManager {
     public Location getSpawn() {
         return Utils.stringToLocation(plugin.getConfig().getString("Spawns.spawn"));
     }
+
     public Location getPicaro() {
         return Utils.stringToLocation(plugin.getConfig().getString("Spawns.picaro"));
     }
@@ -43,8 +44,9 @@ public class ArenaManager {
         return Utils.stringToLocation(plugin.getConfig().getString("Spawns.mage"));
     }
     public Location getArcher() {
-        return Utils.stringToLocation(plugin.getConfig().getString("Spawns.picaro"));
+        return Utils.stringToLocation(plugin.getConfig().getString("Spawns.archer"));
     }
+
     public Location getTower() {
         return Utils.stringToLocation(plugin.getConfig().getString("Spawns.tower"));
     }
