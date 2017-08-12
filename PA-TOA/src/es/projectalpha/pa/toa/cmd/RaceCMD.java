@@ -9,7 +9,7 @@ import es.projectalpha.pa.toa.races.Race;
 public class RaceCMD extends PACmd {
 
     public RaceCMD() {
-        super("raza", Grupo.Admin);
+        super("raza", Grupo.Usuario);
     }
 
     public void run(PAUser u, String label, String... args) {

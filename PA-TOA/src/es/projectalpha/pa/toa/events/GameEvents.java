@@ -58,7 +58,9 @@ public class GameEvents implements Listener {
     @EventHandler
     public void onInteract(PlayerInteractEvent e) {
         final TOAUser u = TOA.getPlayer(e.getPlayer());
-
+        System.out.println(e.getClickedBlock().getType());
+        if(e.getClickedBlock() == null) return;
+        if(e.getClickedBlock().getType() == Material.WALL_SIGN) return;
         e.setCancelled(true);
 
         if (e.getItem() == null || !plugin.getGm().getInTower().contains(u)) return;

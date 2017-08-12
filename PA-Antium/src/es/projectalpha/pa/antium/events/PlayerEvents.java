@@ -28,7 +28,7 @@ public class PlayerEvents implements Listener {
         Player p = e.getPlayer();
 
         u.getPlayer().getInventory().clear();
-        p.getPlayer().teleport(Utils.stringToLocation("login%8%32%-9%0%0"));
+        p.getPlayer().teleport(Utils.stringToLocation("login%4%32%-8%0%0"));
         if (PACore.getInstance().getMysql().isRegistered(u)) {
             u.sendMessage(PAData.ANTIUM.getPrefix() + "&3Por favor, escribe &c/login <contraseña> &3para acceder al servidor");
             return;
