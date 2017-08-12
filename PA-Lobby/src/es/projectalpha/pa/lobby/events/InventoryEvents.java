@@ -6,6 +6,7 @@ import es.projectalpha.pa.core.cmd.PACmd;
 import es.projectalpha.pa.core.utils.Utils;
 import es.projectalpha.pa.lobby.PALobby;
 import es.projectalpha.pa.lobby.utils.LobbyMenu;
+import org.bukkit.ChatColor;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -35,9 +36,15 @@ public class InventoryEvents implements Listener {
                         u.getPlayer().closeInventory();
                         LobbyMenu.openMenu(u, LobbyMenu.MenuType.RG);
                         break;
+                    case 2:
+                        u.sendMessage(ChatColor.RED + "Próximamente.");
+                        break;
                     case 4:
                         u.sendToServer("toa");
                         //u.teleport(Utils.stringToLocation("mlb%-25.5%47%0.5%92.1%-4.5"));
+                        break;
+                    case 6:
+                        u.sendToServer("survival");
                         break;
                     case 8:
                         u.teleport(Utils.stringToLocation("mlb%0.5%47%35.5%0.3%-6"));
