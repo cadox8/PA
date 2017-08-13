@@ -43,7 +43,7 @@ public class PlayerEvents implements Listener {
 
         if (k != null) {
             k.addEffects(u);
-            u.sendToCity();
+            u.teleport(k.spawn());
             return;
         }
         u.teleport(plugin.getAm().getSpawn());
@@ -133,8 +133,6 @@ public class PlayerEvents implements Listener {
     public void onMove(PlayerMoveEvent e) {
         TOAUser u = TOA.getPlayer(e.getPlayer());
         Location l = u.getLoc();
-
-        if (plugin.getGm().getInTower().contains(u)) return;
 
         Block b1 = l.getWorld().getBlockAt(Utils.cuboidToLocation(plugin.getConfig().getString("JoinTower"), 0));
         Block b2 = l.getWorld().getBlockAt(Utils.cuboidToLocation(plugin.getConfig().getString("JoinTower"), 1));

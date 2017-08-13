@@ -45,9 +45,10 @@ public class Ability {
                 break;
             case BLAZE_POWDER:
                 new Fenix().play(u);
+                break;
             case POTION:
                 new Guerrillero().play(u);
-
+                break;
 
             default:
                 break;
