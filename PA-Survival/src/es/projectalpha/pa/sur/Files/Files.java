@@ -9,27 +9,27 @@ import java.io.IOException;
 
 public class Files {
 
-        @Getter public static File fileConfig = new File("plugins/PA-Rage/", "config.yml");
-        private static YamlConfiguration config = YamlConfiguration.loadConfiguration(fileConfig);
+        @Getter public static File fileUser = new File("plugins/PA-Survival/", "config.yml");
+        private static YamlConfiguration user = YamlConfiguration.loadConfiguration(fileUser);
 
     public void setupFiles() {
-        if (!fileConfig.exists()) {
-            fileConfig.mkdir();
+        if (!fileUser.exists()) {
+            fileUser.mkdir();
         }
         saveFiles();
     }
 
     public static void saveFiles() {
         try {
-            config.save(fileConfig);
-            config.load(fileConfig);
+            user.save(fileUser);
+            user.load(fileUser);
         } catch (IOException | InvalidConfigurationException e) {
             e.printStackTrace();
         }
     }
 
-    public YamlConfiguration getConfig() {
-        return YamlConfiguration.loadConfiguration(fileConfig);
+    public YamlConfiguration getUser() {
+        return YamlConfiguration.loadConfiguration(fileUser);
     }
 
 }

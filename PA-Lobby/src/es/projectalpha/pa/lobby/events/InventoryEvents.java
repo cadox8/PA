@@ -37,11 +37,10 @@ public class InventoryEvents implements Listener {
                         LobbyMenu.openMenu(u, LobbyMenu.MenuType.RG);
                         break;
                     case 2:
-                        u.sendMessage(ChatColor.RED + "Próximamente.");
+                        u.sendToServer("creativo");
                         break;
                     case 4:
                         u.sendToServer("toa");
-                        //u.teleport(Utils.stringToLocation("mlb%-25.5%47%0.5%92.1%-4.5"));
                         break;
                     case 6:
                         u.sendToServer("survival");

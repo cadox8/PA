@@ -2,6 +2,7 @@ package es.projectalpha.pa.cr;
 
 import lombok.NonNull;
 import org.bukkit.Bukkit;
+import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -16,10 +17,9 @@ public class PACreativo extends JavaPlugin implements Listener {
 
     @EventHandler
     public void onJoin(PlayerJoinEvent e) {
-        e.getPlayer().teleport(stringToLocation("creativo%0%64%0%0%0"));
+        e.getPlayer().teleport(stringToLocation("Creat%0%65%0%0%0"));
+        e.getPlayer().setGameMode(GameMode.CREATIVE);
     }
-
-
     private Location stringToLocation(@NonNull String string) {
         if (string == null) return null;
         String[] s = string.split("%");

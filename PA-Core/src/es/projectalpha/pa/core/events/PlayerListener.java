@@ -80,6 +80,7 @@ public class PlayerListener implements Listener {
     public void onCommand(PlayerCommandPreprocessEvent e) {
         PAUser p = PAServer.getUser(e.getPlayer());
 
+        if(e.getMessage().startsWith("/plot")) return;
 
         if (e.getMessage().startsWith("/?") || e.getMessage().startsWith("/bukkit:") || e.getMessage().startsWith("/pl") || e.getMessage().startsWith("/plugins") || e.getMessage().startsWith("/minecraft:")) {
             if (p.isOnRank(PACmd.Grupo.Builder)) return;
