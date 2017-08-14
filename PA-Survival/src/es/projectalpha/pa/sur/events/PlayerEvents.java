@@ -1,6 +1,6 @@
 package es.projectalpha.pa.sur.events;
 
-import es.projectalpha.pa.sur.Files.Files;
+import es.projectalpha.pa.sur.files.Files;
 import es.projectalpha.pa.sur.PASurvival;
 import es.projectalpha.pa.sur.api.SurvivalUser;
 import es.projectalpha.pa.sur.manager.Message;
@@ -9,7 +9,6 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
-import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -20,9 +19,7 @@ import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
-import java.io.IOException;
-
-import static es.projectalpha.pa.sur.Files.Files.saveFiles;
+import static es.projectalpha.pa.sur.files.Files.saveFiles;
 
 public class PlayerEvents implements Listener{
 

@@ -1,4 +1,4 @@
-package es.projectalpha.pa.sur.Files;
+package es.projectalpha.pa.sur.files;
 
 import lombok.Getter;
 import org.bukkit.configuration.InvalidConfigurationException;

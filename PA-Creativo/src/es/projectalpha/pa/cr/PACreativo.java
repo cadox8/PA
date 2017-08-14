@@ -5,8 +5,11 @@ import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.weather.ThunderChangeEvent;
+import org.bukkit.event.weather.WeatherChangeEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class PACreativo extends JavaPlugin implements Listener {
@@ -25,5 +28,17 @@ public class PACreativo extends JavaPlugin implements Listener {
         String[] s = string.split("%");
         return new Location(Bukkit.getWorld(s[0]), Double.parseDouble(s[1]),
                 Double.parseDouble(s[2]), Double.parseDouble(s[3]), Float.parseFloat(s[4]), Float.parseFloat(s[5]));
+    }
+
+    @EventHandler(priority= EventPriority.HIGHEST)
+    public void onWeatherChange(WeatherChangeEvent event) {
+        boolean rain = event.toWeatherState();
+        if(rain) event.setCancelled(true);
+    }
+
+    @EventHandler(priority=EventPriority.HIGHEST)
+    public void onThunderChange(ThunderChangeEvent event) {
+        boolean storm = event.toThunderState();
+        if(storm) event.setCancelled(true);
     }
 }

@@ -4,7 +4,7 @@ import com.sk89q.worldguard.bukkit.WGBukkit;
 import com.sk89q.worldguard.protection.ApplicableRegionSet;
 import com.sk89q.worldguard.protection.flags.DefaultFlag;
 import com.sk89q.worldguard.protection.flags.StateFlag;
-import es.projectalpha.pa.sur.Files.Files;
+import es.projectalpha.pa.sur.files.Files;
 import es.projectalpha.pa.sur.manager.Message;
 import es.projectalpha.pa.sur.manager.PvPManager;
 import org.bukkit.ChatColor;

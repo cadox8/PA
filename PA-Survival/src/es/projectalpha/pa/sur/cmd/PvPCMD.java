@@ -2,7 +2,7 @@ package es.projectalpha.pa.sur.cmd;
 
 import es.projectalpha.pa.core.api.PAUser;
 import es.projectalpha.pa.core.cmd.PACmd;
-import es.projectalpha.pa.sur.Files.Files;
+import es.projectalpha.pa.sur.files.Files;
 import es.projectalpha.pa.sur.manager.PvPManager;
 import org.bukkit.ChatColor;
 

@@ -1,7 +1,7 @@
 package es.projectalpha.pa.sur.manager;
 
 import es.projectalpha.pa.core.utils.Cooldown;
-import es.projectalpha.pa.sur.Files.Files;
+import es.projectalpha.pa.sur.files.Files;
 import es.projectalpha.pa.sur.PASurvival;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
