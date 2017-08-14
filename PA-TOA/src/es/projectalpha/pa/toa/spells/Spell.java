@@ -6,7 +6,6 @@ import es.projectalpha.pa.toa.spells.list.BackInTime;
 import es.projectalpha.pa.toa.spells.list.Crucio;
 import es.projectalpha.pa.toa.spells.list.Regen;
 import lombok.Getter;
-import org.bukkit.entity.Monster;
 
 public class Spell {
 
@@ -19,15 +18,14 @@ public class Spell {
     protected TOA plugin = TOA.getInstance();
 
     @Getter private String name;
-    @Getter private double cooldown; //Segundos
+    @Getter private int cooldown; //Segundos
     @Getter private int difficulty; //1-5
 
-    public Spell(String name, double cooldown, int difficulty) {
+    public Spell(String name, int cooldown, int difficulty) {
         this.name = name;
         this.cooldown = cooldown;
         this.difficulty = difficulty;
     }
 
     public void spell(TOAUser u) {}
-    public void spell(TOAUser u, Monster m) {}
 }

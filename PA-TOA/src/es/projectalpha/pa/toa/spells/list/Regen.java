@@ -6,7 +6,7 @@ import es.projectalpha.pa.toa.spells.Spell;
 public class Regen extends Spell {
 
     public Regen(int difficulty) {
-        super("Regeneración", 30, difficulty);
+        super("Regeneración", 17, difficulty);
     }
 
     public void spell(TOAUser u) {

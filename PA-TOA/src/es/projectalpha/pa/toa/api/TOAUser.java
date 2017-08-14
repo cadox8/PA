@@ -67,7 +67,7 @@ public class TOAUser extends PAUser {
         Title.sendTitle(getPlayer(), 0, 3, 0, "&cHas muerto", "&2Reapareceras en 5 segundos");
         plugin.getGm().leaveTower(this);
 
-        plugin.getServer().getScheduler().runTaskLater(plugin, () -> respawn(), 100);
+        plugin.getServer().getScheduler().runTaskLater(plugin, this::respawn, 100);
     }
 
     private void respawn() {

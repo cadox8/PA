@@ -3,6 +3,7 @@ package es.projectalpha.pa.toa.events;
 import es.projectalpha.pa.core.cmd.PACmd;
 import es.projectalpha.pa.core.utils.Utils;
 import es.projectalpha.pa.toa.TOA;
+import es.projectalpha.pa.toa.abilities.Ability;
 import es.projectalpha.pa.toa.api.TOAUser;
 import es.projectalpha.pa.toa.drops.DropsManager;
 import es.projectalpha.pa.toa.manager.Experience;
@@ -37,6 +38,9 @@ public class GameEvents implements Listener {
 
             new Experience(u).addExp(Mob.getXP(level));
 
+            e.getDrops().clear();
+            e.setDroppedExp(0);
+
             DropsManager.drop(MobType.parseMobType(e.getEntityType()), u.getUserData().getKit()).forEach(d -> {
                 BagEvents.addItem(u, d);
                 u.sendSound(Sound.ITEM_PICKUP);
@@ -56,6 +60,11 @@ public class GameEvents implements Listener {
     public void onInteract(PlayerInteractEvent e) {
         final TOAUser u = TOA.getPlayer(e.getPlayer());
 
+        if (e.getItem() != null) {
+            Ability.useAbility(u, e.getItem().getType());
+            e.setCancelled(true);
+        }
+
         if (!u.isOnRank(PACmd.Grupo.Builder)) {
             if (e.getClickedBlock() != null) {
                 if (e.getClickedBlock().getType().equals(Material.TRAP_DOOR) || e.getClickedBlock().getType().equals(Material.IRON_TRAPDOOR)
@@ -73,10 +82,5 @@ public class GameEvents implements Listener {
                 }
             }
         }
-
-        if(e.getClickedBlock() == null) return;
-        if(e.getClickedBlock().getType() == Material.WALL_SIGN) return;
-        e.setCancelled(true);
-
     }
 }
