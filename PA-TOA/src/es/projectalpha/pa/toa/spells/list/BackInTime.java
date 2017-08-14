@@ -11,7 +11,7 @@ public class BackInTime extends Spell {
     private Location l;
 
     public BackInTime(int difficulty) {
-        super("Distorsión", 100, difficulty);
+        super("Distorsión", 19, difficulty);
     }
 
     public void spell(TOAUser u) {

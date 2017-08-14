@@ -51,7 +51,7 @@ public class PlayerEvents implements Listener {
     }
 
     @EventHandler
-    public void onPlayerDie(EntityDamageByEntityEvent e) {
+    public void onDamage(EntityDamageByEntityEvent e) {
         DecimalFormat df = new DecimalFormat("0.00");
 
         //You hit me, bitch
@@ -66,6 +66,7 @@ public class PlayerEvents implements Listener {
                 return;
             }
             plugin.getHealth().damage(u, Double.valueOf(df.format(damage)));
+            e.setDamage(0);
         }
 
 
@@ -73,7 +74,7 @@ public class PlayerEvents implements Listener {
         if (e.getEntity() instanceof Monster && e.getDamager() instanceof Player) {
             TOAUser u = TOA.getPlayer((Player) e.getDamager());
             ItemStack i = u.getPlayer().getItemInHand() != null ? u.getPlayer().getItemInHand() : new ItemStack(Material.AIR);
-            int damage = i.getItemMeta().hasLore() ? Integer.parseInt(ChatColor.stripColor(i.getItemMeta().getLore().get(1))) : 0;
+            int damage = i.getItemMeta().hasLore() ? Integer.parseInt(ChatColor.stripColor(i.getItemMeta().getLore().get(1))) : 20;
 
             e.setDamage(Double.valueOf(df.format(damage + (damage * u.getUserData().getLvl() * 0.2))));
 
@@ -104,7 +105,7 @@ public class PlayerEvents implements Listener {
     }
 
     @EventHandler(priority = EventPriority.HIGHEST)
-    public void onPlayerInteractEntity(PlayerInteractEntityEvent e) {
+    public void onInteractEntity(PlayerInteractEntityEvent e) {
         TOAUser u = TOA.getPlayer(e.getPlayer());
         Entity en = e.getRightClicked();
 

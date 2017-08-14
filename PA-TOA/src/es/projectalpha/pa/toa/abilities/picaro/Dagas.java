@@ -1,5 +1,6 @@
-package es.projectalpha.pa.toa.abilities.list;
+package es.projectalpha.pa.toa.abilities.picaro;
 
+import es.projectalpha.pa.core.utils.Cooldown;
 import es.projectalpha.pa.toa.abilities.Ability;
 import es.projectalpha.pa.toa.api.TOAUser;
 import es.projectalpha.pa.toa.races.Race;
@@ -13,11 +14,12 @@ import org.bukkit.inventory.ItemStack;
 public class Dagas extends Ability {
 
     public Dagas() {
-        super("Dagas", Race.RaceType.PICARO);
+        super("Dagas", 7, Race.RaceType.PICARO);
     }
 
     public void play(TOAUser u){
         if (!canUse(u)) return;
+        if (isInCooldown(u, getName())) return;
         int lvl = u.getUserData().getLvl();
 
         for (int x = 0; x < r.nextInt(4) + 2; x++) {
@@ -35,5 +37,7 @@ public class Dagas extends Ability {
                 });
             }, 0, 20);
         }
+
+        new Cooldown(getCooldown()).setOnCooldown(getName());
     }
 }

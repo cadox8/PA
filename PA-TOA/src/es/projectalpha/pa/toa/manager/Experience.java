@@ -32,7 +32,10 @@ public class Experience {
             addLvL(1);
             remExp(BASE_XP * ud.getLvl());
             user.save();
+            user.reset();
             ajustLvL();
         }
+        user.save();
+        user.reset();
     }
 }

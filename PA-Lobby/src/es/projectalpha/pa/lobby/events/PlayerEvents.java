@@ -114,7 +114,6 @@ public class PlayerEvents implements Listener {
             }
 
             if (e.getClickedBlock() == null) return;
-
             if (e.getClickedBlock().getType() == Material.ENCHANTMENT_TABLE) {
                 e.setCancelled(true);
                 u.sendMessage(PAData.LOBBY.getPrefix() + "&cActualmente estamos trabajando en esto, disculpen las molestias");

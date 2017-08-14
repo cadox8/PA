@@ -20,7 +20,8 @@ public enum Messages {
     INFO("&cEste comando no existe, para ver tus comandos, usa &3/ayuda"),
     NEED_ARGS("&c¡Faltan argumentos!"),
     BUFF_ARGS("&c¡Demasidos argumentos!"),
-    SEND("&3Serás enviado al lobby en %t% segundos");
+    SEND("&3Serás enviado al lobby en %t% segundos"),
+    TOAHOME("&3Asignada casa &c%home&");
 
 
     @Getter

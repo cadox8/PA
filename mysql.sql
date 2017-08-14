@@ -17,9 +17,7 @@ CREATE TABLE IF NOT EXISTS `pa_datos` (
   `deaths`      INT(11)          NOT NULL DEFAULT '0',
   `kit`         INT(2)           NOT NULL DEFAULT '-1',
   PRIMARY KEY (`id`)
-)
-  ENGINE = InnoDB
-  DEFAULT CHARSET = utf8;
+) ENGINE = InnoDB DEFAULT CHARSET = utf8;
 
 CREATE TABLE IF NOT EXISTS `pa_antium` (
   `id`    INT(11) UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -27,6 +25,13 @@ CREATE TABLE IF NOT EXISTS `pa_antium` (
   `pass`  VARCHAR(32)      NOT NULL DEFAULT '',
   `email` VARCHAR(32)      NOT NULL DEFAULT '',
   PRIMARY KEY (`id`)
-)
-  ENGINE = InnoDB
-  DEFAULT CHARSET = utf8;
+) ENGINE = InnoDB DEFAULT CHARSET = utf8;
+
+CREATE TABLE IF NOT EXISTS `pa_homes` (
+  `id`    INT(11) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `owner`  VARCHAR(32)     NOT NULL DEFAULT 'none',
+  `loc`  VARCHAR(500)      NOT NULL DEFAULT '',
+  `tpLoc` VARCHAR(500)     NOT NULL DEFAULT '',
+  `area` VARCHAR(500)      NOT NULL DEFAULT '',
+  PRIMARY KEY (`id`)
+) ENGINE = InnoDB DEFAULT CHARSET = utf8;
