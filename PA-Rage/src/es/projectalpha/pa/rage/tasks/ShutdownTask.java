@@ -20,7 +20,7 @@ public class ShutdownTask extends BukkitRunnable {
             case 10:
                 RageGames.players.forEach(r -> r.sendMessage(Messages.getMessage(Messages.SEND, PAData.BUNGEE, "%t%", count + "")));
                 break;
-            case 1:
+            case 2:
                 removeAll();
                 break;
             case 0:

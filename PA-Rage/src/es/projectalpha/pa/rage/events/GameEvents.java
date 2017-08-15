@@ -9,7 +9,6 @@ import org.bukkit.Material;
 import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.block.Action;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -21,7 +20,6 @@ public class GameEvents implements Listener {
     public GameEvents(RageGames instance) {
         this.plugin = instance;
     }
-
 
     @EventHandler
     public void OnHit(EntityDamageByEntityEvent e) {
