@@ -221,13 +221,11 @@ public class PlayerEvents implements Listener {
 
     @EventHandler(priority=EventPriority.HIGHEST)
     public void onWeatherChange(WeatherChangeEvent event) {
-        boolean rain = event.toWeatherState();
-        if(rain) event.setCancelled(true);
+        if(event.toWeatherState()) event.setCancelled(true);
     }
 
     @EventHandler(priority=EventPriority.HIGHEST)
     public void onThunderChange(ThunderChangeEvent event) {
-        boolean storm = event.toThunderState();
-        if(storm) event.setCancelled(true);
+        if(event.toThunderState()) event.setCancelled(true);
     }
 }
