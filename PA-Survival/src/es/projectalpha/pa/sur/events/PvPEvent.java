@@ -158,8 +158,5 @@ public class PvPEvent implements Listener{
                 }
             }
         }
-
     }
-
-
 }

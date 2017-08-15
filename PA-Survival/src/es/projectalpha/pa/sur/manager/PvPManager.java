@@ -1,8 +1,8 @@
 package es.projectalpha.pa.sur.manager;
 
 import es.projectalpha.pa.core.utils.Cooldown;
-import es.projectalpha.pa.sur.files.Files;
 import es.projectalpha.pa.sur.PASurvival;
+import es.projectalpha.pa.sur.files.Files;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
@@ -81,13 +81,9 @@ public class PvPManager {
     public void check(){
         try {
             plugin.getServer().getOnlinePlayers().forEach(p -> {
-                if (!isInPvP(p)) {
-                    p.sendMessage(Message.prefix + ChatColor.DARK_GREEN + " Ya no estás en pvp, puedes desconectarte.");
-                }
+                if (!isInPvP(p)) p.sendMessage(Message.prefix + ChatColor.DARK_GREEN + " Ya no estás en pvp, puedes desconectarte.");
             });
             check();
-        }catch (StackOverflowError e){
-        }
+        } catch (StackOverflowError e){}
     }
-
 }

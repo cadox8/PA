@@ -1,6 +1,5 @@
 package es.projectalpha.pa.sur.events;
 
-import es.projectalpha.pa.sur.PASurvival;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Sound;
@@ -15,24 +14,18 @@ import org.bukkit.event.player.PlayerToggleSneakEvent;
 
 public class IronElevators implements Listener {
 
-    int minElevation = 2;
-    int maxElevation = 200;
-    private Material elevatorMaterial = Material.IRON_BLOCK;
+    private final int minElevation = 2;
+    private final int maxElevation = 200;
+    private final Material elevatorMaterial = Material.IRON_BLOCK;
 
     @EventHandler(priority = EventPriority.HIGH)
     public void downElevator(PlayerToggleSneakEvent e) {
         Player p = e.getPlayer();
         Block b = p.getLocation().getBlock().getRelative(BlockFace.DOWN);
-        if (!p.isSneaking()
-                && b.getType() == elevatorMaterial) {
+        if (!p.isSneaking() && b.getType() == elevatorMaterial) {
             b = b.getRelative(BlockFace.DOWN, minElevation);
             int i = maxElevation; //16
-            while (i > 0 && !(
-                    b.getType() == elevatorMaterial
-                            && b.getRelative(BlockFace.UP).getType().isTransparent()
-                            && b.getRelative(BlockFace.UP, 2).getType().isTransparent()
-            )
-                    ) {
+            while (i > 0 && !(b.getType() == elevatorMaterial && b.getRelative(BlockFace.UP).getType().isTransparent() && b.getRelative(BlockFace.UP, 2).getType().isTransparent())) {
                 i--;
                 b = b.getRelative(BlockFace.DOWN);
             }
@@ -49,16 +42,9 @@ public class IronElevators implements Listener {
     public void upElevator(PlayerMoveEvent e) {
         Player p = e.getPlayer();
         Block b = e.getTo().getBlock().getRelative(BlockFace.DOWN);
-        if (p.hasPermission("ironelevators.use") && e.getFrom().getY() < e.getTo().getY()
-                && b.getType() == elevatorMaterial) {
-            b = b.getRelative(BlockFace.UP, minElevation);
+        if (p.hasPermission("ironelevators.use") && e.getFrom().getY() < e.getTo().getY() && b.getType() == elevatorMaterial) { b = b.getRelative(BlockFace.UP, minElevation);
             int i = maxElevation;
-            while (i > 0 && !(
-                    b.getType() == elevatorMaterial
-                            && b.getRelative(BlockFace.UP).getType().isTransparent()
-                            && b.getRelative(BlockFace.UP, 2).getType().isTransparent()
-            )
-                    ) {
+            while (i > 0 && !(b.getType() == elevatorMaterial && b.getRelative(BlockFace.UP).getType().isTransparent() && b.getRelative(BlockFace.UP, 2).getType().isTransparent())) {
                 i--;
                 b = b.getRelative(BlockFace.UP);
             }

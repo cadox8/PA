@@ -8,15 +8,16 @@ import es.projectalpha.pa.sur.manager.Balance;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
-import java.util.Arrays;
-
 public class PayCMD extends PACmd {
+
+    private PASurvival plugin = PASurvival.getInstance();
 
     public PayCMD() {
         super("pvp", PACmd.Grupo.Admin);
     }
-    private Files files = new Files();
-    private Balance balance;
+
+    private Files files = plugin.getFiles();
+    private Balance balance = new Balance();
 
     @Override
     public void run(PAUser user, String label, String[] args) {

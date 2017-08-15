@@ -1,13 +1,14 @@
 package es.projectalpha.pa.sur.manager;
 
-import es.projectalpha.pa.sur.files.Files;
 import es.projectalpha.pa.sur.PASurvival;
 import es.projectalpha.pa.sur.api.SurvivalUser;
+import es.projectalpha.pa.sur.files.Files;
 import net.milkbowl.vault.economy.Economy;
 
 public final class Balance {
-    private Economy eco;
-    private Files files;
+
+    private Economy eco = PASurvival.getInstance().getVault();
+    private Files files = PASurvival.getInstance().getFiles();
 
     public void saveBalance(SurvivalUser p){
         if(files.getUser().getInt("Users." + p.getName() + ".money") == eco.getBalance(p.getPlayer())) return;
@@ -30,5 +31,4 @@ public final class Balance {
         eco.withdrawPlayer(p.getPlayer(), eco.getBalance(p.getPlayer()));
         saveBalance(p);
     }
-
 }

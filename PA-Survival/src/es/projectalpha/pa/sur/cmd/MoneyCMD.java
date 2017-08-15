@@ -2,20 +2,22 @@ package es.projectalpha.pa.sur.cmd;
 
 import es.projectalpha.pa.core.api.PAUser;
 import es.projectalpha.pa.core.cmd.PACmd;
+import es.projectalpha.pa.sur.PASurvival;
 import es.projectalpha.pa.sur.files.Files;
 import es.projectalpha.pa.sur.manager.Balance;
 import net.milkbowl.vault.economy.Economy;
 
-import java.util.Arrays;
-
 public class MoneyCMD extends PACmd {
 
+    private PASurvival plugin = PASurvival.getInstance();
+
     public MoneyCMD() {
-        super("pvp", PACmd.Grupo.Admin, Arrays.asList("balance", "dinero"));
+        super("dinero", PACmd.Grupo.Admin, "balance", "money");
     }
-    private Files files = new Files();
-    private Balance balance;
-    private Economy eco;
+
+    private Files files = plugin.getFiles();
+    private Balance balance = new Balance();
+    private Economy eco = plugin.getVault();
 
     @Override
     public void run(PAUser user, String label, String[] args) {
