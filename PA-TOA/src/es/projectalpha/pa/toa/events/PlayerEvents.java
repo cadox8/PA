@@ -1,6 +1,7 @@
 package es.projectalpha.pa.toa.events;
 
 import es.projectalpha.pa.core.api.PAData;
+import es.projectalpha.pa.core.cmd.PACmd;
 import es.projectalpha.pa.core.utils.CuboidZone;
 import es.projectalpha.pa.core.utils.ItemUtil;
 import es.projectalpha.pa.core.utils.Utils;
@@ -13,12 +14,17 @@ import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
-import org.bukkit.entity.*;
+import org.bukkit.entity.Arrow;
+import org.bukkit.entity.Giant;
+import org.bukkit.entity.Monster;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
+import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.FoodLevelChangeEvent;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
@@ -46,8 +52,17 @@ public class PlayerEvents implements Listener {
             u.teleport(k.spawn());
             return;
         }
+        u.getPlayer().getInventory().clear();
+        u.heal();
         u.teleport(plugin.getAm().getSpawn());
-        u.getPlayer().getInventory().setItem(5, ItemUtil.createBook(PAData.TOA.getPrefix(), "&7libro de información", ItemUtil.pages));
+        u.getPlayer().getInventory().setItem(4, ItemUtil.createBook(PAData.TOA.getPrefix(), "&7libro de información", ItemUtil.pages));
+    }
+
+    @EventHandler
+    public void onDamage2(EntityDamageEvent e) {
+        if (e.getEntity() instanceof Player) {
+            if (!plugin.getGm().getInTower().contains(TOA.getPlayer((Player)e.getEntity()))) e.setCancelled(true);
+        }
     }
 
     @EventHandler
@@ -76,7 +91,7 @@ public class PlayerEvents implements Listener {
             ItemStack i = u.getPlayer().getItemInHand() != null ? u.getPlayer().getItemInHand() : new ItemStack(Material.AIR);
             int damage = i.getItemMeta().hasLore() ? Integer.parseInt(ChatColor.stripColor(i.getItemMeta().getLore().get(1))) : 20;
 
-            e.setDamage(Double.valueOf(df.format(damage + (damage * u.getUserData().getLvl() * 0.2))));
+            e.setDamage(Double.valueOf(df.format(damage + (damage * u.getUserData().getLvl() * 0.2)).replace(",", ".")));
 
             if (e.getEntity() instanceof Giant) { //Boss Attack
                 BossAttacks.giantAttacks((Giant) e.getEntity(), u.getPlayer());
@@ -107,33 +122,15 @@ public class PlayerEvents implements Listener {
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onInteractEntity(PlayerInteractEntityEvent e) {
         TOAUser u = TOA.getPlayer(e.getPlayer());
-        Entity en = e.getRightClicked();
-
-        System.out.println("Entidad");
-
-        if (en instanceof ArmorStand) {
-            ArmorStand ar = (ArmorStand) en;
-
-            System.out.println(ar.getItemInHand().getType().toString());
-
-            switch (ar.getItemInHand().getType()) {
-                case DIAMOND_SWORD:
-                    u.setRace(Race.WARRIOR);
-                    break;
-                case BOW:
-                    u.setRace(Race.ARCHER);
-                    break;
-                case SHEARS:
-                    u.setRace(Race.PICARO);
-                    break;
-            }
-        }
+        e.setCancelled(true);
     }
 
     @EventHandler
     public void onMove(PlayerMoveEvent e) {
         TOAUser u = TOA.getPlayer(e.getPlayer());
         Location l = u.getLoc();
+
+        if (plugin.getGm().getInTower().contains(u)) return;
 
         Block b1 = l.getWorld().getBlockAt(Utils.cuboidToLocation(plugin.getConfig().getString("JoinTower"), 0));
         Block b2 = l.getWorld().getBlockAt(Utils.cuboidToLocation(plugin.getConfig().getString("JoinTower"), 1));
@@ -154,6 +151,15 @@ public class PlayerEvents implements Listener {
 
     @EventHandler
     public void onBreak(BlockBreakEvent e) {
+        TOAUser u = TOA.getPlayer(e.getPlayer());
 
+        if (!u.isOnRank(PACmd.Grupo.Builder) || plugin.getGm().getInTower().contains(u)) e.setCancelled(true);
+    }
+
+    @EventHandler
+    public void onPlace(BlockPlaceEvent e){
+        TOAUser u = TOA.getPlayer(e.getPlayer());
+
+        if (!u.isOnRank(PACmd.Grupo.Builder) || plugin.getGm().getInTower().contains(u)) e.setCancelled(true);
     }
 }

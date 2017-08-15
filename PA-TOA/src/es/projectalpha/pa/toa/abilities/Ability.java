@@ -53,6 +53,7 @@ public class Ability {
     }
 
     public static void useAbility(TOAUser u, Material m) {
+        if (!TOA.getInstance().getGm().getInTower().contains(u)) return;
         switch (m) {
             case APPLE:
                 new Fantasma().play(u);
@@ -80,6 +81,7 @@ public class Ability {
                 break;
             case ENCHANTED_BOOK:
                 Spell s = TOA.getInstance().getGm().getSelectedSpell().get(u);
+                if (s == null) return;
                 if (new Cooldown(0).isCoolingDown(s.getName())) {
                     u.sendMessage(PAData.TOA + "&cEsta habilidad está en cooldown &7(&6" + new Cooldown(0).getTimeLeft(s.getName()) + " segundos&7)");
                     return;

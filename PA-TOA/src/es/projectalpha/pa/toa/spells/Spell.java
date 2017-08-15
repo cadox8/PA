@@ -10,9 +10,9 @@ import lombok.Getter;
 public class Spell {
 
     // Spells
-    public static final Spell BIT = new BackInTime(2);
-    public static final Spell CRUCIO = new Crucio(3);
-    public static final Spell REGEN = new Regen(1);
+    public static final Spell BIT = new BackInTime(0);
+    public static final Spell CRUCIO = new Crucio(0);
+    public static final Spell REGEN = new Regen(0);
     //
 
     protected TOA plugin = TOA.getInstance();

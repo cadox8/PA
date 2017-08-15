@@ -60,7 +60,10 @@ public class GameEvents implements Listener {
     public void onInteract(PlayerInteractEvent e) {
         final TOAUser u = TOA.getPlayer(e.getPlayer());
 
+        if (e.getItem().getType() == Material.WRITTEN_BOOK) return;
+
         if (e.getItem() != null) {
+            e.setCancelled(true);
             Ability.useAbility(u, e.getItem().getType());
             e.setCancelled(true);
         }

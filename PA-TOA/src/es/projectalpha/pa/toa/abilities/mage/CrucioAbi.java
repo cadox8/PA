@@ -3,7 +3,7 @@ package es.projectalpha.pa.toa.abilities.mage;
 import es.projectalpha.pa.toa.abilities.Ability;
 import es.projectalpha.pa.toa.api.TOAUser;
 import es.projectalpha.pa.toa.races.Race;
-import es.projectalpha.pa.toa.spells.list.Crucio;
+import es.projectalpha.pa.toa.spells.Spell;
 
 public class CrucioAbi extends Ability {
 
@@ -13,6 +13,6 @@ public class CrucioAbi extends Ability {
 
     public void play(TOAUser u) {
         if (!canUse(u)) return;
-        plugin.getGm().selectSpell(u, new Crucio(0));
+        plugin.getGm().selectSpell(u, Spell.CRUCIO);
     }
 }

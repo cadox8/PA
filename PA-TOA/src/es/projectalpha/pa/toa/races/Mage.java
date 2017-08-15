@@ -1,6 +1,8 @@
 package es.projectalpha.pa.toa.races;
 
 import es.projectalpha.pa.core.utils.ItemMaker;
+import es.projectalpha.pa.toa.TOA;
+import es.projectalpha.pa.toa.abilities.mage.CrucioAbi;
 import es.projectalpha.pa.toa.api.TOAUser;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -18,9 +20,13 @@ public class Mage extends Race {
         p.getInventory().setItem(2, new ItemMaker(Material.NETHER_STAR).setDisplayName("&dBackInTime").build());
         p.getInventory().setItem(3, new ItemMaker(Material.NETHER_STAR).setDisplayName("&cCrucio").build());
         p.getInventory().setItem(4, new ItemMaker(Material.GOLDEN_APPLE).setDisplayName("&dRegeneración").build());
+
+        addEffects(TOA.getPlayer(p));
     }
 
-    public void addEffects(TOAUser u) {}
+    public void addEffects(TOAUser u) {
+        new CrucioAbi().play(u);
+    }
 
     public Location spawn(){
         return plugin.getAm().getMage();
