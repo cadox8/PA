@@ -8,11 +8,16 @@ import es.projectalpha.pa.core.cmd.PACmd;
 import es.projectalpha.pa.core.utils.Messages;
 import es.projectalpha.pa.core.utils.Utils;
 import org.apache.commons.lang.WordUtils;
+import org.bukkit.Material;
+import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.SignChangeEvent;
 import org.bukkit.event.player.*;
+
+import java.util.Set;
 
 public class PlayerListener implements Listener {
 
@@ -88,6 +93,26 @@ public class PlayerListener implements Listener {
                     "ningún problema en decirlos: &6PA-Core. &cAhora, te invito a que los crees tu mismo, puesto que el código " +
                     "de los plugins sólo lo tenemos nosotros :D");
             e.setCancelled(true);
+        }
+    }
+
+    @EventHandler(priority = EventPriority.HIGHEST)
+    public void onSignChange(SignChangeEvent e) {
+        String[] line = e.getLines();
+        for (int i = 0; i < line.length; i++) e.setLine(i, Utils.colorize(line[i]));
+    }
+
+    @EventHandler(priority = EventPriority.LOW)
+    public void onInteract(PlayerInteractEvent e) {
+        PAUser u = PAServer.getUser(e.getPlayer());
+
+        switch (e.getAction()) {
+            case LEFT_CLICK_AIR:
+                if (u.isOnRank(PACmd.Grupo.Builder)) {
+                    Block b = u.getPlayer().getTargetBlock((Set<Material>) null, 40);
+                    u.teleport(b != null ? b.getLocation().add(0, 1, 0) : u.getLoc());
+                }
+                break;
         }
     }
 }

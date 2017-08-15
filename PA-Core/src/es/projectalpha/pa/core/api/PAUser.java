@@ -16,7 +16,6 @@ import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.*;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
-import org.bukkit.event.player.PlayerTeleportEvent;
 import org.bukkit.inventory.ItemStack;
 
 import java.lang.reflect.Constructor;
@@ -24,7 +23,6 @@ import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.net.InetSocketAddress;
-import java.util.UUID;
 
 public class PAUser {
 
@@ -84,31 +82,30 @@ public class PAUser {
     public void sendDiv() {
         getPlayer().sendMessage(Utils.colorize("&e====================="));
     }
-
     public void sendMessage(String str) {
         getPlayer().sendMessage(Utils.colorize(str));
     }
-
     public void sendSound(Sound sound) {
         getPlayer().playSound(getPlayer().getLocation(), sound, 4, 4);
     }
-
     public void teleport(Location location) {
         getPlayer().teleport(location);
     }
-
     public void teleport(Entity entity) {
         getPlayer().teleport(entity);
     }
-
     public void teleport(World world) {
         teleport(world.getSpawnLocation());
     }
-
     public void removeItemInHand() {
         getPlayer().getInventory().setItemInHand(new ItemStack(Material.AIR));
     }
 
+    public void heal() {
+        getPlayer().setHealth(getPlayer().getMaxHealth());
+        getPlayer().setFoodLevel(20);
+        getPlayer().getActivePotionEffects().forEach(p -> getPlayer().removePotionEffect(p.getType()));
+    }
 
     public void toggleAdminChat() {
         if (!PAServer.getAdminChatMode().contains(this)) {

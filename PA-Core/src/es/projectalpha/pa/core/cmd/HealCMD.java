@@ -16,10 +16,7 @@ public class HealCMD extends PACmd {
 
     public void run(PAUser user, String label, String[] args) {
         if (args.length == 0) {
-            user.getPlayer().setHealth(user.getPlayer().getMaxHealth());
-            user.getPlayer().setFoodLevel(20);
-            user.getPlayer().getActivePotionEffects().forEach(p -> user.getPlayer().removePotionEffect(p.getType()));
-
+            user.heal();
             user.sendMessage(PAData.CORE.getPrefix() + "&6Te has curado");
             return;
         }
@@ -30,10 +27,8 @@ public class HealCMD extends PACmd {
                 user.sendMessage(PAData.CORE.getPrefix() + "&cEL jugador debe estar conectado");
                 return;
             }
+            target.heal();
             user.sendMessage(PAData.CORE.getPrefix() + "&6Has curado a &c" + target.getName());
-            target.getPlayer().setHealth(user.getPlayer().getMaxHealth());
-            target.getPlayer().setFoodLevel(20);
-            target.getPlayer().getActivePotionEffects().forEach(p -> target.getPlayer().removePotionEffect(p.getType()));
         }
     }
 
