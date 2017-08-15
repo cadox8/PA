@@ -61,9 +61,7 @@ public class ItemMaker {
     public ItemMaker setLores(String... lores) {
         ItemMeta itemMeta = this.itemStack.getItemMeta();
         List<String> loresList = new ArrayList<>();
-        for (String lore : lores) {
-            loresList.add(lore);
-        }
+        for (String lore : lores) loresList.add(Utils.colorize(lore));
         itemMeta.setLore(loresList);
         this.itemStack.setItemMeta(itemMeta);
         return this;
@@ -112,7 +110,6 @@ public class ItemMaker {
     }
 
     public ItemStack build() {
-        addItemFlag(ItemFlag.values());
         return this.itemStack;
     }
 }
