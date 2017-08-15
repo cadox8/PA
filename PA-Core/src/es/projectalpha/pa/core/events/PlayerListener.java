@@ -82,7 +82,7 @@ public class PlayerListener implements Listener {
 
         if(e.getMessage().startsWith("/plot")) return;
 
-        if (e.getMessage().startsWith("/?") || e.getMessage().startsWith("/bukkit:") || e.getMessage().startsWith("/pl") || e.getMessage().startsWith("/plugins") || e.getMessage().startsWith("/minecraft:")) {
+        if (e.getMessage().startsWith("/?") || e.getMessage().startsWith("/bukkit:") || e.getMessage().startsWith("/pl") || e.getMessage().startsWith("/plugins") || e.getMessage().startsWith("/minecraft:") || e.getMessage().startsWith("/spigot:")) {
             if (p.isOnRank(PACmd.Grupo.Builder)) return;
             p.sendMessage(PAData.CORE.getPrefix() + "&cLos plugins de este servidor ha sido creados por los desarrolladores del mismo, es por eso por lo que no tenemos" +
                     "ningún problema en decirlos: &6PA-Core. &cAhora, te invito a que los crees tu mismo, puesto que el código " +
