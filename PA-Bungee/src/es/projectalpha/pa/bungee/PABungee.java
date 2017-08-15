@@ -39,7 +39,7 @@ public class PABungee extends Plugin implements Listener {
     @EventHandler
     public void onServerKickEvent(ServerKickEvent e) {
         e.setCancelled(true);
-        e.setCancelServer(getLogin());
+        e.setCancelServer(getLobby());
     }
 
     @EventHandler
