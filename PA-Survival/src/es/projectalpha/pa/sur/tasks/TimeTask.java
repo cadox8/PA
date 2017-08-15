@@ -6,11 +6,7 @@ import es.projectalpha.pa.sur.manager.Balance;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
-import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
-
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class TimeTask extends BukkitRunnable {
@@ -32,10 +28,8 @@ public class TimeTask extends BukkitRunnable {
         System.out.println(hora + ":" + min + ":" + seg);
         files.getUser().getList("Users.").forEach(p ->{
                 balance.saveBalance(PASurvival.getPlayer(plugin.getServer().getOfflinePlayer(p.toString())));
-                eco.withdrawPlayer(plugin.getServer().getPlayer(p.toString()), eco.getBalance(plugin.getServer().getPlayer(p.toString())));
-                balance.removeBalance(PASurvival.getPlayer(plugin.getServer().getOfflinePlayer(p.toString())), eco.getBalance(plugin.getServer().getPlayer(p.toString())) * 0.01);
+                balance.removeBalance(PASurvival.getPlayer(plugin.getServer().getOfflinePlayer(p.toString())), eco.getBalance(plugin.getServer().getOfflinePlayer(p.toString()))*0.01);
                 balance.saveBalance(PASurvival.getPlayer(plugin.getServer().getOfflinePlayer(p.toString())));
-                eco.depositPlayer(plugin.getServer().getPlayer(p.toString()), files.getUser().getInt("Users." + plugin.getServer().getPlayer(p.toString() + ".money")));
         });
         Bukkit.getOnlinePlayers().forEach(u -> u.sendMessage(ChatColor.GREEN + "Hora de los impuestos, se te ha quitado 1% de tu dinero, o lo que es lo mismo " + eco.getBalance(plugin.getServer().getPlayer(u.toString())) * 0.01));
     }

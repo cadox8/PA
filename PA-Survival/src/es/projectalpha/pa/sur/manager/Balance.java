@@ -17,11 +17,13 @@ public final class Balance {
     public void addBalace(SurvivalUser p, double v){
         if(files.getUser().getInt("Users." + p.getName() + ".money") != eco.getBalance(p.getPlayer())) saveBalance(PASurvival.getPlayer(p.getPlayer()));
         files.getUser().set("Users." + p.getName() + ".money", files.getUser().getInt("Users." + p.getName() + ".money") + v);
+        eco.depositPlayer(p.getPlayer(), v);
     }
 
     public void removeBalance(SurvivalUser p, double v){
         if(files.getUser().getInt("Users." + p.getName() + ".money") != eco.getBalance(p.getPlayer())) saveBalance(PASurvival.getPlayer(p.getPlayer()));
         files.getUser().set("Users." + p.getName() + ".money", files.getUser().getInt("Users." + p.getName() + ".money") - v);
+        eco.withdrawPlayer(p.getPlayer(), v);
     }
 
     public void resetBalance(SurvivalUser p){
