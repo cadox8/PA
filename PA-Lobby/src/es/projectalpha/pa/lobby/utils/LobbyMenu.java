@@ -23,8 +23,8 @@ public class LobbyMenu {
         //Servidores
         servers = plugin.getServer().createInventory(null, 9, "Servidores");
         servers.setItem(0, new ItemMaker(Material.BOW).setDisplayName(PAData.RG.getName()).build());
-        servers.setItem(2, new ItemMaker(Material.DIAMOND).setDisplayName("Creativo").build());
-        servers.setItem(6, new ItemMaker(Material.DIAMOND).setDisplayName("Survival").setLores("Survival vanilla para la beta." + ChatColor.ITALIC + ChatColor.STRIKETHROUGH + " ¿Bloodcore?").build());
+        servers.setItem(2, new ItemMaker(Material.COMMAND).setDisplayName("&cCreativo").setLores("&b&cAVISO: SERVIDOR EN LA 1.12.X").build());
+        servers.setItem(6, new ItemMaker(Material.GOLD_PICKAXE).setDisplayName("&dSurvival").setLores("Survival vanilla para la beta.", ChatColor.ITALIC.toString() + ChatColor.STRIKETHROUGH + " ¿Bloodcore?", "&b&cAVISO: SERVIDOR EN LA 1.12.X").build());
         servers.setItem(4, new ItemMaker(Material.IRON_AXE).setDisplayName("&6Tower &rOf &cAncients").build());
         servers.setItem(8, new ItemMaker(Material.TNT).setDisplayName(PAData.NS.getName()).build());
 
