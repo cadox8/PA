@@ -1,7 +1,9 @@
 package es.projectalpha.pa.toa.cmd;
 
+import es.projectalpha.pa.core.api.PAData;
 import es.projectalpha.pa.core.api.PAUser;
 import es.projectalpha.pa.core.cmd.PACmd;
+import es.projectalpha.pa.core.utils.Messages;
 import es.projectalpha.pa.core.utils.Utils;
 import es.projectalpha.pa.toa.TOA;
 import es.projectalpha.pa.toa.races.Race;
@@ -15,6 +17,8 @@ public class RaceCMD extends PACmd {
     public void run(PAUser u, String label, String... args) {
         if (args.length == 1) {
             TOA.getPlayer(u.getPlayer()).setRace(Race.parseRace(Utils.isInt(args[0]) ? Integer.parseInt(args[0]) : 0));
+            return;
         }
+        u.sendMessage(Messages.getMessage(Messages.NEED_ARGS, PAData.TOA));
     }
 }
