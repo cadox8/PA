@@ -69,7 +69,7 @@ public class PlayerEvents implements Listener {
         //You hit me, bitch
         if (e.getEntity() instanceof Player && e.getDamager() instanceof Monster) {
             TOAUser u = TOA.getPlayer((Player) e.getEntity());
-            String name = e.getEntity().getCustomName().split(" ")[1];
+            String name = e.getDamager().getCustomName().split(" ")[1];
             int level = Utils.isInt(name) ? Integer.parseInt(name) : 0;
             double damage = 10 + (level * 0.8);
 
@@ -86,7 +86,13 @@ public class PlayerEvents implements Listener {
         if (e.getEntity() instanceof Monster && e.getDamager() instanceof Player) {
             TOAUser u = TOA.getPlayer((Player) e.getDamager());
             ItemStack i = u.getPlayer().getItemInHand() != null ? u.getPlayer().getItemInHand() : new ItemStack(Material.AIR);
-            int damage = i.getItemMeta().hasLore() ? Integer.parseInt(ChatColor.stripColor(i.getItemMeta().getLore().get(1))) : 20;
+            int damage;
+
+            if (i.hasItemMeta()) {
+                damage = i.getItemMeta().hasLore() ? Integer.parseInt(ChatColor.stripColor(i.getItemMeta().getLore().get(1))) : 20;
+            } else {
+                damage = 20;
+            }
 
             e.setDamage(Double.valueOf(df.format(damage + (damage * u.getUserData().getLvl() * 0.2)).replace(",", ".")));
 
@@ -137,12 +143,12 @@ public class PlayerEvents implements Listener {
         }
     }
 
-    @EventHandler
+    @EventHandler(priority = EventPriority.HIGH)
     public void onMove(PlayerMoveEvent e) {
         TOAUser u = TOA.getPlayer(e.getPlayer());
-        Location l = u.getLoc();
+        Location l = new Location(u.getWorld(), (int)u.getLoc().getX(), (int)u.getLoc().getY(), (int)u.getLoc().getZ());
 
-        if (plugin.getGm().getInTower().contains(u)) return;
+        if (!l.getWorld().equals(Utils.cuboidToLocation(plugin.getConfig().getString("JoinTower"), 0).getWorld())) return;
 
         Block b1 = l.getWorld().getBlockAt(Utils.cuboidToLocation(plugin.getConfig().getString("JoinTower"), 0));
         Block b2 = l.getWorld().getBlockAt(Utils.cuboidToLocation(plugin.getConfig().getString("JoinTower"), 1));

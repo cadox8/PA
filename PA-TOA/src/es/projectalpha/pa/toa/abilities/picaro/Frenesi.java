@@ -18,7 +18,7 @@ public class Frenesi extends Ability {
         if (isInCooldown(u, getName())) return;
 
         u.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.FAST_DIGGING, 100, 1, true, false));
-        u.getPlayer().setWalkSpeed(0.4f);
+        u.getPlayer().setWalkSpeed(0.5f);
         plugin.getServer().getScheduler().runTaskLater(plugin, () -> Race.parseRace(getRace().getId()).addEffects(u), 100);
 
         new Cooldown(getCooldown()).setOnCooldown(getName());

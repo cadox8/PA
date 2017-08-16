@@ -15,6 +15,7 @@ import es.projectalpha.pa.toa.events.PlayerEvents;
 import es.projectalpha.pa.toa.manager.ArenaManager;
 import es.projectalpha.pa.toa.manager.GameManager;
 import es.projectalpha.pa.toa.races.Race;
+import es.projectalpha.pa.toa.tasks.InfoTask;
 import es.projectalpha.pa.toa.tasks.SpawnTask;
 import es.projectalpha.pa.toa.utils.FileUtils;
 import lombok.Getter;
@@ -49,7 +50,8 @@ public class TOA extends JavaPlugin {
         registerEvents();
 
         spawnTask.removeAll();
-        spawnTask.runTaskTimer(instance, 20, 20);
+        spawnTask.runTaskTimer(instance, 20, 25 * 20);
+        new InfoTask(instance).runTaskTimer(instance, 0, 20);
     }
 
     private void registerClasses() {
@@ -76,7 +78,7 @@ public class TOA extends JavaPlugin {
 
     public static TOAUser getPlayer(OfflinePlayer p) {
         for (TOAUser pl : users) {
-            if (pl.getName() == null) continue;
+            if (pl.getName() == null || p.getName() == null) continue;
             if (pl.getName().equalsIgnoreCase(p.getName())) return pl;
         }
         TOAUser us = new TOAUser(p.getName());

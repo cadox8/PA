@@ -62,7 +62,6 @@ public class GameEvents implements Listener {
 
         if (e.getItem() != null) {
             if (e.getItem().getType() == Material.WRITTEN_BOOK) return;
-            e.setCancelled(true);
             Ability.useAbility(u, e.getItem().getType());
             e.setCancelled(true);
         }

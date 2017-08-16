@@ -65,4 +65,9 @@ public class Race {
 
         @Getter private int id;
     }
+
+    @Override
+    public String toString() {
+        return "Raza:{Nombre: " + getName() + ", Tipo: " + getRaceType() + ", Vida: " + health + "}";
+    }
 }

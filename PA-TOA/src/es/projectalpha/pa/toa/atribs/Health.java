@@ -22,7 +22,7 @@ public class Health {
             health.put(u, healthPerLevel(u));
             return;
         }
-        if (value <= 0) {
+        if (getHealth(u) - value <= 0) {
             u.death();
             return;
         }

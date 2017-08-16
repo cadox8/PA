@@ -19,8 +19,8 @@ public class TOAUser extends PAUser {
     }
 
     public void reset() {
-        save();
         TOA.users.remove(this);
+        save();
         TOA.getPlayer(plugin.getServer().getOfflinePlayer(getName()));
     }
 
@@ -43,7 +43,7 @@ public class TOAUser extends PAUser {
                 board.text(3, "§e ");
                 board.text(2, "Raza: §e" + kit);
                 board.text(1, "§e ");
-                board.text(0, PACore.getIP());
+                board.text(0, PACore.getOLD_IP());
                 if (getPlayer() != null) board.build(getPlayer());
             }
         }.runTaskTimer(plugin, 1, 20);
@@ -80,7 +80,6 @@ public class TOAUser extends PAUser {
         sendMessage(PAData.TOA.getPrefix() + "&2Has perdido &6" + zenys + "&2 zenys");
     }
 
-    private int count = 0;
     public void setRace(Race race) {
         if (!race.enabled()) {
             sendMessage(PAData.TOA.getPrefix() + "&cEsta clase no está disponible por el momento");

@@ -15,12 +15,24 @@ import es.projectalpha.pa.toa.api.TOAUser;
 import es.projectalpha.pa.toa.races.Race;
 import es.projectalpha.pa.toa.spells.Spell;
 import lombok.Getter;
+import org.apache.commons.lang.WordUtils;
 import org.bukkit.Material;
 
 import java.util.ArrayList;
 import java.util.Random;
 
 public class Ability {
+
+    //
+    private static final Ability FANTASMA = new Fantasma();
+    private static final Ability FRENESI = new Frenesi();
+    private static final Ability DAGAS = new Dagas();
+    private static final Ability FENIX = new Fenix();
+    private static final Ability GUERRILLERO = new Guerrillero();
+    private static final Ability BIT = new BIT();
+    private static final Ability CRUCIO = new CrucioAbi();
+    private static final Ability REGEN = new Regeneration();
+    //
 
     protected TOA plugin = TOA.getInstance();
 
@@ -54,30 +66,40 @@ public class Ability {
 
     public static void useAbility(TOAUser u, Material m) {
         if (!TOA.getInstance().getGm().getInTower().contains(u)) return;
+        String name = "ERROR";
+
         switch (m) {
             case APPLE:
-                new Fantasma().play(u);
+                FANTASMA.play(u);
+                name = FANTASMA.getName();
                 break;
             case SUGAR:
-                new Frenesi().play(u);
+                FRENESI.play(u);
+                name = FRENESI.getName();
                 break;
             case FEATHER:
-                new Dagas().play(u);
+                DAGAS.play(u);
+                name = DAGAS.getName();
                 break;
             case BLAZE_POWDER:
-                new Fenix().play(u);
+                FENIX.play(u);
+                name = FENIX.getName();
                 break;
             case POTION:
-                new Guerrillero().play(u);
+                GUERRILLERO.play(u);
+                name = GUERRILLERO.getName();
                 break;
             case NETHER_STAR:
-                new BIT().play(u);
+                BIT.play(u);
+                name = BIT.getName();
                 break;
             case BARRIER:
-                new CrucioAbi().play(u);
+                CRUCIO.play(u);
+                name = CRUCIO.getName();
                 break;
             case GOLDEN_APPLE:
-                new Regeneration().play(u);
+                REGEN.play(u);
+                name = REGEN.getName();
                 break;
             case ENCHANTED_BOOK:
                 Spell s = TOA.getInstance().getGm().getSelectedSpell().get(u);
@@ -93,5 +115,6 @@ public class Ability {
             default:
                 break;
         }
+        u.sendMessage(PAData.TOA.getPrefix() + "&6Has usado la habilidad &c" + WordUtils.capitalizeFully(name.toLowerCase()));
     }
 }
