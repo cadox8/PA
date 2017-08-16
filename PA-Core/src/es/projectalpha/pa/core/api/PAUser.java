@@ -213,7 +213,7 @@ public class PAUser {
 
     @Override
     public String toString() {
-        return "PAUser{name: " + getName() + ",  group: + " + getUserData().getGrupo() + "}";
+        return "PAUser{name: " + getName() + ",  group: " + getUserData().getGrupo() + "}";
     }
 
     /**
