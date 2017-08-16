@@ -1,24 +1,17 @@
 package es.projectalpha.pa.rage.tasks;
 
 import es.projectalpha.pa.core.api.PAData;
-import es.projectalpha.pa.core.utils.*;
+import es.projectalpha.pa.core.utils.BossBarUtils;
+import es.projectalpha.pa.core.utils.GameState;
+import es.projectalpha.pa.core.utils.Title;
+import es.projectalpha.pa.core.utils.Utils;
 import es.projectalpha.pa.rage.RageGames;
 import es.projectalpha.pa.rage.api.RagePlayer;
-import es.projectalpha.pa.rage.manager.ArenaManager;
-import es.projectalpha.pa.rage.utils.Items;
-import org.bukkit.*;
-import org.bukkit.block.Block;
-import org.bukkit.entity.Arrow;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.Item;
-import org.bukkit.inventory.ItemStack;
+import org.bukkit.ChatColor;
+import org.bukkit.GameMode;
+import org.bukkit.Sound;
 import org.bukkit.scheduler.BukkitRunnable;
-import org.bukkit.scoreboard.DisplaySlot;
 import org.inventivetalent.bossbar.BossBarAPI;
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 
 public class GameTask extends BukkitRunnable {
 
@@ -74,7 +67,6 @@ public class GameTask extends BukkitRunnable {
 
     private void checkWinner() {
         RagePlayer[] users = plugin.getGm().reorder().keySet().toArray(new RagePlayer[plugin.getGm().reorder().size()]);
-
         if (users.length == 0) return;
 
         Utils.broadcastMsg("------------------------");
@@ -92,6 +84,7 @@ public class GameTask extends BukkitRunnable {
         plugin.getGm().getPlaying().forEach(p ->{
             p.getPlayer().getInventory().clear();
             p.getPlayer().setGameMode(GameMode.SPECTATOR);
+            BossBarAPI.removeAllBars(p.getPlayer());
         });
     }
 

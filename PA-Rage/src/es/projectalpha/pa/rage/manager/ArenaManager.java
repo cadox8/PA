@@ -31,13 +31,13 @@ public class ArenaManager {
         w.setStorm(false);
         w.setDifficulty(Difficulty.PEACEFUL);
         w.setTime(14000);
-        w.getLivingEntities().stream().filter(e -> !e.getType().equals(EntityType.PLAYER)).forEach(e -> e.damage(e.getMaxHealth()));
+        w.getLivingEntities().stream().filter(e -> !e.getType().equals(EntityType.PLAYER)).forEach(e -> e.remove());
         initArena();
         w.setAutoSave(false);
     }
 
     private void initArena() {
-        for(int p = 1; p < Files.config.getInt("puntos"); p++){
+        for(int p = 1; p < Files.config.getInt("puntos"); p++) {
                 spawns.add(Utils.stringToLocation(Files.config.getString("spawns." + p)));
         }
     }

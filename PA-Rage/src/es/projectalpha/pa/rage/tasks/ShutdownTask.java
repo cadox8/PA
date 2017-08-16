@@ -16,16 +16,15 @@ public class ShutdownTask extends BukkitRunnable {
     }
 
     public void run() {
+        RageGames.players.forEach(r -> r.sendMessage(Messages.getMessage(Messages.SEND, PAData.BUNGEE, "%t%", count + "")));
+
         switch (count) {
-            case 10:
-                RageGames.players.forEach(r -> r.sendMessage(Messages.getMessage(Messages.SEND, PAData.BUNGEE, "%t%", count + "")));
-                break;
             case 2:
                 removeAll();
                 break;
             case 0:
-                plugin.getServer().shutdown();
                 cancel();
+                plugin.getServer().shutdown();
                 break;
         }
         count--;

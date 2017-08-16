@@ -28,11 +28,10 @@ public class PlayerEvents implements Listener {
         this.plugin = instance;
     }
 
-    @EventHandler
+    @EventHandler(priority = EventPriority.HIGHEST)
     public void onJoin(PlayerJoinEvent e) {
         RagePlayer u = RageGames.getPlayer(e.getPlayer());
         e.setJoinMessage(null);
-        Player j = e.getPlayer();
 
         u.getPlayer().setFlySpeed(0.2f);
         u.getPlayer().setWalkSpeed(0.2f);
@@ -42,15 +41,16 @@ public class PlayerEvents implements Listener {
             plugin.getGm().addPlayerToGame(u);
             plugin.getServer().getOnlinePlayers().forEach(p -> u.getPlayer().showPlayer(p));
             plugin.getServer().getOnlinePlayers().forEach(p -> p.showPlayer(u.getPlayer()));
-            j.teleport(Utils.stringToLocation("lm%1%57%0%179%-20"));
             u.setLobby();
             Utils.broadcastMsg("&7Ha entrado al juego &e" + u.getName() + " &3(&b" + plugin.getGm().getPlaying().size() + "&d/&b" + plugin.getAm().getMaxPlayers() + "&3)");
             plugin.getGm().checkStart();
+
+            plugin.getServer().getScheduler().runTaskLater(plugin, () -> u.sendToLobby(), 20);
         } else {
             u.getPlayer().setGameMode(GameMode.SPECTATOR);
             u.getPlayer().teleport(plugin.getAm().getRandomSpawn());
             plugin.getServer().getScheduler().runTaskTimer(plugin, () -> {
-                u.sendActionBar("&cEstas en modo espectador");
+                u.sendActionBar("&cEstas en modo espectador, pon &6/lobby &cpara salir");
                 if (u.getPlayer().getGameMode() != GameMode.SPECTATOR) u.getPlayer().setGameMode(GameMode.SPECTATOR);
             }, 0, 20);
         }
@@ -59,7 +59,9 @@ public class PlayerEvents implements Listener {
     @EventHandler
     public void onQuit(PlayerQuitEvent e){
         Player p = e.getPlayer();
-        plugin.getGm().removePlayerFromGame(RageGames.getPlayer(p));
+        RagePlayer u = RageGames.getPlayer(p);
+        plugin.getGm().removePlayerFromGame(u);
+        RageGames.players.remove(u);
         Utils.broadcastMsg("&7Ha salido del juego &e" + p.getDisplayName() + " &3(&b" + plugin.getGm().getPlaying().size() + "&d/&b" + plugin.getAm().getMaxPlayers() + "&3)");
     }
 

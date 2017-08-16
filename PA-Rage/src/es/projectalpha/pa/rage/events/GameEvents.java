@@ -8,7 +8,9 @@ import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
+import org.bukkit.event.entity.CreatureSpawnEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -27,9 +29,9 @@ public class GameEvents implements Listener {
             Player d = (Player) e.getDamager();
             Player a = (Player) e.getEntity();
 
-            if(d.equals(a)) return;
+            if (d.equals(a)) return;
 
-            if(GameState.getState() == GameState.LOBBY) e.setCancelled(true);
+            if (GameState.getState() == GameState.LOBBY) e.setCancelled(true);
 
             if (d.getInventory().getItemInHand().getType() == Material.IRON_SWORD) {
                 e.setCancelled(true);
@@ -46,13 +48,13 @@ public class GameEvents implements Listener {
             Player h = (Player) e.getEntity();
             Projectile a = (Projectile) e.getDamager();
 
-            if(s.equals(h)) return;
+            if (s.equals(h)) return;
 
             if (a instanceof Arrow) {
                 e.setCancelled(true);
                 h.damage(0);
                 s.getInventory().setItem(9, Items.getArrow());
-                Utils.broadcastMsg(ChatColor.GOLD + h.getName() + ChatColor.GREEN + " ha matado a " + ChatColor.GOLD + s.getName() + ChatColor.GREEN + " usando " + Items.getArrow().getItemMeta().getDisplayName() + ChatColor.GREEN +  " (+30 puntos)");
+                Utils.broadcastMsg(ChatColor.GOLD + h.getName() + ChatColor.GREEN + " ha matado a " + ChatColor.GOLD + s.getName() + ChatColor.GREEN + " usando " + Items.getArrow().getItemMeta().getDisplayName() + ChatColor.GREEN + " (+30 puntos)");
 
                 h.teleport(plugin.getAm().getRandomSpawn());
                 RageGames.getPlayer(h).resetPlayer();
@@ -88,7 +90,12 @@ public class GameEvents implements Listener {
                         RageGames.getPlayer((Player) e).resetPlayer();
                     });
                 }
-            }.runTaskTimer(plugin, 0,1);
+            }.runTaskTimer(plugin, 0, 1);
         }
+    }
+
+    @EventHandler(priority = EventPriority.HIGHEST)
+    public void onSpawn(CreatureSpawnEvent e) {
+        e.setCancelled(true);
     }
 }
