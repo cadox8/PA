@@ -70,7 +70,7 @@ public class Utils {
         if (string == null) return null;
         String[] s = string.split("%");
         return new Location(Bukkit.getWorld(s[0]), Double.parseDouble(s[1]),
-                Double.parseDouble(s[2]), Double.parseDouble(s[3]), Float.parseFloat(s[4]), Float.parseFloat(s[5]));
+                Double.parseDouble(s[2]), Double.parseDouble(s[3]), s[4] != null ? Float.parseFloat(s[4]) : 0, s[5] != null ? Float.parseFloat(s[5]) : 0);
     }
 
     public static Location cuboidToLocation(String string, int args) {
