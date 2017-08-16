@@ -1,9 +1,5 @@
 package es.projectalpha.pa.sur.events;
 
-import com.sk89q.worldguard.bukkit.WGBukkit;
-import com.sk89q.worldguard.protection.ApplicableRegionSet;
-import com.sk89q.worldguard.protection.flags.DefaultFlag;
-import com.sk89q.worldguard.protection.flags.StateFlag;
 import es.projectalpha.pa.sur.files.Files;
 import es.projectalpha.pa.sur.manager.Message;
 import es.projectalpha.pa.sur.manager.PvPManager;
@@ -38,11 +34,6 @@ public class PvPEvent implements Listener{
                 Player pl = (Player)en;
 
                 if (p.hasMetadata("NPC") || pl.hasMetadata("NPC")) return;
-
-                ApplicableRegionSet set = WGBukkit.getPlugin().getRegionManager(pl.getWorld()).getApplicableRegions(pl.getLocation());
-                if (set.queryState(null, DefaultFlag.PVP) == StateFlag.State.DENY){
-                    return;
-                }
 
                 if(p == pl) return;
                 if(files.getUser().getBoolean("Users." + p.getName() + ".pvp") == true && files.getUser().getBoolean("Users." + pl.getName() + ".pvp") == true){
@@ -105,12 +96,6 @@ public class PvPEvent implements Listener{
                 Player pl = (Player)en;
 
                 if (p.hasMetadata("NPC") || pl.hasMetadata("NPC")) return;
-
-                ApplicableRegionSet set = WGBukkit.getPlugin().getRegionManager(pl.getWorld()).getApplicableRegions(pl.getLocation());
-
-                if (set.queryState(null, DefaultFlag.PVP) == StateFlag.State.DENY){
-                    return;
-                }
 
                 if(files.getUser().getBoolean("Users." + p.getName() + ".pvp") == true && files.getUser().getBoolean("Users." + pl.getName() + ".pvp") == true){
 
