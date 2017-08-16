@@ -14,10 +14,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
-import org.bukkit.entity.Arrow;
-import org.bukkit.entity.Giant;
-import org.bukkit.entity.Monster;
-import org.bukkit.entity.Player;
+import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
@@ -122,7 +119,22 @@ public class PlayerEvents implements Listener {
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onInteractEntity(PlayerInteractEntityEvent e) {
         TOAUser u = TOA.getPlayer(e.getPlayer());
+
         e.setCancelled(true);
+
+        if (e.getRightClicked() instanceof Villager) {
+            Villager v = (Villager) e.getRightClicked();
+            if (v.getCustomName().equalsIgnoreCase("") || v.getCustomName() == null) return;
+
+            switch (ChatColor.stripColor(v.getCustomName())) {
+                case "Comprador Variado":
+                    u.sendMessage("Oh, un menú");
+                    break;
+                case "Comprador Armas":
+                    u.sendMessage("Oh, un menú");
+                    break;
+            }
+        }
     }
 
     @EventHandler

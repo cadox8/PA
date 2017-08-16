@@ -7,17 +7,17 @@ import es.projectalpha.pa.toa.atribs.Health;
 import es.projectalpha.pa.toa.cmd.MobsCMD;
 import es.projectalpha.pa.toa.cmd.MochilaCMD;
 import es.projectalpha.pa.toa.cmd.RaceCMD;
+import es.projectalpha.pa.toa.cmd.ShopsCMD;
 import es.projectalpha.pa.toa.drops.DropsManager;
 import es.projectalpha.pa.toa.events.BagEvents;
 import es.projectalpha.pa.toa.events.GameEvents;
 import es.projectalpha.pa.toa.events.PlayerEvents;
-import es.projectalpha.pa.toa.races.Race;
 import es.projectalpha.pa.toa.manager.ArenaManager;
 import es.projectalpha.pa.toa.manager.GameManager;
+import es.projectalpha.pa.toa.races.Race;
 import es.projectalpha.pa.toa.tasks.SpawnTask;
 import es.projectalpha.pa.toa.utils.FileUtils;
 import lombok.Getter;
-import org.bukkit.ChatColor;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -48,6 +48,7 @@ public class TOA extends JavaPlugin {
         registerClasses();
         registerEvents();
 
+        spawnTask.removeAll();
         spawnTask.runTaskTimer(instance, 20, 20);
     }
 
@@ -62,7 +63,7 @@ public class TOA extends JavaPlugin {
 
         Race.registerRaces();
 
-        PACommands.register(new MobsCMD(), new RaceCMD(), new MochilaCMD());
+        PACommands.register(new MobsCMD(), new RaceCMD(), new MochilaCMD(), new ShopsCMD());
     }
 
     private void registerEvents() {

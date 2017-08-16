@@ -17,10 +17,16 @@ public class SpawnTask extends BukkitRunnable {
 
     public void run() {
         if (count >= 300 || TOA.users.isEmpty()) return;
+        if (plugin.getAm().mobs.isEmpty()) return;
 
         plugin.getAm().mobs.forEach(m -> {
             count++;
             m.spawn();
         });
+    }
+
+    public void removeAll() {
+        if (plugin.getAm().mobs.isEmpty()) return;
+        plugin.getAm().mobs.get(0).getL().getWorld().getEntities().forEach(e -> e.remove());
     }
 }
