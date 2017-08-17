@@ -35,7 +35,7 @@ public class ExplosiveSheep extends Cosmetic {
         o.setNoDamageTicks(Integer.MAX_VALUE);
         o.setVelocity(u.getPlayer().getLocation().getDirection().multiply(2));
 
-        PAServer.users.forEach(h -> h.sendSound(Sound.CAT_MEOW));
+        PAServer.users.forEach(h -> h.sendSound(Sound.SHEEP_IDLE));
 
         bt = plugin.getServer().getScheduler().runTaskTimer(plugin, () -> {
             ColorParser dc = ColorParser.values()[r.nextInt(ColorParser.values().length)];

@@ -218,7 +218,7 @@ public class PlayerEvents implements Listener {
 
     @EventHandler
     public void onSpawn(CreatureSpawnEvent e){
-        e.setCancelled(true);
+        if (e.getEntity().getCustomName() == null || e.getEntity().getCustomName().equalsIgnoreCase("")) e.setCancelled(true);
     }
 
     @EventHandler(priority=EventPriority.HIGHEST)

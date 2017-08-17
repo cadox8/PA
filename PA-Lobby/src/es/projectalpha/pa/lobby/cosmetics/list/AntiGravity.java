@@ -8,7 +8,6 @@ import es.projectalpha.pa.lobby.utils.Helpers;
 import org.bukkit.Color;
 import org.bukkit.FireworkEffect;
 import org.bukkit.Material;
-import org.bukkit.Sound;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.EntityType;
 import org.bukkit.inventory.ItemStack;
@@ -53,7 +52,6 @@ public class AntiGravity extends Cosmetic {
         u.getPlayer().eject();
 
         FireworkAPI.spawnFirework(u.getLoc(), FireworkEffect.Type.BALL_LARGE, Color.GRAY, Color.MAROON, 10).detonate();
-        u.sendSound(Sound.EXPLODE);
 
         u.getPlayer().setNoDamageTicks(100);
         new Helpers(u).sendToSpawn();
