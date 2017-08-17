@@ -21,7 +21,7 @@ public class NoFallTask extends BukkitRunnable {
                 return;
             }
             if (l.getLoc().getY() <= 0) new Helpers(l).sendToSpawn();
-            if(!l.getLoc().getWorld().equals("mlb")) new Helpers(l).sendToSpawn();
+            if(!l.getLoc().getWorld().getName().equals("mlb")) new Helpers(l).sendToSpawn();
         });
     }
 }

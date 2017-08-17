@@ -7,6 +7,7 @@ import es.projectalpha.pa.core.cmd.PACmd;
 import es.projectalpha.pa.core.utils.ItemMaker;
 import es.projectalpha.pa.core.utils.Utils;
 import es.projectalpha.pa.lobby.PALobby;
+import es.projectalpha.pa.lobby.cosmetics.Cosmetic;
 import es.projectalpha.pa.lobby.utils.Helpers;
 import es.projectalpha.pa.lobby.utils.LobbyMenu;
 import es.projectalpha.pa.lobby.utils.LobbyTeams;
@@ -61,11 +62,10 @@ public class PlayerEvents implements Listener {
 
         h.lobbyScoreboard();
         LobbyTeams.setScoreboardTeam(u);
-        p.teleport(Utils.stringToLocation(plugin.getConfig().getString("spawn")));
-        //new Helpers(u).sendToSpawn();
+        new Helpers(u).sendToSpawn();
         u.getPlayer().getInventory().clear();
         u.getPlayer().getInventory().setItem(0, new ItemMaker(Material.NETHER_STAR).setDisplayName("&cJuegos").build());
-        u.getPlayer().getInventory().setItem(4, new ItemMaker(Material.PISTON_STICKY_BASE).setDisplayName("&7Cosmeticos").build());
+        u.getPlayer().getInventory().setItem(4, new ItemMaker(Material.REDSTONE).setDisplayName("&7Cosmeticos").build());
         u.getPlayer().updateInventory();
 
         u.sendMessage("&6Actualmente hay &2" + PAServer.users.size() + " &6usuarios en línea");
@@ -100,16 +100,18 @@ public class PlayerEvents implements Listener {
 
         if (e.getAction() == Action.RIGHT_CLICK_AIR || e.getAction() == Action.RIGHT_CLICK_BLOCK) {
             if (e.getItem() == null) return;
+            e.setCancelled(true);
+            Cosmetic.useCosmetic(u, e.getItem().getType());
 
             switch (e.getItem().getType()) {
                 case NETHER_STAR:
                     e.setCancelled(true);
                     LobbyMenu.openMenu(u, LobbyMenu.MenuType.SERVERS);
                     break;
-                case PISTON_STICKY_BASE:
+                case REDSTONE:
                     e.setCancelled(true);
-                    u.sendMessage(PAData.LOBBY.getPrefix() + "&cEstamos trabajando en esto :D");
-                    //LobbyMenu.openMenu(u, LobbyMenu.MenuType.COSMETICOS);
+                    //u.sendMessage(PAData.LOBBY.getPrefix() + "&cEstamos trabajando en esto :D");
+                    LobbyMenu.openMenu(u, LobbyMenu.MenuType.COSMETICOS);
                     break;
             }
 

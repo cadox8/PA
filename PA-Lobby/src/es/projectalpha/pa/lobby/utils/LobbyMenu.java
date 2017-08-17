@@ -4,6 +4,7 @@ import es.projectalpha.pa.core.api.PAData;
 import es.projectalpha.pa.core.api.PAUser;
 import es.projectalpha.pa.core.utils.ItemMaker;
 import es.projectalpha.pa.lobby.PALobby;
+import es.projectalpha.pa.lobby.cosmetics.Cosmetic;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.Sound;
@@ -23,23 +24,24 @@ public class LobbyMenu {
         //Servidores
         servers = plugin.getServer().createInventory(null, 9, "Servidores");
         servers.setItem(0, new ItemMaker(Material.BOW).setDisplayName(PAData.RG.getName()).build());
-        servers.setItem(2, new ItemMaker(Material.COMMAND).setDisplayName("&cCreativo").setLores("&b&cAVISO: SERVIDOR EN LA 1.12.X").build());
-        servers.setItem(6, new ItemMaker(Material.GOLD_PICKAXE).setDisplayName("&dSurvival").setLores("Survival vanilla para la beta.", ChatColor.ITALIC.toString() + ChatColor.STRIKETHROUGH + " ¿Bloodcore?", "&b&cAVISO: SERVIDOR EN LA 1.12.X").build());
+        servers.setItem(2, new ItemMaker(Material.DIAMOND_BLOCK).setDisplayName("&cCreativo").setLores("&b&cAVISO: SERVIDOR EN LA 1.12.X").build());
+        servers.setItem(6, new ItemMaker(Material.GRASS).setDisplayName("&dSurvival").setLores("Survival vanilla para la beta.", ChatColor.ITALIC.toString() + ChatColor.STRIKETHROUGH + " ¿Bloodcore?", "&b&cAVISO: SERVIDOR EN LA 1.12.X").build());
         servers.setItem(4, new ItemMaker(Material.IRON_AXE).setDisplayName("&6Tower &rOf &cAncients").build());
         servers.setItem(8, new ItemMaker(Material.TNT).setDisplayName(PAData.NS.getName()).build());
 
         //RageGames
         rg = plugin.getServer().createInventory(null, 9, "RageGames");
-        rg.setItem(0, new ItemMaker(Material.BOW).setDisplayName(PAData.RG.getName() + " &r1").build());
-        rg.setItem(1, new ItemMaker(Material.BOW).setDisplayName(PAData.RG.getName() + " &r2").build());
-        rg.setItem(2, new ItemMaker(Material.BOW).setDisplayName(PAData.RG.getName() + " &r3").build());
-        rg.setItem(3, new ItemMaker(Material.BOW).setDisplayName(PAData.RG.getName() + " &r4").build());
+        rg.setItem(2, new ItemMaker(Material.BOW).setDisplayName("&eQuartz").build());
+        rg.setItem(3, new ItemMaker(Material.BOW).setDisplayName("&bVillage").build());
+        rg.setItem(4, new ItemMaker(Material.BOW).setDisplayName("&2Green").build());
         rg.setItem(8, new ItemMaker(Material.COMPASS).setDisplayName("&cModalidad").build());
 
 
         //Cosmeticos
-        cometicos = plugin.getServer().createInventory(null, 27, "Cosmeticos");
-
+        cometicos = plugin.getServer().createInventory(null, 9, "Cosmeticos");
+        cometicos.setItem(0, new ItemMaker(Cosmetic.ANTI_GRAVITY.getMat()).setDisplayName(Cosmetic.ANTI_GRAVITY.getName()).build());
+        cometicos.setItem(1, new ItemMaker(Cosmetic.EXPLOSIVE_SHEEP.getMat()).setDisplayName(Cosmetic.EXPLOSIVE_SHEEP.getName()).build());
+        cometicos.setItem(8, new ItemMaker(Material.BARRIER).setDisplayName("&cBorrar Cosmeticos").build());
     }
 
     public static void openMenu(PAUser u, MenuType menuType) {
