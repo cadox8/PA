@@ -48,7 +48,6 @@ public class PALobby extends JavaPlugin {
 
     private void registerEvents() {
         PluginManager pm = getServer().getPluginManager();
-
         pm.registerEvents(new InventoryEvents(instance), instance);
         pm.registerEvents(new PlayerEvents(instance), instance);
     }
