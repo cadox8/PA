@@ -1,4 +1,4 @@
-package es.projectalpha.wc.sn.recipes;
+package es.projectalpha.pa.sn.recipes;
 
 import es.projectalpha.pa.core.utils.ItemMaker;
 import org.bukkit.Bukkit;

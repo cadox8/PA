@@ -1,7 +1,7 @@
-package es.projectalpha.wc.sn.utils;
+package es.projectalpha.pa.sn.utils;
 
-import es.projectalpha.wc.sn.SafariNet;
-import es.projectalpha.wc.sn.files.Files;
+import es.projectalpha.pa.sn.SafariNet;
+import es.projectalpha.pa.sn.files.Files;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 

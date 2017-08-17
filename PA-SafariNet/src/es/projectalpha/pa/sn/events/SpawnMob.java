@@ -1,8 +1,8 @@
-package es.projectalpha.wc.sn.events;
+package es.projectalpha.pa.sn.events;
 
-import es.projectalpha.wc.sn.SNMob;
-import es.projectalpha.wc.sn.SafariNet;
-import es.projectalpha.wc.sn.files.Files;
+import es.projectalpha.pa.sn.SNMob;
+import es.projectalpha.pa.sn.SafariNet;
+import es.projectalpha.pa.sn.files.Files;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;

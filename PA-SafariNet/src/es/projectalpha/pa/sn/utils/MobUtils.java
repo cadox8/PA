@@ -1,4 +1,4 @@
-package es.projectalpha.wc.sn.utils;
+package es.projectalpha.pa.sn.utils;
 
 import org.bukkit.entity.Animals;
 import org.bukkit.entity.Entity;

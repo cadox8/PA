@@ -1,8 +1,8 @@
-package es.projectalpha.wc.sn.cmd;
+package es.projectalpha.pa.sn.cmd;
 
 import es.projectalpha.pa.core.api.PAUser;
 import es.projectalpha.pa.core.cmd.PACmd;
-import es.projectalpha.wc.sn.recipes.PokeEgg;
+import es.projectalpha.pa.sn.recipes.PokeEgg;
 import org.bukkit.Sound;
 
 import java.util.Arrays;

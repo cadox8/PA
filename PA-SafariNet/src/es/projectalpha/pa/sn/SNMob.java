@@ -1,9 +1,9 @@
-package es.projectalpha.wc.sn;
+package es.projectalpha.pa.sn;
 
 import es.projectalpha.pa.core.utils.ItemMaker;
-import es.projectalpha.wc.sn.files.Files;
-import es.projectalpha.wc.sn.utils.ColorUtils;
-import es.projectalpha.wc.sn.utils.MobUtils;
+import es.projectalpha.pa.sn.utils.ColorUtils;
+import es.projectalpha.pa.sn.utils.MobUtils;
+import es.projectalpha.pa.sn.files.Files;
 import lombok.Getter;
 import org.apache.commons.lang.WordUtils;
 import org.bukkit.DyeColor;

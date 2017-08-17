@@ -1,12 +1,12 @@
-package es.projectalpha.wc.sn;
+package es.projectalpha.pa.sn;
 
 import es.projectalpha.pa.core.PACommands;
 import es.projectalpha.pa.core.api.PAData;
-import es.projectalpha.wc.sn.cmd.SafariCMD;
-import es.projectalpha.wc.sn.events.CatchMob;
-import es.projectalpha.wc.sn.events.SpawnMob;
-import es.projectalpha.wc.sn.files.Files;
-import es.projectalpha.wc.sn.recipes.PokeEgg;
+import es.projectalpha.pa.sn.cmd.SafariCMD;
+import es.projectalpha.pa.sn.events.CatchMob;
+import es.projectalpha.pa.sn.events.SpawnMob;
+import es.projectalpha.pa.sn.files.Files;
+import es.projectalpha.pa.sn.recipes.PokeEgg;
 import lombok.Getter;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.event.Listener;

@@ -1,11 +1,11 @@
-package es.projectalpha.wc.sn.events;
+package es.projectalpha.pa.sn.events;
 
-import es.projectalpha.wc.sn.SNMob;
-import es.projectalpha.wc.sn.SafariNet;
-import es.projectalpha.wc.sn.files.Files;
-import es.projectalpha.wc.sn.recipes.PokeEgg;
-import es.projectalpha.wc.sn.utils.MobUtils;
-import es.projectalpha.wc.sn.utils.VaultUtils;
+import es.projectalpha.pa.sn.SNMob;
+import es.projectalpha.pa.sn.SafariNet;
+import es.projectalpha.pa.sn.files.Files;
+import es.projectalpha.pa.sn.recipes.PokeEgg;
+import es.projectalpha.pa.sn.utils.MobUtils;
+import es.projectalpha.pa.sn.utils.VaultUtils;
 import org.bukkit.ChatColor;
 import org.bukkit.Sound;
 import org.bukkit.entity.*;
