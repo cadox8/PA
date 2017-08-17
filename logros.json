@@ -1,0 +1,11 @@
+{
+  "logros": 2,
+  "1": {
+    "nombre": "Beta Player",
+    "desc": "Un jugador capaz de haber aguantado con los bugs del servidor durante la beta."
+  },
+  "2": {
+    "nombre": "Con el triciclo",
+    "desc": "Haber entrado al servidor por primera vez."
+  }
+}
