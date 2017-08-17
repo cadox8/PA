@@ -36,6 +36,7 @@ public class MoneyCMD extends PACmd {
                 default:
                     if(user.isOnRank(Grupo.Mod)){
                         Player p = Bukkit.getPlayerExact(args[0]);
+                        if(!p.isOnline()){ user.sendMessage("&4El jugador no existe o está desconectado"); return;}
                         if(!files.getUser().contains(args[0])) return;
                         user.sendMessage("&cDinero de " + args[0] + ": &6" + eco.getBalance(p));
                     }else{
