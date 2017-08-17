@@ -1,10 +1,9 @@
 package es.projectalpha.pa.sur;
 
+import es.projectalpha.pa.core.PACommands;
 import es.projectalpha.pa.sur.api.SurvivalUser;
-import es.projectalpha.pa.sur.events.IronElevators;
-import es.projectalpha.pa.sur.events.PlayerEvents;
-import es.projectalpha.pa.sur.events.PvPEvent;
-import es.projectalpha.pa.sur.events.Sit;
+import es.projectalpha.pa.sur.cmd.*;
+import es.projectalpha.pa.sur.events.*;
 import es.projectalpha.pa.sur.files.Files;
 import es.projectalpha.pa.sur.manager.PvPManager;
 import lombok.Getter;
@@ -31,7 +30,7 @@ public class PASurvival extends JavaPlugin {
         instance = this;
         manager = new PvPManager();
         manager.check();
-
+        PACommands.register(new StonesCMD(), new MoneyCMD(), new PayCMD(), new PvPCMD(), new LoteriaCMD());
         files.setupFiles();
 
         registerEvents();
@@ -46,6 +45,7 @@ public class PASurvival extends JavaPlugin {
         pm.registerEvents(new PlayerEvents(), instance);
         pm.registerEvents(new PvPEvent(), instance);
         pm.registerEvents(new Sit(), instance);
+        pm.registerEvents(new StonesEvents(), instance);
     }
 
     public static SurvivalUser getPlayer(OfflinePlayer p) {

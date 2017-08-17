@@ -63,6 +63,7 @@ public class StonesEvents implements Listener {
                 files.getStone().set("piedras" + i + ".b1", b1);
                 files.getStone().set("piedras" + i + ".b2", b2);
                 files.getStone().set("piedras" + i + ".owner", p.getName());
+                p.sendMessage(ChatColor.GREEN + "Zona protegida, tamaño 10x10x10.");
                 break;
 
             case IRON_ORE:
@@ -91,6 +92,7 @@ public class StonesEvents implements Listener {
                 files.getStone().set("piedras" + i + ".b1", b1);
                 files.getStone().set("piedras" + i + ".b2", b2);
                 files.getStone().set("piedras" + i + ".owner", p.getName());
+                p.sendMessage(ChatColor.GREEN + "Zona protegida, tamaño 20x20x20.");
                 break;
 
             case GOLD_ORE:
@@ -111,6 +113,7 @@ public class StonesEvents implements Listener {
                                 if(bl.getLocation() == st.getLocation()) return;
                                 p.sendMessage(ChatColor.DARK_RED + "No puedes colocar este bloque de protección aquí ya que hay otra región cerca.");
                                 e.setCancelled(true);
+                                return;
                             });
                         }
                     });
@@ -119,6 +122,7 @@ public class StonesEvents implements Listener {
                 files.getStone().set("piedras" + i + ".b1", b1);
                 files.getStone().set("piedras" + i + ".b2", b2);
                 files.getStone().set("piedras" + i + ".owner", p.getName());
+                p.sendMessage(ChatColor.GREEN + "Zona protegida, tamaño 30x30x30.");
                 break;
 
             case LAPIS_ORE:
@@ -147,6 +151,7 @@ public class StonesEvents implements Listener {
                 files.getStone().set("piedras" + i + ".b1", b1);
                 files.getStone().set("piedras" + i + ".b2", b2);
                 files.getStone().set("piedras" + i + ".owner", p.getName());
+                p.sendMessage(ChatColor.GREEN + "Zona protegida, tamaño 40x40x40.");
                 break;
 
             case EMERALD_ORE:
@@ -175,6 +180,7 @@ public class StonesEvents implements Listener {
                 files.getStone().set("piedras" + i + ".b1", b1);
                 files.getStone().set("piedras" + i + ".b2", b2);
                 files.getStone().set("piedras" + i + ".owner", p.getName());
+                p.sendMessage(ChatColor.GREEN + "Zona protegida, tamaño 50x50x50.");
                 break;
             case DIAMOND_ORE:
                 if(!p.getInventory().getItemInMainHand().equals(stones.stone6)) return;
@@ -202,6 +208,7 @@ public class StonesEvents implements Listener {
                 files.getStone().set("piedras" + i + ".b1", b1);
                 files.getStone().set("piedras" + i + ".b2", b2);
                 files.getStone().set("piedras" + i + ".owner", p.getName());
+                p.sendMessage(ChatColor.GREEN + "Zona protegida, tamaño 70x70x70.");
                 break;
 
         }

@@ -18,7 +18,7 @@ public class StonesCMD extends PACmd {
     private PASurvival plugin = PASurvival.getInstance();
 
     public StonesCMD() {
-        super("pvp", PACmd.Grupo.Admin);
+        super("pvp", Grupo.Usuario);
     }
 
     private Files files = plugin.getFiles();

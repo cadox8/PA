@@ -13,7 +13,7 @@ public class PayCMD extends PACmd {
     private PASurvival plugin = PASurvival.getInstance();
 
     public PayCMD() {
-        super("pvp", PACmd.Grupo.Admin);
+        super("pvp", Grupo.Usuario);
     }
 
     private Files files = plugin.getFiles();

@@ -12,7 +12,7 @@ public class PvPCMD extends PACmd {
     private PASurvival plugin = PASurvival.getInstance();
 
     public PvPCMD() {
-        super("pvp", PACmd.Grupo.Admin, Arrays.asList("pvpmanager", "pvpm"));
+        super("pvp", Grupo.Usuario, Arrays.asList("pvpmanager", "pvpm"));
     }
 
     @Override

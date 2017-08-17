@@ -15,7 +15,7 @@ public class MoneyCMD extends PACmd {
     private PASurvival plugin = PASurvival.getInstance();
 
     public MoneyCMD() {
-        super("dinero", PACmd.Grupo.Admin, "balance", "money");
+        super("dinero", Grupo.Usuario, "balance", "money");
     }
 
     private Files files = plugin.getFiles();
