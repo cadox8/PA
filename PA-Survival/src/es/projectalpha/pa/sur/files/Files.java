@@ -19,6 +19,8 @@ public class Files {
     public void setupFiles() {
         if (!fileUser.exists()) {
             fileUser.mkdir();
+            user.set("recaudado", 0);
+            user.set("lotería", 100);
         }
 
         if (!fileStone.exists()) {
