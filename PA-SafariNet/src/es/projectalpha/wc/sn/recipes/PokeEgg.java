@@ -15,7 +15,7 @@ import org.bukkit.inventory.ShapedRecipe;
 public class PokeEgg {
 
     public ItemStack getPokeEgg(){
-        return new ItemMaker(Material.EGG).setAmount(4).setDisplayName(ChatColor.YELLOW + "Poke" + ChatColor.WHITE + "Egg").setLores(ChatColor.WHITE + "Lanzalo contra un mob", ChatColor.WHITE + "para atraparlo").addUnsafeEnchant(Enchantment.ARROW_DAMAGE, 1).addItemFlag(ItemFlag.HIDE_ENCHANTS).build();
+        return new ItemMaker(Material.EGG).setAmount(4).setDisplayName(ChatColor.YELLOW + "Poke" + ChatColor.WHITE + "Egg").setLores(ChatColor.WHITE + "Lanzalo contra un mob", ChatColor.WHITE + "para atraparlo").addEnchant(Enchantment.ARROW_DAMAGE, 1).addItemFlag(ItemFlag.HIDE_ENCHANTS).build();
     }
 
     public void registerRecipe(){
