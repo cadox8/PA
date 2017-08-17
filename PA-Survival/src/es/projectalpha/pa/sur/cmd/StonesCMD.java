@@ -13,6 +13,8 @@ import org.bukkit.Location;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 
+import java.util.List;
+
 public class StonesCMD extends PACmd {
 
     private PASurvival plugin = PASurvival.getInstance();
@@ -57,7 +59,7 @@ public class StonesCMD extends PACmd {
                         fb1 = l.getWorld().getBlockAt(l.add(Utils.stringToLocation(files.getStone().getString("piedras." + s + ".b1"))));
                         fb2 = l.getWorld().getBlockAt(l.add(Utils.stringToLocation(files.getStone().getString("piedras." + s + ".b2"))));
                         CuboidZone fcz = new CuboidZone(fb1, fb2);
-                        Boolean owner = files.getStone().getString("piedras." + s + ".owner").equals(user.getName());
+                        boolean owner = files.getStone().getString("piedras." + s + ".owner").equals(user.getName());
                             fcz.toArray().forEach(st ->{
                                 if(p.getLocation() == st.getLocation() && !owner){
                                     p.sendMessage(ChatColor.DARK_RED + "No puedes darle permisos a otra persona si no estás en tu región.");
@@ -75,18 +77,16 @@ public class StonesCMD extends PACmd {
                         fb1 = l.getWorld().getBlockAt(l.add(Utils.stringToLocation(files.getStone().getString("piedras." + s + ".b1"))));
                         fb2 = l.getWorld().getBlockAt(l.add(Utils.stringToLocation(files.getStone().getString("piedras." + s + ".b2"))));
                         CuboidZone fcz = new CuboidZone(fb1, fb2);
-                        Boolean owner = files.getStone().getString("piedras." + s + ".owner").equals(user.getName());
+                        boolean owner = files.getStone().getString("piedras." + s + ".owner").equals(user.getName());
                         fcz.toArray().forEach(st ->{
                             if(p.getLocation() == st.getLocation() && !owner){
                                 p.sendMessage(ChatColor.DARK_RED + "No puedes quitarle permisos a otra persona si no estás en tu región.");
                                 return;
                             }
                         });
-                        files.getStone().getList("piedras." + s + ".perm.").forEach(j ->{
-                                    if(j.toString().equals(p.getName())){
-                                     j.toString().replace(p.getName(), "");
-                                    }
-                        });
+                        List<String> perms = files.getStone().getStringList("piedras." + s + ".perm.");
+                        perms.remove(p.getName());
+                        files.getStone().set("piedras." + s + ".perm.", perms);
                     }
                     break;
                 default:
