@@ -28,6 +28,7 @@ public class TimeTask extends BukkitRunnable {
         System.out.println(hora + ":" + min + ":" + seg);
         files.getUser().getList("Users.").forEach(p ->{
                 balance.saveBalance(PASurvival.getPlayer(plugin.getServer().getOfflinePlayer(p.toString())));
+                files.getUser().set("recaudado", files.getUser().getInt("recaudado") + (files.getUser().getInt("Users." + p.toString() + ".money")*0.01));
                 balance.removeBalance(PASurvival.getPlayer(plugin.getServer().getOfflinePlayer(p.toString())), eco.getBalance(plugin.getServer().getOfflinePlayer(p.toString()))*0.01);
                 balance.saveBalance(PASurvival.getPlayer(plugin.getServer().getOfflinePlayer(p.toString())));
         });

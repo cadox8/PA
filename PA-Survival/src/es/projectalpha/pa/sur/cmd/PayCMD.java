@@ -33,6 +33,7 @@ public class PayCMD extends PACmd {
             Player u = Bukkit.getPlayerExact(args[0]);
             if(!u.isOnline()){ user.sendMessage("&4El jugador no existe o está desconectado"); return;}
             balance.addBalace(PASurvival.getPlayer(u), Double.parseDouble(args[1]));
+            balance.removeBalance(PASurvival.getPlayer(user.getPlayer()), Double.parseDouble(args[1]));
             balance.saveBalance(PASurvival.getPlayer(u));
             user.sendMessage("&Has pagado a " + u.getName() + " " + args[1] + "$");
         }

@@ -6,6 +6,9 @@ import es.projectalpha.pa.sur.PASurvival;
 import es.projectalpha.pa.sur.files.Files;
 import es.projectalpha.pa.sur.manager.Balance;
 import net.milkbowl.vault.economy.Economy;
+import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
+import org.bukkit.entity.Player;
 
 public class MoneyCMD extends PACmd {
 
@@ -26,6 +29,24 @@ public class MoneyCMD extends PACmd {
         }
         if (args.length == 1) {
 
+            switch (args[0]){
+                case "recaudado":
+                    user.sendMessage("&cDinero recaudado: &6" + files.getUser().getInt("recaudado"));
+                    break;
+                default:
+                    if(user.isOnRank(Grupo.Mod)){
+                        Player p = Bukkit.getPlayerExact(args[0]);
+                        if(!files.getUser().contains(args[0])) return;
+                        user.sendMessage("&cDinero de " + args[0] + ": &6" + eco.getBalance(p));
+                    }else{
+                        user.sendMessage(ChatColor.DARK_RED + "Demasiados argumentos, /money");
+                    }
+                    break;
+            }
+        }
+
+        if (args.length > 1) {
+            user.sendMessage(ChatColor.DARK_RED + "Demasiados argumentos, /money");
         }
     }
 

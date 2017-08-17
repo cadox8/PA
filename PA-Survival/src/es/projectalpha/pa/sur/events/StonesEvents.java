@@ -13,8 +13,8 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.event.player.PlayerItemBreakEvent;
 
 public class StonesEvents implements Listener {
 
@@ -217,10 +217,10 @@ public class StonesEvents implements Listener {
             fb2 = l.getWorld().getBlockAt(l.add(Utils.stringToLocation(files.getStone().getString("piedras." + s + ".b2"))));
             CuboidZone fcz = new CuboidZone(fb1, fb2);
             Boolean owner = files.getStone().getString("piedras." + s + ".owner").equals(p.getName());
-            files.getStone().getList("piedras." + s + ".owner").forEach(j ->{
+            files.getStone().getList("piedras." + s + ".perm").forEach(j ->{
                 fcz.toArray().forEach(st ->{
                     if(p.getLocation() == st.getLocation() && !owner || !j.toString().equals(p.getName())){
-                        p.sendMessage(ChatColor.DARK_RED + "No tienes permisos para romper aquí.");
+                        p.sendMessage(ChatColor.DARK_RED + "No tienes permisos para construir aquí.");
                         e.setCancelled(true);
                     }
                 });
@@ -238,10 +238,33 @@ public class StonesEvents implements Listener {
             fb2 = l.getWorld().getBlockAt(l.add(Utils.stringToLocation(files.getStone().getString("piedras." + s + ".b2"))));
             CuboidZone fcz = new CuboidZone(fb1, fb2);
             Boolean owner = files.getStone().getString("piedras." + s + ".owner").equals(p.getName());
-            files.getStone().getList("piedras." + s + ".owner").forEach(j ->{
+            files.getStone().getList("piedras." + s + ".perm").forEach(j ->{
                 fcz.toArray().forEach(st ->{
                     if(p.getLocation() == st.getLocation() && !owner || !j.toString().equals(p.getName())){
                         p.sendMessage(ChatColor.DARK_RED + "No tienes permisos para construir aquí.");
+                        e.setCancelled(true);
+                    }
+                });
+            });
+        }
+
+    }
+
+    @EventHandler
+    public void onAttack(EntityDamageByEntityEvent e){
+        if(!(e.getDamager() instanceof Player)) return;
+        Player p = (Player) e.getDamager();
+        Location l = p.getLocation();
+        for(int s = 0; s <= i; s++){
+            Block fb1,fb2;
+            fb1 = l.getWorld().getBlockAt(l.add(Utils.stringToLocation(files.getStone().getString("piedras." + s + ".b1"))));
+            fb2 = l.getWorld().getBlockAt(l.add(Utils.stringToLocation(files.getStone().getString("piedras." + s + ".b2"))));
+            CuboidZone fcz = new CuboidZone(fb1, fb2);
+            Boolean owner = files.getStone().getString("piedras." + s + ".owner").equals(p.getName());
+            files.getStone().getList("piedras." + s + ".perm").forEach(j ->{
+                fcz.toArray().forEach(st ->{
+                    if(p.getLocation() == st.getLocation() && !owner || !j.toString().equals(p.getName())){
+                        p.sendMessage(ChatColor.DARK_RED + "No tienes permisos para atacar a entidades aquí.");
                         e.setCancelled(true);
                     }
                 });
