@@ -21,7 +21,8 @@ public enum Messages {
     NEED_ARGS("&c¡Faltan argumentos!"),
     BUFF_ARGS("&c¡Demasidos argumentos!"),
     SEND("&3Serás enviado al lobby en %t% segundos"),
-    TOAHOME("&3Asignada casa &c%home&");
+    TOAHOME("&3Asignada casa &c%home&"),
+    COSMETIC_USE("&3Has usado &c%cosmetic%");
 
 
     @Getter

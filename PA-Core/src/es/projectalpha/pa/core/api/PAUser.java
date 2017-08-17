@@ -100,6 +100,9 @@ public class PAUser {
     public void removeItemInHand() {
         getPlayer().getInventory().setItemInHand(new ItemStack(Material.AIR));
     }
+    public void removeItemInSlot(int slot) {
+        if (getPlayer().getInventory().getItem(slot) != null || getPlayer().getInventory().getItem(slot).getType() != Material.AIR) getPlayer().getInventory().clear(slot);
+    }
 
     public void heal() {
         getPlayer().setHealth(getPlayer().getMaxHealth());
