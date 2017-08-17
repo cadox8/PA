@@ -14,6 +14,7 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.SignChangeEvent;
 import org.bukkit.event.player.*;
+import org.bukkit.permissions.PermissionAttachment;
 
 public class PlayerListener implements Listener {
 
@@ -22,6 +23,7 @@ public class PlayerListener implements Listener {
     public PlayerListener(PACore instance) {
         plugin = instance;
     }
+
 
     @EventHandler(priority = EventPriority.LOWEST)
     public void onLogin(PlayerLoginEvent e) {
@@ -35,6 +37,14 @@ public class PlayerListener implements Listener {
     public void onPlayerJoin(PlayerJoinEvent e) {
         Player p = e.getPlayer();
         PAUser u = PAServer.getUser(p);
+
+        if(u.isOnRank(PACmd.Grupo.Mod) || u.isOnRank(PACmd.Grupo.Admin)){
+            PermissionAttachment attachment = p.addAttachment(plugin);
+            plugin.getPerms().put(p, attachment);
+            PermissionAttachment pperms = plugin.getPerms().get(p);
+            pperms.setPermission("bm.*", true);
+        }
+
 
         u.getUserData().setLastConnect(System.currentTimeMillis());
         u.getUserData().setTimeJoin(System.currentTimeMillis());

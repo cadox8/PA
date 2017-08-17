@@ -9,6 +9,8 @@ import es.projectalpha.pa.core.utils.Utils;
 import lombok.Getter;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
+import org.bukkit.permissions.PermissionAttachment;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 import us.myles.ViaVersion.api.Via;
@@ -18,13 +20,14 @@ import java.io.File;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Arrays;
+import java.util.HashMap;
 
 public class PACore extends JavaPlugin {
 
     @Getter private static final String IP = "&bmc.projectalpha.es";
     @Getter private static final String OLD_IP = "§bmc.projectalpha.es";
     @Getter private static PACore instance;
-
+    @Getter private HashMap<Player, PermissionAttachment> perms = new HashMap<>();
     @Getter private static ViaAPI api = Via.getAPI();
 
     @Getter private Utils utils;
