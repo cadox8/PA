@@ -1,0 +1,9 @@
+name: ${project.artifactId}
+main: es.projectalpha.wc.sn.SafariNet
+version: ${project.version}
+authors: [cadox8, Wikijito7]
+depends: [Vault, WC-Core]
+
+commands:
+    game:
+      description: Comando SafariNet

@@ -2,7 +2,6 @@ package es.projectalpha.pa.core.api;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import org.bukkit.ChatColor;
 
 @AllArgsConstructor
 public enum PAData {
@@ -14,7 +13,8 @@ public enum PAData {
 
     RG(4, "&cRageGames"),
     TOA(5, "&aTOA"),
-    NS(6, "&eNexus&bSiege");
+    NS(6, "&eNexus&bSiege"),
+    SN(7, "&bSafari&8Net");
 
     @Getter
     private int id;

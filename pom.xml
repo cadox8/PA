@@ -20,6 +20,7 @@
 
         <!-- Survival -->
         <module>PA-Survival</module>
+        <module>PA-SafariNet</module>
 
         <!-- Creativo -->
         <module>PA-Creativo</module>
