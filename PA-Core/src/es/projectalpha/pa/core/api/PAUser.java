@@ -23,6 +23,7 @@ import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.net.InetSocketAddress;
+import java.util.ArrayList;
 
 public class PAUser {
 
@@ -236,6 +237,9 @@ public class PAUser {
         Integer coins = 0;
 
         InetSocketAddress ip = null;
+
+        //Logros
+        ArrayList<Integer> logros = new ArrayList<>();
 
         //TOA
         Integer maxPiso = 0;

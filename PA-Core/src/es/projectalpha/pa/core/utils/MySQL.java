@@ -7,8 +7,7 @@ import es.projectalpha.pa.core.cmd.PACmd;
 import org.bukkit.entity.Player;
 
 import java.sql.*;
-import java.util.HashMap;
-import java.util.UUID;
+import java.util.ArrayList;
 
 /**
  * Objeto para conexiones de MySQL
@@ -62,6 +61,7 @@ public class MySQL {
             try {
                 PreparedStatement statement = openConnection().prepareStatement("SELECT `id` FROM `pa_datos` WHERE `name` = ?");
                 statement.setString(1, p.getName());
+
                 ResultSet rs = statement.executeQuery();
                 if (!rs.next()) { //No hay filas encontradas, insertar nuevos datos
                     PreparedStatement inserDatos = openConnection().prepareStatement("INSERT INTO `pa_datos` (`name`, `grupo`) VALUES (?, ?)");
@@ -128,6 +128,16 @@ public class MySQL {
                 data.setDeaths(rsDatos.getInt("deaths"));
                 data.setKit(rsDatos.getInt("kit"));
             }
+
+            //Amigos
+            PreparedStatement stamentLogros = openConnection().prepareStatement("SELECT `logro` FROM `pa_logros` WHERE `name` = ?");
+            stamentLogros.setString(1, id);
+            ResultSet rsLogros = stamentLogros.executeQuery();
+
+            ArrayList<Integer> logros = new ArrayList<>();
+            while (rsLogros.next()) logros.add(rsLogros.getInt("logro"));
+            data.setLogros(logros);
+
         } catch (CommunicationsException ex) {
             PACore.getInstance().debugLog(ex.toString());
             try {
@@ -216,5 +226,36 @@ public class MySQL {
             Log.log(Log.Level.SEVERE, e.toString());
         }
         return false;
+    }
+
+    //Logros
+    public void addLogro(PAUser u, int logro) {
+        try {
+            PreparedStatement statement = openConnection().prepareStatement("SELECT * FROM `pa_logros` WHERE `name` =? AND `logro`=?");
+            statement.setString(1, u.getName());
+            statement.setInt(2, logro);
+            ResultSet rs = statement.executeQuery();
+            if (!rs.next()) { //No hay filas encontradas, insertar nuevos datos
+                PreparedStatement logros = openConnection().prepareStatement("INSERT INTO `pa_logros` (`name`, `logro`) VALUES (?, ?)");
+                logros.setString(1, u.getName());
+                logros.setInt(2, logro);
+                logros.executeUpdate();
+            }
+        } catch (SQLException | ClassNotFoundException e) {
+            Log.log(Log.Level.SEVERE, e.toString());
+        }
+    }
+
+    public boolean chechLogro(PAUser u, int logro) {
+        try {
+            PreparedStatement statement = openConnection().prepareStatement("SELECT * FROM `pa_logros` WHERE `name` =? AND `logro`=?");
+            statement.setString(1, u.getName());
+            statement.setInt(2, logro);
+            ResultSet rs = statement.executeQuery();
+            if (!rs.next()) return false;
+        } catch (SQLException | ClassNotFoundException e) {
+            Log.log(Log.Level.SEVERE, e.toString());
+        }
+        return true;
     }
 }
