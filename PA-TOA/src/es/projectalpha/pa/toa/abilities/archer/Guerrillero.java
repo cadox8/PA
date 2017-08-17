@@ -18,7 +18,7 @@ public class Guerrillero extends Ability {
         if (isInCooldown(u, getName())) return;
 
         u.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.FAST_DIGGING, 200, 0, true, false));
-        u.getPlayer().setWalkSpeed(0.3f);
+        u.getPlayer().setWalkSpeed(0.4f);
         plugin.getServer().getScheduler().runTaskLater(plugin, ()-> u.getPlayer().setWalkSpeed(0.2f), 200);
         new Cooldown(getCooldown()).setOnCooldown(getName());
     }
