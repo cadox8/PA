@@ -41,7 +41,7 @@ public class LobbyMenu {
         cometicos = plugin.getServer().createInventory(null, 9, "Cosmeticos");
         cometicos.setItem(0, new ItemMaker(Cosmetic.ANTI_GRAVITY.getMat()).setDisplayName(Cosmetic.ANTI_GRAVITY.getName()).build());
         cometicos.setItem(1, new ItemMaker(Cosmetic.EXPLOSIVE_SHEEP.getMat()).setDisplayName(Cosmetic.EXPLOSIVE_SHEEP.getName()).build());
-        cometicos.setItem(8, new ItemMaker(Material.BARRIER).setDisplayName("&cBorrar Cosmeticos").build());
+        //cometicos.setItem(8, new ItemMaker(Material.BARRIER).setDisplayName("&cBorrar Cosmeticos").build());
     }
 
     public static void openMenu(PAUser u, MenuType menuType) {

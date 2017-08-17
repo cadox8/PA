@@ -101,7 +101,7 @@ public class PlayerEvents implements Listener {
         if (e.getAction() == Action.RIGHT_CLICK_AIR || e.getAction() == Action.RIGHT_CLICK_BLOCK) {
             if (e.getItem() == null) return;
             e.setCancelled(true);
-            Cosmetic.useCosmetic(u, e.getItem().getType());
+            if (Cosmetic.useCosmetic(u, e.getItem().getType())) return;
 
             switch (e.getItem().getType()) {
                 case NETHER_STAR:

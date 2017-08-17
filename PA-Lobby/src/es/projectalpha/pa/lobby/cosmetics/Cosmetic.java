@@ -52,7 +52,7 @@ public class Cosmetic {
         return false;
     }
 
-    public static void useCosmetic(PAUser u, Material m) {
+    public static boolean useCosmetic(PAUser u, Material m) {
         String name = "ERROR";
         switch (m) {
             case DIAMOND_BARDING:
@@ -64,7 +64,11 @@ public class Cosmetic {
                 name = EXPLOSIVE_SHEEP.getName();
                 break;
         }
+        if (name.equalsIgnoreCase("ERROR")) {
+            return false;
+        }
         u.sendMessage(Messages.getMessage(Messages.COSMETIC_USE, PAData.LOBBY, "%cosmetic%", name));
+        return true;
     }
 
     protected Entity spawnEntity(Location l, EntityType et) {

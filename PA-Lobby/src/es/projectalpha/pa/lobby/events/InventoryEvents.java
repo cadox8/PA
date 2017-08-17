@@ -73,15 +73,14 @@ public class InventoryEvents implements Listener {
                 e.setCancelled(true);
                 switch (e.getSlot()) {
                     case 0:
-                        u.removeItemInSlot(5);
                         u.getPlayer().getInventory().setItem(5, Cosmetic.ANTI_GRAVITY.getItemStack());
+                        u.getPlayer().updateInventory();
                         break;
                     case 1:
-                        u.removeItemInSlot(5);
                         u.getPlayer().getInventory().setItem(5, Cosmetic.EXPLOSIVE_SHEEP.getItemStack());
+                        u.getPlayer().updateInventory();
                         break;
                     case 8:
-                        u.removeItemInSlot(5);
                         break;
 
                     default:
