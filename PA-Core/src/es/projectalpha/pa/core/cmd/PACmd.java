@@ -93,7 +93,7 @@ public abstract class PACmd {
                 case VIP:
                     return 'e';
                 default:
-                    return '7';
+                    return 'r';
             }
         }
     }

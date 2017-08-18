@@ -79,7 +79,7 @@ public class PlayerListener implements Listener {
         }
 
         //Format
-        String tag = user.getUserData().getGrupo() == PACmd.Grupo.Usuario ? "&7" : "[&" + PACmd.Grupo.groupColor(user.getUserData().getGrupo()) + WordUtils.capitalizeFully(user.getUserData().getGrupo().toString().toLowerCase()) + "&r]";
+        String tag = "[&" + PACmd.Grupo.groupColor(user.getUserData().getGrupo()) + WordUtils.capitalizeFully(user.getUserData().getGrupo().toString().toLowerCase()) + "&r]";
         String msg = user.isOnRank(PACmd.Grupo.ORIGIN) ? Utils.colorize(e.getMessage()) : e.getMessage();
         e.setFormat(Utils.colorize(tag + " " + user.getName() + ": ") + msg);
     }

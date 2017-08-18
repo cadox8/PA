@@ -26,13 +26,24 @@ public class LoteriaCMD extends PACmd {
         }
         if(args.length == 1){
             int bol = Integer.parseInt(args[0]);
-            int rd = new Random().nextInt(9999);
-            if(bol > 10) user.sendMessage(PAData.SURVIVAL.getPrefix() + "&4El máximo de boletos que puedes comprar son 10.");
-            if(bol <= 0) user.sendMessage(PAData.SURVIVAL.getPrefix() + "&4El mínimo de boletos que puedes comprar es 1");
+            int apos = Files.user.getInt("Users." + user.getName() + ".apos");
+            if(bol > 10){
+                user.sendMessage(PAData.SURVIVAL.getPrefix() + "&4El máximo de boletos que puedes comprar son 10.");
+                return;
+            }
+            if(bol <= 0){
+                user.sendMessage(PAData.SURVIVAL.getPrefix() + "&4El mínimo de boletos que puedes comprar es 1");
+                return;
+            }
+            if(apos + bol >= 10){
+                user.sendMessage("&4Ya has comprado 10 boletos, mañana podrás apostar 10 boletos más.");
+                return;
+            }
             user.sendMessage(PAData.SURVIVAL.getPrefix() + "&aHas comprado " + bol + " boletos, tus números son: ");
             for(int b = 1; b <= bol; b++){
-               Files.user.set("Users." + user.getName() + ".bol." + b, rd);
-               user.sendMessage(ChatColor.GOLD + Files.user.getString("Users." + user.getName() + ".bol." + b));
+                Files.user.set("Users." + user.getName() + ".apos", bol);
+                Files.user.set("Users." + user.getName() + ".bol." + b, new Random().nextInt(9999));
+                user.sendMessage(ChatColor.GOLD + Files.user.getString("Users." + user.getName() + ".bol." + b));
             }
         }
     }

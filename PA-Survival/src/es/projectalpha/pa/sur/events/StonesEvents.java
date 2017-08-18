@@ -61,14 +61,15 @@ public class StonesEvents implements Listener {
                                 if(bl.getLocation() == st.getLocation()) return;
                                 p.sendMessage(PAData.SURVIVAL.getPrefix() + ChatColor.DARK_RED + "No puedes colocar este bloque de protección aquí ya que hay otra región cerca.");
                                 e.setCancelled(true);
+                                return;
                             });
                         }
                     });
                 }
                 i++;
-                Files.stone.set("piedras" + i + ".b1", b1);
-                Files.stone.set("piedras" + i + ".b2", b2);
-                Files.stone.set("piedras" + i + ".owner", p.getName());
+                Files.stone.set("piedras." + i + ".b1", Utils.locationToString(b1.getLocation()));
+                Files.stone.set("piedras." + i + ".b2", Utils.locationToString(b2.getLocation()));
+                Files.stone.set("piedras." + i + ".owner", p.getName());
                 p.sendMessage(PAData.SURVIVAL.getPrefix() + ChatColor.GREEN + "Zona protegida, tamaño 10x10x10.");
                 Files.saveFiles();
                 break;
@@ -91,14 +92,15 @@ public class StonesEvents implements Listener {
                                 if(bl.getLocation() == st.getLocation()) return;
                                 p.sendMessage(PAData.SURVIVAL.getPrefix() + ChatColor.DARK_RED + "No puedes colocar este bloque de protección aquí ya que hay otra región cerca.");
                                 e.setCancelled(true);
+                                return;
                             });
                         }
                     });
                 }
                 i++;
-                Files.stone.set("piedras" + i + ".b1", b1);
-                Files.stone.set("piedras" + i + ".b2", b2);
-                Files.stone.set("piedras" + i + ".owner", p.getName());
+                Files.stone.set("piedras." + i + ".b1", Utils.locationToString(b1.getLocation()));
+                Files.stone.set("piedras." + i + ".b2", Utils.locationToString(b2.getLocation()));
+                Files.stone.set("piedras." + i + ".owner", p.getName());
                 p.sendMessage(PAData.SURVIVAL.getPrefix() + ChatColor.GREEN + "Zona protegida, tamaño 20x20x20.");
                 Files.saveFiles();
                 break;
@@ -127,9 +129,9 @@ public class StonesEvents implements Listener {
                     });
                 }
                 i++;
-                Files.stone.set("piedras" + i + ".b1", b1);
-                Files.stone.set("piedras" + i + ".b2", b2);
-                Files.stone.set("piedras" + i + ".owner", p.getName());
+                Files.stone.set("piedras." + i + ".b1", Utils.locationToString(b1.getLocation()));
+                Files.stone.set("piedras." + i + ".b2", Utils.locationToString(b2.getLocation()));
+                Files.stone.set("piedras." + i + ".owner", p.getName());
                 p.sendMessage(PAData.SURVIVAL.getPrefix() + ChatColor.GREEN + "Zona protegida, tamaño 30x30x30.");
                 Files.saveFiles();
                 break;
@@ -152,14 +154,15 @@ public class StonesEvents implements Listener {
                                 if(bl.getLocation() == st.getLocation()) return;
                                 p.sendMessage(PAData.SURVIVAL.getPrefix() + ChatColor.DARK_RED + "No puedes colocar este bloque de protección aquí ya que hay otra región cerca.");
                                 e.setCancelled(true);
+                                return;
                             });
                         }
                     });
                 }
                 i++;
-                Files.stone.set("piedras" + i + ".b1", b1);
-                Files.stone.set("piedras" + i + ".b2", b2);
-                Files.stone.set("piedras" + i + ".owner", p.getName());
+                Files.stone.set("piedras." + i + ".b1", Utils.locationToString(b1.getLocation()));
+                Files.stone.set("piedras." + i + ".b2", Utils.locationToString(b2.getLocation()));
+                Files.stone.set("piedras." + i + ".owner", p.getName());
                 p.sendMessage(PAData.SURVIVAL.getPrefix() + ChatColor.GREEN + "Zona protegida, tamaño 40x40x40.");
                 Files.saveFiles();
                 break;
@@ -182,14 +185,15 @@ public class StonesEvents implements Listener {
                                 if(bl.getLocation() == st.getLocation()) return;
                                 p.sendMessage(PAData.SURVIVAL.getPrefix() + ChatColor.DARK_RED + "No puedes colocar este bloque de protección aquí ya que hay otra región cerca.");
                                 e.setCancelled(true);
+                                return;
                             });
                         }
                     });
                 }
                 i++;
-                Files.stone.set("piedras" + i + ".b1", b1);
-                Files.stone.set("piedras" + i + ".b2", b2);
-                Files.stone.set("piedras" + i + ".owner", p.getName());
+                Files.stone.set("piedras." + i + ".b1", Utils.locationToString(b1.getLocation()));
+                Files.stone.set("piedras." + i + ".b2", Utils.locationToString(b2.getLocation()));
+                Files.stone.set("piedras." + i + ".owner", p.getName());
                 p.sendMessage(PAData.SURVIVAL.getPrefix() + ChatColor.GREEN + "Zona protegida, tamaño 50x50x50.");
                 Files.saveFiles();
                 break;
@@ -211,14 +215,15 @@ public class StonesEvents implements Listener {
                                 if(bl.getLocation() == st.getLocation()) return;
                                 p.sendMessage(PAData.SURVIVAL.getPrefix() + ChatColor.DARK_RED + "No puedes colocar este bloque de protección aquí ya que hay otra región cerca.");
                                 e.setCancelled(true);
+                                return;
                             });
                         }
                     });
                 }
                 i++;
-                Files.stone.set("piedras" + i + ".b1", b1);
-                Files.stone.set("piedras" + i + ".b2", b2);
-                Files.stone.set("piedras" + i + ".owner", p.getName());
+                Files.stone.set("piedras." + i + ".b1", Utils.locationToString(b1.getLocation()));
+                Files.stone.set("piedras." + i + ".b2", Utils.locationToString(b2.getLocation()));
+                Files.stone.set("piedras." + i + ".owner", p.getName());
                 p.sendMessage(PAData.SURVIVAL.getPrefix() + ChatColor.GREEN + "Zona protegida, tamaño 70x70x70.");
                 Files.saveFiles();
                 break;
@@ -242,14 +247,15 @@ public class StonesEvents implements Listener {
                                 if(bl.getLocation() == st.getLocation()) return;
                                 p.sendMessage(PAData.SURVIVAL.getPrefix() + ChatColor.DARK_RED + "No puedes colocar este bloque de protección aquí ya que hay otra región cerca.");
                                 e.setCancelled(true);
+                                return;
                             });
                         }
                     });
                 }
                 i++;
-                Files.stone.set("piedras" + i + ".b1", b1);
-                Files.stone.set("piedras" + i + ".b2", b2);
-                Files.stone.set("piedras" + i + ".owner", p.getName());
+                Files.stone.set("piedras." + i + ".b1", Utils.locationToString(b1.getLocation()));
+                Files.stone.set("piedras." + i + ".b2", Utils.locationToString(b2.getLocation()));
+                Files.stone.set("piedras." + i + ".owner", p.getName());
                 p.sendMessage(PAData.SURVIVAL.getPrefix() + ChatColor.GREEN + "Zona protegida, tamaño 70x70x70.");
                 Files.saveFiles();
                 break;

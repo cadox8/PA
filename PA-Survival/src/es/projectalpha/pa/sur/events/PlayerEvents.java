@@ -36,33 +36,22 @@ public class PlayerEvents implements Listener{
     public void onJoin(PlayerJoinEvent e) {
         Player p = e.getPlayer();
         SurvivalUser u = PASurvival.getPlayer(p);
-        System.out.println("Detectando users.");
         if (!Files.user.getStringList("Users").contains(p.getName())) {
-            System.out.println("Usuario no detectado.");
             Files.user.set("Users." + p.getName() + ".pvp", false);
-            System.out.println("Guardado el pvp.");
             Files.user.set("Users." + p.getName() + ".money", "0");
-            System.out.println("Guardado el money.");
-            Files.user.createSection("Users." + p.getName() + "homes");
-            System.out.println("Guardado los homes.");
+            Files.user.createSection("Users." + p.getName() + ".homes");
             Files.user.set("Users." + p.getName() + ".imprec","0");
-            System.out.println("Guardado el imprec.");
+            Files.user.set("Users." + p.getName() + ".pimp",false);
+            Files.user.set("Users." + p.getName() + ".apos",0);
             Files.saveFiles();
         }
-        System.out.println("Finalizado o detectado el usuario.");
-        System.out.println("Detectando impuestos.");
-        if(!files.getImp().getStringList("impuestos").contains(p.getName())){
-            System.out.println("jg2r no detecta2");
+
+        if(Files.user.getBoolean("Users." + p.getName() + ".pimp") == false){
             balance.cobrarImpuestos(u);
-            System.out.println("cobrando impuestos");
-            Files.imp.set("impuestos", p.getName());
-            System.out.println("guardando jugador");
-            u.sendMessage("&aSe te ha cobrado los impuestos, lo que equivale a &6" + eco.getBalance(u.getPlayer()) * 0.01 + "&4$");
-            System.out.println("mensaje guardado");
+            Files.user.set("Users." + p.getName() + ".pimp", true);
+            u.sendMessage("&aSe te ha cobrado los impuestos, lo que equivale a &6" + eco.getBalance(u.getPlayer()) * 0.01 + "&a$");
             Files.saveFiles();
-            System.out.println("impuestos finalizados");
         }
-        System.out.println("impuestos finalizados o impuestos detectados");
     }
 
     @EventHandler

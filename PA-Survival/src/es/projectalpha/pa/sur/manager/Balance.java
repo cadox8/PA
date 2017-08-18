@@ -50,6 +50,7 @@ public final class Balance {
             Files.user.set("recaudado", Files.user.getInt("recaudado") + (Files.user.getInt("Users." + p.getName() + ".money")*0.01));
             Files.user.set("recaudado", Files.user.getInt("recaudado") - (Files.user.getInt("recaudado")*0.1));
             Files.user.set("loteria", Files.user.getInt("loteria") + (Files.user.getInt("recaudado")*0.1));
+            Files.user.set("Users." + p.getName() + ".imprec",Files.user.getInt("Users." + p.getName() + ".imprec") + (eco.getBalance(p.getPlayer())*0.01));
             removeBalance(p, eco.getBalance(p.getPlayer())*0.01);
             saveBalance(p);
 
