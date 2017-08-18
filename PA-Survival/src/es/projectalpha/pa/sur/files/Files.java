@@ -9,10 +9,10 @@ import java.io.IOException;
 
 public class Files {
 
-    @Getter public static File fileUser = new File("plugins/PA-Survival/", "config.yml");
+    @Getter public static File fileUser = new File("plugins/PA-Survival/", "users.yml");
     private static YamlConfiguration user = YamlConfiguration.loadConfiguration(fileUser);
 
-    @Getter public static File fileStone = new File("plugins/PA-Survival/", "config.yml");
+    @Getter public static File fileStone = new File("plugins/PA-Survival/", "stones.yml");
     private static YamlConfiguration stone = YamlConfiguration.loadConfiguration(fileStone);
 
 

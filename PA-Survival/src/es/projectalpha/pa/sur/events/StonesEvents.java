@@ -34,6 +34,9 @@ public class StonesEvents implements Listener {
         Block b1;
         Block b2;
         CuboidZone cz;
+
+        if (e.getClickedBlock() == null) return;
+
         Location l = b.getLocation();
 
         switch(b.getType()){
@@ -263,6 +266,9 @@ public class StonesEvents implements Listener {
         if(!(e.getDamager() instanceof Player)) return;
         Player p = (Player) e.getDamager();
         Location l = p.getLocation();
+
+        if (i == 0) return;
+
         for(int s = 0; s <= i; s++){
             Block fb1,fb2;
             fb1 = l.getWorld().getBlockAt(l.add(Utils.stringToLocation(files.getStone().getString("piedras." + s + ".b1"))));

@@ -36,13 +36,7 @@ public class PASurvival extends JavaPlugin {
 
         registerEvents();
 
-        RegisteredServiceProvider<Economy> economyProvider = getServer().getServicesManager().getRegistration(Economy.class);
-        if(economyProvider != null) vault = economyProvider.getProvider();
-
-        if (vault == null) {
-            Log.log(Log.Level.SEVERE, "Vault no encontrado");
-            getServer().getPluginManager().disablePlugin(this);
-        }
+        if (!setupEconomy()) Log.debugLog("Oye, que el Economy es null");
 
         timeTask = new TimeTask(instance);
         timeTask.runTaskTimer(instance, 0, 20);
@@ -65,5 +59,15 @@ public class PASurvival extends JavaPlugin {
         SurvivalUser us = new SurvivalUser(p.getName());
         if (us.isOnline()) players.add(us);
         return us;
+    }
+
+    private boolean setupEconomy() {
+        if (getServer().getPluginManager().getPlugin("Vault") == null) return false;
+
+        RegisteredServiceProvider<Economy> rsp = getServer().getServicesManager().getRegistration(Economy.class);
+        if (rsp == null) return false;
+
+        vault = rsp.getProvider();
+        return vault != null;
     }
 }

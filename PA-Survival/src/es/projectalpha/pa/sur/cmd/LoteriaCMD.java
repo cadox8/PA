@@ -20,8 +20,8 @@ public class LoteriaCMD extends PACmd {
             user.sendMessage("&aLa lotería es un juego del Survival que cada 24 horas se sortea.");
             user.sendMessage("&aSi hay un ganador se lleva el dinero en el bote, si no sale ninguno");
             user.sendMessage("&ase guarda ese dinero junto al que se añade cada día hasta que salga");
-            user.sendMessage("&algún ganador. Para comprar un boleto haz /loteria <numero>, puedes ");
-            user.sendMessage("&comprar un máximo de 10 boletos. Ejemplo: /lotaria 10. ¡Suerte!");
+            user.sendMessage("&algún ganador. Para comprar un boleto haz /loteria <numero>, ");
+            user.sendMessage("&apuedes comprar un máximo de 10 boletos. Ejemplo: /lotaria 10. ¡Suerte!");
         }
         if(args.length == 1){
             int bol = Integer.parseInt(args[0]);

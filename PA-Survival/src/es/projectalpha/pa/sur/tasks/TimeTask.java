@@ -1,6 +1,5 @@
 package es.projectalpha.pa.sur.tasks;
 
-import es.projectalpha.pa.core.api.PAData;
 import es.projectalpha.pa.core.utils.Utils;
 import es.projectalpha.pa.sur.PASurvival;
 import es.projectalpha.pa.sur.files.Files;
@@ -9,19 +8,29 @@ import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.scheduler.BukkitRunnable;
-import java.util.*;
+
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+import java.util.Random;
 
 public class TimeTask extends BukkitRunnable {
 
+    private PASurvival plugin;
+
     private Calendar cal = Calendar.getInstance();
     private int hora,min,seg;
-    private Files files = new Files();
-    private Economy eco;
-    private PASurvival plugin;
-    private Balance balance;
-    int rd = new Random().nextInt(9999);
 
-    public TimeTask(PASurvival instance){ this.plugin = instance;}
+    private Files files;
+    private Economy eco;
+    private Balance balance = new Balance();
+
+    private int rd = new Random().nextInt(9999);
+
+    public TimeTask(PASurvival instance){
+        this.plugin = instance;
+        files = plugin.getFiles();
+        eco = plugin.getVault();
+    }
 
     public void run() {
         cal = new GregorianCalendar();
@@ -29,10 +38,9 @@ public class TimeTask extends BukkitRunnable {
         min = cal.get(Calendar.MINUTE);
         seg = cal.get(Calendar.SECOND);
 
-        PASurvival.players.forEach(p -> balance.saveBalance(p));
-
-        plugin.getServer().getOnlinePlayers().forEach(p -> {
-            if (!plugin.getManager().isInPvP(p)) p.sendMessage(PAData.SURVIVAL.getPrefix() + ChatColor.DARK_GREEN + " Ya no estás en pvp, puedes desconectarte.");
+        PASurvival.players.forEach(p -> {
+            balance.saveBalance(p);
+            //if (!plugin.getManager().isInPvP(p.getPlayer())) p.sendMessage(PAData.SURVIVAL.getPrefix() + ChatColor.DARK_GREEN + "Ya no estás en pvp, puedes desconectarte.");
         });
 
         switch(hora){

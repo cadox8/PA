@@ -1,5 +1,6 @@
 package es.projectalpha.pa.sur.manager;
 
+import es.projectalpha.pa.core.utils.Log;
 import es.projectalpha.pa.sur.PASurvival;
 import es.projectalpha.pa.sur.api.SurvivalUser;
 import es.projectalpha.pa.sur.files.Files;
@@ -13,6 +14,10 @@ public final class Balance {
     private Files files = PASurvival.getInstance().getFiles();
 
     public void saveBalance(SurvivalUser p){
+        if (eco == null) {
+            Log.debugLog("Oye, que el Economy es null");
+            return;
+        }
         if(files.getUser().getInt("Users." + p.getName() + ".money") == eco.getBalance(p.getPlayer())) return;
         files.getUser().set("Users." + p.getName() + ".money", eco.getBalance(p.getPlayer()));
         saveFiles();

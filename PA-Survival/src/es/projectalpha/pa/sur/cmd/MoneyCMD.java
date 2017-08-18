@@ -3,6 +3,7 @@ package es.projectalpha.pa.sur.cmd;
 import es.projectalpha.pa.core.api.PAData;
 import es.projectalpha.pa.core.api.PAUser;
 import es.projectalpha.pa.core.cmd.PACmd;
+import es.projectalpha.pa.core.utils.Log;
 import es.projectalpha.pa.core.utils.Messages;
 import es.projectalpha.pa.sur.PASurvival;
 import es.projectalpha.pa.sur.files.Files;
@@ -26,6 +27,10 @@ public class MoneyCMD extends PACmd {
     @Override
     public void run(PAUser user, String label, String[] args) {
         if (args.length == 0) {
+            if (eco == null) {
+                Log.debugLog("Oye, que el Economy es null");
+                return;
+            }
             user.sendMessage(PAData.SURVIVAL.getPrefix() + "&cDinero: &6" + eco.getBalance(user.getOfflinePlayer()));
         }
         if (args.length == 1) {
