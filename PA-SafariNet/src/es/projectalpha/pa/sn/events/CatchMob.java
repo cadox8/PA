@@ -59,7 +59,7 @@ public class CatchMob implements Listener{
         }
     }
 
-    @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
+    @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
     public void onMobCatch(ProjectileHitEvent e){
         Player p;
         if (e.getEntity().getShooter() instanceof Player) {
