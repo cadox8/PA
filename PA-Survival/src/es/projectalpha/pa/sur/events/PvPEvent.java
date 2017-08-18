@@ -36,7 +36,7 @@ public class PvPEvent implements Listener{
                 if (p.hasMetadata("NPC") || pl.hasMetadata("NPC")) return;
 
                 if(p == pl) return;
-                if(files.getUser().getBoolean("Users." + p.getName() + ".pvp") == true && files.getUser().getBoolean("Users." + pl.getName() + ".pvp") == true){
+                if(Files.user.getBoolean("Users." + p.getName() + ".pvp") == true && Files.user.getBoolean("Users." + pl.getName() + ".pvp") == true){
 
                     if(p.getGameMode() == GameMode.CREATIVE){
                         p.setGameMode(GameMode.SURVIVAL);
@@ -77,12 +77,12 @@ public class PvPEvent implements Listener{
                         return;
                     }
 
-                    if(files.getUser().getBoolean("Users." + p.getName() + ".pvp") == false){
+                    if(Files.user.getBoolean("Users." + p.getName() + ".pvp") == false){
                         p.sendMessage(PAData.SURVIVAL.getPrefix() + ChatColor.DARK_GRAY + " Tienes el pvp desactivado.");
                         return;
                     }
 
-                    if(files.getUser().getBoolean("Users." + pl.getName() + ".pvp") == false){
+                    if(Files.user.getBoolean("Users." + pl.getName() + ".pvp") == false){
                         p.sendMessage(PAData.SURVIVAL.getPrefix() + ChatColor.GOLD + pl.getName() + ChatColor.DARK_GRAY + " tiene el pvp desactivado.");
                         return;
                     }
@@ -97,7 +97,7 @@ public class PvPEvent implements Listener{
 
                 if (p.hasMetadata("NPC") || pl.hasMetadata("NPC")) return;
 
-                if(files.getUser().getBoolean("Users." + p.getName() + ".pvp") == true && files.getUser().getBoolean("Users." + pl.getName() + ".pvp") == true){
+                if(Files.user.getBoolean("Users." + p.getName() + ".pvp") == true && Files.user.getBoolean("Users." + pl.getName() + ".pvp") == true){
 
                     if(p.getGameMode() == GameMode.CREATIVE){
                         p.setGameMode(GameMode.SURVIVAL);
@@ -131,12 +131,12 @@ public class PvPEvent implements Listener{
                         return;
                     }
 
-                    if(files.getUser().getBoolean("Users." + p.getName() + ".pvp") == false){
+                    if(Files.user.getBoolean("Users." + p.getName() + ".pvp") == false){
                         p.sendMessage(PAData.SURVIVAL.getPrefix() + ChatColor.DARK_GRAY + " Tienes el pvp desactivado.");
                         return;
                     }
 
-                    if(files.getUser().getBoolean("Users." + pl.getName() + ".pvp") == false){
+                    if(Files.user.getBoolean("Users." + pl.getName() + ".pvp") == false){
                         p.sendMessage(PAData.SURVIVAL.getPrefix() + ChatColor.GOLD + pl.getName() + ChatColor.DARK_GRAY + " tiene el pvp desactivado.");
                         return;
                     }

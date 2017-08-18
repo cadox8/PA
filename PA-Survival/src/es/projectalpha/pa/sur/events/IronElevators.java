@@ -31,7 +31,7 @@ public class IronElevators implements Listener {
             }
             if (i > 0) {
                 Location l = p.getLocation();
-                l.setY(l.getY() - maxElevation - 3 + i);
+                l.setY(l.getY() - maxElevation - 2 + i);
                 p.teleport(l);
                 p.getWorld().playSound(p.getLocation(), Sound.ENTITY_IRONGOLEM_ATTACK, 1, 1);
             }
@@ -42,7 +42,7 @@ public class IronElevators implements Listener {
     public void upElevator(PlayerMoveEvent e) {
         Player p = e.getPlayer();
         Block b = e.getTo().getBlock().getRelative(BlockFace.DOWN);
-        if (p.hasPermission("ironelevators.use") && e.getFrom().getY() < e.getTo().getY() && b.getType() == elevatorMaterial) { b = b.getRelative(BlockFace.UP, minElevation);
+        if (e.getFrom().getY() < e.getTo().getY() && b.getType() == elevatorMaterial) { b = b.getRelative(BlockFace.UP, minElevation);
             int i = maxElevation;
             while (i > 0 && !(b.getType() == elevatorMaterial && b.getRelative(BlockFace.UP).getType().isTransparent() && b.getRelative(BlockFace.UP, 2).getType().isTransparent())) {
                 i--;

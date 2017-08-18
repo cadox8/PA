@@ -31,10 +31,9 @@ public class PASurvival extends JavaPlugin {
     public void onEnable() {
         instance = this;
         manager = new PvPManager();
+        files.setupFiles();
         setupEconomy();
         PACommands.register(new StonesCMD(), new RecaudadoCMD(), new PvPCMD(), new LoteriaCMD());
-        files.setupFiles();
-
         registerEvents();
 
 

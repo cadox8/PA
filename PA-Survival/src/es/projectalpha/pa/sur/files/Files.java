@@ -10,20 +10,20 @@ import java.io.IOException;
 public class Files {
 
     @Getter public static File fileUser = new File("plugins/PA-Survival/", "users.yml");
-    private static YamlConfiguration user = YamlConfiguration.loadConfiguration(fileUser);
+    public static YamlConfiguration user = YamlConfiguration.loadConfiguration(fileUser);
 
     @Getter public static File fileStone = new File("plugins/PA-Survival/", "stones.yml");
-    private static YamlConfiguration stone = YamlConfiguration.loadConfiguration(fileStone);
+    public static YamlConfiguration stone = YamlConfiguration.loadConfiguration(fileStone);
 
     @Getter public static File fileImp = new File("plugins/PA-Survival/", "impuestos.yml");
-    private static YamlConfiguration imp = YamlConfiguration.loadConfiguration(fileImp);
+    public static YamlConfiguration imp = YamlConfiguration.loadConfiguration(fileImp);
 
     public void setupFiles() {
         if (!fileUser.exists()) {
             fileUser.mkdir();
             user.set("recaudado", 0);
             user.set("loteria", 100);
-            imp.createSection("Users.");
+            user.set("Users.0", "");
         }
 
         if (!fileStone.exists()) {
@@ -32,7 +32,7 @@ public class Files {
         }
 
         if (!fileImp.exists()) {
-            imp.createSection("impuestos");
+            imp.set("impuestos.0", "");
             fileImp.mkdir();
         }
         saveFiles();
@@ -42,8 +42,10 @@ public class Files {
         try {
             user.save(fileUser);
             user.load(fileUser);
+
             stone.save(fileStone);
             stone.load(fileStone);
+
             imp.save(fileImp);
             imp.load(fileImp);
         } catch (IOException | InvalidConfigurationException e) {

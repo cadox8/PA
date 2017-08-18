@@ -30,7 +30,7 @@ public class StonesCMD extends PACmd {
     private Balance balance = new Balance();
     private Player p;
     private Location l;
-    private int i = files.getStone().getInt("piedras");
+    private int i = Files.stone.getInt("piedras");
     private Stones stones = new Stones();
 
     @Override
@@ -81,18 +81,18 @@ public class StonesCMD extends PACmd {
                     Location l = user.getPlayer().getLocation();
                     for(int s = 0; s <= i; s++){
                         Block fb1,fb2;
-                        fb1 = l.getWorld().getBlockAt(l.add(Utils.stringToLocation(files.getStone().getString("piedras." + s + ".b1"))));
-                        fb2 = l.getWorld().getBlockAt(l.add(Utils.stringToLocation(files.getStone().getString("piedras." + s + ".b2"))));
+                        fb1 = l.getWorld().getBlockAt(l.add(Utils.stringToLocation(Files.stone.getString("piedras." + s + ".b1"))));
+                        fb2 = l.getWorld().getBlockAt(l.add(Utils.stringToLocation(Files.stone.getString("piedras." + s + ".b2"))));
                         CuboidZone fcz = new CuboidZone(fb1, fb2);
-                        boolean owner = files.getStone().getString("piedras." + s + ".owner").equals(user.getName());
+                        boolean owner = Files.stone.getString("piedras." + s + ".owner").equals(user.getName());
                         fcz.toArray().forEach(st ->{
                             if(p.getLocation() == st.getLocation() && !owner){
                                 p.sendMessage(PAData.SURVIVAL.getPrefix() + ChatColor.DARK_RED + "No puedes darle permisos a otra persona si no estás en tu región.");
                                 return;
                             }
                         });
-                        files.getStone().set("piedras." + s + ".perm.", p.getName());
-                        Files.saveFiles();
+                        Files.stone.set("piedras." + s + ".perm.", p.getName());
+                        files.saveFiles();
                     }
                     break;
                 case "remove":
@@ -100,20 +100,20 @@ public class StonesCMD extends PACmd {
                     l = user.getPlayer().getLocation();
                     for(int s = 0; s <= i; s++){
                         Block fb1,fb2;
-                        fb1 = l.getWorld().getBlockAt(l.add(Utils.stringToLocation(files.getStone().getString("piedras." + s + ".b1"))));
-                        fb2 = l.getWorld().getBlockAt(l.add(Utils.stringToLocation(files.getStone().getString("piedras." + s + ".b2"))));
+                        fb1 = l.getWorld().getBlockAt(l.add(Utils.stringToLocation(Files.stone.getString("piedras." + s + ".b1"))));
+                        fb2 = l.getWorld().getBlockAt(l.add(Utils.stringToLocation(Files.stone.getString("piedras." + s + ".b2"))));
                         CuboidZone fcz = new CuboidZone(fb1, fb2);
-                        boolean owner = files.getStone().getString("piedras." + s + ".owner").equals(user.getName());
+                        boolean owner = Files.stone.getString("piedras." + s + ".owner").equals(user.getName());
                         fcz.toArray().forEach(st ->{
                             if(p.getLocation() == st.getLocation() && !owner){
                                 p.sendMessage(PAData.SURVIVAL.getPrefix() + ChatColor.DARK_RED + "No puedes quitarle permisos a otra persona si no estás en tu región.");
                                 return;
                             }
                         });
-                        List<String> perms = files.getStone().getStringList("piedras." + s + ".perm.");
+                        List<String> perms = Files.stone.getStringList("piedras." + s + ".perm.");
                         perms.remove(p.getName());
-                        files.getStone().set("piedras." + s + ".perm.", perms);
-                        Files.saveFiles();
+                        Files.stone.set("piedras." + s + ".perm.", perms);
+                        files.saveFiles();
                     }
                     break;
                 default:

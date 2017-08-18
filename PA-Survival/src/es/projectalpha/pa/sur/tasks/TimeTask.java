@@ -37,6 +37,7 @@ public class TimeTask extends BukkitRunnable {
         seg = cal.get(Calendar.SECOND);
 
         PASurvival.players.forEach(p -> {
+            if(p == null) return;
             balance.saveBalance(p);
             //if (!plugin.getManager().isInPvP(p.getPlayer())) p.sendMessage(PAData.SURVIVAL.getPrefix() + ChatColor.DARK_GREEN + "Ya no estás en pvp, puedes desconectarte.");
         });
@@ -52,12 +53,12 @@ public class TimeTask extends BukkitRunnable {
                     int rd = new Random().nextInt(9999);
                     Utils.broadcastMsg("&aHora de la lotería, los números ganadores son: &6" + rd + ".");
 
-                    files.getUser().getStringList("Users.").forEach(p ->{
-                        files.getUser().getStringList("Users." + p + ".bol").forEach(b ->{
+                    Files.user.getStringList("Users.").forEach(p ->{
+                        Files.user.getStringList("Users." + p + ".bol").forEach(b ->{
                             if(Integer.parseInt(b) == rd){
-                                Utils.broadcastMsg("&aEl ganador de la lotería es " + p + ". Ha ganado " + files.getUser().getInt("loteria") + "$");
-                                balance.addBalace(PASurvival.getPlayer(plugin.getServer().getOfflinePlayer(p)), files.getUser().getInt("loteria"));
-                                files.getUser().set("loteria", 0);
+                                Utils.broadcastMsg("&aEl ganador de la lotería es " + p + ". Ha ganado " + Files.user.getInt("loteria") + "$");
+                                balance.addBalace(PASurvival.getPlayer(plugin.getServer().getOfflinePlayer(p)), Files.user.getInt("loteria"));
+                                Files.user.set("loteria", 0);
                                 return;
                             }
                         });

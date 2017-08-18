@@ -5,10 +5,9 @@ import es.projectalpha.pa.sur.PASurvival;
 import es.projectalpha.pa.sur.api.SurvivalUser;
 import es.projectalpha.pa.sur.files.Files;
 import net.milkbowl.vault.economy.Economy;
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 
-import static es.projectalpha.pa.sur.files.Files.saveFiles;
+
+
 
 public final class Balance {
 
@@ -21,36 +20,36 @@ public final class Balance {
             Log.debugLog("Oye, que el Economy es null");
             return;
         }
-        if(files.getUser().getInt("Users." + p.getName() + ".money") == eco.getBalance(p.getPlayer())) return;
-        files.getUser().set("Users." + p.getName() + ".money", eco.getBalance(p.getPlayer()));
-        saveFiles();
+        if(Files.user.getInt("Users." + p.getName() + ".money") == eco.getBalance(p.getPlayer())) return;
+        Files.user.set("Users." + p.getName() + ".money", eco.getBalance(p.getPlayer()));
+        Files.saveFiles();
     }
 
     public void addBalace(SurvivalUser p, double v){
-        if(files.getUser().getInt("Users." + p.getName() + ".money") != eco.getBalance(p.getPlayer())) saveBalance(PASurvival.getPlayer(p.getPlayer()));
-        files.getUser().set("Users." + p.getName() + ".money", files.getUser().getInt("Users." + p.getName() + ".money") + v);
+        if(Files.user.getInt("Users." + p.getName() + ".money") != eco.getBalance(p.getPlayer())) saveBalance(PASurvival.getPlayer(p.getPlayer()));
+        Files.user.set("Users." + p.getName() + ".money", Files.user.getInt("Users." + p.getName() + ".money") + v);
         eco.depositPlayer(p.getPlayer(), v);
-        saveFiles();
+        Files.saveFiles();
     }
 
     public void removeBalance(SurvivalUser p, double v){
-        if(files.getUser().getInt("Users." + p.getName() + ".money") != eco.getBalance(p.getPlayer())) saveBalance(PASurvival.getPlayer(p.getPlayer()));
-        files.getUser().set("Users." + p.getName() + ".money", files.getUser().getInt("Users." + p.getName() + ".money") - v);
+        if(Files.user.getInt("Users." + p.getName() + ".money") != eco.getBalance(p.getPlayer())) saveBalance(PASurvival.getPlayer(p.getPlayer()));
+        Files.user.set("Users." + p.getName() + ".money", Files.user.getInt("Users." + p.getName() + ".money") - v);
         eco.withdrawPlayer(p.getPlayer(), v);
-        saveFiles();
+        Files.saveFiles();
     }
 
     public void resetBalance(SurvivalUser p){
         eco.withdrawPlayer(p.getPlayer(), eco.getBalance(p.getPlayer()));
         saveBalance(p);
-        saveFiles();
+        Files.saveFiles();
     }
 
     public void cobrarImpuestos(SurvivalUser p){
             saveBalance(p);
-            files.getUser().set("recaudado", files.getUser().getInt("recaudado") + (files.getUser().getInt("Users." + p.getName() + ".money")*0.01));
-            files.getUser().set("recaudado", files.getUser().getInt("recaudado") - (files.getUser().getInt("recaudado")*0.1));
-            files.getUser().set("loteria", files.getUser().getInt("loteria") + (files.getUser().getInt("recaudado")*0.1));
+            Files.user.set("recaudado", Files.user.getInt("recaudado") + (Files.user.getInt("Users." + p.getName() + ".money")*0.01));
+            Files.user.set("recaudado", Files.user.getInt("recaudado") - (Files.user.getInt("recaudado")*0.1));
+            Files.user.set("loteria", Files.user.getInt("loteria") + (Files.user.getInt("recaudado")*0.1));
             removeBalance(p, eco.getBalance(p.getPlayer())*0.01);
             saveBalance(p);
 

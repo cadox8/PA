@@ -22,7 +22,7 @@ import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
-import static es.projectalpha.pa.sur.files.Files.saveFiles;
+
 
 public class PlayerEvents implements Listener{
 
@@ -36,20 +36,33 @@ public class PlayerEvents implements Listener{
     public void onJoin(PlayerJoinEvent e) {
         Player p = e.getPlayer();
         SurvivalUser u = PASurvival.getPlayer(p);
-
-        if (!files.getUser().contains(p.getName())) {
-            files.getUser().set("Users." + p.getName() + ".pvp", false);
-            files.getUser().set("Users." + p.getName() + ".money", "0");
-            files.getUser().createSection("Users." + p.getName() + "homes");
-            files.getUser().set("Users." + p.getName() + ".imprec","0");
-            saveFiles();
+        System.out.println("Detectando users.");
+        if (!Files.user.getStringList("Users").contains(p.getName())) {
+            System.out.println("Usuario no detectado.");
+            Files.user.set("Users." + p.getName() + ".pvp", false);
+            System.out.println("Guardado el pvp.");
+            Files.user.set("Users." + p.getName() + ".money", "0");
+            System.out.println("Guardado el money.");
+            Files.user.createSection("Users." + p.getName() + "homes");
+            System.out.println("Guardado los homes.");
+            Files.user.set("Users." + p.getName() + ".imprec","0");
+            System.out.println("Guardado el imprec.");
+            Files.saveFiles();
         }
-
-        if(files.getImp().getStringList("impuestos.").contains(u.getName())) return;
+        System.out.println("Finalizado o detectado el usuario.");
+        System.out.println("Detectando impuestos.");
+        if(!files.getImp().getStringList("impuestos").contains(p.getName())){
+            System.out.println("jg2r no detecta2");
             balance.cobrarImpuestos(u);
-            files.getImp().set("impuestos.", u.getName());
+            System.out.println("cobrando impuestos");
+            Files.imp.set("impuestos", p.getName());
+            System.out.println("guardando jugador");
             u.sendMessage("&aSe te ha cobrado los impuestos, lo que equivale a &6" + eco.getBalance(u.getPlayer()) * 0.01 + "&4$");
-            saveFiles();
+            System.out.println("mensaje guardado");
+            Files.saveFiles();
+            System.out.println("impuestos finalizados");
+        }
+        System.out.println("impuestos finalizados o impuestos detectados");
     }
 
     @EventHandler
@@ -80,7 +93,7 @@ public class PlayerEvents implements Listener{
                 if(en == p) continue;
                 if(b.getType() == Material.FIRE){
 
-                    if(files.getUser().getBoolean("Users." + en.getName() + ".pvp") == false){
+                    if(Files.user.getBoolean("Users." + en.getName() + ".pvp") == false){
                         p.sendMessage(PAData.SURVIVAL.getPrefix() + ChatColor.DARK_RED + " No puedes poner ese bloque cerca de un jugador con el pvp desactivado.");
                         e.setCancelled(true);
                     }
@@ -97,7 +110,7 @@ public class PlayerEvents implements Listener{
                 if(en == p) continue;
                 if(e.getBucket() == Material.LAVA_BUCKET){
 
-                    if(files.getUser().getBoolean("Users." + en.getName() + ".pvp") == false){
+                    if(Files.user.getBoolean("Users." + en.getName() + ".pvp") == false){
                         p.sendMessage(PAData.SURVIVAL.getPrefix() + ChatColor.DARK_RED + " No puedes poner ese bloque cerca de un jugador con el pvp desactivado.");
                         e.setCancelled(true);
                     }
@@ -120,8 +133,8 @@ public class PlayerEvents implements Listener{
     @EventHandler
     public void onLeave(PlayerQuitEvent event){
         Player p = event.getPlayer();
-        if(files.getUser().contains("Users." + p.getName())){
-            saveFiles();
+        if(Files.user.contains("Users." + p.getName())){
+            Files.saveFiles();
             if(manager.isInPvP(p)){
                 p.setHealth(0D);
                 Bukkit.broadcastMessage(PAData.SURVIVAL.getPrefix() + ChatColor.GRAY + " ¡" + ChatColor.GOLD + p.getName() + ChatColor.GREEN + " se ha desconectado en combate!");
