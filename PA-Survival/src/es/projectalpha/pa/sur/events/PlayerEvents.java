@@ -1,9 +1,9 @@
 package es.projectalpha.pa.sur.events;
 
-import es.projectalpha.pa.sur.files.Files;
+import es.projectalpha.pa.core.api.PAData;
 import es.projectalpha.pa.sur.PASurvival;
 import es.projectalpha.pa.sur.api.SurvivalUser;
-import es.projectalpha.pa.sur.manager.Message;
+import es.projectalpha.pa.sur.files.Files;
 import es.projectalpha.pa.sur.manager.PvPManager;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -12,6 +12,7 @@ import org.bukkit.block.Block;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerBucketEmptyEvent;
@@ -28,17 +29,14 @@ public class PlayerEvents implements Listener{
 
     @EventHandler
     public void onJoin(PlayerJoinEvent e) {
-
         Player p = e.getPlayer();
         SurvivalUser u = PASurvival.getPlayer(p);
 
         if (!files.getUser().contains(p.getName())) {
-
             files.getUser().set("Users." + p.getName() + ".pvp", false);
             files.getUser().set("Users." + p.getName() + ".money", "0");
             files.getUser().createSection("Users." + p.getName() + "homes");
             files.getUser().set("Users." + p.getName() + ".imprec","0");
-
         }
     }
 
@@ -55,8 +53,8 @@ public class PlayerEvents implements Listener{
                 manager.removeCooldown(p);
                 manager.removeCooldown(pl);
 
-                p.sendMessage(Message.prefix + ChatColor.DARK_GREEN + " Ya no estás en pvp, puedes desconectarte.");
-                pl.sendMessage(Message.prefix + ChatColor.DARK_GREEN + " Ya no estás en pvp, puedes desconectarte.");
+                p.sendMessage(PAData.SURVIVAL.getPrefix() + ChatColor.DARK_GREEN + " Ya no estás en pvp, puedes desconectarte.");
+                pl.sendMessage(PAData.SURVIVAL.getPrefix() + ChatColor.DARK_GREEN + " Ya no estás en pvp, puedes desconectarte.");
             }
         }
     }
@@ -71,7 +69,7 @@ public class PlayerEvents implements Listener{
                 if(b.getType() == Material.FIRE){
 
                     if(files.getUser().getBoolean("Users." + en.getName() + ".pvp") == false){
-                        p.sendMessage(Message.prefix + ChatColor.DARK_RED + " No puedes poner ese bloque cerca de un jugador con el pvp desactivado.");
+                        p.sendMessage(PAData.SURVIVAL.getPrefix() + ChatColor.DARK_RED + " No puedes poner ese bloque cerca de un jugador con el pvp desactivado.");
                         e.setCancelled(true);
                     }
                 }
@@ -88,7 +86,7 @@ public class PlayerEvents implements Listener{
                 if(e.getBucket() == Material.LAVA_BUCKET){
 
                     if(files.getUser().getBoolean("Users." + en.getName() + ".pvp") == false){
-                        p.sendMessage(Message.prefix + ChatColor.DARK_RED + " No puedes poner ese bloque cerca de un jugador con el pvp desactivado.");
+                        p.sendMessage(PAData.SURVIVAL.getPrefix() + ChatColor.DARK_RED + " No puedes poner ese bloque cerca de un jugador con el pvp desactivado.");
                         e.setCancelled(true);
                     }
                 }
@@ -97,12 +95,12 @@ public class PlayerEvents implements Listener{
     }
 
 
-    @EventHandler
+    @EventHandler(priority = EventPriority.HIGH)
     public void onCommand(PlayerCommandPreprocessEvent e){
         Player p = e.getPlayer();
         if(manager.isInPvP(p)){
             e.setCancelled(true);
-            p.sendMessage(Message.prefix + ChatColor.DARK_RED + " ¡No puedes ejecutar comandos en pvp!");
+            p.sendMessage(PAData.SURVIVAL.getPrefix() + ChatColor.DARK_RED + " ¡No puedes ejecutar comandos en pvp!");
         }
     }
 
@@ -114,7 +112,7 @@ public class PlayerEvents implements Listener{
             saveFiles();
             if(manager.isInPvP(p)){
                 p.setHealth(0D);
-                Bukkit.broadcastMessage(Message.prefix + ChatColor.GRAY + " ¡" + ChatColor.GOLD + p.getName() + ChatColor.GREEN + " se ha desconectado en combate!");
+                Bukkit.broadcastMessage(PAData.SURVIVAL.getPrefix() + ChatColor.GRAY + " ¡" + ChatColor.GOLD + p.getName() + ChatColor.GREEN + " se ha desconectado en combate!");
             }
         }
     }

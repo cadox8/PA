@@ -1,7 +1,6 @@
 package es.projectalpha.pa.sur.events;
 
 import es.projectalpha.pa.sur.files.Files;
-import es.projectalpha.pa.sur.manager.Message;
 import es.projectalpha.pa.sur.manager.PvPManager;
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;

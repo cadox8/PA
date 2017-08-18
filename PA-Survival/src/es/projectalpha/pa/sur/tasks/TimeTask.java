@@ -1,5 +1,6 @@
 package es.projectalpha.pa.sur.tasks;
 
+import es.projectalpha.pa.core.api.PAData;
 import es.projectalpha.pa.core.utils.Utils;
 import es.projectalpha.pa.sur.PASurvival;
 import es.projectalpha.pa.sur.files.Files;
@@ -8,24 +9,36 @@ import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.scheduler.BukkitRunnable;
-import java.util.*;
+
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+import java.util.Random;
 
 public class TimeTask extends BukkitRunnable {
 
-    private Calendar cal = Calendar.getInstance();
-    private int hora,min,seg;
-    private Files files = new Files();
-    private Economy eco;
     private PASurvival plugin;
-    private Balance balance;
-    int rd = new Random().nextInt(9999);
+
+    private Calendar cal = Calendar.getInstance(); //Comprueba esto *
+    private Files files = new Files();
+    private Economy eco = plugin.getVault();
+    private Balance balance = new Balance();
+    private int rd = new Random().nextInt(9999); //Buff... miedo
+
+    public TimeTask(PASurvival instance) {
+        this.plugin = instance;
+    }
 
     public void run() {
-        cal = new GregorianCalendar();
-        hora = cal.get(Calendar.HOUR_OF_DAY);
-        min = cal.get(Calendar.MINUTE);
-        seg = cal.get(Calendar.SECOND);
-        Bukkit.getOnlinePlayers().forEach(p -> balance.saveBalance(PASurvival.getPlayer(p)));
+        cal = new GregorianCalendar(); //Junto con esto *
+        int hora = cal.get(Calendar.HOUR_OF_DAY);
+        int min = cal.get(Calendar.MINUTE);
+        int seg = cal.get(Calendar.SECOND);
+        PASurvival.players.forEach(p -> balance.saveBalance(p));
+
+        plugin.getServer().getOnlinePlayers().forEach(p -> {
+            if (!plugin.getManager().isInPvP(p)) p.sendMessage(PAData.SURVIVAL.getPrefix() + ChatColor.DARK_GREEN + " Ya no estás en pvp, puedes desconectarte.");
+        });
+
         switch(hora){
             case 6:
                 if(min == 0 && seg == 0){
@@ -38,28 +51,25 @@ public class TimeTask extends BukkitRunnable {
                         balance.removeBalance(PASurvival.getPlayer(plugin.getServer().getOfflinePlayer(p)), eco.getBalance(plugin.getServer().getOfflinePlayer(p))*0.01);
                         balance.saveBalance(PASurvival.getPlayer(plugin.getServer().getOfflinePlayer(p)));
                     });
-                    Bukkit.getOnlinePlayers().forEach(u ->
-                            u.sendMessage(ChatColor.GREEN + "Hora de los impuestos, se te ha quitado 1% de tu dinero, o lo que es lo mismo " + eco.getBalance(u.getPlayer()) * 0.01));
+                    Bukkit.getOnlinePlayers().forEach(u -> u.sendMessage(PAData.SURVIVAL.getPrefix() + ChatColor.GREEN + "Hora de los impuestos, se te ha quitado 1% de tu dinero, o lo que es lo mismo " + eco.getBalance(u.getPlayer()) * 0.01));
                 }
                 break;
             case 18:
                 if(min == 0 && seg == 0){
-                    Utils.broadcastMsg("&aHora de la lotería, los números ganadores son: &6" + rd + ".");
+                    Utils.broadcastMsg(PAData.SURVIVAL.getPrefix() + "&aHora de la lotería, los números ganadores son: &6" + rd + ".");
 
                     for(int x = 0; x <= rd; x++);
-                    files.getUser().getStringList("Users.").forEach(p ->{
+                    files.getUser().getStringList("Users.").forEach(p -> {
                         files.getUser().getStringList("Users." + p + ".bol").forEach(b ->{
                             if(Integer.parseInt(b) == rd){
-                                Utils.broadcastMsg("&aEl ganador de la lotería es " + p);
+                                Utils.broadcastMsg(PAData.SURVIVAL.getPrefix() + "&aEl ganador de la lotería es " + p);
                                 return;
                             }
                         });
                     });
-                    Utils.broadcastMsg("&cNo ha habido ningún ganador hoy, mañana habrá otra oportunidad.");
+                    Utils.broadcastMsg(PAData.SURVIVAL.getPrefix() + "&cNo ha habido ningún ganador hoy, mañana habrá otra oportunidad.");
                 }
                 break;
         }
     }
-
-
 }

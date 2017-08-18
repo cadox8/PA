@@ -1,11 +1,13 @@
 package es.projectalpha.pa.sur;
 
 import es.projectalpha.pa.core.PACommands;
+import es.projectalpha.pa.core.utils.Log;
 import es.projectalpha.pa.sur.api.SurvivalUser;
 import es.projectalpha.pa.sur.cmd.*;
 import es.projectalpha.pa.sur.events.*;
 import es.projectalpha.pa.sur.files.Files;
 import es.projectalpha.pa.sur.manager.PvPManager;
+import es.projectalpha.pa.sur.tasks.TimeTask;
 import lombok.Getter;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.OfflinePlayer;
@@ -24,7 +26,7 @@ public class PASurvival extends JavaPlugin {
     @Getter private Files files = new Files();
     @Getter private PvPManager manager;
     @Getter private Economy vault;
-
+    @Getter private TimeTask timeTask;
 
     public void onEnable() {
         instance = this;
@@ -37,6 +39,14 @@ public class PASurvival extends JavaPlugin {
 
         RegisteredServiceProvider<Economy> economyProvider = getServer().getServicesManager().getRegistration(Economy.class);
         if(economyProvider != null) vault = economyProvider.getProvider();
+
+        if (vault == null) {
+            Log.log(Log.Level.SEVERE, "Vault no encontrado");
+            getServer().getPluginManager().disablePlugin(this);
+        }
+
+        timeTask = new TimeTask(instance);
+        timeTask.runTaskTimer(instance, 0, 20);
     }
 
     private void registerEvents(){

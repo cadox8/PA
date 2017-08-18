@@ -1,14 +1,11 @@
 package es.projectalpha.pa.sur.manager;
 
 import es.projectalpha.pa.core.utils.Cooldown;
-import es.projectalpha.pa.sur.PASurvival;
 import es.projectalpha.pa.sur.files.Files;
-import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
 public class PvPManager {
 
-    private PASurvival plugin;
     private Cooldown cmdc = new Cooldown(20);
     private Cooldown pvpc = new Cooldown(25);
     private Cooldown noobc = new Cooldown(1800);
@@ -80,9 +77,7 @@ public class PvPManager {
 
     public void check(){
         try {
-            plugin.getServer().getOnlinePlayers().forEach(p -> {
-                if (!isInPvP(p)) p.sendMessage(Message.prefix + ChatColor.DARK_GREEN + " Ya no estás en pvp, puedes desconectarte.");
-            });
+
             check();
         } catch (StackOverflowError e){}
     }

@@ -1,5 +1,6 @@
 package es.projectalpha.pa.sur.cmd;
 
+import es.projectalpha.pa.core.api.PAData;
 import es.projectalpha.pa.core.api.PAUser;
 import es.projectalpha.pa.core.cmd.PACmd;
 import es.projectalpha.pa.sur.files.Files;
@@ -25,10 +26,10 @@ public class LoteriaCMD extends PACmd {
         if(args.length == 1){
             int bol = Integer.parseInt(args[0]);
             int rd = new Random().nextInt(9999);
-            if(bol > 10) user.sendMessage("&4El máximo de boletos que puedes comprar son 10.");
+            if(bol > 10) user.sendMessage(PAData.SURVIVAL.getPrefix() + "&4El máximo de boletos que puedes comprar son 10.");
             for(int b = 0; b <= bol; b++){
-               files.getUser().set("Users." + user.getName() + ".bol." + b,rd);
-               user.sendMessage("&aHas comprado " + bol + "fichas, " + "tus números son: ");
+               files.getUser().set("Users." + user.getName() + ".bol." + b, rd);
+               user.sendMessage(PAData.SURVIVAL.getPrefix() + "&aHas comprado " + bol + "fichas, tus números son: ");
                user.sendMessage(ChatColor.GOLD + files.getUser().getString("Users." + user.getName() + ".bol." + b));
             }
         }

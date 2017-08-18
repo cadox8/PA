@@ -95,7 +95,7 @@ public class Sit implements Listener {
         }
     }
 
-    public static boolean isStairs(Material m) {
+    private boolean isStairs(Material m) {
         List<Material> stairs = new ArrayList<>();
         stairs.add(Material.ACACIA_STAIRS);
         stairs.add(Material.BIRCH_WOOD_STAIRS);

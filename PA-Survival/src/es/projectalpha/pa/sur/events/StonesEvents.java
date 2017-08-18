@@ -1,5 +1,6 @@
 package es.projectalpha.pa.sur.events;
 
+import es.projectalpha.pa.core.api.PAData;
 import es.projectalpha.pa.core.utils.CuboidZone;
 import es.projectalpha.pa.core.utils.Utils;
 import es.projectalpha.pa.sur.PASurvival;
@@ -20,9 +21,8 @@ public class StonesEvents implements Listener {
 
     private Files files = new Files();
     private Stones stones = new Stones();
-    private int piedras = files.getStone().getInt("piedras");
-    double l1,l2,l3;
-    double fl1,fl2,fl3;
+    private double l1,l2,l3;
+    private double fl1,fl2,fl3;
     private PASurvival plugin;
     private int i = files.getStone().getInt("piedras");
 
@@ -53,7 +53,7 @@ public class StonesEvents implements Listener {
                             CuboidZone fcz = new CuboidZone(fb1, fb2);
                             fcz.toArray().forEach(st ->{
                                 if(bl.getLocation() == st.getLocation()) return;
-                                p.sendMessage(ChatColor.DARK_RED + "No puedes colocar este bloque de protección aquí ya que hay otra región cerca.");
+                                p.sendMessage(PAData.SURVIVAL.getPrefix() + ChatColor.DARK_RED + "No puedes colocar este bloque de protección aquí ya que hay otra región cerca.");
                                 e.setCancelled(true);
                             });
                         }
@@ -63,7 +63,7 @@ public class StonesEvents implements Listener {
                 files.getStone().set("piedras" + i + ".b1", b1);
                 files.getStone().set("piedras" + i + ".b2", b2);
                 files.getStone().set("piedras" + i + ".owner", p.getName());
-                p.sendMessage(ChatColor.GREEN + "Zona protegida, tamaño 10x10x10.");
+                p.sendMessage(PAData.SURVIVAL.getPrefix() + ChatColor.GREEN + "Zona protegida, tamaño 10x10x10.");
                 break;
 
             case IRON_ORE:
@@ -82,7 +82,7 @@ public class StonesEvents implements Listener {
                             CuboidZone fcz = new CuboidZone(fb1, fb2);
                             fcz.toArray().forEach(st ->{
                                 if(bl.getLocation() == st.getLocation()) return;
-                                p.sendMessage(ChatColor.DARK_RED + "No puedes colocar este bloque de protección aquí ya que hay otra región cerca.");
+                                p.sendMessage(PAData.SURVIVAL.getPrefix() + ChatColor.DARK_RED + "No puedes colocar este bloque de protección aquí ya que hay otra región cerca.");
                                 e.setCancelled(true);
                             });
                         }
@@ -92,7 +92,7 @@ public class StonesEvents implements Listener {
                 files.getStone().set("piedras" + i + ".b1", b1);
                 files.getStone().set("piedras" + i + ".b2", b2);
                 files.getStone().set("piedras" + i + ".owner", p.getName());
-                p.sendMessage(ChatColor.GREEN + "Zona protegida, tamaño 20x20x20.");
+                p.sendMessage(PAData.SURVIVAL.getPrefix() + ChatColor.GREEN + "Zona protegida, tamaño 20x20x20.");
                 break;
 
             case GOLD_ORE:
@@ -111,7 +111,7 @@ public class StonesEvents implements Listener {
                             CuboidZone fcz = new CuboidZone(fb1, fb2);
                             fcz.toArray().forEach(st ->{
                                 if(bl.getLocation() == st.getLocation()) return;
-                                p.sendMessage(ChatColor.DARK_RED + "No puedes colocar este bloque de protección aquí ya que hay otra región cerca.");
+                                p.sendMessage(PAData.SURVIVAL.getPrefix() + ChatColor.DARK_RED + "No puedes colocar este bloque de protección aquí ya que hay otra región cerca.");
                                 e.setCancelled(true);
                                 return;
                             });
@@ -122,7 +122,7 @@ public class StonesEvents implements Listener {
                 files.getStone().set("piedras" + i + ".b1", b1);
                 files.getStone().set("piedras" + i + ".b2", b2);
                 files.getStone().set("piedras" + i + ".owner", p.getName());
-                p.sendMessage(ChatColor.GREEN + "Zona protegida, tamaño 30x30x30.");
+                p.sendMessage(PAData.SURVIVAL.getPrefix() + ChatColor.GREEN + "Zona protegida, tamaño 30x30x30.");
                 break;
 
             case LAPIS_ORE:
@@ -141,7 +141,7 @@ public class StonesEvents implements Listener {
                             CuboidZone fcz = new CuboidZone(fb1, fb2);
                             fcz.toArray().forEach(st ->{
                                 if(bl.getLocation() == st.getLocation()) return;
-                                p.sendMessage(ChatColor.DARK_RED + "No puedes colocar este bloque de protección aquí ya que hay otra región cerca.");
+                                p.sendMessage(PAData.SURVIVAL.getPrefix() + ChatColor.DARK_RED + "No puedes colocar este bloque de protección aquí ya que hay otra región cerca.");
                                 e.setCancelled(true);
                             });
                         }
@@ -151,7 +151,7 @@ public class StonesEvents implements Listener {
                 files.getStone().set("piedras" + i + ".b1", b1);
                 files.getStone().set("piedras" + i + ".b2", b2);
                 files.getStone().set("piedras" + i + ".owner", p.getName());
-                p.sendMessage(ChatColor.GREEN + "Zona protegida, tamaño 40x40x40.");
+                p.sendMessage(PAData.SURVIVAL.getPrefix() + ChatColor.GREEN + "Zona protegida, tamaño 40x40x40.");
                 break;
 
             case EMERALD_ORE:
@@ -170,7 +170,7 @@ public class StonesEvents implements Listener {
                             CuboidZone fcz = new CuboidZone(fb1, fb2);
                             fcz.toArray().forEach(st ->{
                                 if(bl.getLocation() == st.getLocation()) return;
-                                p.sendMessage(ChatColor.DARK_RED + "No puedes colocar este bloque de protección aquí ya que hay otra región cerca.");
+                                p.sendMessage(PAData.SURVIVAL.getPrefix() + ChatColor.DARK_RED + "No puedes colocar este bloque de protección aquí ya que hay otra región cerca.");
                                 e.setCancelled(true);
                             });
                         }
@@ -180,7 +180,7 @@ public class StonesEvents implements Listener {
                 files.getStone().set("piedras" + i + ".b1", b1);
                 files.getStone().set("piedras" + i + ".b2", b2);
                 files.getStone().set("piedras" + i + ".owner", p.getName());
-                p.sendMessage(ChatColor.GREEN + "Zona protegida, tamaño 50x50x50.");
+                p.sendMessage(PAData.SURVIVAL.getPrefix() + ChatColor.GREEN + "Zona protegida, tamaño 50x50x50.");
                 break;
             case DIAMOND_ORE:
                 if(!p.getInventory().getItemInMainHand().equals(stones.stone6)) return;
@@ -198,7 +198,7 @@ public class StonesEvents implements Listener {
                             CuboidZone fcz = new CuboidZone(fb1, fb2);
                             fcz.toArray().forEach(st ->{
                                 if(bl.getLocation() == st.getLocation()) return;
-                                p.sendMessage(ChatColor.DARK_RED + "No puedes colocar este bloque de protección aquí ya que hay otra región cerca.");
+                                p.sendMessage(PAData.SURVIVAL.getPrefix() + ChatColor.DARK_RED + "No puedes colocar este bloque de protección aquí ya que hay otra región cerca.");
                                 e.setCancelled(true);
                             });
                         }
@@ -208,7 +208,7 @@ public class StonesEvents implements Listener {
                 files.getStone().set("piedras" + i + ".b1", b1);
                 files.getStone().set("piedras" + i + ".b2", b2);
                 files.getStone().set("piedras" + i + ".owner", p.getName());
-                p.sendMessage(ChatColor.GREEN + "Zona protegida, tamaño 70x70x70.");
+                p.sendMessage(PAData.SURVIVAL.getPrefix() + ChatColor.GREEN + "Zona protegida, tamaño 70x70x70.");
                 break;
 
         }
@@ -227,7 +227,7 @@ public class StonesEvents implements Listener {
             files.getStone().getList("piedras." + s + ".perm").forEach(j ->{
                 fcz.toArray().forEach(st ->{
                     if(p.getLocation() == st.getLocation() && !owner || !j.toString().equals(p.getName())){
-                        p.sendMessage(ChatColor.DARK_RED + "No tienes permisos para construir aquí.");
+                        p.sendMessage(PAData.SURVIVAL.getPrefix() + ChatColor.DARK_RED + "No tienes permisos para construir aquí.");
                         e.setCancelled(true);
                     }
                 });
@@ -248,7 +248,7 @@ public class StonesEvents implements Listener {
             files.getStone().getList("piedras." + s + ".perm").forEach(j ->{
                 fcz.toArray().forEach(st ->{
                     if(p.getLocation() == st.getLocation() && !owner || !j.toString().equals(p.getName())){
-                        p.sendMessage(ChatColor.DARK_RED + "No tienes permisos para construir aquí.");
+                        p.sendMessage(PAData.SURVIVAL.getPrefix() + ChatColor.DARK_RED + "No tienes permisos para construir aquí.");
                         e.setCancelled(true);
                     }
                 });
@@ -271,7 +271,7 @@ public class StonesEvents implements Listener {
             files.getStone().getList("piedras." + s + ".perm").forEach(j ->{
                 fcz.toArray().forEach(st ->{
                     if(p.getLocation() == st.getLocation() && !owner || !j.toString().equals(p.getName())){
-                        p.sendMessage(ChatColor.DARK_RED + "No tienes permisos para atacar a entidades aquí.");
+                        p.sendMessage(PAData.SURVIVAL.getPrefix() + ChatColor.DARK_RED + "No tienes permisos para atacar a entidades aquí.");
                         e.setCancelled(true);
                     }
                 });
