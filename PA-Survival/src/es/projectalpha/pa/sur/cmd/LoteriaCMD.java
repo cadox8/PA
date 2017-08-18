@@ -8,6 +8,8 @@ import org.bukkit.ChatColor;
 
 import java.util.Random;
 
+import static es.projectalpha.pa.sur.files.Files.saveFiles;
+
 public class LoteriaCMD extends PACmd {
     public LoteriaCMD() {
             super("loteria", Grupo.Usuario);
@@ -27,9 +29,11 @@ public class LoteriaCMD extends PACmd {
             int bol = Integer.parseInt(args[0]);
             int rd = new Random().nextInt(9999);
             if(bol > 10) user.sendMessage(PAData.SURVIVAL.getPrefix() + "&4El máximo de boletos que puedes comprar son 10.");
+            if(bol <= 0) user.sendMessage(PAData.SURVIVAL.getPrefix() + "&4El mínimo de boletos que puedes comprar es 1");
             user.sendMessage(PAData.SURVIVAL.getPrefix() + "&aHas comprado " + bol + " boletos, tus números son: ");
-            for(int b = 0; b <= bol; b++){
+            for(int b = 1; b <= bol; b++){
                files.getUser().set("Users." + user.getName() + ".bol." + b, rd);
+                saveFiles();
                user.sendMessage(ChatColor.GOLD + files.getUser().getString("Users." + user.getName() + ".bol." + b));
             }
         }

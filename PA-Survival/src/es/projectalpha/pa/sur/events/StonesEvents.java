@@ -19,6 +19,8 @@ import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 
+import static es.projectalpha.pa.sur.files.Files.saveFiles;
+
 public class StonesEvents implements Listener {
 
     private Files files = new Files();
@@ -214,6 +216,7 @@ public class StonesEvents implements Listener {
                 files.getStone().set("piedras" + i + ".b2", b2);
                 files.getStone().set("piedras" + i + ".owner", p.getName());
                 p.sendMessage(PAData.SURVIVAL.getPrefix() + ChatColor.GREEN + "Zona protegida, tamaño 70x70x70.");
+
                 break;
 
             case BEDROCK:
@@ -245,7 +248,7 @@ public class StonesEvents implements Listener {
                 files.getStone().set("piedras" + i + ".owner", p.getName());
                 p.sendMessage(PAData.SURVIVAL.getPrefix() + ChatColor.GREEN + "Zona protegida, tamaño 70x70x70.");
                 break;
-        }
+        }saveFiles();
 
 
     }

@@ -8,6 +8,8 @@ import org.bukkit.ChatColor;
 
 import java.util.Arrays;
 
+import static es.projectalpha.pa.sur.files.Files.saveFiles;
+
 public class PvPCMD extends PACmd {
 
     private PASurvival plugin = PASurvival.getInstance();
@@ -23,11 +25,15 @@ public class PvPCMD extends PACmd {
                 user.sendMessage(PAData.SURVIVAL.getPrefix() + ChatColor.DARK_RED + "¡Tienes que esperar para volver a usar este comando!");
             if (plugin.getFiles().getUser().getBoolean(user.getName() + ".pvp") == true) {
                 plugin.getFiles().getUser().set(user.getName() + ".pvp", false);
+                user.sendMessage(PAData.SURVIVAL.getPrefix() +"&aPvp desactivado.");
                 plugin.getManager().addCooldown(user.getPlayer());
+                saveFiles();
                 return;
             }
             plugin.getFiles().getUser().set(user.getName() + ".pvp", true);
+            user.sendMessage(PAData.SURVIVAL.getPrefix() +"&cPvp activado.");
             plugin.getManager().addCooldown(user.getPlayer());
+            saveFiles();
         }
 
         if (args.length == 1) {
@@ -41,6 +47,7 @@ public class PvPCMD extends PACmd {
                     plugin.getFiles().getUser().set(user.getName() + ".pvp", true);
                     plugin.getManager().addCooldown(user.getPlayer());
                     user.sendMessage(PAData.SURVIVAL.getPrefix() + ChatColor.RED + "Pvp activado.");
+                    saveFiles();
                     break;
                 case "off":
                     if (plugin.getManager().isInCooldown(user.getPlayer()))
@@ -51,6 +58,7 @@ public class PvPCMD extends PACmd {
                     plugin.getFiles().getUser().set(user.getName() + ".pvp", false);
                     plugin.getManager().addCooldown(user.getPlayer());
                     user.sendMessage(PAData.SURVIVAL.getPrefix() + ChatColor.RED + "Pvp desactivado.");
+                    saveFiles();
                     break;
                 case "status":
                     switch (plugin.getFiles().getUser().getString(user.getName() + ".pvp")) {

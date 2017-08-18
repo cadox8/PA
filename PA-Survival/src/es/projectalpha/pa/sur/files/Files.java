@@ -22,7 +22,8 @@ public class Files {
         if (!fileUser.exists()) {
             fileUser.mkdir();
             user.set("recaudado", 0);
-            user.set("lotería", 100);
+            user.set("loteria", 100);
+            imp.createSection("Users.");
         }
 
         if (!fileStone.exists()) {
@@ -31,6 +32,7 @@ public class Files {
         }
 
         if (!fileImp.exists()) {
+            imp.createSection("impuestos");
             fileImp.mkdir();
         }
         saveFiles();
