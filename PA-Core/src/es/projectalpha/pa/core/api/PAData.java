@@ -14,7 +14,8 @@ public enum PAData {
     RG(4, "&cRageGames"),
     TOA(5, "&aTOA"),
     NS(6, "&eNexus&bSiege"),
-    SN(7, "&bSafari&8Net");
+    SN(7, "&bSafari&8Net"),
+    SURVIVAL(8, "&3Survival");
 
     @Getter
     private int id;

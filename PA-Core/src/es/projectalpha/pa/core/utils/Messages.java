@@ -16,7 +16,7 @@ public enum Messages {
     LEFT("&7El jugador &6%player% &7ha salido del juego"),
     AFK("&6%player% &7está AFK"),
     NO_AFK("&6%player% &7ya no está AFK"),
-    NO_PERMS("&cNo tienes permiso para este comando"),
+    NO_PERMS("&cNo tienes permiso para hacer esto"),
     INFO("&cEste comando no existe, para ver tus comandos, usa &3/ayuda"),
     NEED_ARGS("&c¡Faltan argumentos!"),
     BUFF_ARGS("&c¡Demasidos argumentos!"),
