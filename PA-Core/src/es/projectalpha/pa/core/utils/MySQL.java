@@ -130,7 +130,7 @@ public class MySQL {
             }
 
             //Amigos
-            PreparedStatement stamentLogros = openConnection().prepareStatement("SELECT `logro` FROM `pa_logros` WHERE `name` = ?");
+            PreparedStatement stamentLogros = openConnection().prepareStatement("SELECT `logro` FROM `pa_logros` WHERE `user` = ?");
             stamentLogros.setString(1, id);
             ResultSet rsLogros = stamentLogros.executeQuery();
 
