@@ -1,0 +1,5 @@
+name: ${project.artifactId}
+main: es.projectalpha.pa.sur.PASurvival
+version: ${project.version}
+authors: [cadox8, Wikijito7]
+depends: [Vault, PA-Core]
