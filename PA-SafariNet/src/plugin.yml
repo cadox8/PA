@@ -1,8 +1,8 @@
 name: ${project.artifactId}
-main: SafariNet
+main: es.projectalpha.pa.sn.SafariNet
 version: ${project.version}
 authors: [cadox8, Wikijito7]
-depends: [Vault, WC-Core]
+depends: [Vault, PA-Core]
 
 commands:
     game:

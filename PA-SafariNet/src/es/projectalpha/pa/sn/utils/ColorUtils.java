@@ -10,14 +10,13 @@ import java.util.Random;
 public class ColorUtils {
 
     private ChatColor getRandomChatColor(){
-        ChatColor c = ChatColor.values()[new Random().nextInt(ChatColor.values().length)];
-        return c;
+        return ChatColor.values()[new Random().nextInt(ChatColor.values().length)];
     }
 
     public ChatColor getRandomColor(){
         ChatColor c = getRandomChatColor();
 
-        if(c == ChatColor.MAGIC || c == ChatColor.STRIKETHROUGH || c == ChatColor.BOLD || c == ChatColor.ITALIC) getRandomColor();
+        if(c == ChatColor.MAGIC || c == ChatColor.STRIKETHROUGH || c == ChatColor.BOLD || c == ChatColor.ITALIC) return getRandomColor();
         return c;
     }
 }
