@@ -64,7 +64,7 @@ public class PlayerEvents implements Listener {
 
     @EventHandler
     public void onDamage(EntityDamageByEntityEvent e) {
-        DecimalFormat df = new DecimalFormat("0.00");
+        DecimalFormat df = new DecimalFormat("#.00");
 
         //You hit me, bitch
         if (e.getEntity() instanceof Player && e.getDamager() instanceof Monster) {
@@ -86,7 +86,8 @@ public class PlayerEvents implements Listener {
         if (e.getEntity() instanceof Monster && e.getDamager() instanceof Player) {
             TOAUser u = TOA.getPlayer((Player) e.getDamager());
             ItemStack i = u.getPlayer().getItemInHand() != null ? u.getPlayer().getItemInHand() : new ItemStack(Material.AIR);
-            int damage;
+            double damage;
+            double multi = 0;
 
             if (i.hasItemMeta()) {
                 damage = i.getItemMeta().hasLore() ? Integer.parseInt(ChatColor.stripColor(i.getItemMeta().getLore().get(1))) : 20;
@@ -94,7 +95,15 @@ public class PlayerEvents implements Listener {
                 damage = 20;
             }
 
-            e.setDamage(Double.valueOf(df.format(damage + (damage * u.getUserData().getLvl() * 0.2)).replace(",", ".")));
+            if (Ability.getAbilities().get(Ability.AbilityType.GOLPE_CERTERO).contains(u)) multi = 2.3;
+            if (Ability.getAbilities().get(Ability.AbilityType.SUSPIRO).contains(u)) {
+                multi = multi + 1.5;
+                plugin.getHealth().regen(u, 0.2 * ((Monster) e.getEntity()).getHealth());
+            }
+
+            damage = Double.valueOf(df.format(damage + (damage * u.getUserData().getLvl() * 0.2)).replace(",", "."));
+
+            e.setDamage(damage + (damage * multi));
 
             if (e.getEntity() instanceof Giant) { //Boss Attack
                 BossAttacks.giantAttacks((Giant) e.getEntity(), u.getPlayer());
@@ -109,14 +118,15 @@ public class PlayerEvents implements Listener {
             TOAUser u = TOA.getPlayer((Player)((Arrow) e.getDamager()).getShooter());
             int multi = 0;
 
-            if (Ability.getFireArrow().contains(u)) {
+            if (Ability.getAbilities().get(Ability.AbilityType.FENIX).contains(u)) {
                 m.setFireTicks(40);
                 multi = 1;
             }
+            if (Ability.getAbilities().get(Ability.AbilityType.HALCON).contains(u)) multi = multi + 3;
 
             double damage = (u.getUserData().getLvl() * 0.2) + 20;
 
-            damage = multi != 0 ? damage + (damage * 0.1) : damage;
+            damage = multi != 0 ? damage + (damage * (multi / 10)) : damage;
 
             e.setDamage(Double.valueOf(df.format(damage)));
         }

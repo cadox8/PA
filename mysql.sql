@@ -30,7 +30,7 @@ CREATE TABLE IF NOT EXISTS `pa_antium` (
 CREATE TABLE IF NOT EXISTS `pa_logros` (
   `id`    INT(11) UNSIGNED NOT NULL AUTO_INCREMENT,
   `user`  VARCHAR(32)      NOT NULL DEFAULT '',
-  `logro`  INT(5)          NOT NULL DEFAULT '',
+  `logro` INT(5)           NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8;
 

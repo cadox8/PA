@@ -7,25 +7,25 @@ import es.projectalpha.pa.toa.races.Race;
 
 import java.util.List;
 
-public class Fenix extends Ability {
+public class Halcon extends Ability {
 
-    public Fenix() {
-        super("Fenix", 24, Race.RaceType.ARCHER);
+    public Halcon() {
+        super("Halcon", 10, Race.RaceType.ARCHER);
     }
 
     public void play(TOAUser u) {
         if (!canUse(u)) return;
         if (isInCooldown(u, getName())) return;
 
-        List<TOAUser> h = getAbilities().get(AbilityType.FENIX);
+        List<TOAUser> h = getAbilities().get(AbilityType.HALCON);
         h.add(u);
-        getAbilities().put(AbilityType.FENIX, h);
+        getAbilities().put(AbilityType.HALCON, h);
 
         plugin.getServer().getScheduler().runTaskLater(plugin, ()-> {
-            List<TOAUser> k = getAbilities().get(AbilityType.FENIX);
+            List<TOAUser> k = getAbilities().get(AbilityType.HALCON);
             k.remove(u);
-            getAbilities().put(AbilityType.FENIX, k);
-        }, 20 * 7);
+            getAbilities().put(AbilityType.HALCON, k);
+        }, 20 * 3);
         new Cooldown(getCooldown()).setOnCooldown(getName());
     }
 }

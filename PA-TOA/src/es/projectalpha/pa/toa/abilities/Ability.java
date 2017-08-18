@@ -3,14 +3,18 @@ package es.projectalpha.pa.toa.abilities;
 import es.projectalpha.pa.core.api.PAData;
 import es.projectalpha.pa.core.utils.Cooldown;
 import es.projectalpha.pa.toa.TOA;
+import es.projectalpha.pa.toa.abilities.archer.Cadenas;
 import es.projectalpha.pa.toa.abilities.archer.Fenix;
 import es.projectalpha.pa.toa.abilities.archer.Guerrillero;
+import es.projectalpha.pa.toa.abilities.archer.Halcon;
 import es.projectalpha.pa.toa.abilities.mage.BIT;
 import es.projectalpha.pa.toa.abilities.mage.CrucioAbi;
 import es.projectalpha.pa.toa.abilities.mage.Regeneration;
 import es.projectalpha.pa.toa.abilities.picaro.Dagas;
 import es.projectalpha.pa.toa.abilities.picaro.Fantasma;
 import es.projectalpha.pa.toa.abilities.picaro.Frenesi;
+import es.projectalpha.pa.toa.abilities.picaro.Suspiro;
+import es.projectalpha.pa.toa.abilities.tank.GolpeCertero;
 import es.projectalpha.pa.toa.api.TOAUser;
 import es.projectalpha.pa.toa.races.Race;
 import es.projectalpha.pa.toa.spells.Spell;
@@ -18,27 +22,34 @@ import lombok.Getter;
 import org.apache.commons.lang.WordUtils;
 import org.bukkit.Material;
 
-import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Random;
 
 public class Ability {
 
     //
+    private static final Ability HALCON = new Halcon();
+    private static final Ability CADENAS = new Cadenas();
+    private static final Ability FENIX = new Fenix();
+    private static final Ability GUERRILLERO = new Guerrillero();
+
     private static final Ability FANTASMA = new Fantasma();
     private static final Ability FRENESI = new Frenesi();
     private static final Ability DAGAS = new Dagas();
-    private static final Ability FENIX = new Fenix();
-    private static final Ability GUERRILLERO = new Guerrillero();
+    private static final Ability SUSPIRO = new Suspiro();
+
     private static final Ability BIT = new BIT();
     private static final Ability CRUCIO = new CrucioAbi();
     private static final Ability REGEN = new Regeneration();
+
+    private static final Ability GOLPE_CERTERO = new GolpeCertero();
     //
 
     protected TOA plugin = TOA.getInstance();
 
     protected Random r = new Random();
-
-    @Getter private static ArrayList<TOAUser> fireArrow = new ArrayList<>();
+    @Getter private static HashMap<AbilityType, List<TOAUser>> abilities = new HashMap<>();
 
     @Getter private String name;
     @Getter private Race.RaceType race;
@@ -116,5 +127,9 @@ public class Ability {
                 break;
         }
         u.sendMessage(PAData.TOA.getPrefix() + "&6Has usado la habilidad &c" + WordUtils.capitalizeFully(name.toLowerCase()));
+    }
+
+    public enum AbilityType {
+        FENIX, HALCON, GOLPE_CERTERO, SUSPIRO,
     }
 }
