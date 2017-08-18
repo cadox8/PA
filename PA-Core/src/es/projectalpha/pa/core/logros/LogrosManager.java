@@ -14,12 +14,13 @@ public class LogrosManager {
 
     private PACore plugin;
 
-    private int maxLogros;
-    private ArrayList<Logro> logros = new ArrayList<>();
+    private ArrayList<Logro> logros;
 
     public LogrosManager(PACore instance) {
         this.plugin = instance;
-        loadLogros();
+        logros = new ArrayList<>();
+        Log.debugLog("Ja, aun no estan preparados :D");
+        //loadLogros();
     }
 
     private void loadLogros() {
@@ -28,7 +29,7 @@ public class LogrosManager {
         try {
             BufferedReader in = new BufferedReader(new InputStreamReader(new URL("http://dev.projectalpha.es/logros.json").openStream()));
             JSONObject jsonObject = (JSONObject) parser.parse(in);
-            maxLogros = Integer.parseInt(String.valueOf(jsonObject.get("logros")));
+            int maxLogros = Integer.parseInt(String.valueOf(jsonObject.get("logros")));
 
             for (int x = 0; x <= maxLogros; x++) {
                 JSONObject structure = (JSONObject) jsonObject.get(String.valueOf(x));

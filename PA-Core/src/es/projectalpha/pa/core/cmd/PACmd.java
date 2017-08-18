@@ -2,7 +2,6 @@ package es.projectalpha.pa.core.cmd;
 
 import es.projectalpha.pa.core.PACore;
 import es.projectalpha.pa.core.api.PAData;
-import es.projectalpha.pa.core.api.PAServer;
 import es.projectalpha.pa.core.api.PAUser;
 import es.projectalpha.pa.core.utils.Utils;
 import lombok.AllArgsConstructor;
@@ -19,7 +18,6 @@ import java.util.Random;
 public abstract class PACmd {
 
     protected static transient PACore plugin = PACore.getInstance();
-    protected static transient PAServer server = new PAServer();
     protected static transient Utils utils = PACore.getInstance().getUtils();
     protected static transient Random r = new Random();
     @Getter private final transient String name;

@@ -87,7 +87,6 @@ public class PACore extends JavaPlugin {
 
     private void registerEvent() {
         PluginManager pluginManager = getServer().getPluginManager();
-
         pluginManager.registerEvents(new PlayerListener(instance), this);
     }
 
