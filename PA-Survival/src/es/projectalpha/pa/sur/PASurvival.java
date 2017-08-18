@@ -31,7 +31,6 @@ public class PASurvival extends JavaPlugin {
     public void onEnable() {
         instance = this;
         manager = new PvPManager();
-        manager.check();
         PACommands.register(new StonesCMD(), new MoneyCMD(), new PayCMD(), new PvPCMD(), new LoteriaCMD());
         files.setupFiles();
 

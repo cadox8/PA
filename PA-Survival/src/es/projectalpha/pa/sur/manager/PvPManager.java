@@ -75,10 +75,4 @@ public class PvPManager {
         return noobc.isCoolingDown(p);
     }
 
-    public void check(){
-        try {
-
-            check();
-        } catch (StackOverflowError e){}
-    }
 }
