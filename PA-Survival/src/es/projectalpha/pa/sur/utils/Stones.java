@@ -15,6 +15,7 @@ public final class Stones /*like the rolling*/ {
     public ItemStack stone4 = new ItemMaker(Material.LAPIS_ORE).setDisplayName(ChatColor.DARK_PURPLE + "Piedra de protección").setLores("Esta piedra te proporciona un area de 40x40x40.").addEnchant(Enchantment.DURABILITY, 1).build();
     public ItemStack stone5 = new ItemMaker(Material.EMERALD_ORE).setDisplayName(ChatColor.RED + "Piedra de protección").setLores("Esta piedra te proporciona un area de 50x50x50.").addEnchant(Enchantment.DURABILITY, 1).build();
     public ItemStack stone6 = new ItemMaker(Material.DIAMOND_ORE).setDisplayName(ChatColor.GOLD + "Piedra de protección").setLores("Esta piedra te proporciona un area de 70x70x70.").addEnchant(Enchantment.DURABILITY, 1).build();
+    public ItemStack staffst = new ItemMaker(Material.BEDROCK).setDisplayName(ChatColor.GRAY + "Piedra de protección del Staff").setLores("Esta piedra te proporciona un area de 150x150x150.").addEnchant(Enchantment.DURABILITY, 1).build();
 
 
 }

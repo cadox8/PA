@@ -1,6 +1,7 @@
 package es.projectalpha.pa.sur.events;
 
 import es.projectalpha.pa.core.api.PAData;
+import es.projectalpha.pa.core.cmd.PACmd;
 import es.projectalpha.pa.core.utils.CuboidZone;
 import es.projectalpha.pa.core.utils.Utils;
 import es.projectalpha.pa.sur.PASurvival;
@@ -215,7 +216,38 @@ public class StonesEvents implements Listener {
                 p.sendMessage(PAData.SURVIVAL.getPrefix() + ChatColor.GREEN + "Zona protegida, tamaño 70x70x70.");
                 break;
 
+            case BEDROCK:
+                if(!p.getInventory().getItemInMainHand().equals(stones.staffst)) return;
+                if(!PASurvival.getPlayer(p).isOnRank(PACmd.Grupo.Admin) || !PASurvival.getPlayer(p).isOnRank(PACmd.Grupo.Mod) || !PASurvival.getPlayer(p).isOnRank(PACmd.Grupo.Builder)) p.sendMessage(ChatColor.RED + "No puedes usar esta piedra de protección, ya que es sólo para el staff.");
+                l1 = 75; l2 = 75; l3 = 75;
+                fl1 = -75; fl2 = -75; fl3 = -75;
+                b1 = l.getWorld().getBlockAt(l.add(l1, l2, l3));
+                b2 = l.getWorld().getBlockAt(l.add(fl1, fl2, fl3));
+                cz = new CuboidZone(b1,b2);
+                if(files.getStone().getInt("piedras") != 0){
+                    cz.toArray().forEach(bl->{
+                        for(int s = 0; s <= i; s++){
+                            Block fb1,fb2;
+                            fb1 = l.getWorld().getBlockAt(l.add(Utils.stringToLocation(files.getStone().getString("piedras." + s + ".b1"))));
+                            fb2 = l.getWorld().getBlockAt(l.add(Utils.stringToLocation(files.getStone().getString("piedras." + s + ".b2"))));
+                            CuboidZone fcz = new CuboidZone(fb1, fb2);
+                            fcz.toArray().forEach(st ->{
+                                if(bl.getLocation() == st.getLocation()) return;
+                                p.sendMessage(PAData.SURVIVAL.getPrefix() + ChatColor.DARK_RED + "No puedes colocar este bloque de protección aquí ya que hay otra región cerca.");
+                                e.setCancelled(true);
+                            });
+                        }
+                    });
+                }
+                i++;
+                files.getStone().set("piedras" + i + ".b1", b1);
+                files.getStone().set("piedras" + i + ".b2", b2);
+                files.getStone().set("piedras" + i + ".owner", p.getName());
+                p.sendMessage(PAData.SURVIVAL.getPrefix() + ChatColor.GREEN + "Zona protegida, tamaño 70x70x70.");
+                break;
         }
+
+
     }
 
     @EventHandler

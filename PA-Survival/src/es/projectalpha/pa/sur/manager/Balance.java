@@ -5,6 +5,8 @@ import es.projectalpha.pa.sur.PASurvival;
 import es.projectalpha.pa.sur.api.SurvivalUser;
 import es.projectalpha.pa.sur.files.Files;
 import net.milkbowl.vault.economy.Economy;
+import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 
 import static es.projectalpha.pa.sur.files.Files.saveFiles;
 
@@ -12,6 +14,7 @@ public final class Balance {
 
     private Economy eco = PASurvival.getInstance().getVault();
     private Files files = PASurvival.getInstance().getFiles();
+    private PASurvival plugin;
 
     public void saveBalance(SurvivalUser p){
         if (eco == null) {
@@ -42,4 +45,15 @@ public final class Balance {
         saveBalance(p);
         saveFiles();
     }
+
+    public void cobrarImpuestos(SurvivalUser p){
+            saveBalance(p);
+            files.getUser().set("recaudado", files.getUser().getInt("recaudado") + (files.getUser().getInt("Users." + p.getName() + ".money")*0.01));
+            files.getUser().set("recaudado", files.getUser().getInt("recaudado") - (files.getUser().getInt("recaudado")*0.1));
+            files.getUser().set("loteria", files.getUser().getInt("loteria") + (files.getUser().getInt("recaudado")*0.1));
+            removeBalance(p, eco.getBalance(p.getPlayer())*0.01);
+            saveBalance(p);
+
+       }
+
 }

@@ -4,7 +4,9 @@ import es.projectalpha.pa.core.api.PAData;
 import es.projectalpha.pa.sur.PASurvival;
 import es.projectalpha.pa.sur.api.SurvivalUser;
 import es.projectalpha.pa.sur.files.Files;
+import es.projectalpha.pa.sur.manager.Balance;
 import es.projectalpha.pa.sur.manager.PvPManager;
+import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -24,8 +26,11 @@ import static es.projectalpha.pa.sur.files.Files.saveFiles;
 
 public class PlayerEvents implements Listener{
 
+    private PASurvival plugin;
     private Files files = new Files();
     private PvPManager manager = new PvPManager();
+    private Balance balance = new Balance();
+    private Economy eco = plugin.getVault();
 
     @EventHandler
     public void onJoin(PlayerJoinEvent e) {
@@ -38,6 +43,11 @@ public class PlayerEvents implements Listener{
             files.getUser().createSection("Users." + p.getName() + "homes");
             files.getUser().set("Users." + p.getName() + ".imprec","0");
         }
+
+        if(files.getImp().getStringList("impuestos.").contains(u.getName())) return;
+            balance.cobrarImpuestos(u);
+            files.getImp().set("impuestos.", u.getName());
+            u.sendMessage("&aSe te ha cobrado los impuestos, lo que equivale a &6" + eco.getBalance(u.getPlayer()) * 0.01 + "&4$");
     }
 
     @EventHandler

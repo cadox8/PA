@@ -9,6 +9,7 @@ import es.projectalpha.pa.core.utils.Utils;
 import es.projectalpha.pa.sur.PASurvival;
 import es.projectalpha.pa.sur.files.Files;
 import es.projectalpha.pa.sur.manager.Balance;
+import es.projectalpha.pa.sur.utils.Stones;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -30,6 +31,7 @@ public class StonesCMD extends PACmd {
     private Player p;
     private Location l;
     private int i = files.getStone().getInt("piedras");
+    private Stones stones = new Stones();
 
     @Override
     public void run(PAUser user, String label, String[] args) {
@@ -44,6 +46,27 @@ public class StonesCMD extends PACmd {
                 case "remove":
                     user.sendMessage(Messages.getMessage(Messages.NEED_ARGS, PAData.SURVIVAL));
                 break;
+                case "1":
+                    user.getPlayer().getInventory().addItem(stones.stone1);
+                    break;
+                case "2":
+                    user.getPlayer().getInventory().addItem(stones.stone2);
+                    break;
+                case "3":
+                    user.getPlayer().getInventory().addItem(stones.stone3);
+                    break;
+                case "4":
+                    user.getPlayer().getInventory().addItem(stones.stone4);
+                    break;
+                case "5":
+                    user.getPlayer().getInventory().addItem(stones.stone5);
+                    break;
+                case "6":
+                    user.getPlayer().getInventory().addItem(stones.stone6);
+                    break;
+                case "staff":
+                    user.getPlayer().getInventory().addItem(stones.staffst);
+                    break;
                 default:
                     user.sendMessage(PAData.SURVIVAL.getPrefix() + "&4Ese comando no existe, revisa que lo hayas escrito bien.");
                     break;

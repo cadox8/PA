@@ -15,6 +15,8 @@ public class Files {
     @Getter public static File fileStone = new File("plugins/PA-Survival/", "stones.yml");
     private static YamlConfiguration stone = YamlConfiguration.loadConfiguration(fileStone);
 
+    @Getter public static File fileImp = new File("plugins/PA-Survival/", "impuestos.yml");
+    private static YamlConfiguration imp = YamlConfiguration.loadConfiguration(fileImp);
 
     public void setupFiles() {
         if (!fileUser.exists()) {
@@ -27,6 +29,10 @@ public class Files {
             fileStone.mkdir();
             stone.set("piedras", 0);
         }
+
+        if (!fileImp.exists()) {
+            fileImp.mkdir();
+        }
         saveFiles();
     }
 
@@ -36,6 +42,8 @@ public class Files {
             user.load(fileUser);
             stone.save(fileStone);
             stone.load(fileStone);
+            imp.save(fileImp);
+            imp.load(fileImp);
         } catch (IOException | InvalidConfigurationException e) {
             e.printStackTrace();
         }
@@ -46,6 +54,9 @@ public class Files {
     }
     public YamlConfiguration getStone() {
         return YamlConfiguration.loadConfiguration(fileStone);
+    }
+    public YamlConfiguration getImp() {
+        return YamlConfiguration.loadConfiguration(fileImp);
     }
 
 

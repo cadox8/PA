@@ -24,8 +24,6 @@ public class TimeTask extends BukkitRunnable {
     private Economy eco;
     private Balance balance = new Balance();
 
-    private int rd = new Random().nextInt(9999);
-
     public TimeTask(PASurvival instance){
         this.plugin = instance;
         files = plugin.getFiles();
@@ -45,22 +43,13 @@ public class TimeTask extends BukkitRunnable {
 
         switch(hora){
             case 6:
-                if(min == 0 && seg == 0){
+                if(min == 0 && seg == 0) {
                     System.out.println(hora + ":" + min + ":" + seg);
-                    files.getUser().getStringList("Users.").forEach(p ->{
-                        balance.saveBalance(PASurvival.getPlayer(plugin.getServer().getOfflinePlayer(p)));
-                        files.getUser().set("recaudado", files.getUser().getInt("recaudado") + (files.getUser().getInt("Users." + p + ".money")*0.01));
-                        files.getUser().set("recaudado", files.getUser().getInt("recaudado") - (files.getUser().getInt("recaudado")*0.1));
-                        files.getUser().set("loteria", files.getUser().getInt("loteria") + (files.getUser().getInt("recaudado")*0.1));
-                        balance.removeBalance(PASurvival.getPlayer(plugin.getServer().getOfflinePlayer(p)), eco.getBalance(plugin.getServer().getOfflinePlayer(p))*0.01);
-                        balance.saveBalance(PASurvival.getPlayer(plugin.getServer().getOfflinePlayer(p)));
-                    });
-                    Bukkit.getOnlinePlayers().forEach(u ->
-                            u.sendMessage(ChatColor.GREEN + "Hora de los impuestos, se te ha quitado 1% de tu dinero, o lo que es lo mismo " + eco.getBalance(u.getPlayer()) * 0.01));
                 }
                 break;
             case 18:
                 if(min == 0 && seg == 0){
+                    int rd = new Random().nextInt(9999);
                     Utils.broadcastMsg("&aHora de la lotería, los números ganadores son: &6" + rd + ".");
 
                     files.getUser().getStringList("Users.").forEach(p ->{

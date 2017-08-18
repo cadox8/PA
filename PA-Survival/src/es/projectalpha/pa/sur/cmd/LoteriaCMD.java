@@ -27,9 +27,9 @@ public class LoteriaCMD extends PACmd {
             int bol = Integer.parseInt(args[0]);
             int rd = new Random().nextInt(9999);
             if(bol > 10) user.sendMessage(PAData.SURVIVAL.getPrefix() + "&4El máximo de boletos que puedes comprar son 10.");
+            user.sendMessage(PAData.SURVIVAL.getPrefix() + "&aHas comprado " + bol + " boletos, tus números son: ");
             for(int b = 0; b <= bol; b++){
                files.getUser().set("Users." + user.getName() + ".bol." + b, rd);
-               user.sendMessage(PAData.SURVIVAL.getPrefix() + "&aHas comprado " + bol + "fichas, tus números son: ");
                user.sendMessage(ChatColor.GOLD + files.getUser().getString("Users." + user.getName() + ".bol." + b));
             }
         }

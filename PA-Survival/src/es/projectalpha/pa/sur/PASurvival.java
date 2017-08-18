@@ -31,12 +31,12 @@ public class PASurvival extends JavaPlugin {
     public void onEnable() {
         instance = this;
         manager = new PvPManager();
-        PACommands.register(new StonesCMD(), new MoneyCMD(), new PayCMD(), new PvPCMD(), new LoteriaCMD());
+        setupEconomy();
+        PACommands.register(new StonesCMD(), new RecaudadoCMD(), new PayCMD(), new PvPCMD(), new LoteriaCMD());
         files.setupFiles();
 
         registerEvents();
 
-        if (!setupEconomy()) Log.debugLog("Oye, que el Economy es null");
 
         timeTask = new TimeTask(instance);
         timeTask.runTaskTimer(instance, 0, 20);
@@ -62,12 +62,19 @@ public class PASurvival extends JavaPlugin {
     }
 
     private boolean setupEconomy() {
-        if (getServer().getPluginManager().getPlugin("Vault") == null) return false;
+        if (getServer().getPluginManager().getPlugin("Vault") == null){
+            Log.debugLog("Oye, que el Economy es null 1");
+            return false;
+        }
 
         RegisteredServiceProvider<Economy> rsp = getServer().getServicesManager().getRegistration(Economy.class);
-        if (rsp == null) return false;
+        if (rsp == null){
+            Log.debugLog("Oye, que el Economy es null 2");
+            return false;
+        }
 
         vault = rsp.getProvider();
+        Log.debugLog("Oye, que el Economy ha cargao mi arma");
         return vault != null;
     }
 }
