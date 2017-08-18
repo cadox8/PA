@@ -11,6 +11,7 @@ import org.bukkit.Location;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
@@ -257,7 +258,7 @@ public class StonesEvents implements Listener {
 
     }
 
-    @EventHandler
+    @EventHandler(priority = EventPriority.HIGHEST)
     public void onAttack(EntityDamageByEntityEvent e){
         if(!(e.getDamager() instanceof Player)) return;
         Player p = (Player) e.getDamager();
