@@ -22,7 +22,7 @@ import org.bukkit.event.player.PlayerBucketEmptyEvent;
 import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
-
+import org.bukkit.permissions.PermissionAttachment;
 
 
 public class PlayerEvents implements Listener{
@@ -48,11 +48,22 @@ public class PlayerEvents implements Listener{
         }
 
         if(Files.user.getBoolean("Users." + p.getName() + ".pimp") == false){
+            u.sendMessage("&aSe te ha cobrado los impuestos, lo que equivale a &6" + eco.getBalance(u.getPlayer()) * 0.01 + "&a$");
+            Files.user.set("Users." + p.getName() + ".apos", eco.getBalance(u.getPlayer()) * 0.01);
             balance.cobrarImpuestos(u);
             Files.user.set("Users." + p.getName() + ".pimp", true);
-            u.sendMessage("&aSe te ha cobrado los impuestos, lo que equivale a &6" + eco.getBalance(u.getPlayer()) * 0.01 + "&a$");
             Files.saveFiles();
         }
+
+        PermissionAttachment attachment = p.addAttachment(plugin);
+        plugin.getPerms().put(p, attachment);
+        PermissionAttachment pperms = plugin.getPerms().get(p);
+        pperms.setPermission("saneeconomy.balance", true);
+        pperms.setPermission("saneeconomy.pay", true);
+        pperms.setPermission("saneeconomy.balancetop", true);
+        pperms.setPermission(" jobs.use", true);
+
+
     }
 
     @EventHandler

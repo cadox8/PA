@@ -11,11 +11,14 @@ import es.projectalpha.pa.sur.tasks.TimeTask;
 import lombok.Getter;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.OfflinePlayer;
+import org.bukkit.entity.Player;
+import org.bukkit.permissions.PermissionAttachment;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class PASurvival extends JavaPlugin {
 
@@ -27,6 +30,7 @@ public class PASurvival extends JavaPlugin {
     @Getter private PvPManager manager;
     @Getter private Economy vault;
     @Getter private TimeTask timeTask;
+    @Getter private HashMap<Player, PermissionAttachment> perms = new HashMap<>();
 
     public void onEnable() {
         instance = this;

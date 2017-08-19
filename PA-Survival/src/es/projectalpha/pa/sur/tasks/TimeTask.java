@@ -50,6 +50,10 @@ public class TimeTask extends BukkitRunnable {
             case 6:
                 if(min == 0 && seg == 0) {
                     System.out.println(hora + ":" + min + ":" + seg);
+                    Files.user.getStringList("Users").forEach(e->{
+                        Files.user.set("Users." + e + ".pimp", false);
+                        Files.saveFiles();
+                    });
                 }
                 break;
             case 18:
@@ -63,6 +67,7 @@ public class TimeTask extends BukkitRunnable {
                                 Utils.broadcastMsg("&aEl ganador de la lotería es " + p + ". Ha ganado " + Files.user.getInt("loteria") + "$");
                                 balance.addBalace(PASurvival.getPlayer(plugin.getServer().getOfflinePlayer(p)), Files.user.getInt("loteria"));
                                 Files.user.set("loteria", 0);
+                                Files.saveFiles();
                                 return;
                             }
                         });
