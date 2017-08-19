@@ -20,6 +20,10 @@ public class ItemMaker {
         itemStack = new ItemStack(Material.AIR);
     }
 
+    public ItemMaker(ItemStack i) {
+        this.itemStack = i;
+    }
+
     public ItemMaker(Material type) {
         itemStack = new ItemStack(type);
     }

@@ -18,7 +18,6 @@ import java.util.Random;
 public abstract class PACmd {
 
     protected static transient PACore plugin = PACore.getInstance();
-    protected static transient Utils utils = PACore.getInstance().getUtils();
     protected static transient Random r = new Random();
     @Getter private final transient String name;
     @Getter private final transient List<String> aliases;
