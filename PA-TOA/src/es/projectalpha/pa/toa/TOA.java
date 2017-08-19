@@ -18,6 +18,7 @@ import es.projectalpha.pa.toa.races.Race;
 import es.projectalpha.pa.toa.tasks.InfoTask;
 import es.projectalpha.pa.toa.tasks.SpawnTask;
 import es.projectalpha.pa.toa.utils.FileUtils;
+import es.projectalpha.pa.toa.utils.TOAMenu;
 import lombok.Getter;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.plugin.PluginManager;
@@ -37,6 +38,7 @@ public class TOA extends JavaPlugin {
     @Getter private FileUtils fileUtils;
     @Getter private Health health;
     @Getter private Armor armor;
+    @Getter private TOAMenu toaMenu;
 
     @Getter private SpawnTask spawnTask;
 
@@ -50,7 +52,7 @@ public class TOA extends JavaPlugin {
         registerEvents();
 
         spawnTask.removeAll();
-        spawnTask.runTaskTimer(instance, 20, 25 * 20);
+        spawnTask.runTaskTimer(instance, 0, 25 * 20);
         new InfoTask(instance).runTaskTimer(instance, 0, 20);
     }
 
@@ -62,6 +64,7 @@ public class TOA extends JavaPlugin {
         spawnTask = new SpawnTask(instance);
         health = new Health(instance);
         armor = new Armor(instance);
+        toaMenu = new TOAMenu(instance);
 
         Race.registerRaces();
 

@@ -10,6 +10,7 @@ import es.projectalpha.pa.toa.abilities.Ability;
 import es.projectalpha.pa.toa.api.TOAUser;
 import es.projectalpha.pa.toa.mobs.boss.BossAttacks;
 import es.projectalpha.pa.toa.races.Race;
+import es.projectalpha.pa.toa.utils.TOAMenu;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -144,10 +145,10 @@ public class PlayerEvents implements Listener {
 
             switch (ChatColor.stripColor(v.getCustomName())) {
                 case "Comprador Variado":
-                    u.sendMessage("Oh, un menú");
+                    TOAMenu.openMenu(u, TOAMenu.MenuType.VARIADO);
                     break;
                 case "Comprador Armas":
-                    u.sendMessage("Oh, un menú");
+                    TOAMenu.openMenu(u, TOAMenu.MenuType.ARMAS);
                     break;
             }
         }

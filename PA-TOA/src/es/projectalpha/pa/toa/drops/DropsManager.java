@@ -15,15 +15,15 @@ public class DropsManager {
 
     //
     public final Drop ARROW = new Drop(MobType.SKELETON, new ItemMaker(Material.ARROW).setDisplayName("&6Flecha").build());
-
-
+    public final Drop ROTTEN = new Drop(MobType.ZOMBIE, new ItemMaker(Material.ROTTEN_FLESH).setDisplayName("&6Carne podrida").build());
+    public final Drop ROD = new Drop(MobType.BLAZE, new ItemMaker(Material.BLAZE_ROD).setDisplayName("&6Vara de fuego").build());
     //
     public ArrayList<Drop> drops;
 
     public DropsManager() {
         drops = new ArrayList<>();
 
-        registerDrop(ARROW);
+        registerDrop(ARROW, ROTTEN, ROD);
     }
 
     private void registerDrop(Drop... drop) {
