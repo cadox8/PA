@@ -1,5 +1,6 @@
 package es.projectalpha.pa.sur.tasks;
 
+import es.projectalpha.pa.core.api.PAData;
 import es.projectalpha.pa.core.utils.Utils;
 import es.projectalpha.pa.sur.PASurvival;
 import es.projectalpha.pa.sur.files.Files;
@@ -39,7 +40,10 @@ public class TimeTask extends BukkitRunnable {
         PASurvival.players.forEach(p -> {
             if(p == null) return;
             balance.saveBalance(p);
-            //if (!plugin.getManager().isInPvP(p.getPlayer())) p.sendMessage(PAData.SURVIVAL.getPrefix() + ChatColor.DARK_GREEN + "Ya no estás en pvp, puedes desconectarte.");
+            if (plugin.getManager().getPvpc().getTimeLeft(p.getName()) == 1){
+                p.sendMessage(Utils.colorize(PAData.SURVIVAL.getPrefix() + ChatColor.DARK_GREEN + "Ya no estás en pvp, puedes desconectarte."));
+                plugin.getManager().removePvP(p.getPlayer());
+            }
         });
 
         switch(hora){

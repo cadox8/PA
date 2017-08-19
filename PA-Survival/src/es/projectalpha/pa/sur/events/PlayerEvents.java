@@ -1,6 +1,7 @@
 package es.projectalpha.pa.sur.events;
 
 import es.projectalpha.pa.core.api.PAData;
+import es.projectalpha.pa.core.utils.Utils;
 import es.projectalpha.pa.sur.PASurvival;
 import es.projectalpha.pa.sur.api.SurvivalUser;
 import es.projectalpha.pa.sur.files.Files;
@@ -67,8 +68,8 @@ public class PlayerEvents implements Listener{
                 manager.removeCooldown(p);
                 manager.removeCooldown(pl);
 
-                p.sendMessage(PAData.SURVIVAL.getPrefix() + ChatColor.DARK_GREEN + " Ya no estás en pvp, puedes desconectarte.");
-                pl.sendMessage(PAData.SURVIVAL.getPrefix() + ChatColor.DARK_GREEN + " Ya no estás en pvp, puedes desconectarte.");
+                p.sendMessage(Utils.colorize(PAData.SURVIVAL.getPrefix() + ChatColor.DARK_GREEN + " Ya no estás en pvp, puedes desconectarte."));
+                pl.sendMessage(Utils.colorize(PAData.SURVIVAL.getPrefix() + ChatColor.DARK_GREEN + " Ya no estás en pvp, puedes desconectarte."));
             }
         }
     }
@@ -83,7 +84,7 @@ public class PlayerEvents implements Listener{
                 if(b.getType() == Material.FIRE){
 
                     if(Files.user.getBoolean("Users." + en.getName() + ".pvp") == false){
-                        p.sendMessage(PAData.SURVIVAL.getPrefix() + ChatColor.DARK_RED + " No puedes poner ese bloque cerca de un jugador con el pvp desactivado.");
+                        p.sendMessage(Utils.colorize(PAData.SURVIVAL.getPrefix() + ChatColor.DARK_RED + " No puedes poner ese bloque cerca de un jugador con el pvp desactivado."));
                         e.setCancelled(true);
                     }
                 }
@@ -100,7 +101,7 @@ public class PlayerEvents implements Listener{
                 if(e.getBucket() == Material.LAVA_BUCKET){
 
                     if(Files.user.getBoolean("Users." + en.getName() + ".pvp") == false){
-                        p.sendMessage(PAData.SURVIVAL.getPrefix() + ChatColor.DARK_RED + " No puedes poner ese bloque cerca de un jugador con el pvp desactivado.");
+                        p.sendMessage(Utils.colorize(PAData.SURVIVAL.getPrefix() + ChatColor.DARK_RED + " No puedes poner ese bloque cerca de un jugador con el pvp desactivado."));
                         e.setCancelled(true);
                     }
                 }
@@ -114,7 +115,7 @@ public class PlayerEvents implements Listener{
         Player p = e.getPlayer();
         if(manager.isInPvP(p)){
             e.setCancelled(true);
-            p.sendMessage(PAData.SURVIVAL.getPrefix() + ChatColor.DARK_RED + " ¡No puedes ejecutar comandos en pvp!");
+            p.sendMessage(Utils.colorize(PAData.SURVIVAL.getPrefix() + ChatColor.DARK_RED + " ¡No puedes ejecutar comandos en pvp!"));
         }
     }
 
@@ -126,7 +127,7 @@ public class PlayerEvents implements Listener{
             Files.saveFiles();
             if(manager.isInPvP(p)){
                 p.setHealth(0D);
-                Bukkit.broadcastMessage(PAData.SURVIVAL.getPrefix() + ChatColor.GRAY + " ¡" + ChatColor.GOLD + p.getName() + ChatColor.GREEN + " se ha desconectado en combate!");
+                Bukkit.broadcastMessage(Utils.colorize(PAData.SURVIVAL.getPrefix() + ChatColor.GRAY + " ¡" + ChatColor.GOLD + p.getName() + ChatColor.GREEN + " se ha desconectado en combate!"));
             }
         }
     }

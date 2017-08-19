@@ -44,6 +44,7 @@ public class LoteriaCMD extends PACmd {
                 Files.user.set("Users." + user.getName() + ".apos", bol);
                 Files.user.set("Users." + user.getName() + ".bol." + b, new Random().nextInt(9999));
                 user.sendMessage(ChatColor.GOLD + Files.user.getString("Users." + user.getName() + ".bol." + b));
+                Files.saveFiles(); //Que si no no se guarda, joder. #SuicideIsNear
             }
         }
     }

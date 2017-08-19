@@ -16,10 +16,6 @@ public final class Balance {
     private PASurvival plugin;
 
     public void saveBalance(SurvivalUser p){
-        if (eco == null) {
-            Log.debugLog("Oye, que el Economy es null");
-            return;
-        }
         if(Files.user.getInt("Users." + p.getName() + ".money") == eco.getBalance(p.getPlayer())) return;
         Files.user.set("Users." + p.getName() + ".money", eco.getBalance(p.getPlayer()));
         Files.saveFiles();

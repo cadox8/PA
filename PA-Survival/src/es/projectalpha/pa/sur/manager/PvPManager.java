@@ -2,12 +2,13 @@ package es.projectalpha.pa.sur.manager;
 
 import es.projectalpha.pa.core.utils.Cooldown;
 import es.projectalpha.pa.sur.files.Files;
+import lombok.Getter;
 import org.bukkit.entity.Player;
 
 public class PvPManager {
 
     private Cooldown cmdc = new Cooldown(20);
-    private Cooldown pvpc = new Cooldown(25);
+    @Getter private Cooldown pvpc = new Cooldown(26);
     private Cooldown noobc = new Cooldown(1800);
     private Files files = new Files();
 

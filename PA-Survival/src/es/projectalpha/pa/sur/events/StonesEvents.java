@@ -27,7 +27,7 @@ public class StonesEvents implements Listener {
     private double l1,l2,l3;
     private double fl1,fl2,fl3;
     private PASurvival plugin;
-    private int i = Files.stone.getInt("piedras");
+    private int i = Files.stone.getInt("tstones");
 
     @EventHandler
     public void onInteract(PlayerInteractEvent e){
@@ -50,7 +50,7 @@ public class StonesEvents implements Listener {
                 b1 = l.getWorld().getBlockAt(l.add(l1, l2, l3));
                 b2 = l.getWorld().getBlockAt(l.add(fl1, fl2, fl3));
                 cz = new CuboidZone(b1,b2);
-                if(Files.stone.getInt("piedras") != 0){
+                if(i != 0){
                     cz.toArray().forEach(bl->{
                         for(int s = 0; s <= i; s++){
                             Block fb1,fb2;
@@ -67,6 +67,7 @@ public class StonesEvents implements Listener {
                     });
                 }
                 i++;
+                Files.stone.set("tstones", i);
                 Files.stone.set("piedras." + i + ".b1", Utils.locationToString(b1.getLocation()));
                 Files.stone.set("piedras." + i + ".b2", Utils.locationToString(b2.getLocation()));
                 Files.stone.set("piedras." + i + ".owner", p.getName());
@@ -81,7 +82,7 @@ public class StonesEvents implements Listener {
                 b1 = l.getWorld().getBlockAt(l.add(l1, l2, l3));
                 b2 = l.getWorld().getBlockAt(l.add(fl1, fl2, fl3));
                 cz = new CuboidZone(b1,b2);
-                if(Files.stone.getInt("piedras") != 0){
+                if(i != 0){
                     cz.toArray().forEach(bl->{
                         for(int s = 0; s <= i; s++){
                             Block fb1,fb2;
@@ -98,6 +99,7 @@ public class StonesEvents implements Listener {
                     });
                 }
                 i++;
+                Files.stone.set("tstones", i);
                 Files.stone.set("piedras." + i + ".b1", Utils.locationToString(b1.getLocation()));
                 Files.stone.set("piedras." + i + ".b2", Utils.locationToString(b2.getLocation()));
                 Files.stone.set("piedras." + i + ".owner", p.getName());
@@ -112,7 +114,7 @@ public class StonesEvents implements Listener {
                 b1 = l.getWorld().getBlockAt(l.add(l1, l2, l3));
                 b2 = l.getWorld().getBlockAt(l.add(fl1, fl2, fl3));
                 cz = new CuboidZone(b1,b2);
-                if(Files.stone.getInt("piedras") != 0){
+                if(i != 0){
                     cz.toArray().forEach(bl->{
                         for(int s = 0; s <= i; s++){
                             Block fb1,fb2;
@@ -129,6 +131,7 @@ public class StonesEvents implements Listener {
                     });
                 }
                 i++;
+                Files.stone.set("tstones", i);
                 Files.stone.set("piedras." + i + ".b1", Utils.locationToString(b1.getLocation()));
                 Files.stone.set("piedras." + i + ".b2", Utils.locationToString(b2.getLocation()));
                 Files.stone.set("piedras." + i + ".owner", p.getName());
@@ -143,7 +146,7 @@ public class StonesEvents implements Listener {
                 b1 = l.getWorld().getBlockAt(l.add(l1, l2, l3));
                 b2 = l.getWorld().getBlockAt(l.add(fl1, fl2, fl3));
                 cz = new CuboidZone(b1,b2);
-                if(Files.stone.getInt("piedras") != 0){
+                if(i != 0){
                     cz.toArray().forEach(bl->{
                         for(int s = 0; s <= i; s++){
                             Block fb1,fb2;
@@ -160,6 +163,7 @@ public class StonesEvents implements Listener {
                     });
                 }
                 i++;
+                Files.stone.set("tstones", i);
                 Files.stone.set("piedras." + i + ".b1", Utils.locationToString(b1.getLocation()));
                 Files.stone.set("piedras." + i + ".b2", Utils.locationToString(b2.getLocation()));
                 Files.stone.set("piedras." + i + ".owner", p.getName());
@@ -174,7 +178,7 @@ public class StonesEvents implements Listener {
                 b1 = l.getWorld().getBlockAt(l.add(l1, l2, l3));
                 b2 = l.getWorld().getBlockAt(l.add(fl1, fl2, fl3));
                 cz = new CuboidZone(b1,b2);
-                if(Files.stone.getInt("piedras") != 0){
+                if(i != 0){
                     cz.toArray().forEach(bl->{
                         for(int s = 0; s <= i; s++){
                             Block fb1,fb2;
@@ -191,6 +195,7 @@ public class StonesEvents implements Listener {
                     });
                 }
                 i++;
+                Files.stone.set("tstones", i);
                 Files.stone.set("piedras." + i + ".b1", Utils.locationToString(b1.getLocation()));
                 Files.stone.set("piedras." + i + ".b2", Utils.locationToString(b2.getLocation()));
                 Files.stone.set("piedras." + i + ".owner", p.getName());
@@ -204,7 +209,7 @@ public class StonesEvents implements Listener {
                 b1 = l.getWorld().getBlockAt(l.add(l1, l2, l3));
                 b2 = l.getWorld().getBlockAt(l.add(fl1, fl2, fl3));
                 cz = new CuboidZone(b1,b2);
-                if(Files.stone.getInt("piedras") != 0){
+                if(i != 0){
                     cz.toArray().forEach(bl->{
                         for(int s = 0; s <= i; s++){
                             Block fb1,fb2;
@@ -221,6 +226,7 @@ public class StonesEvents implements Listener {
                     });
                 }
                 i++;
+                Files.stone.set("tstones", i);
                 Files.stone.set("piedras." + i + ".b1", Utils.locationToString(b1.getLocation()));
                 Files.stone.set("piedras." + i + ".b2", Utils.locationToString(b2.getLocation()));
                 Files.stone.set("piedras." + i + ".owner", p.getName());
@@ -236,7 +242,7 @@ public class StonesEvents implements Listener {
                 b1 = l.getWorld().getBlockAt(l.add(l1, l2, l3));
                 b2 = l.getWorld().getBlockAt(l.add(fl1, fl2, fl3));
                 cz = new CuboidZone(b1,b2);
-                if(Files.stone.getInt("piedras") != 0){
+                if(i != 0){
                     cz.toArray().forEach(bl->{
                         for(int s = 0; s <= i; s++){
                             Block fb1,fb2;
@@ -253,6 +259,7 @@ public class StonesEvents implements Listener {
                     });
                 }
                 i++;
+                Files.stone.set("tstones", i);
                 Files.stone.set("piedras." + i + ".b1", Utils.locationToString(b1.getLocation()));
                 Files.stone.set("piedras." + i + ".b2", Utils.locationToString(b2.getLocation()));
                 Files.stone.set("piedras." + i + ".owner", p.getName());

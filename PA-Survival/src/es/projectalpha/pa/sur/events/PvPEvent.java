@@ -1,6 +1,7 @@
 package es.projectalpha.pa.sur.events;
 
 import es.projectalpha.pa.core.api.PAData;
+import es.projectalpha.pa.core.utils.Utils;
 import es.projectalpha.pa.sur.files.Files;
 import es.projectalpha.pa.sur.manager.PvPManager;
 import org.bukkit.ChatColor;
@@ -58,8 +59,8 @@ public class PvPEvent implements Listener{
                     manager.addPvp(p);
                     manager.addPvp(pl);
 
-                    p.sendMessage(PAData.SURVIVAL.getPrefix() + ChatColor.DARK_RED + " Has entrado en pelea con " + ChatColor.DARK_GRAY + pl.getName() + ChatColor.DARK_RED + ", �no te desconectes!");
-                    pl.sendMessage(PAData.SURVIVAL.getPrefix() + ChatColor.DARK_RED + "Has entrado en pelea con " + ChatColor.DARK_GRAY + p.getName() + ChatColor.DARK_RED + ", �no te desconectes!");
+                    p.sendMessage(Utils.colorize(PAData.SURVIVAL.getPrefix() + ChatColor.DARK_RED + " Has entrado en pelea con " + ChatColor.DARK_GRAY + pl.getName() + ChatColor.DARK_RED + ", ¡no te desconectes!"));
+                    pl.sendMessage(Utils.colorize(PAData.SURVIVAL.getPrefix() + ChatColor.DARK_RED + "Has entrado en pelea con " + ChatColor.DARK_GRAY + p.getName() + ChatColor.DARK_RED + ", ¡no te desconectes!"));
 
                 }else{
 
@@ -68,22 +69,22 @@ public class PvPEvent implements Listener{
                     pl.setFireTicks(0);
 
                     if(manager.isNewbie(p)){
-                        p.sendMessage(PAData.SURVIVAL.getPrefix() + ChatColor.DARK_GRAY + " Tienes la protección de novato activada, para desactivarla haz /pvp disable.");
+                        p.sendMessage(Utils.colorize(PAData.SURVIVAL.getPrefix() + ChatColor.DARK_GRAY + " Tienes la protección de novato activada, para desactivarla haz /pvp disable."));
                         return;
                     }
 
                     if(manager.isNewbie(pl)){
-                        p.sendMessage(PAData.SURVIVAL.getPrefix() + ChatColor.GOLD + pl.getName() + ChatColor.DARK_GRAY + " tiene la protección de novato activada.");
+                        p.sendMessage(Utils.colorize(PAData.SURVIVAL.getPrefix() + ChatColor.GOLD + pl.getName() + ChatColor.DARK_GRAY + " tiene la protección de novato activada."));
                         return;
                     }
 
                     if(Files.user.getBoolean("Users." + p.getName() + ".pvp") == false){
-                        p.sendMessage(PAData.SURVIVAL.getPrefix() + ChatColor.DARK_GRAY + " Tienes el pvp desactivado.");
+                        p.sendMessage(Utils.colorize(PAData.SURVIVAL.getPrefix() + ChatColor.DARK_GRAY + " Tienes el pvp desactivado."));
                         return;
                     }
 
                     if(Files.user.getBoolean("Users." + pl.getName() + ".pvp") == false){
-                        p.sendMessage(PAData.SURVIVAL.getPrefix() + ChatColor.GOLD + pl.getName() + ChatColor.DARK_GRAY + " tiene el pvp desactivado.");
+                        p.sendMessage(Utils.colorize(PAData.SURVIVAL.getPrefix() + ChatColor.GOLD + pl.getName() + ChatColor.DARK_GRAY + " tiene el pvp desactivado."));
                         return;
                     }
                 }
@@ -112,8 +113,8 @@ public class PvPEvent implements Listener{
                     manager.addPvp(p);
                     manager.addPvp(pl);
 
-                    p.sendMessage(PAData.SURVIVAL.getPrefix() + ChatColor.DARK_RED + " Has entrado en pelea con " + ChatColor.DARK_GRAY + pl.getName());
-                    pl.sendMessage(PAData.SURVIVAL.getPrefix() + ChatColor.DARK_RED + " Has entrado en pelea con " + ChatColor.DARK_GRAY + p.getName());
+                    p.sendMessage(Utils.colorize(PAData.SURVIVAL.getPrefix() + ChatColor.DARK_RED + " Has entrado en pelea con " + ChatColor.DARK_GRAY + pl.getName()));
+                    pl.sendMessage(Utils.colorize(PAData.SURVIVAL.getPrefix() + ChatColor.DARK_RED + " Has entrado en pelea con " + ChatColor.DARK_GRAY + p.getName()));
 
                 }else{
 
@@ -122,22 +123,22 @@ public class PvPEvent implements Listener{
                     pl.setFireTicks(0);
 
                     if(manager.isNewbie(p)){
-                        p.sendMessage(PAData.SURVIVAL.getPrefix() + ChatColor.DARK_GRAY + " Tienes la protección de novato activada, para desactivarla haz /pvp disable.");
+                        p.sendMessage(Utils.colorize(PAData.SURVIVAL.getPrefix() + ChatColor.DARK_GRAY + " Tienes la protección de novato activada, para desactivarla haz /pvp disable."));
                         return;
                     }
 
                     if(manager.isNewbie(pl)){
-                        p.sendMessage(PAData.SURVIVAL.getPrefix() + ChatColor.GOLD + pl.getName() + ChatColor.DARK_GRAY + " tiene la protección de novato activada.");
+                        p.sendMessage(Utils.colorize(PAData.SURVIVAL.getPrefix() + ChatColor.GOLD + pl.getName() + ChatColor.DARK_GRAY + " tiene la protección de novato activada."));
                         return;
                     }
 
                     if(Files.user.getBoolean("Users." + p.getName() + ".pvp") == false){
-                        p.sendMessage(PAData.SURVIVAL.getPrefix() + ChatColor.DARK_GRAY + " Tienes el pvp desactivado.");
+                        p.sendMessage(Utils.colorize(PAData.SURVIVAL.getPrefix() + ChatColor.DARK_GRAY + " Tienes el pvp desactivado."));
                         return;
                     }
 
                     if(Files.user.getBoolean("Users." + pl.getName() + ".pvp") == false){
-                        p.sendMessage(PAData.SURVIVAL.getPrefix() + ChatColor.GOLD + pl.getName() + ChatColor.DARK_GRAY + " tiene el pvp desactivado.");
+                        p.sendMessage(Utils.colorize(PAData.SURVIVAL.getPrefix() + ChatColor.GOLD + pl.getName() + ChatColor.DARK_GRAY + " tiene el pvp desactivado."));
                         return;
                     }
                 }
