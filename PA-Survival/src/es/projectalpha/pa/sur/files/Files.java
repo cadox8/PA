@@ -25,7 +25,7 @@ public class Files {
 
         if (!fileStone.exists()) {
             fileStone.mkdir();
-            stone.set("piedras", 0);
+            stone.set("tstones", 0);
         }
 
         saveFiles();

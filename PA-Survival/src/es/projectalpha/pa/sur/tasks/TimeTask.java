@@ -39,7 +39,6 @@ public class TimeTask extends BukkitRunnable {
 
         PASurvival.players.forEach(p -> {
             if(p == null) return;
-            balance.saveBalance(p);
             if (plugin.getManager().getPvpc().getTimeLeft(p.getName()) == 1){
                 p.sendMessage(Utils.colorize(PAData.SURVIVAL.getPrefix() + ChatColor.DARK_GREEN + "Ya no estás en pvp, puedes desconectarte."));
                 plugin.getManager().removePvP(p.getPlayer());
