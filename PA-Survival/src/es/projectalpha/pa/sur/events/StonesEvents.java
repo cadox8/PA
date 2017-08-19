@@ -37,25 +37,23 @@ public class StonesEvents implements Listener {
         Block b2;
         CuboidZone cz;
 
-        if (e.getClickedBlock() == null) return;
+        if (e.getItem() == null) return;
 
         Location l = b.getLocation();
 
-        switch(p.getInventory().getItemInMainHand().getType()){
-
+        switch(e.getItem().getType()){
             case COAL_ORE:
                 if(!p.getInventory().getItemInMainHand().equals(stones.stone1)) return;
-                l1 = 5; l2 = 5; l3 = 5;
-                fl1 = -5; fl2 = -5; fl3 = -5;
-                b1 = l.getWorld().getBlockAt(l.add(l1, l2, l3));
-                b2 = l.getWorld().getBlockAt(l.add(fl1, fl2, fl3));
-                cz = new CuboidZone(b1,b2);
+                l1 = 5;
+                b1 = l.getWorld().getBlockAt(l.add(l1, l1, l1));
+                b2 = l.getWorld().getBlockAt(l.add(-l1, -l1, -l1));
+                cz = new CuboidZone(b1, b2);
                 if(i != 0){
                     cz.toArray().forEach(bl->{
                         for(int s = 0; s <= i; s++){
                             Block fb1,fb2;
-                            fb1 = l.getWorld().getBlockAt(l.add(Utils.stringToLocation(Files.stone.getString("piedras." + s + ".b1"))));
-                            fb2 = l.getWorld().getBlockAt(l.add(Utils.stringToLocation(Files.stone.getString("piedras." + s + ".b2"))));
+                            fb1 = l.getWorld().getBlockAt(Utils.stringToLocation(Files.stone.getString("piedras." + s + ".b1")));
+                            fb2 = l.getWorld().getBlockAt(Utils.stringToLocation(Files.stone.getString("piedras." + s + ".b2")));
                             CuboidZone fcz = new CuboidZone(fb1, fb2);
                             fcz.toArray().forEach(st ->{
                                 if(bl.getLocation() == st.getLocation()) return;
