@@ -28,13 +28,14 @@ public class StonesEvents implements Listener {
     private double fl1,fl2,fl3;
     private PASurvival plugin;
     private int i = Files.stone.getInt("tstones");
-
     @EventHandler
     public void onInteract(PlayerInteractEvent e){
         Player p = e.getPlayer();
         Block b = e.getClickedBlock();
         Block b1;
         Block b2;
+        double x,y,z,xf,yf,zf;
+        String w1,w2;
         CuboidZone cz;
 
         if (e.getItem() == null) return;
@@ -50,21 +51,24 @@ public class StonesEvents implements Listener {
                 cz = new CuboidZone(b1, b2);
                 if(i != 0){
                     cz.toArray().forEach(bl->{
-                        for(int s = 0; s <= i; s++){
+                        for(int s = 1; s <= i; s++){
+
                             Block fb1,fb2;
-                            fb1 = l.getWorld().getBlockAt(Utils.stringToLocation(Files.stone.getString("piedras." + s + ".b1")));
-                            fb2 = l.getWorld().getBlockAt(Utils.stringToLocation(Files.stone.getString("piedras." + s + ".b2")));
+                            fb1 = l.getWorld().getBlockAt(l.add(Utils.stringToLocation(Files.stone.getString("piedras." + s + ".b1"))));
+                            fb2 = l.getWorld().getBlockAt(l.add(Utils.stringToLocation(Files.stone.getString("piedras." + s + ".b2"))));
                             CuboidZone fcz = new CuboidZone(fb1, fb2);
                             fcz.toArray().forEach(st ->{
-                                if(bl.getLocation() == st.getLocation()) return;
-                                p.sendMessage(PAData.SURVIVAL.getPrefix() + ChatColor.DARK_RED + "No puedes colocar este bloque de protección aquí ya que hay otra región cerca.");
-                                e.setCancelled(true);
-                                return;
+                                if(st.getLocation() == bl.getLocation()){
+                                    p.sendMessage(PAData.SURVIVAL.getPrefix() + ChatColor.DARK_RED + "No puedes colocar este bloque de protección aquí ya que hay otra región cerca.");
+                                    e.setCancelled(true);
+                                    return;
+                                }
                             });
                         }
                     });
                 }
                 i++;
+
                 Files.stone.set("tstones", i);
                 Files.stone.set("piedras." + i + ".b1", Utils.locationToString(b1.getLocation()));
                 Files.stone.set("piedras." + i + ".b2", Utils.locationToString(b2.getLocation()));
@@ -276,8 +280,8 @@ public class StonesEvents implements Listener {
         if (Files.stone.getInt("piedras") != 0) {
             for (int s = 0; s <= i; s++) {
                 Block fb1, fb2;
-                fb1 = l.getWorld().getBlockAt(l.add(Utils.stringToLocation(Files.stone.getString("piedras." + s + ".b1"))));
-                fb2 = l.getWorld().getBlockAt(l.add(Utils.stringToLocation(Files.stone.getString("piedras." + s + ".b2"))));
+                fb1 = l.getWorld().getBlockAt(Utils.stringToLocation(Files.stone.getString("piedras." + s + ".b1")));
+                fb2 = l.getWorld().getBlockAt(Utils.stringToLocation(Files.stone.getString("piedras." + s + ".b2")));
                 CuboidZone fcz = new CuboidZone(fb1, fb2);
                 Boolean owner = Files.stone.getString("piedras." + s + ".owner").equals(p.getName());
                 Files.stone.getList("piedras." + s + ".perm").forEach(j -> {
@@ -299,8 +303,8 @@ public class StonesEvents implements Listener {
         if (Files.stone.getInt("piedras") != 0) {
             for (int s = 0; s <= i; s++) {
                 Block fb1, fb2;
-                fb1 = l.getWorld().getBlockAt(l.add(Utils.stringToLocation(Files.stone.getString("piedras." + s + ".b1"))));
-                fb2 = l.getWorld().getBlockAt(l.add(Utils.stringToLocation(Files.stone.getString("piedras." + s + ".b2"))));
+                fb1 = l.getWorld().getBlockAt(Utils.stringToLocation(Files.stone.getString("piedras." + s + ".b1")));
+                fb2 = l.getWorld().getBlockAt(Utils.stringToLocation(Files.stone.getString("piedras." + s + ".b2")));
                 CuboidZone fcz = new CuboidZone(fb1, fb2);
                 Boolean owner = Files.stone.getString("piedras." + s + ".owner").equals(p.getName());
                 Files.stone.getList("piedras." + s + ".perm").forEach(j -> {

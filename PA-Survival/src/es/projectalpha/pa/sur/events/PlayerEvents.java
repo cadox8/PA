@@ -1,6 +1,7 @@
 package es.projectalpha.pa.sur.events;
 
 import es.projectalpha.pa.core.api.PAData;
+import es.projectalpha.pa.core.cmd.PACmd;
 import es.projectalpha.pa.core.utils.Utils;
 import es.projectalpha.pa.sur.PASurvival;
 import es.projectalpha.pa.sur.api.SurvivalUser;
@@ -58,10 +59,54 @@ public class PlayerEvents implements Listener{
         PermissionAttachment attachment = p.addAttachment(plugin);
         plugin.getPerms().put(p, attachment);
         PermissionAttachment pperms = plugin.getPerms().get(p);
-        pperms.setPermission("saneeconomy.balance", true);
-        pperms.setPermission("saneeconomy.pay", true);
-        pperms.setPermission("saneeconomy.balancetop", true);
-        pperms.setPermission(" jobs.use", true);
+        pperms.setPermission("essentials.balance", true);
+        pperms.setPermission("essentials.pay", true);
+        pperms.setPermission("essentials.balancetop", true);
+        pperms.setPermission("jobs.use", true);
+        pperms.setPermission("essentials.home", true);
+        pperms.setPermission("essentials.sethome", true);
+        pperms.setPermission("essentials.tpahere", true);
+        pperms.setPermission("essentials.tpaccept", true);
+        pperms.setPermission("essentials.tpdeny", true);
+        pperms.setPermission("essentials.afk", true);
+        pperms.setPermission("essentials.ignore", true);
+        pperms.setPermission("essentials.msg", true);
+        pperms.setPermission("essentials.recipe", true);
+        pperms.setPermission("essentials.spawn", true);
+        if(u.isOnRank(PACmd.Grupo.VIP)){
+            pperms.setPermission("essentials.tpa", true);
+            pperms.setPermission("essentials.sethome.multiple.vip", true);
+            pperms.setPermission("essentials.chat.color", true);
+            pperms.setPermission("essentials.chat.format", true);
+            pperms.setPermission("essentials.chat.magic", true);
+            pperms.setPermission("essentials.nick", true);
+            pperms.setPermission("essentials.msg.color", true);
+            pperms.setPermission("essentials.msg.format", true);
+            pperms.setPermission("essentials.msg.magic", true);
+            pperms.setPermission("essentials.back", true);
+            pperms.setPermission("essentials.back.ondeath", true);
+        }
+        if(u.isOnRank(PACmd.Grupo.ORIGIN)){
+            pperms.setPermission("essentials.sethome.multiple.origin", true);
+            pperms.setPermission("essentials.signs.color", true);
+            pperms.setPermission("essentials.signs.format", true);
+            pperms.setPermission("essentials.signs.magic", true);
+            pperms.setPermission("essentials.me", true);
+            pperms.setPermission("essentials.nick.color", true);
+            pperms.setPermission("essentials.nick.format", true);
+            pperms.setPermission("essentials.nick.magic", true);
+            pperms.setPermission("essentials.nick.format", true);
+            pperms.setPermission("essentials.keepxp", true);
+        }
+        if(u.isOnRank(PACmd.Grupo.Builder)){
+            pperms.setPermission("essentials.msg.url", true);
+        }
+        if(u.isOnRank(PACmd.Grupo.Mod)){
+            pperms.setPermission("essentials.*", true);
+        }
+        if(u.isOnRank(PACmd.Grupo.Admin)){
+            pperms.setPermission("*", true);
+        }
 
 
     }
