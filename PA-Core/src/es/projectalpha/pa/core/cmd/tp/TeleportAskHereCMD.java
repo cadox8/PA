@@ -15,7 +15,7 @@ public class TeleportAskHereCMD extends PACmd {
         super("tpahere", Grupo.Builder, Arrays.asList("teleportaskhere"));
     }
 
-    /*@Override
+    @Override
     public void run(PAUser user, String label, String[] args) {
         if (args.length == 0) {
             user.sendMessage("");
@@ -28,13 +28,13 @@ public class TeleportAskHereCMD extends PACmd {
             return;
         }
 
-        PAServer.addTeleportHereRequest(target.getUuid(), user.getUuid());
-        if (PAServer.getTeleportRequests().containsKey(target.getUuid())) {
-            PAServer.getTeleportRequests().remove(target.getUuid());
+        PAServer.addTeleportHereRequest(target.getName(), user.getName());
+        if (PAServer.getTeleportRequests().containsKey(target.getName())) {
+            PAServer.getTeleportRequests().remove(target.getName());
         }
 
         PAServer.getTeleportRequests().keySet().stream()
-                .filter(u -> PAServer.getTeleportRequests().get(u).equals(target.getUuid()))
+                .filter(u -> PAServer.getTeleportRequests().get(u).equals(target.getName()))
                 .forEach(u -> PAServer.removeTeleportRequest(u));
 
         target.sendMessage("");
@@ -42,8 +42,8 @@ public class TeleportAskHereCMD extends PACmd {
 
         //Eliminar petición a los 2 minutos
         plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> {
-            if (PAServer.getTeleportRequests().containsKey(target.getUuid()) && PAServer.getTeleportRequests().get(target.getUuid()).equals(user.getUuid())) {
-                PAServer.removeTeleportRequest(target.getUuid());
+            if (PAServer.getTeleportRequests().containsKey(target.getName()) && PAServer.getTeleportRequests().get(target.getName()).equals(user.getName())) {
+                PAServer.removeTeleportRequest(target.getName());
                 user.sendMessage("");
             }
         }, 120 * 20L);
@@ -52,5 +52,5 @@ public class TeleportAskHereCMD extends PACmd {
     @Override
     public List<String> onTabComplete(CommandSender sender, Command cmd, String alias, String[] args, String curs, Integer curn) {
         return null;
-    }*/
+    }
 }

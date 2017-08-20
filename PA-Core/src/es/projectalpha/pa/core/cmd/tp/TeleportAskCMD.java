@@ -1,8 +1,10 @@
 package es.projectalpha.pa.core.cmd.tp;
 
+import es.projectalpha.pa.core.api.PAData;
 import es.projectalpha.pa.core.api.PAServer;
 import es.projectalpha.pa.core.api.PAUser;
 import es.projectalpha.pa.core.cmd.PACmd;
+import es.projectalpha.pa.core.utils.Messages;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 
@@ -15,10 +17,10 @@ public class TeleportAskCMD extends PACmd {
         super("tpa", Grupo.Builder, Arrays.asList("teleportask"));
     }
 
-   /* @Override
+    @Override
     public void run(PAUser user, String label, String[] args) {
         if (args.length == 0) {
-            user.sendMessage("");
+            user.sendMessage(Messages.getMessage(Messages.NEED_ARGS, PAData.CORE));
             return;
         }
 
@@ -28,23 +30,23 @@ public class TeleportAskCMD extends PACmd {
             return;
         }
 
-        PAServer.addTeleportRequest(target.getUuid(), user.getUuid());
-        if (PAServer.getTeleportHereRequests().containsKey(target.getUuid())) {
-            PAServer.getTeleportHereRequests().remove(target.getUuid());
+        PAServer.addTeleportRequest(target.getName(), user.getName());
+        if (PAServer.getTeleportHereRequests().containsKey(target.getName())) {
+            PAServer.getTeleportHereRequests().remove(target.getName());
         }
 
         PAServer.getTeleportHereRequests().keySet().stream()
-                .filter(u -> PAServer.getTeleportHereRequests().get(u).equals(target.getUuid()))
+                .filter(u -> PAServer.getTeleportHereRequests().get(u).equals(target.getName()))
                 .forEach(u -> PAServer.removeTeleportHereRequest(u));
 
-        user.sendMessage("");
-        target.sendMessage("");
+        user.sendMessage("Has enviado una petición de teletransporte");
+        target.sendMessage("Te han enviado una petición de teletransporte");
 
         //Eliminar petición a los 2 minutos
         plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> {
-            if (PAServer.getTeleportRequests().containsKey(target.getUuid()) && PAServer.getTeleportRequests().get(target.getUuid()).equals(user.getUuid())) {
-                PAServer.removeTeleportRequest(target.getUuid());
-                user.sendMessage("");
+            if (PAServer.getTeleportRequests().containsKey(target.getName()) && PAServer.getTeleportRequests().get(target.getName()).equals(user.getName())) {
+                PAServer.removeTeleportRequest(target.getName());
+                user.sendMessage("La petición ha caducado");
             }
         }, 120 * 20L);
     }
@@ -52,5 +54,5 @@ public class TeleportAskCMD extends PACmd {
     @Override
     public List<String> onTabComplete(CommandSender cs, Command cmd, String alias, String[] args, String curs, Integer curn) {
         return null;
-    }*/
+    }
 }

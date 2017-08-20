@@ -6,16 +6,17 @@ import org.bukkit.OfflinePlayer;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.UUID;
 
 public class PAServer {
 
-/*    private static final HashMap<UUID, UUID> tp = new HashMap<>();
-    private static final HashMap<UUID, UUID> tph = new HashMap<>();*/
+    private static final HashMap<String, String> tp = new HashMap<>();
+    private static final HashMap<String, String> tph = new HashMap<>();
+
     public static ArrayList<PAUser> users = new ArrayList<>();
     public static ArrayList<PAUser> afkMode = new ArrayList<>();
-    private static PACore plugin = PACore.getInstance();
     @Getter private static ArrayList<PAUser> adminChatMode = new ArrayList<>();
+
+    private static PACore plugin = PACore.getInstance();
 
     public static PAUser getUser(String id) {
         for (PAUser pl : users) {
@@ -31,29 +32,27 @@ public class PAServer {
         return getUser(p.getName());
     }
 
-/*    public static HashMap<UUID, UUID> getTeleportRequests() {
+    public static HashMap<String, String> getTeleportRequests() {
         return tp;
     }
 
-    public static HashMap<UUID, UUID> getTeleportHereRequests() {
+    public static HashMap<String, String> getTeleportHereRequests() {
         return tph;
     }
 
-    public static void addTeleportRequest(UUID u1, UUID u2) {
+    public static void addTeleportRequest(String u1, String u2) {
         tp.put(u1, u2);
     }
 
-    public static void addTeleportHereRequest(UUID u1, UUID u2) {
+    public static void addTeleportHereRequest(String u1, String u2) {
         tph.put(u1, u2);
     }
 
-    public static void removeTeleportRequest(UUID u) {
+    public static void removeTeleportRequest(String u) {
         tp.remove(u);
     }
 
-    public static void removeTeleportHereRequest(UUID u) {
+    public static void removeTeleportHereRequest(String u) {
         tph.remove(u);
-    }*/
-
-
+    }
 }

@@ -14,10 +14,10 @@ public class TeleportAcceptCMD extends PACmd {
         super("tpaccept", Grupo.Usuario, Arrays.asList("teleportaccept", "tpaacept"));
     }
 
-   /* @Override
+    @Override
     public void run(PAUser user, String label, String[] args) {
-        if (PAServer.getTeleportHereRequests().containsKey(user.getUuid())) {
-            PAUser target = PAServer.getUser(PAServer.getTeleportHereRequests().get(user.getUuid()));
+        if (PAServer.getTeleportHereRequests().containsKey(user.getName())) {
+            PAUser target = PAServer.getUser(PAServer.getTeleportHereRequests().get(user.getName()));
             if (target == null) {
                 userNotOnline(user);
                 return;
@@ -25,19 +25,19 @@ public class TeleportAcceptCMD extends PACmd {
 
             user.getPlayer().teleport(target.getPlayer(), PlayerTeleportEvent.TeleportCause.COMMAND);
             target.sendMessage(PAData.CORE.getPrefix() + "&6Teletransportado a &c" + user.getName());
-            PAServer.removeTeleportHereRequest(target.getUuid());
+            PAServer.removeTeleportHereRequest(target.getName());
 
-        } else if (!PAServer.getTeleportRequests().containsKey(user.getUuid())) {
+        } else if (!PAServer.getTeleportRequests().containsKey(user.getName())) {
             user.sendMessage(PAData.CORE.getPrefix() + "&cNo tienes peticiones de TP pendientes");
         } else {
-            PAUser target = PAServer.getUser(PAServer.getTeleportRequests().get(user.getUuid()));
+            PAUser target = PAServer.getUser(PAServer.getTeleportRequests().get(user.getName()));
             if (target == null) {
                 user.sendMessage("");
             } else {
                 target.getPlayer().teleport(user.getPlayer(), PlayerTeleportEvent.TeleportCause.COMMAND);
                 target.sendMessage(PAData.CORE.getPrefix() + "&6Teletransportado a &c" + user.getName());
-                PAServer.removeTeleportRequest(user.getUuid());
+                PAServer.removeTeleportRequest(user.getName());
             }
         }
-    }*/
+    }
 }
