@@ -45,8 +45,8 @@ public class PABungee extends Plugin implements Listener {
     @EventHandler
     public void onProxyPing(ProxyPingEvent e) {
         ServerPing ping = e.getResponse();
-        //String motd = "&7&l&k||||&r&9&l ProjectAlpha &r&7&l&k||||&r&7   [&91.8 - 1.12.1&7]  &r&7Alpha\n      Beta: &bRageGames, &2Survival &6y mucho más!           ";
-        String motd = "&7&l&k||||&r&9&l ProjectAlpha &r&7&l&k||||&r&7   [&91.8 - 1.12.1&7]  &r&7Alpha\n      &cMANTENIMIENTO          ";
+        String motd = "&7&l&k||||&r&9&l ProjectAlpha &r&7&l&k||||&r&7   [&91.8 - 1.12.1&7]  &r&7Alpha\n      Beta: &bRageGames, &2Survival &6y mucho más!           ";
+        //String motd = "&7&l&k||||&r&9&l ProjectAlpha &r&7&l&k||||&r&7   [&91.8 - 1.12.1&7]  &r&7Alpha\n      &cMANTENIMIENTO          ";
 
         ping.setDescriptionComponent(new TextComponent(ChatColor.translateAlternateColorCodes('&', motd)));
     }
