@@ -20,7 +20,7 @@ public class Cadenas extends Ability {
         if (!canUse(u)) return;
         if (isInCooldown(u, getName())) return;
 
-        if (r.nextInt(10) + 1 < 8) {
+        if (u.getUserData().getKit() == 2 && r.nextInt(10) + 1 <= 3) {
             u.sendMessage(PAData.TOA.getPrefix() + "&cTu habilidad ha fallado");
             return;
         }

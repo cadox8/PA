@@ -74,6 +74,8 @@ public class PlayerEvents implements Listener {
             int level = Utils.isInt(name) ? Integer.parseInt(name) : 0;
             double damage = 10 + (level * 0.8);
 
+            if (Ability.getAbilities().get(Ability.AbilityType.ESCUDO).contains(u)) damage = damage - (0.75 * damage);
+
             if (plugin.getHealth().getHealth(u) - damage <= 0) {
                 u.death();
                 return;

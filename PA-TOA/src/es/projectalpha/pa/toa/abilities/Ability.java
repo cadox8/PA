@@ -14,6 +14,8 @@ import es.projectalpha.pa.toa.abilities.picaro.Dagas;
 import es.projectalpha.pa.toa.abilities.picaro.Fantasma;
 import es.projectalpha.pa.toa.abilities.picaro.Frenesi;
 import es.projectalpha.pa.toa.abilities.picaro.Suspiro;
+import es.projectalpha.pa.toa.abilities.tank.Berseker;
+import es.projectalpha.pa.toa.abilities.tank.Escudo;
 import es.projectalpha.pa.toa.abilities.tank.GolpeCertero;
 import es.projectalpha.pa.toa.api.TOAUser;
 import es.projectalpha.pa.toa.races.Race;
@@ -44,6 +46,8 @@ public class Ability {
     private static final Ability REGEN = new Regeneration();
 
     private static final Ability GOLPE_CERTERO = new GolpeCertero();
+    private static final Ability ESCUDO = new Escudo();
+    private static final Ability BERSEKER = new Berseker();
     //
 
     protected TOA plugin = TOA.getInstance();
@@ -130,6 +134,6 @@ public class Ability {
     }
 
     public enum AbilityType {
-        FENIX, HALCON, GOLPE_CERTERO, SUSPIRO,
+        FENIX, HALCON, GOLPE_CERTERO, ESCUDO, SUSPIRO
     }
 }
