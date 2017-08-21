@@ -31,27 +31,29 @@ public class PASurvival extends JavaPlugin {
     @Getter private Economy vault;
     @Getter private TimeTask timeTask;
     @Getter private HashMap<Player, PermissionAttachment> perms = new HashMap<>();
+    @Getter private static ArrayList<String> imp = new ArrayList<>();
+    @Getter private HashMap<SurvivalUser, ArrayList<Integer>> bol = new HashMap<>();
 
     public void onEnable() {
         instance = this;
         manager = new PvPManager();
         files.setupFiles();
         setupEconomy();
-        PACommands.register(new StonesCMD(), new RecaudadoCMD(), new PvPCMD(), new LoteriaCMD());
+        PACommands.register(new StonesCMD(), new RecaudadoCMD(), new PvPCMD(), new LoteriaCMD(), new Cash2xp(), new Exp2cash(), new XPbalance());
         registerEvents();
 
 
         timeTask = new TimeTask(instance);
-        timeTask.runTaskTimer(instance, 0, 20);
+        timeTask.runTaskTimer(instance, 0, 15);
     }
 
     private void registerEvents(){
         PluginManager pm = getServer().getPluginManager();
         pm.registerEvents(new IronElevators(), instance);
-        pm.registerEvents(new PlayerEvents(), instance);
+        pm.registerEvents(new PlayerEvents(instance), instance);
         pm.registerEvents(new PvPEvent(), instance);
         pm.registerEvents(new Sit(), instance);
-        pm.registerEvents(new StonesEvents(), instance);
+        //pm.registerEvents(new StonesEvents(), instance);
     }
 
     public static SurvivalUser getPlayer(OfflinePlayer p) {

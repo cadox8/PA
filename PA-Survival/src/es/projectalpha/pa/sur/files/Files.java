@@ -6,6 +6,7 @@ import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class Files {
 
@@ -16,14 +17,14 @@ public class Files {
     public static YamlConfiguration stone = YamlConfiguration.loadConfiguration(fileStone);
 
     @Getter public static File fileConfig = new File("plugins/PA-Survival/", "config.yml");
-    public static YamlConfiguration config = YamlConfiguration.loadConfiguration(fileStone);
-
+    public static YamlConfiguration config = YamlConfiguration.loadConfiguration(fileConfig);
+    private int nmr = Files.user.getInt("nmr");
     public void setupFiles() {
         if (!fileUser.exists()) {
             fileUser.mkdir();
             user.set("recaudado", 0);
             user.set("loteria", 100);
-            user.set("Users.0", "");
+            user.set("Users", new ArrayList<>());
         }
 
         if (!fileStone.exists()) {
@@ -35,6 +36,8 @@ public class Files {
             fileConfig.mkdir();
             config.set("Experiencia.vender", 0.2);
             config.set("Experiencia.comprar", 2.5);
+            config.set("numeros", new ArrayList<>());
+            config.set("nmr", 2);
         }
 
         saveFiles();

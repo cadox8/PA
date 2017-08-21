@@ -1,5 +1,6 @@
 package es.projectalpha.pa.sur.events;
 
+import es.projectalpha.pa.core.PACore;
 import es.projectalpha.pa.core.api.PAData;
 import es.projectalpha.pa.core.cmd.PACmd;
 import es.projectalpha.pa.core.utils.Utils;
@@ -34,6 +35,11 @@ public class PlayerEvents implements Listener{
     private Balance balance = new Balance();
     private Economy eco = PASurvival.getInstance().getVault();
 
+    public PlayerEvents(PASurvival instance) {
+        plugin = instance;
+    }
+
+
     @EventHandler
     public void onJoin(PlayerJoinEvent e) {
         Player p = e.getPlayer();
@@ -46,13 +52,14 @@ public class PlayerEvents implements Listener{
             Files.user.set("Users." + p.getName() + ".pimp",false);
             Files.user.set("Users." + p.getName() + ".apos",0);
             Files.saveFiles();
+            plugin.getImp().add(p.getName());
         }
 
-        if(Files.user.getBoolean("Users." + p.getName() + ".pimp") == false){
+        if(plugin.getImp().contains(p.getName())){
             u.sendMessage("&aSe te ha cobrado los impuestos, lo que equivale a &6" + eco.getBalance(u.getPlayer()) * 0.01 + "&a$");
-            Files.user.set("Users." + p.getName() + ".apos", eco.getBalance(u.getPlayer()) * 0.01);
+            Files.user.set("Users." + p.getName() + ".imprec", eco.getBalance(u.getPlayer()) * 0.01);
             balance.cobrarImpuestos(u);
-            Files.user.set("Users." + p.getName() + ".pimp", true);
+            plugin.getImp().remove(p.getName());
             Files.saveFiles();
         }
 
@@ -73,6 +80,10 @@ public class PlayerEvents implements Listener{
         pperms.setPermission("essentials.msg", true);
         pperms.setPermission("essentials.recipe", true);
         pperms.setPermission("essentials.spawn", true);
+        pperms.setPermission("safetrade.request", true);
+        pperms.setPermission("safetrade.accept", true);
+        pperms.setPermission("safetrade.deny", true);
+
         if(u.isOnRank(PACmd.Grupo.VIP)){
             pperms.setPermission("essentials.tpa", true);
             pperms.setPermission("essentials.sethome.multiple.vip", true);
@@ -100,6 +111,8 @@ public class PlayerEvents implements Listener{
         }
         if(u.isOnRank(PACmd.Grupo.Builder)){
             pperms.setPermission("essentials.msg.url", true);
+            pperms.setPermission("essentials.fly", true);
+            pperms.setPermission("essentials.gamemode.*", true);
         }
         if(u.isOnRank(PACmd.Grupo.Mod)){
             pperms.setPermission("essentials.*", true);

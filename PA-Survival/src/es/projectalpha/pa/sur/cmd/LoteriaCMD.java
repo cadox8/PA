@@ -3,9 +3,11 @@ package es.projectalpha.pa.sur.cmd;
 import es.projectalpha.pa.core.api.PAData;
 import es.projectalpha.pa.core.api.PAUser;
 import es.projectalpha.pa.core.cmd.PACmd;
+import es.projectalpha.pa.sur.PASurvival;
 import es.projectalpha.pa.sur.files.Files;
 import org.bukkit.ChatColor;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 
@@ -15,6 +17,7 @@ public class LoteriaCMD extends PACmd {
         }
 
     private Files files = new Files();
+    private PASurvival plugin;
 
     public void run(PAUser user, String label, String[] args) {
         if(args.length == 0){
@@ -31,19 +34,21 @@ public class LoteriaCMD extends PACmd {
                 user.sendMessage(PAData.SURVIVAL.getPrefix() + "&4El máximo de boletos que puedes comprar son 10.");
                 return;
             }
-            if(bol <= 0){
+            if(bol < 1){
                 user.sendMessage(PAData.SURVIVAL.getPrefix() + "&4El mínimo de boletos que puedes comprar es 1");
                 return;
             }
-            if(apos + bol >= 10){
+            if(apos + bol > 10){
                 user.sendMessage("&4Ya has comprado 10 boletos, mañana podrás apostar 10 boletos más.");
                 return;
             }
             user.sendMessage(PAData.SURVIVAL.getPrefix() + "&aHas comprado " + bol + " boletos, tus números son: ");
             for(int b = 1; b <= bol; b++){
+                ArrayList<Integer> arbol = new ArrayList<>();
+                plugin.getBol().put(PASurvival.getPlayer(user.getPlayer()), arbol);
                 Files.user.set("Users." + user.getName() + ".apos", bol);
-                Files.user.set("Users." + user.getName() + ".bol." + b, new Random().nextInt(9999));
-                user.sendMessage(ChatColor.GOLD + Files.user.getString("Users." + user.getName() + ".bol." + b));
+                Files.user.set("numeros." + new Random().nextInt(9999) + ".owner", user.getName());
+                user.sendMessage(".");
                 Files.saveFiles(); //Que si no no se guarda, joder. #SuicideIsNear
             }
         }

@@ -36,7 +36,6 @@ public class TimeTask extends BukkitRunnable {
         hora = cal.get(Calendar.HOUR_OF_DAY);
         min = cal.get(Calendar.MINUTE);
         seg = cal.get(Calendar.SECOND);
-
         PASurvival.players.forEach(p -> {
             if(p == null) return;
             if (plugin.getManager().getPvpc().getTimeLeft(p.getName()) == 1){
@@ -49,29 +48,40 @@ public class TimeTask extends BukkitRunnable {
             case 6:
                 if(min == 0 && seg == 0) {
                     System.out.println(hora + ":" + min + ":" + seg);
+                    plugin.getImp().clear();
                     Files.user.getStringList("Users").forEach(e->{
                         Files.user.set("Users." + e + ".pimp", false);
                         Files.saveFiles();
                     });
                 }
                 break;
-            case 18:
-                if(min == 0 && seg == 0){
+            case 13:
+                if(min == 34 && seg == 0){
+                    System.out.println(hora + ":" + min + ":" + seg);
                     int rd = new Random().nextInt(9999);
                     Utils.broadcastMsg("&aHora de la lotería, los números ganadores son: &6" + rd + ".");
 
-                    Files.user.getStringList("Users.").forEach(p ->{
+                    Files.user.getStringList("Users").forEach(p ->{
+                        System.out.println(p);
                         Files.user.getStringList("Users." + p + ".bol").forEach(b ->{
+                            System.out.println(rd + ", numeros de los jugadores " + p + ": " + b);
                             if(Integer.parseInt(b) == rd){
+                                System.out.println("&aEl ganador de la lotería es " + p + ". Ha ganado " + Files.user.getInt("loteria") + "$");
                                 Utils.broadcastMsg("&aEl ganador de la lotería es " + p + ". Ha ganado " + Files.user.getInt("loteria") + "$");
                                 balance.addBalace(PASurvival.getPlayer(plugin.getServer().getOfflinePlayer(p)), Files.user.getInt("loteria"));
                                 Files.user.set("loteria", 0);
                                 Files.saveFiles();
                                 return;
+                            }else{
+                                Utils.broadcastMsg("&cNo ha habido ningun ganador hoy, mañana habra otra oportunidad.");
+                                System.out.println("&cNo ha habido ningún ganador hoy, mañana habrá otra oportunidad.");
+                                Files.user.set("Users." + p + ".", "bol");
+                                Files.user.set("Users." + p + ".apos",0);
                             }
                         });
                     });
-                    Utils.broadcastMsg("&cNo ha habido ningún ganador hoy, mañana habrá otra oportunidad.");
+
+
                 }
                 break;
         }
