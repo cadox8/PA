@@ -2,6 +2,8 @@ package es.projectalpha.pa.sur.utils;
 
 
 import es.projectalpha.pa.core.utils.ItemMaker;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
@@ -18,4 +20,17 @@ public final class Stones /*like the rolling*/ {
     public ItemStack staffst = new ItemMaker(Material.BEDROCK).setDisplayName(ChatColor.GRAY + "Piedra de protección del Staff").setLores("Esta piedra te proporciona un area de 150x150x150.").addEnchant(Enchantment.DURABILITY, 1).build();
 
 
+    @AllArgsConstructor
+    public enum StoneType {
+        COAL(new Stones().stone1, 5),
+        IRON(new Stones().stone2,10),
+        GOLD(new Stones().stone3,15),
+        LAPIS(new Stones().stone4,20),
+        EMERALD(new Stones().stone5,25),
+        DIAMOND(new Stones().stone6,35),
+        STAFF(new Stones().staffst,75);
+
+        @Getter private ItemStack itemStack;
+        @Getter private int area;
+    }
 }

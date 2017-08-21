@@ -9,45 +9,101 @@ import es.projectalpha.pa.sur.files.Files;
 import es.projectalpha.pa.sur.utils.Stones;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.block.Block;
+import org.bukkit.entity.ArmorStand;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class StonesEvents implements Listener {
 
     private Files files = new Files();
     private Stones stones = new Stones();
-    private double l1,l2,l3;
-    private double fl1,fl2,fl3;
     private PASurvival plugin;
     private int i = Files.stone.getInt("tstones");
+
     @EventHandler
     public void onInteract(PlayerInteractEvent e){
         Player p = e.getPlayer();
         Block b = e.getClickedBlock();
         Block b1;
         Block b2;
-        double x,y,z,xf,yf,zf;
-        String w1,w2;
         CuboidZone cz;
 
-        if (e.getItem() == null) return;
+        if (e.getItem() == null) {
+            if (e.getAction() == Action.RIGHT_CLICK_BLOCK) {
+                if (p.getInventory().getItemInMainHand() != null) return;
+                b = e.getClickedBlock();
+                if (isStairs(b.getType())) {
+                    if (!p.isSneaking() && p.getVehicle() != null) {
+                        p.getVehicle().remove();
+                        return;
+                    }
+                    p.setSneaking(false);
+
+                    Location l = b.getLocation().add(0.5, -1.3, 0.3);
+
+                    switch (b.getState().getData().toItemStack().getDurability()) {
+                        case 0: //west
+                            l.setYaw(90f);
+                            l.setZ(l.getZ() + 0.2);
+                            break;
+                        case 1: //east
+                            l.setYaw(-90f);
+                            l.setZ(l.getZ() + 0.2);
+                            break;
+                        case 2: //north
+                            l.setYaw(-180f);
+                            break;
+                        case 3: //south
+                            l.setYaw(0);
+                            l.setZ(l.getZ() + 0.2);
+                            break;
+                    }
+
+                    if (b.getState().getData().toItemStack().getDurability() >= 4) return;
+
+                    ArmorStand as = (ArmorStand) p.getWorld().spawnEntity(l, EntityType.ARMOR_STAND);
+                    as.teleport(l);
+                    as.setVisible(false);
+                    as.setGravity(false);
+                    as.setMaxHealth(1);
+                    as.setHealth(1);
+                    as.setCustomName("pa_silla");
+                    as.setCustomNameVisible(false);
+                    as.setPassenger(p);
+
+                    e.setCancelled(true);
+                }
+            }
+        }
 
         Location l = b.getLocation();
 
-        switch(e.getItem().getType()){
-            case COAL_ORE:
-                if(!p.getInventory().getItemInMainHand().equals(stones.stone1)) return;
-                l1 = 5;
-                b1 = l.getWorld().getBlockAt(l.add(l1, l1, l1));
-                b2 = l.getWorld().getBlockAt(l.add(-l1, -l1, -l1));
+        for (Stones.StoneType st : Stones.StoneType.values()) {
+            if (st.getItemStack().getType() == e.getItem().getType()) {
+                if(!p.getInventory().getItemInMainHand().equals(st.getItemStack())) return;
+                int area = st.getArea();
+
+                if(st == Stones.StoneType.STAFF && !PASurvival.getPlayer(p).isOnRank(PACmd.Grupo.Builder)) {
+                    p.sendMessage(ChatColor.RED + "No puedes usar esta piedra de protección, ya que es sólo para el staff.");
+                    return;
+                }
+
+                b1 = l.getWorld().getBlockAt(l.add(area, area, area));
+                b2 = l.getWorld().getBlockAt(l.add(-area, -area, -area));
                 cz = new CuboidZone(b1, b2);
                 if(i != 0){
                     cz.toArray().forEach(bl->{
@@ -57,8 +113,8 @@ public class StonesEvents implements Listener {
                             fb1 = l.getWorld().getBlockAt(l.add(Utils.stringToLocation(Files.stone.getString("piedras." + s + ".b1"))));
                             fb2 = l.getWorld().getBlockAt(l.add(Utils.stringToLocation(Files.stone.getString("piedras." + s + ".b2"))));
                             CuboidZone fcz = new CuboidZone(fb1, fb2);
-                            fcz.toArray().forEach(st ->{
-                                if(st.getLocation() == bl.getLocation()){
+                            fcz.toArray().forEach(g ->{
+                                if(g.getLocation() == bl.getLocation()){
                                     p.sendMessage(PAData.SURVIVAL.getPrefix() + ChatColor.DARK_RED + "No puedes colocar este bloque de protección aquí ya que hay otra región cerca.");
                                     e.setCancelled(true);
                                     return;
@@ -73,201 +129,9 @@ public class StonesEvents implements Listener {
                 Files.stone.set("piedras." + i + ".b1", Utils.locationToString(b1.getLocation()));
                 Files.stone.set("piedras." + i + ".b2", Utils.locationToString(b2.getLocation()));
                 Files.stone.set("piedras." + i + ".owner", p.getName());
-                p.sendMessage(PAData.SURVIVAL.getPrefix() + ChatColor.GREEN + "Zona protegida, tamaño 10x10x10.");
+                p.sendMessage(PAData.SURVIVAL.getPrefix() + ChatColor.GREEN + "Zona protegida, tamaño " + area + "x" + area + "x" + area);
                 Files.saveFiles();
-                break;
-
-            case IRON_ORE:
-                if(!p.getInventory().getItemInMainHand().equals(stones.stone2)) return;
-                l1 = 10; l2 = 10; l3 = 10;
-                fl1 = -10; fl2 = -10; fl3 = -10;
-                b1 = l.getWorld().getBlockAt(l.add(l1, l2, l3));
-                b2 = l.getWorld().getBlockAt(l.add(fl1, fl2, fl3));
-                cz = new CuboidZone(b1,b2);
-                if(i != 0){
-                    cz.toArray().forEach(bl->{
-                        for(int s = 0; s <= i; s++){
-                            Block fb1,fb2;
-                            fb1 = l.getWorld().getBlockAt(l.add(Utils.stringToLocation(Files.stone.getString("piedras." + s + ".b1"))));
-                            fb2 = l.getWorld().getBlockAt(l.add(Utils.stringToLocation(Files.stone.getString("piedras." + s + ".b2"))));
-                            CuboidZone fcz = new CuboidZone(fb1, fb2);
-                            fcz.toArray().forEach(st ->{
-                                if(bl.getLocation() == st.getLocation()) return;
-                                p.sendMessage(PAData.SURVIVAL.getPrefix() + ChatColor.DARK_RED + "No puedes colocar este bloque de protección aquí ya que hay otra región cerca.");
-                                e.setCancelled(true);
-                                return;
-                            });
-                        }
-                    });
-                }
-                i++;
-                Files.stone.set("tstones", i);
-                Files.stone.set("piedras." + i + ".b1", Utils.locationToString(b1.getLocation()));
-                Files.stone.set("piedras." + i + ".b2", Utils.locationToString(b2.getLocation()));
-                Files.stone.set("piedras." + i + ".owner", p.getName());
-                p.sendMessage(PAData.SURVIVAL.getPrefix() + ChatColor.GREEN + "Zona protegida, tamaño 20x20x20.");
-                Files.saveFiles();
-                break;
-
-            case GOLD_ORE:
-                if(!p.getInventory().getItemInMainHand().equals(stones.stone3)) return;
-                l1 = 15; l2 = 15; l3 = 15;
-                fl1 = -15; fl2 = -15; fl3 = -15;
-                b1 = l.getWorld().getBlockAt(l.add(l1, l2, l3));
-                b2 = l.getWorld().getBlockAt(l.add(fl1, fl2, fl3));
-                cz = new CuboidZone(b1,b2);
-                if(i != 0){
-                    cz.toArray().forEach(bl->{
-                        for(int s = 0; s <= i; s++){
-                            Block fb1,fb2;
-                            fb1 = l.getWorld().getBlockAt(l.add(Utils.stringToLocation(Files.stone.getString("piedras." + s + ".b1"))));
-                            fb2 = l.getWorld().getBlockAt(l.add(Utils.stringToLocation(Files.stone.getString("piedras." + s + ".b2"))));
-                            CuboidZone fcz = new CuboidZone(fb1, fb2);
-                            fcz.toArray().forEach(st ->{
-                                if(bl.getLocation() == st.getLocation()) return;
-                                p.sendMessage(PAData.SURVIVAL.getPrefix() + ChatColor.DARK_RED + "No puedes colocar este bloque de protección aquí ya que hay otra región cerca.");
-                                e.setCancelled(true);
-                                return;
-                            });
-                        }
-                    });
-                }
-                i++;
-                Files.stone.set("tstones", i);
-                Files.stone.set("piedras." + i + ".b1", Utils.locationToString(b1.getLocation()));
-                Files.stone.set("piedras." + i + ".b2", Utils.locationToString(b2.getLocation()));
-                Files.stone.set("piedras." + i + ".owner", p.getName());
-                p.sendMessage(PAData.SURVIVAL.getPrefix() + ChatColor.GREEN + "Zona protegida, tamaño 30x30x30.");
-                Files.saveFiles();
-                break;
-
-            case LAPIS_ORE:
-                if(!p.getInventory().getItemInMainHand().equals(stones.stone4)) return;
-                l1 = 20; l2 = 20; l3 = 20;
-                fl1 = -20; fl2 = -20; fl3 = -20;
-                b1 = l.getWorld().getBlockAt(l.add(l1, l2, l3));
-                b2 = l.getWorld().getBlockAt(l.add(fl1, fl2, fl3));
-                cz = new CuboidZone(b1,b2);
-                if(i != 0){
-                    cz.toArray().forEach(bl->{
-                        for(int s = 0; s <= i; s++){
-                            Block fb1,fb2;
-                            fb1 = l.getWorld().getBlockAt(l.add(Utils.stringToLocation(Files.stone.getString("piedras." + s + ".b1"))));
-                            fb2 = l.getWorld().getBlockAt(l.add(Utils.stringToLocation(Files.stone.getString("piedras." + s + ".b2"))));
-                            CuboidZone fcz = new CuboidZone(fb1, fb2);
-                            fcz.toArray().forEach(st ->{
-                                if(bl.getLocation() == st.getLocation()) return;
-                                p.sendMessage(PAData.SURVIVAL.getPrefix() + ChatColor.DARK_RED + "No puedes colocar este bloque de protección aquí ya que hay otra región cerca.");
-                                e.setCancelled(true);
-                                return;
-                            });
-                        }
-                    });
-                }
-                i++;
-                Files.stone.set("tstones", i);
-                Files.stone.set("piedras." + i + ".b1", Utils.locationToString(b1.getLocation()));
-                Files.stone.set("piedras." + i + ".b2", Utils.locationToString(b2.getLocation()));
-                Files.stone.set("piedras." + i + ".owner", p.getName());
-                p.sendMessage(PAData.SURVIVAL.getPrefix() + ChatColor.GREEN + "Zona protegida, tamaño 40x40x40.");
-                Files.saveFiles();
-                break;
-
-            case EMERALD_ORE:
-                if(!p.getInventory().getItemInMainHand().equals(stones.stone5)) return;
-                l1 = 25; l2 = 25; l3 = 25;
-                fl1 = -25; fl2 = -25; fl3 = -25;
-                b1 = l.getWorld().getBlockAt(l.add(l1, l2, l3));
-                b2 = l.getWorld().getBlockAt(l.add(fl1, fl2, fl3));
-                cz = new CuboidZone(b1,b2);
-                if(i != 0){
-                    cz.toArray().forEach(bl->{
-                        for(int s = 0; s <= i; s++){
-                            Block fb1,fb2;
-                            fb1 = l.getWorld().getBlockAt(l.add(Utils.stringToLocation(Files.stone.getString("piedras." + s + ".b1"))));
-                            fb2 = l.getWorld().getBlockAt(l.add(Utils.stringToLocation(Files.stone.getString("piedras." + s + ".b2"))));
-                            CuboidZone fcz = new CuboidZone(fb1, fb2);
-                            fcz.toArray().forEach(st ->{
-                                if(bl.getLocation() == st.getLocation()) return;
-                                p.sendMessage(PAData.SURVIVAL.getPrefix() + ChatColor.DARK_RED + "No puedes colocar este bloque de protección aquí ya que hay otra región cerca.");
-                                e.setCancelled(true);
-                                return;
-                            });
-                        }
-                    });
-                }
-                i++;
-                Files.stone.set("tstones", i);
-                Files.stone.set("piedras." + i + ".b1", Utils.locationToString(b1.getLocation()));
-                Files.stone.set("piedras." + i + ".b2", Utils.locationToString(b2.getLocation()));
-                Files.stone.set("piedras." + i + ".owner", p.getName());
-                p.sendMessage(PAData.SURVIVAL.getPrefix() + ChatColor.GREEN + "Zona protegida, tamaño 50x50x50.");
-                Files.saveFiles();
-                break;
-            case DIAMOND_ORE:
-                if(!p.getInventory().getItemInMainHand().equals(stones.stone6)) return;
-                l1 = 35; l2 = 35; l3 = 35;
-                fl1 = -35; fl2 = -35; fl3 = -35;
-                b1 = l.getWorld().getBlockAt(l.add(l1, l2, l3));
-                b2 = l.getWorld().getBlockAt(l.add(fl1, fl2, fl3));
-                cz = new CuboidZone(b1,b2);
-                if(i != 0){
-                    cz.toArray().forEach(bl->{
-                        for(int s = 0; s <= i; s++){
-                            Block fb1,fb2;
-                            fb1 = l.getWorld().getBlockAt(l.add(Utils.stringToLocation(Files.stone.getString("piedras." + s + ".b1"))));
-                            fb2 = l.getWorld().getBlockAt(l.add(Utils.stringToLocation(Files.stone.getString("piedras." + s + ".b2"))));
-                            CuboidZone fcz = new CuboidZone(fb1, fb2);
-                            fcz.toArray().forEach(st ->{
-                                if(bl.getLocation() == st.getLocation()) return;
-                                p.sendMessage(PAData.SURVIVAL.getPrefix() + ChatColor.DARK_RED + "No puedes colocar este bloque de protección aquí ya que hay otra región cerca.");
-                                e.setCancelled(true);
-                                return;
-                            });
-                        }
-                    });
-                }
-                i++;
-                Files.stone.set("tstones", i);
-                Files.stone.set("piedras." + i + ".b1", Utils.locationToString(b1.getLocation()));
-                Files.stone.set("piedras." + i + ".b2", Utils.locationToString(b2.getLocation()));
-                Files.stone.set("piedras." + i + ".owner", p.getName());
-                p.sendMessage(PAData.SURVIVAL.getPrefix() + ChatColor.GREEN + "Zona protegida, tamaño 70x70x70.");
-                Files.saveFiles();
-                break;
-
-            case BEDROCK:
-                if(!p.getInventory().getItemInMainHand().equals(stones.staffst)) return;
-                if(!PASurvival.getPlayer(p).isOnRank(PACmd.Grupo.Admin) || !PASurvival.getPlayer(p).isOnRank(PACmd.Grupo.Mod) || !PASurvival.getPlayer(p).isOnRank(PACmd.Grupo.Builder)) p.sendMessage(ChatColor.RED + "No puedes usar esta piedra de protección, ya que es sólo para el staff.");
-                l1 = 75; l2 = 75; l3 = 75;
-                fl1 = -75; fl2 = -75; fl3 = -75;
-                b1 = l.getWorld().getBlockAt(l.add(l1, l2, l3));
-                b2 = l.getWorld().getBlockAt(l.add(fl1, fl2, fl3));
-                cz = new CuboidZone(b1,b2);
-                if(i != 0){
-                    cz.toArray().forEach(bl->{
-                        for(int s = 0; s <= i; s++){
-                            Block fb1,fb2;
-                            fb1 = l.getWorld().getBlockAt(l.add(Utils.stringToLocation(Files.stone.getString("piedras." + s + ".b1"))));
-                            fb2 = l.getWorld().getBlockAt(l.add(Utils.stringToLocation(Files.stone.getString("piedras." + s + ".b2"))));
-                            CuboidZone fcz = new CuboidZone(fb1, fb2);
-                            fcz.toArray().forEach(st ->{
-                                if(bl.getLocation() == st.getLocation()) return;
-                                p.sendMessage(PAData.SURVIVAL.getPrefix() + ChatColor.DARK_RED + "No puedes colocar este bloque de protección aquí ya que hay otra región cerca.");
-                                e.setCancelled(true);
-                                return;
-                            });
-                        }
-                    });
-                }
-                i++;
-                Files.stone.set("tstones", i);
-                Files.stone.set("piedras." + i + ".b1", Utils.locationToString(b1.getLocation()));
-                Files.stone.set("piedras." + i + ".b2", Utils.locationToString(b2.getLocation()));
-                Files.stone.set("piedras." + i + ".owner", p.getName());
-                p.sendMessage(PAData.SURVIVAL.getPrefix() + ChatColor.GREEN + "Zona protegida, tamaño 70x70x70.");
-                Files.saveFiles();
-                break;
+            }
         }
 
 
@@ -343,7 +207,24 @@ public class StonesEvents implements Listener {
                 });
             });
         }
-
     }
 
+    private boolean isStairs(Material m) {
+        List<Material> stairs = new ArrayList<>();
+        stairs.add(Material.ACACIA_STAIRS);
+        stairs.add(Material.BIRCH_WOOD_STAIRS);
+        stairs.add(Material.BRICK_STAIRS);
+        stairs.add(Material.COBBLESTONE_STAIRS);
+        stairs.add(Material.DARK_OAK_STAIRS);
+        stairs.add(Material.JUNGLE_WOOD_STAIRS);
+        stairs.add(Material.NETHER_BRICK_STAIRS);
+        stairs.add(Material.PURPUR_STAIRS);
+        stairs.add(Material.QUARTZ_STAIRS);
+        stairs.add(Material.RED_SANDSTONE_STAIRS);
+        stairs.add(Material.SANDSTONE_STAIRS);
+        stairs.add(Material.SPRUCE_WOOD_STAIRS);
+        stairs.add(Material.WOOD_STAIRS);
+        stairs.add(Material.SMOOTH_STAIRS);
+        return stairs.contains(m);
+    }
 }
