@@ -78,6 +78,7 @@ public class MySQL {
     public void saveUser(PAUser u) {
         PACore.getInstance().getServer().getScheduler().runTaskAsynchronously(PACore.getInstance(), () -> {
             PAUser.UserData data = u.getUserData();
+
             try {
                 PreparedStatement statementDatos = openConnection().prepareStatement("UPDATE `pa_datos` SET `grupo`=?,`god`=?,`coins`=?," +
                         "`lastConnect`=?,`ip`=?,`nick`=?,`maxPiso`=?,`exp`=?,`lvl`=?,`zeny`=?,`kills`=?,`deaths`=?,`kit`=? WHERE `name`=?");
@@ -127,9 +128,11 @@ public class MySQL {
                 data.setKills(rsDatos.getInt("kills"));
                 data.setDeaths(rsDatos.getInt("deaths"));
                 data.setKit(rsDatos.getInt("kit"));
+            } else {
+                PACore.getInstance().debugLog("No hay datos guardados de " + id);
             }
 
-            //Amigos
+            //Logros
             PreparedStatement stamentLogros = openConnection().prepareStatement("SELECT `logro` FROM `pa_logros` WHERE `user` = ?");
             stamentLogros.setString(1, id);
             ResultSet rsLogros = stamentLogros.executeQuery();
