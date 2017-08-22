@@ -42,9 +42,12 @@ public class StonesEvents implements Listener {
         Block b2;
         CuboidZone cz;
 
+        System.out.println(1);
         if (e.getItem() == null) {
+            System.out.println(2);
             if (e.getAction() == Action.RIGHT_CLICK_BLOCK) {
                 if (p.getInventory().getItemInMainHand() != null) return;
+                System.out.println(3);
                 b = e.getClickedBlock();
                 if (isStairs(b.getType())) {
                     if (!p.isSneaking() && p.getVehicle() != null) {
@@ -52,6 +55,7 @@ public class StonesEvents implements Listener {
                         return;
                     }
                     p.setSneaking(false);
+                    System.out.println(4);
 
                     Location l = b.getLocation().add(0.5, -1.3, 0.3);
 
@@ -133,8 +137,6 @@ public class StonesEvents implements Listener {
                 Files.saveFiles();
             }
         }
-
-
     }
 
     @EventHandler

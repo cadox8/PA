@@ -1,7 +1,6 @@
 package es.projectalpha.pa.sur.events;
 
 import es.projectalpha.pa.core.api.PAData;
-import es.projectalpha.pa.core.cmd.PACmd;
 import es.projectalpha.pa.core.utils.Utils;
 import es.projectalpha.pa.sur.PASurvival;
 import es.projectalpha.pa.sur.api.SurvivalUser;
@@ -23,7 +22,8 @@ import org.bukkit.event.player.PlayerBucketEmptyEvent;
 import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
-import org.bukkit.permissions.PermissionAttachment;
+
+import java.text.DecimalFormat;
 
 
 public class PlayerEvents implements Listener{
@@ -43,6 +43,7 @@ public class PlayerEvents implements Listener{
     public void onJoin(PlayerJoinEvent e) {
         Player p = e.getPlayer();
         SurvivalUser u = PASurvival.getPlayer(p);
+
         if (!Files.user.getStringList("Users").contains(p.getName())) {
             Files.user.set("Users." + p.getName() + ".pvp", false);
             Files.user.set("Users." + p.getName() + ".money", "0");
@@ -51,79 +52,17 @@ public class PlayerEvents implements Listener{
             Files.user.set("Users." + p.getName() + ".pimp",false);
             Files.user.set("Users." + p.getName() + ".apos",0);
             Files.saveFiles();
-            plugin.getImp().add(p.getName());
         }
 
-        if(plugin.getImp().contains(p.getName())){
-            u.sendMessage("&aSe te ha cobrado los impuestos, lo que equivale a &6" + eco.getBalance(u.getPlayer()) * 0.01 + "&a$");
-            Files.user.set("Users." + p.getName() + ".imprec", eco.getBalance(u.getPlayer()) * 0.01);
-            balance.cobrarImpuestos(u);
-            plugin.getImp().remove(p.getName());
+        if(!PASurvival.getImp().contains(p.getName())){
+            DecimalFormat df = new DecimalFormat("#.00");
+            double imp = Double.valueOf(df.format(eco.getBalance(u.getPlayer()) * 0.01));
+            u.sendMessage("&aSe te ha cobrado los impuestos, lo que equivale a &6" + imp + "&a$");
+            Files.user.set("Users." + p.getName() + ".imprec", imp);
+            balance.cobrarImpuestos(u, imp);
+            PASurvival.getImp().add(p.getName());
             Files.saveFiles();
         }
-
-        PermissionAttachment attachment = p.addAttachment(plugin);
-        plugin.getPerms().put(p, attachment);
-        PermissionAttachment pperms = plugin.getPerms().get(p);
-        pperms.setPermission("essentials.balance", true);
-        pperms.setPermission("essentials.pay", true);
-        pperms.setPermission("essentials.balancetop", true);
-        pperms.setPermission("jobs.use", true);
-        pperms.setPermission("essentials.home", true);
-        pperms.setPermission("essentials.sethome", true);
-        pperms.setPermission("essentials.tpahere", true);
-        pperms.setPermission("essentials.tpaccept", true);
-        pperms.setPermission("essentials.tpdeny", true);
-        pperms.setPermission("essentials.afk", true);
-        pperms.setPermission("essentials.ignore", true);
-        pperms.setPermission("essentials.msg", true);
-        pperms.setPermission("essentials.recipe", true);
-        pperms.setPermission("essentials.spawn", true);
-        pperms.setPermission("safetrade.request", true);
-        pperms.setPermission("safetrade.accept", true);
-        pperms.setPermission("safetrade.deny", true);
-        pperms.setPermission("40servidores.voto", true);
-
-
-        if(!u.isOnRank(PACmd.Grupo.VIP)){
-            pperms.setPermission("essentials.tpa", true);
-            pperms.setPermission("essentials.sethome.multiple.vip", true);
-            pperms.setPermission("essentials.chat.color", true);
-            pperms.setPermission("essentials.chat.format", true);
-            pperms.setPermission("essentials.chat.magic", true);
-            pperms.setPermission("essentials.nick", true);
-            pperms.setPermission("essentials.msg.color", true);
-            pperms.setPermission("essentials.msg.format", true);
-            pperms.setPermission("essentials.msg.magic", true);
-            pperms.setPermission("essentials.back", true);
-            pperms.setPermission("essentials.back.ondeath", true);
-        }
-
-        if(!u.isOnRank(PACmd.Grupo.ORIGIN)){
-            pperms.setPermission("essentials.sethome.multiple.origin", true);
-            pperms.setPermission("essentials.signs.color", true);
-            pperms.setPermission("essentials.signs.format", true);
-            pperms.setPermission("essentials.signs.magic", true);
-            pperms.setPermission("essentials.me", true);
-            pperms.setPermission("essentials.nick.color", true);
-            pperms.setPermission("essentials.nick.format", true);
-            pperms.setPermission("essentials.nick.magic", true);
-            pperms.setPermission("essentials.nick.format", true);
-            pperms.setPermission("essentials.keepxp", true);
-        }
-        if(!u.isOnRank(PACmd.Grupo.Builder)){
-            pperms.setPermission("essentials.msg.url", true);
-            pperms.setPermission("essentials.fly", true);
-            pperms.setPermission("essentials.gamemode.*", true);
-        }
-        if(!u.isOnRank(PACmd.Grupo.Mod)){
-            pperms.setPermission("essentials.*", true);
-        }
-        if(!u.isOnRank(PACmd.Grupo.Admin)){
-            pperms.setPermission("*", true);
-        }
-
-
     }
 
     @EventHandler
@@ -131,17 +70,15 @@ public class PlayerEvents implements Listener{
         Entity en1 = e.getEntity();
         Entity en = e.getEntity().getKiller();
 
-        if (en instanceof Player) {
-            Player pl = (Player) en1;
-            Player p = (Player) en;
+        Player pl = (Player) en1;
+        Player p = (Player) en;
 
-            if (manager.isInPvP(p)) {
-                manager.removeCooldown(p);
-                manager.removeCooldown(pl);
+        if (manager.isInPvP(p)) {
+            manager.removeCooldown(p);
+            manager.removeCooldown(pl);
 
-                p.sendMessage(Utils.colorize(PAData.SURVIVAL.getPrefix() + ChatColor.DARK_GREEN + " Ya no estás en pvp, puedes desconectarte."));
-                pl.sendMessage(Utils.colorize(PAData.SURVIVAL.getPrefix() + ChatColor.DARK_GREEN + " Ya no estás en pvp, puedes desconectarte."));
-            }
+            p.sendMessage(Utils.colorize(PAData.SURVIVAL.getPrefix() + ChatColor.DARK_GREEN + " Ya no estás en pvp, puedes desconectarte."));
+            pl.sendMessage(Utils.colorize(PAData.SURVIVAL.getPrefix() + ChatColor.DARK_GREEN + " Ya no estás en pvp, puedes desconectarte."));
         }
     }
 

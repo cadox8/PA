@@ -1,12 +1,11 @@
 package es.projectalpha.pa.sur.manager;
 
-import es.projectalpha.pa.core.utils.Log;
 import es.projectalpha.pa.sur.PASurvival;
 import es.projectalpha.pa.sur.api.SurvivalUser;
 import es.projectalpha.pa.sur.files.Files;
 import net.milkbowl.vault.economy.Economy;
 
-
+import java.text.DecimalFormat;
 
 
 public final class Balance {
@@ -41,15 +40,14 @@ public final class Balance {
         Files.saveFiles();
     }
 
-    public void cobrarImpuestos(SurvivalUser p){
-            saveBalance(p);
-            Files.user.set("recaudado", Files.user.getInt("recaudado") + (Files.user.getInt("Users." + p.getName() + ".money")*0.01));
-            Files.user.set("recaudado", Files.user.getInt("recaudado") - (Files.user.getInt("recaudado")*0.1));
-            Files.user.set("loteria", Files.user.getInt("loteria") + (Files.user.getInt("recaudado")*0.1));
-            Files.user.set("Users." + p.getName() + ".imprec",Files.user.getInt("Users." + p.getName() + ".imprec") + (eco.getBalance(p.getPlayer())*0.01));
-            removeBalance(p, eco.getBalance(p.getPlayer())*0.01);
-            saveBalance(p);
-
-       }
-
+    public void cobrarImpuestos(SurvivalUser p, double amount) {
+        DecimalFormat df = new DecimalFormat("#.00");
+        saveBalance(p);
+        Files.user.set("recaudado", Files.user.getInt("recaudado") + amount);
+        Files.user.set("recaudado", Files.user.getInt("recaudado") - Double.valueOf(df.format((Files.user.getInt("recaudado") * 0.1))));
+        Files.user.set("loteria", Files.user.getInt("loteria") + Double.valueOf(df.format((Files.user.getInt("recaudado") * 0.1))));
+        Files.user.set("Users." + p.getName() + ".imprec", Files.user.getInt("Users." + p.getName() + ".imprec") + amount);
+        removeBalance(p, amount);
+        saveBalance(p);
+    }
 }
