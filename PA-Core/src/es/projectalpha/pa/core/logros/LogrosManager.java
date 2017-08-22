@@ -4,8 +4,10 @@ import es.projectalpha.pa.core.PACore;
 import es.projectalpha.pa.core.utils.Log;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.ArrayList;
@@ -19,7 +21,6 @@ public class LogrosManager {
     public LogrosManager(PACore instance) {
         this.plugin = instance;
         logros = new ArrayList<>();
-        Log.debugLog("Ja, aun no estan preparados :D");
         //loadLogros();
     }
 
@@ -35,8 +36,9 @@ public class LogrosManager {
                 JSONObject structure = (JSONObject) jsonObject.get(String.valueOf(x));
                 logros.add(new Logro(x, structure.get("nombre").toString(), structure.get("desc").toString()));
             }
-        } catch (Exception e) {
+        } catch (IOException | ParseException e) {
             Log.log(Log.Level.SEVERE, "Error al cargar los logros");
+            Log.debugLog(e.getMessage());
         }
     }
 }
