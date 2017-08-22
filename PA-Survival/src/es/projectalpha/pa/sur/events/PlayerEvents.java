@@ -83,6 +83,7 @@ public class PlayerEvents implements Listener{
         pperms.setPermission("safetrade.request", true);
         pperms.setPermission("safetrade.accept", true);
         pperms.setPermission("safetrade.deny", true);
+        pperms.setPermission("40servidores.voto", true);
 
         if(u.isOnRank(PACmd.Grupo.VIP)){
             pperms.setPermission("essentials.tpa", true);
@@ -97,6 +98,7 @@ public class PlayerEvents implements Listener{
             pperms.setPermission("essentials.back", true);
             pperms.setPermission("essentials.back.ondeath", true);
         }
+
         if(u.isOnRank(PACmd.Grupo.ORIGIN)){
             pperms.setPermission("essentials.sethome.multiple.origin", true);
             pperms.setPermission("essentials.signs.color", true);

@@ -19,7 +19,6 @@ public class Cash2xp extends PACmd {
     }
 
     private Economy eco = PASurvival.getInstance().getVault();
-    private Files files = PASurvival.getInstance().getFiles();
     private ExperienceManager exp;
 
     public void run(PAUser user, String label, String[] args){
@@ -39,8 +38,8 @@ public class Cash2xp extends PACmd {
                     return;
                 }
 
-                eco.withdrawPlayer(user.getPlayer(), Files.user.getDouble("Experiencia.comprar") * Double.parseDouble(args[0]));
-                user.sendMessage(ChatColor.GREEN + " Has comprado " + ChatColor.YELLOW + args[0] + ChatColor.GREEN +" puntos de experiencia por " + ChatColor.YELLOW + Files.user.getDouble("Experiencia.comprar") * Double.parseDouble(args[0]) + ChatColor.GREEN +"$");
+                eco.withdrawPlayer(user.getPlayer(), (Files.user.getDouble("Experiencia.comprar") * Double.parseDouble(args[0])));
+                user.sendMessage(ChatColor.GREEN + " Has comprado " + ChatColor.YELLOW + args[0] + ChatColor.GREEN +" puntos de experiencia por " + ChatColor.YELLOW + (Files.user.getDouble("Experiencia.comprar") * Double.parseDouble(args[0])) + ChatColor.GREEN +"$");
                 user.getPlayer().giveExp(Integer.parseInt(args[0]));
             }
         }
