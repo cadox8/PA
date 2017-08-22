@@ -4,6 +4,7 @@ import es.projectalpha.pa.core.api.PAData;
 import es.projectalpha.pa.core.api.PAUser;
 import es.projectalpha.pa.core.utils.Cooldown;
 import es.projectalpha.pa.core.utils.ItemMaker;
+import es.projectalpha.pa.core.utils.Messages;
 import es.projectalpha.pa.core.utils.Utils;
 import es.projectalpha.pa.lobby.PALobby;
 import es.projectalpha.pa.lobby.cosmetics.list.AntiGravity;
@@ -54,10 +55,7 @@ public class Cosmetic {
     public static boolean useCosmetic(PAUser u, Material m) {
         String name = "ERROR";
 
-        u.sendMessage(PAData.LOBBY.getPrefix() + "&cNo estamos listos aún");
-        return false;
-
-/*        switch (m) {
+        switch (m) {
             case DIAMOND_BARDING:
                 ANTI_GRAVITY.play(u);
                 name = ANTI_GRAVITY.getName();
@@ -71,7 +69,7 @@ public class Cosmetic {
             return false;
         }
         u.sendMessage(Messages.getMessage(Messages.COSMETIC_USE, PAData.LOBBY, "%cosmetic%", name));
-        return true;*/
+        return true;
     }
 
     protected Entity spawnEntity(Location l, EntityType et) {

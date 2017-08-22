@@ -110,8 +110,8 @@ public class PlayerEvents implements Listener {
                     break;
                 case REDSTONE:
                     e.setCancelled(true);
-                    //u.sendMessage(PAData.LOBBY.getPrefix() + "&cEstamos trabajando en esto :D");
-                    LobbyMenu.openMenu(u, LobbyMenu.MenuType.COSMETICOS);
+                    u.sendMessage(PAData.LOBBY.getPrefix() + "&cNo estamos listos aún");
+                    //LobbyMenu.openMenu(u, LobbyMenu.MenuType.COSMETICOS);
                     break;
             }
 
