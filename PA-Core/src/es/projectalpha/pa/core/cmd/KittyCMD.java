@@ -1,15 +1,12 @@
-package es.projectalpha.pa.lobby.cmd;
+package es.projectalpha.pa.core.cmd;
 
 import es.projectalpha.pa.core.api.PAServer;
 import es.projectalpha.pa.core.api.PAUser;
-import es.projectalpha.pa.core.cmd.PACmd;
 import es.projectalpha.pa.core.utils.Utils;
 import org.bukkit.Sound;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Ocelot;
 import org.inventivetalent.particle.ParticleEffect;
-
-import java.util.Random;
 
 public class KittyCMD extends PACmd {
 

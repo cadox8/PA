@@ -2,7 +2,6 @@ package es.projectalpha.pa.lobby;
 
 import es.projectalpha.pa.core.PACommands;
 import es.projectalpha.pa.core.utils.Log;
-import es.projectalpha.pa.lobby.cmd.KittyCMD;
 import es.projectalpha.pa.lobby.cmd.SetSpawnCMD;
 import es.projectalpha.pa.lobby.cmd.SpawnCMD;
 import es.projectalpha.pa.lobby.events.InventoryEvents;
@@ -40,7 +39,7 @@ public class PALobby extends JavaPlugin {
             }
         }
 
-        PACommands.register(new SpawnCMD(), new KittyCMD(), new SetSpawnCMD());
+        PACommands.register(new SpawnCMD(), new SetSpawnCMD());
         new LobbyMenu(instance);
         new NoFallTask(instance).runTaskTimer(instance, 0, 20);
     }

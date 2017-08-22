@@ -55,6 +55,7 @@ public class PACommands implements TabCompleter {
         cmds.add(new SocialCMD());
         cmds.add(new StaffCMD());
         cmds.add(new WeatherCMD());
+        cmds.add(new KittyCMD());
 
         //Teleport
         cmds.add(new TeleportAcceptCMD());
