@@ -1,5 +1,6 @@
 package es.projectalpha.pa.rage.events;
 
+import es.projectalpha.pa.core.api.PAServer;
 import es.projectalpha.pa.core.cmd.PACmd;
 import es.projectalpha.pa.core.utils.Utils;
 import es.projectalpha.pa.rage.RageGames;
@@ -62,6 +63,8 @@ public class PlayerEvents implements Listener {
         RagePlayer u = RageGames.getPlayer(p);
         plugin.getGm().removePlayerFromGame(u);
         RageGames.players.remove(u);
+        u.save();
+        PAServer.users.remove(u);
         Utils.broadcastMsg("&7Ha salido del juego &e" + p.getDisplayName() + " &3(&b" + plugin.getGm().getPlaying().size() + "&d/&b" + plugin.getAm().getMaxPlayers() + "&3)");
     }
 

@@ -1,6 +1,7 @@
 package es.projectalpha.pa.toa.events;
 
 import es.projectalpha.pa.core.cmd.PACmd;
+import es.projectalpha.pa.core.utils.Sounds;
 import es.projectalpha.pa.core.utils.Utils;
 import es.projectalpha.pa.toa.TOA;
 import es.projectalpha.pa.toa.abilities.Ability;
@@ -10,7 +11,6 @@ import es.projectalpha.pa.toa.manager.Experience;
 import es.projectalpha.pa.toa.mobs.Mob;
 import es.projectalpha.pa.toa.mobs.MobType;
 import org.bukkit.Material;
-import org.bukkit.Sound;
 import org.bukkit.block.BlockFace;
 import org.bukkit.entity.Animals;
 import org.bukkit.entity.Monster;
@@ -43,7 +43,7 @@ public class GameEvents implements Listener {
 
             DropsManager.drop(MobType.parseMobType(e.getEntityType()), u.getUserData().getKit()).forEach(d -> {
                 BagEvents.addItem(u, d);
-                u.sendSound(Sound.ITEM_PICKUP);
+                u.sendSound(Sounds.ITEM_PICKUP);
             });
 
             if (plugin.getSpawnTask().getCount() == 0) return;

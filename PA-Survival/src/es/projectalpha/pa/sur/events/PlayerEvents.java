@@ -1,6 +1,7 @@
 package es.projectalpha.pa.sur.events;
 
 import es.projectalpha.pa.core.api.PAData;
+import es.projectalpha.pa.core.api.PAServer;
 import es.projectalpha.pa.core.utils.Utils;
 import es.projectalpha.pa.sur.PASurvival;
 import es.projectalpha.pa.sur.api.SurvivalUser;
@@ -131,6 +132,8 @@ public class PlayerEvents implements Listener{
     @EventHandler
     public void onLeave(PlayerQuitEvent event){
         Player p = event.getPlayer();
+        SurvivalUser u = PASurvival.getPlayer(p);
+
         if(Files.user.contains("Users." + p.getName())){
             Files.saveFiles();
             if(manager.isInPvP(p)){
@@ -138,6 +141,7 @@ public class PlayerEvents implements Listener{
                 Bukkit.broadcastMessage(Utils.colorize(PAData.SURVIVAL.getPrefix() + ChatColor.GRAY + " ¡" + ChatColor.GOLD + p.getName() + ChatColor.GREEN + " se ha desconectado en combate!"));
             }
         }
+        u.save();
+        PAServer.users.remove(u);
     }
-
 }

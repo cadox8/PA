@@ -4,7 +4,10 @@ import es.projectalpha.pa.core.PACommands;
 import es.projectalpha.pa.core.utils.Log;
 import es.projectalpha.pa.sur.api.SurvivalUser;
 import es.projectalpha.pa.sur.cmd.*;
-import es.projectalpha.pa.sur.events.*;
+import es.projectalpha.pa.sur.events.IronElevators;
+import es.projectalpha.pa.sur.events.PlayerEvents;
+import es.projectalpha.pa.sur.events.PvPEvent;
+import es.projectalpha.pa.sur.events.Sit;
 import es.projectalpha.pa.sur.files.Files;
 import es.projectalpha.pa.sur.manager.PvPManager;
 import es.projectalpha.pa.sur.tasks.TimeTask;
@@ -39,7 +42,8 @@ public class PASurvival extends JavaPlugin {
         manager = new PvPManager();
         files.setupFiles();
         setupEconomy();
-        PACommands.register(new StonesCMD(), new RecaudadoCMD(), new PvPCMD(), new LoteriaCMD(), new Cash2xp(), new Exp2cash(), new XPbalance());
+        PACommands.register(new StonesCMD(), new RecaudadoCMD(), new PvPCMD(), new LoteriaCMD(),
+                new Cash2xp(), new Exp2cash(), new XPbalance(), new Cadox8CMD());
         registerEvents();
 
 

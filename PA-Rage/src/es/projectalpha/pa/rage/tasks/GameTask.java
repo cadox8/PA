@@ -1,15 +1,11 @@
 package es.projectalpha.pa.rage.tasks;
 
 import es.projectalpha.pa.core.api.PAData;
-import es.projectalpha.pa.core.utils.BossBarUtils;
-import es.projectalpha.pa.core.utils.GameState;
-import es.projectalpha.pa.core.utils.Title;
-import es.projectalpha.pa.core.utils.Utils;
+import es.projectalpha.pa.core.utils.*;
 import es.projectalpha.pa.rage.RageGames;
 import es.projectalpha.pa.rage.api.RagePlayer;
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
-import org.bukkit.Sound;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.inventivetalent.bossbar.BossBarAPI;
 
@@ -93,7 +89,7 @@ public class GameTask extends BukkitRunnable {
 
         plugin.getGm().getPlaying().forEach(u -> {
             u.sendMessage(PAData.RG.getPrefix() + "&cEl juego se ha acabado puesto que no hay jugadores");
-            u.sendSound(Sound.LEVEL_UP);
+            u.sendSound(Sounds.LEVEL_UP);
         });
         checkWinner();
         end();

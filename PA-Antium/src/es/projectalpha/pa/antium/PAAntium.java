@@ -9,17 +9,13 @@ import es.projectalpha.pa.core.PACommands;
 import es.projectalpha.pa.core.PACore;
 import es.projectalpha.pa.core.api.PAServer;
 import es.projectalpha.pa.core.api.PAUser;
-import es.projectalpha.pa.core.utils.MySQL;
 import lombok.Getter;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.sql.Connection;
-import java.sql.SQLException;
 import java.util.logging.Filter;
 import java.util.logging.LogRecord;
-import java.util.logging.Logger;
 
 public class PAAntium extends JavaPlugin {
 
@@ -27,10 +23,6 @@ public class PAAntium extends JavaPlugin {
     @Getter private static PAAntium instance;
 
     @Getter private PassManager passManager;
-
-    public static PAUser getUser(OfflinePlayer p) {
-        return PAServer.getUser(p);
-    }
 
     public void onEnable() {
         instance = this;
@@ -64,7 +56,7 @@ public class PAAntium extends JavaPlugin {
     private void filter() {
         Filter f = new Filter() {
             public boolean isLoggable(LogRecord line) {
-                return !(line.getMessage().toLowerCase().startsWith("/login") || line.getMessage().toLowerCase().startsWith("/register"));
+                return false;
             }
 
             public String doFilter(String arg0) {
@@ -75,5 +67,9 @@ public class PAAntium extends JavaPlugin {
             }
         };
         getLogger().setFilter(f);
+    }
+
+    public static PAUser getUser(OfflinePlayer p) {
+        return PAServer.getUser(p);
     }
 }

@@ -2,8 +2,8 @@ package es.projectalpha.pa.core.cmd;
 
 import es.projectalpha.pa.core.api.PAServer;
 import es.projectalpha.pa.core.api.PAUser;
+import es.projectalpha.pa.core.utils.Sounds;
 import es.projectalpha.pa.core.utils.Utils;
-import org.bukkit.Sound;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Ocelot;
 import org.inventivetalent.particle.ParticleEffect;
@@ -25,10 +25,10 @@ public class KittyCMD extends PACmd {
         o.setNoDamageTicks(Integer.MAX_VALUE);
         o.setVelocity(user.getPlayer().getLocation().getDirection().multiply(2));
 
-        PAServer.users.forEach(u -> u.sendSound(Sound.CAT_MEOW));
+        PAServer.users.forEach(u -> u.sendSound(Sounds.CAT_MEOW));
 
         plugin.getServer().getScheduler().runTaskLater(plugin, () -> {
-            PAServer.users.forEach(u -> u.sendSound(Sound.EXPLODE));
+            PAServer.users.forEach(u -> u.sendSound(Sounds.EXPLODE));
             ParticleEffect.EXPLOSION_HUGE.send(plugin.getServer().getOnlinePlayers(), o.getLocation(), 0, 0, 0, 1, 20, 50);
             o.remove();
         }, 60);

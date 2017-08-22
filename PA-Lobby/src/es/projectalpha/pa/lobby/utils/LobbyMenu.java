@@ -3,10 +3,10 @@ package es.projectalpha.pa.lobby.utils;
 import es.projectalpha.pa.core.api.PAData;
 import es.projectalpha.pa.core.api.PAUser;
 import es.projectalpha.pa.core.utils.ItemMaker;
+import es.projectalpha.pa.core.utils.Sounds;
 import es.projectalpha.pa.lobby.PALobby;
 import es.projectalpha.pa.lobby.cosmetics.Cosmetic;
 import org.bukkit.Material;
-import org.bukkit.Sound;
 import org.bukkit.inventory.Inventory;
 
 public class LobbyMenu {
@@ -60,7 +60,7 @@ public class LobbyMenu {
         if (clon != null) {
             u.getPlayer().closeInventory();
             u.getPlayer().openInventory(clon);
-            u.sendSound(Sound.CLICK);
+            u.sendSound(Sounds.CLICK);
         }
     }
 

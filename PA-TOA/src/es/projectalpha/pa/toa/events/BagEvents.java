@@ -2,13 +2,13 @@ package es.projectalpha.pa.toa.events;
 
 import es.projectalpha.pa.core.api.PAData;
 import es.projectalpha.pa.core.cmd.PACmd;
+import es.projectalpha.pa.core.utils.Sounds;
 import es.projectalpha.pa.core.utils.Title;
 import es.projectalpha.pa.toa.TOA;
 import es.projectalpha.pa.toa.api.TOAUser;
 import es.projectalpha.pa.toa.utils.FileUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
-import org.bukkit.Sound;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
@@ -101,7 +101,7 @@ public class BagEvents implements Listener {
                 p.sendMessage(PAData.TOA.getPrefix() + "&cAlgo me dice que tu mochila esta llena...");
                 Title.sendTitle(p.getPlayer(), 0, 3, 0, ChatColor.RED + "&c¡Atención!", "&6Tu mochila esta llena");
         }
-        p.sendSound(Sound.FUSE);
+        p.sendSound(Sounds.FUSE);
     }
 
     private static Inventory getInventory(TOAUser p) {

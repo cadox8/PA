@@ -2,8 +2,8 @@ package es.projectalpha.pa.toa.utils;
 
 import es.projectalpha.pa.core.api.PAUser;
 import es.projectalpha.pa.core.utils.ItemMaker;
+import es.projectalpha.pa.core.utils.Sounds;
 import es.projectalpha.pa.toa.TOA;
-import org.bukkit.Sound;
 import org.bukkit.inventory.Inventory;
 
 public class TOAMenu {
@@ -40,7 +40,7 @@ public class TOAMenu {
         if (clon != null) {
             u.getPlayer().closeInventory();
             u.getPlayer().openInventory(clon);
-            u.sendSound(Sound.CLICK);
+            u.sendSound(Sounds.CLICK);
         }
     }
 

@@ -6,7 +6,10 @@ import es.projectalpha.pa.core.api.PAServer;
 import es.projectalpha.pa.core.api.PAUser;
 import es.projectalpha.pa.core.cmd.PACmd;
 import lombok.NonNull;
-import org.bukkit.*;
+import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
+import org.bukkit.Location;
+import org.bukkit.World;
 
 import java.util.ArrayList;
 
@@ -28,7 +31,7 @@ public class Utils {
             PAUser u = PAServer.getUser(p);
             if (u.isOnRank(PACmd.Grupo.Builder)) {
                 u.sendMessage("&0[&2A&0] &3" + user.getName() + "&r: " + Utils.colorize(msg));
-                u.sendSound(Sound.ANVIL_BREAK);
+                u.sendSound(Sounds.ANVIL_BREAK);
             }
         });
     }

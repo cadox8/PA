@@ -2,8 +2,8 @@ package es.projectalpha.pa.sn.cmd;
 
 import es.projectalpha.pa.core.api.PAUser;
 import es.projectalpha.pa.core.cmd.PACmd;
+import es.projectalpha.pa.core.utils.Sounds;
 import es.projectalpha.pa.sn.recipes.PokeEgg;
-import org.bukkit.Sound;
 
 import java.util.Arrays;
 
@@ -19,7 +19,7 @@ public class SafariCMD extends PACmd {
         if (args.length == 1){
             if (args[0].equalsIgnoreCase("huevo")){
                 user.getPlayer().getInventory().addItem(egg.getPokeEgg());
-                user.sendSound(Sound.ENTITY_ENDERDRAGON_DEATH);
+                user.sendSound(Sounds.ENDERDRAGON_DEATH);
             }
         }
     }

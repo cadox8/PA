@@ -5,6 +5,7 @@ import com.google.common.io.ByteStreams;
 import es.projectalpha.pa.core.PACore;
 import es.projectalpha.pa.core.cmd.PACmd;
 import es.projectalpha.pa.core.utils.ReflectionAPI;
+import es.projectalpha.pa.core.utils.Sounds;
 import es.projectalpha.pa.core.utils.Utils;
 import lombok.Data;
 import lombok.Getter;
@@ -13,7 +14,10 @@ import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.ComponentBuilder;
 import net.md_5.bungee.api.chat.HoverEvent;
 import net.md_5.bungee.api.chat.TextComponent;
-import org.bukkit.*;
+import org.bukkit.Location;
+import org.bukkit.Material;
+import org.bukkit.OfflinePlayer;
+import org.bukkit.World;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -86,8 +90,8 @@ public class PAUser {
     public void sendMessage(String str) {
         getPlayer().sendMessage(Utils.colorize(str));
     }
-    public void sendSound(Sound sound) {
-        getPlayer().playSound(getPlayer().getLocation(), sound, 4, 4);
+    public void sendSound(Sounds sound) {
+        getPlayer().playSound(getPlayer().getLocation(), sound.toSound(), 4, 4);
     }
     public void teleport(Location location) {
         getPlayer().teleport(location);

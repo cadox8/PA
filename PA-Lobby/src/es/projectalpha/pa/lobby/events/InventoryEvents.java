@@ -3,11 +3,11 @@ package es.projectalpha.pa.lobby.events;
 import es.projectalpha.pa.core.api.PAServer;
 import es.projectalpha.pa.core.api.PAUser;
 import es.projectalpha.pa.core.cmd.PACmd;
+import es.projectalpha.pa.core.utils.Sounds;
 import es.projectalpha.pa.core.utils.Utils;
 import es.projectalpha.pa.lobby.PALobby;
 import es.projectalpha.pa.lobby.cosmetics.Cosmetic;
 import es.projectalpha.pa.lobby.utils.LobbyMenu;
-import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -49,7 +49,7 @@ public class InventoryEvents implements Listener {
                         u.teleport(Utils.stringToLocation("mlb%0.5%47%35.5%0.3%-6"));
                         break;
                 }
-                u.sendSound(Sound.CLICK);
+                u.sendSound(Sounds.CLICK);
                 break;
             case "RageGames":
                 e.setCancelled(true);
@@ -67,7 +67,7 @@ public class InventoryEvents implements Listener {
                         u.teleport(Utils.stringToLocation("mlb%0.5%47%-34.5%179.4%-6.5"));
                         break;
                 }
-                u.sendSound(Sound.CLICK);
+                u.sendSound(Sounds.CLICK);
                 break;
             case "Cosmeticos":
                 e.setCancelled(true);
@@ -86,7 +86,7 @@ public class InventoryEvents implements Listener {
                     default:
                         break;
                 }
-                u.sendSound(Sound.CLICK);
+                u.sendSound(Sounds.CLICK);
                 break;
             default:
                 break;
