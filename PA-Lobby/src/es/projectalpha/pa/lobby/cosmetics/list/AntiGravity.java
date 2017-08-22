@@ -1,7 +1,6 @@
 package es.projectalpha.pa.lobby.cosmetics.list;
 
 import es.projectalpha.pa.core.api.PAUser;
-import es.projectalpha.pa.core.utils.Cooldown;
 import es.projectalpha.pa.core.utils.FireworkAPI;
 import es.projectalpha.pa.lobby.cosmetics.Cosmetic;
 import es.projectalpha.pa.lobby.utils.Helpers;
@@ -16,7 +15,7 @@ import org.bukkit.scheduler.BukkitTask;
 public class AntiGravity extends Cosmetic {
 
     public AntiGravity() {
-        super("&bArco Dimensional", Material.DIAMOND_BARDING, new Cooldown(20));
+        super("&bAnti Gravedad", Material.DIAMOND_BARDING, 20);
     }
 
     private int count = 10;

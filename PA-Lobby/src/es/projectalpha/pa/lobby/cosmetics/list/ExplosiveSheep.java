@@ -3,7 +3,6 @@ package es.projectalpha.pa.lobby.cosmetics.list;
 import es.projectalpha.pa.core.api.PAServer;
 import es.projectalpha.pa.core.api.PAUser;
 import es.projectalpha.pa.core.utils.ColorParser;
-import es.projectalpha.pa.core.utils.Cooldown;
 import es.projectalpha.pa.core.utils.Utils;
 import es.projectalpha.pa.lobby.cosmetics.Cosmetic;
 import org.bukkit.DyeColor;
@@ -17,7 +16,7 @@ import org.inventivetalent.particle.ParticleEffect;
 public class ExplosiveSheep extends Cosmetic {
 
     public ExplosiveSheep() {
-        super("&dOveja Fiestera", Material.WOOL, new Cooldown(15));
+        super("&dOveja Fiestera", Material.WOOL, 15);
     }
 
     private int count = 10;
