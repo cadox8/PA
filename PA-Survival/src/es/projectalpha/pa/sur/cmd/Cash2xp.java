@@ -33,12 +33,12 @@ public class Cash2xp extends PACmd {
                     return;
                 }
 
-                if (eco.getBalance(user.getPlayer()) < (Files.user.getDouble("Experiencia.comprar") * Double.parseDouble(args[0]))) {
+                if (eco.getBalance(user.getPlayer()) < (Files.config.getDouble("Experiencia.comprar") * Double.parseDouble(args[0]))) {
                     user.sendMessage(PAData.SURVIVAL.getPrefix() + "&cNo tienes suficiente dinero para hacer esto. (" + (Files.user.getDouble("Experiencia.comprar") * Double.parseDouble(args[0])) + ")");
                     return;
                 }
 
-                eco.withdrawPlayer(user.getPlayer(), (Files.user.getDouble("Experiencia.comprar") * Double.parseDouble(args[0])));
+                eco.withdrawPlayer(user.getPlayer(), (Files.config.getDouble("Experiencia.comprar") * Double.parseDouble(args[0])));
                 user.sendMessage(ChatColor.GREEN + " Has comprado " + ChatColor.YELLOW + args[0] + ChatColor.GREEN +" puntos de experiencia por " + ChatColor.YELLOW + (Files.user.getDouble("Experiencia.comprar") * Double.parseDouble(args[0])) + ChatColor.GREEN +"$");
                 user.getPlayer().giveExp(Integer.parseInt(args[0]));
             }
@@ -46,7 +46,5 @@ public class Cash2xp extends PACmd {
         if(args.length > 1){
             user.sendMessage("&cPara usar este comando, haz /cash2exp <cantidad>");
         }
-
     }
-
 }

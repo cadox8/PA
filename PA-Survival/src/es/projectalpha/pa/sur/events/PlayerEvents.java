@@ -1,6 +1,5 @@
 package es.projectalpha.pa.sur.events;
 
-import es.projectalpha.pa.core.PACore;
 import es.projectalpha.pa.core.api.PAData;
 import es.projectalpha.pa.core.cmd.PACmd;
 import es.projectalpha.pa.core.utils.Utils;
@@ -40,7 +39,7 @@ public class PlayerEvents implements Listener{
     }
 
 
-    @EventHandler
+    @EventHandler(priority = EventPriority.HIGHEST)
     public void onJoin(PlayerJoinEvent e) {
         Player p = e.getPlayer();
         SurvivalUser u = PASurvival.getPlayer(p);
@@ -85,7 +84,8 @@ public class PlayerEvents implements Listener{
         pperms.setPermission("safetrade.deny", true);
         pperms.setPermission("40servidores.voto", true);
 
-        if(u.isOnRank(PACmd.Grupo.VIP)){
+
+        if(!u.isOnRank(PACmd.Grupo.VIP)){
             pperms.setPermission("essentials.tpa", true);
             pperms.setPermission("essentials.sethome.multiple.vip", true);
             pperms.setPermission("essentials.chat.color", true);
@@ -99,7 +99,7 @@ public class PlayerEvents implements Listener{
             pperms.setPermission("essentials.back.ondeath", true);
         }
 
-        if(u.isOnRank(PACmd.Grupo.ORIGIN)){
+        if(!u.isOnRank(PACmd.Grupo.ORIGIN)){
             pperms.setPermission("essentials.sethome.multiple.origin", true);
             pperms.setPermission("essentials.signs.color", true);
             pperms.setPermission("essentials.signs.format", true);
@@ -111,15 +111,15 @@ public class PlayerEvents implements Listener{
             pperms.setPermission("essentials.nick.format", true);
             pperms.setPermission("essentials.keepxp", true);
         }
-        if(u.isOnRank(PACmd.Grupo.Builder)){
+        if(!u.isOnRank(PACmd.Grupo.Builder)){
             pperms.setPermission("essentials.msg.url", true);
             pperms.setPermission("essentials.fly", true);
             pperms.setPermission("essentials.gamemode.*", true);
         }
-        if(u.isOnRank(PACmd.Grupo.Mod)){
+        if(!u.isOnRank(PACmd.Grupo.Mod)){
             pperms.setPermission("essentials.*", true);
         }
-        if(u.isOnRank(PACmd.Grupo.Admin)){
+        if(!u.isOnRank(PACmd.Grupo.Admin)){
             pperms.setPermission("*", true);
         }
 
