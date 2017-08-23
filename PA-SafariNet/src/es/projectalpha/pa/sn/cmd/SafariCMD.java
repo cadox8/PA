@@ -1,5 +1,6 @@
 package es.projectalpha.pa.sn.cmd;
 
+import es.projectalpha.pa.core.api.PAData;
 import es.projectalpha.pa.core.api.PAUser;
 import es.projectalpha.pa.core.cmd.PACmd;
 import es.projectalpha.pa.core.utils.Sounds;
@@ -16,6 +17,10 @@ public class SafariCMD extends PACmd {
     }
 
     public void run(PAUser user, String label, String[] args){
+        if (args.length == 0 || args.length > 1) {
+            user.sendMessage(PAData.SN.getPrefix() + "&2Este plugin está funcionando");
+            return;
+        }
         if (args.length == 1){
             if (args[0].equalsIgnoreCase("huevo")){
                 user.getPlayer().getInventory().addItem(egg.getPokeEgg());

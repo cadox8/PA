@@ -72,11 +72,6 @@ public class CatchMob implements Listener{
                             p.getInventory().addItem(pe.getPokeEgg());
                             return;
                         }
-                        if (!files.getConfig().getStringList("mundosPermitidos").contains(e.getEntity().getLocation().getWorld().getName())) {
-                            p.sendMessage(this.plugin.getPrefix() + ChatColor.RED + "No se puede usar en este mundo");
-                            p.getInventory().addItem(pe.getPokeEgg());
-                            return;
-                        }
                         if (!vu.hasEnoughMoney(p, e.getHitEntity().getType().toString())) {
                             p.sendMessage(SafariNet.getInstance().getPrefix() + ChatColor.RED + "No tienes dinero suficiente para hacer esto");
                             p.getInventory().addItem(pe.getPokeEgg());
@@ -92,7 +87,7 @@ public class CatchMob implements Listener{
                         }
 
                         //To Fix
-                        if (e.getEntity() instanceof Mule || e.getEntity() instanceof Donkey || e.getEntity() instanceof Llama){
+                        if (e.getEntity() instanceof Mule || e.getEntity() instanceof Donkey || e.getEntity() instanceof Llama || e.getEntity() instanceof Villager){
                             p.sendMessage(ChatColor.RED + "Estos mobs están desactivados debido a un error de Minecraft.");
                             return;
                         }
