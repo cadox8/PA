@@ -108,7 +108,6 @@ public class ItemMaker {
     public ItemMaker setUnbreakable() {
         ItemMeta meta = this.itemStack.getItemMeta();
         meta.spigot().setUnbreakable(true);
-        meta.addItemFlags(ItemFlag.HIDE_UNBREAKABLE);
         this.itemStack.setItemMeta(meta);
         return this;
     }
