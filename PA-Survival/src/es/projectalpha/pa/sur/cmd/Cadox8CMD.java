@@ -23,6 +23,7 @@ public class Cadox8CMD extends PACmd {
                 return;
             }
         }
+        if (!u.isOnRank(Grupo.Mod)) return;
         switch (args.length) {
             case 1:
                 switch (args[0]) {

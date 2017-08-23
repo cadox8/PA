@@ -18,11 +18,10 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.BlockBreakEvent;
+import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
-import org.bukkit.event.player.PlayerBucketEmptyEvent;
-import org.bukkit.event.player.PlayerCommandPreprocessEvent;
-import org.bukkit.event.player.PlayerJoinEvent;
-import org.bukkit.event.player.PlayerQuitEvent;
+import org.bukkit.event.player.*;
 
 import java.text.DecimalFormat;
 
@@ -84,7 +83,7 @@ public class PlayerEvents implements Listener{
     }
 
     @EventHandler
-    public void BlockPlaceEvent(org.bukkit.event.block.BlockPlaceEvent e){
+    public void BlockPlaceEvent(BlockPlaceEvent e){
         Player p = e.getPlayer();
         Block b = e.getBlock();
         for(Entity en : p.getNearbyEntities (4D, 4D, 4D)){
@@ -143,5 +142,27 @@ public class PlayerEvents implements Listener{
         }
         u.save();
         PAServer.users.remove(u);
+    }
+
+    @EventHandler(priority = EventPriority.HIGHEST)
+    public void onBreak(BlockBreakEvent e) {
+        SurvivalUser u = PASurvival.getPlayer((Player) e);
+
+        if (plugin.getMineTask().getBlocks().containsKey(u)) {
+            plugin.getMineTask().getBlocks().put(u, plugin.getMineTask().getBlocks().get(u) + 1);
+            return;
+        }
+    }
+
+    @EventHandler(priority = EventPriority.HIGHEST)
+    public void onWorldChange(PlayerChangedWorldEvent e) {
+        SurvivalUser u = PASurvival.getPlayer((Player) e);
+
+        if (e.getFrom().getName().toLowerCase().equalsIgnoreCase("eventos")) {
+            if (plugin.getMineTask().getBlocks().containsKey(u)) {
+                plugin.getMineTask().getBlocks().remove(u, plugin.getMineTask().getBlocks().get(u));
+                return;
+            }
+        }
     }
 }

@@ -10,6 +10,7 @@ import es.projectalpha.pa.sur.events.PvPEvent;
 import es.projectalpha.pa.sur.events.Sit;
 import es.projectalpha.pa.sur.files.Files;
 import es.projectalpha.pa.sur.manager.PvPManager;
+import es.projectalpha.pa.sur.tasks.MineTask;
 import es.projectalpha.pa.sur.tasks.TimeTask;
 import lombok.Getter;
 import net.milkbowl.vault.economy.Economy;
@@ -33,6 +34,7 @@ public class PASurvival extends JavaPlugin {
     @Getter private PvPManager manager;
     @Getter private Economy vault;
     @Getter private TimeTask timeTask;
+    @Getter private MineTask mineTask;
     @Getter private HashMap<Player, PermissionAttachment> perms = new HashMap<>();
     @Getter private static ArrayList<String> imp = new ArrayList<>();
     @Getter private HashMap<SurvivalUser, ArrayList<Integer>> bol = new HashMap<>();
@@ -43,11 +45,12 @@ public class PASurvival extends JavaPlugin {
         files.setupFiles();
         setupEconomy();
         PACommands.register(new StonesCMD(), new RecaudadoCMD(), new PvPCMD(), new LoteriaCMD(),
-                new Cash2xp(), new Exp2cash(), new XPbalance(), new Cadox8CMD());
+                new Cash2xp(), new Exp2cash(), new XPbalance(), new Cadox8CMD(), new MineCMD());
         registerEvents();
 
 
         timeTask = new TimeTask(instance);
+        mineTask = new MineTask(instance);
         timeTask.runTaskTimer(instance, 0, 15);
     }
 
