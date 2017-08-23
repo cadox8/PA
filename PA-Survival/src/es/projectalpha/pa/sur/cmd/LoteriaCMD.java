@@ -5,19 +5,18 @@ import es.projectalpha.pa.core.api.PAUser;
 import es.projectalpha.pa.core.cmd.PACmd;
 import es.projectalpha.pa.sur.PASurvival;
 import es.projectalpha.pa.sur.files.Files;
-import org.bukkit.ChatColor;
 
 import java.util.ArrayList;
 import java.util.Random;
 
 
 public class LoteriaCMD extends PACmd {
+
     public LoteriaCMD() {
             super("loteria", Grupo.Usuario);
         }
 
-    private Files files = new Files();
-    private PASurvival plugin;
+    private PASurvival plugin = PASurvival.getInstance();
 
     public void run(PAUser user, String label, String[] args) {
         if(args.length == 0){
@@ -42,15 +41,20 @@ public class LoteriaCMD extends PACmd {
                 user.sendMessage("&4Ya has comprado 10 boletos, mañana podrás apostar 10 boletos más.");
                 return;
             }
-            user.sendMessage(PAData.SURVIVAL.getPrefix() + "&aHas comprado " + bol + " boletos, tus números son: ");
-            for(int b = 1; b <= bol; b++){
-                ArrayList<Integer> arbol = new ArrayList<>();
-                plugin.getBol().put(PASurvival.getPlayer(user.getPlayer()), arbol);
+            user.sendMessage(PAData.SURVIVAL.getPrefix() + "&aHas comprado &c" + bol + " &aboletos, tus números son: ");
+
+            ArrayList<Integer> numbers = new ArrayList<>();
+            for (int b = 1; b <= bol; b++) {
+                int n = new Random().nextInt(9999);
+                numbers.add(n);
+
                 Files.user.set("Users." + user.getName() + ".apos", bol);
-                Files.user.set("numeros." + new Random().nextInt(9999) + ".owner", user.getName());
-                user.sendMessage(".");
+                Files.user.set("numeros." + n + ".owner", user.getName());
+
                 Files.saveFiles(); //Que si no no se guarda, joder. #SuicideIsNear
             }
+            plugin.getBol().put(PASurvival.getPlayer(user.getPlayer()), numbers);
+            user.sendMessage("&c" + numbers.toString().replace("[", " ").replace("]", " ").replace(",", "&6,"));
         }
     }
 }
