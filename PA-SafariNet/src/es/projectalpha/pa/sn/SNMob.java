@@ -1,9 +1,9 @@
 package es.projectalpha.pa.sn;
 
 import es.projectalpha.pa.core.utils.ItemMaker;
+import es.projectalpha.pa.sn.files.Files;
 import es.projectalpha.pa.sn.utils.ColorUtils;
 import es.projectalpha.pa.sn.utils.MobUtils;
-import es.projectalpha.pa.sn.files.Files;
 import lombok.Getter;
 import org.apache.commons.lang.WordUtils;
 import org.bukkit.DyeColor;
@@ -46,7 +46,7 @@ public class SNMob {
     }
 
     public String getCustomName(){
-        return entity.getCustomName();
+        return entity.getCustomName() != null ? entity.getCustomName() : "";
     }
 
     public double getHealth(){
