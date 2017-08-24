@@ -2,6 +2,7 @@ package es.projectalpha.pa.sn;
 
 import es.projectalpha.pa.core.PACommands;
 import es.projectalpha.pa.core.api.PAData;
+import es.projectalpha.pa.core.utils.Utils;
 import es.projectalpha.pa.sn.cmd.SafariCMD;
 import es.projectalpha.pa.sn.events.CatchMob;
 import es.projectalpha.pa.sn.events.SpawnMob;
@@ -24,7 +25,7 @@ public class SafariNet extends JavaPlugin implements Listener{
     private PokeEgg pe = new PokeEgg();
     private Files files = new Files();
 
-    @Getter private String prefix = PAData.NS.getPrefix();
+    @Getter private String prefix = Utils.colorize(PAData.SN.getPrefix());
     
     public void onEnable(){
         instance = this;

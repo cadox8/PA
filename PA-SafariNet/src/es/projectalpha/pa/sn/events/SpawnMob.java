@@ -34,10 +34,6 @@ public class SpawnMob implements Listener{
             if(e.getHand() != EquipmentSlot.HAND) return;
             if (e.getItem() == null || !e.getItem().hasItemMeta() || !e.getItem().getItemMeta().hasDisplayName() || e.getItem().getType() != Material.MONSTER_EGG) return;
             if (!ChatColor.stripColor(e.getItem().getItemMeta().getDisplayName()).contains("Spawn")) return;
-            if (!files.getConfig().getStringList("mundosPermitidos").contains(p.getLocation().getWorld().getName())) {
-                p.sendMessage(this.plugin.getPrefix() + ChatColor.RED + "No se puede usar en este mundo");
-                return;
-            }
             int id = Integer.parseInt(e.getItem().getItemMeta().getLore().get(0));
             String s = e.getItem().getItemMeta().getLore().get(1);
 
