@@ -39,7 +39,7 @@ public class Cash2xp extends PACmd {
                 }
 
                 eco.withdrawPlayer(user.getPlayer(), (Files.config.getDouble("Experiencia.comprar") * Double.parseDouble(args[0])));
-                user.sendMessage(ChatColor.GREEN + " Has comprado " + ChatColor.YELLOW + args[0] + ChatColor.GREEN +" puntos de experiencia por " + ChatColor.YELLOW + (Files.user.getDouble("Experiencia.comprar") * Double.parseDouble(args[0])) + ChatColor.GREEN +"$");
+                user.sendMessage(ChatColor.GREEN + " Has comprado " + ChatColor.YELLOW + args[0] + ChatColor.GREEN +" puntos de experiencia por " + ChatColor.YELLOW + (Files.config.getDouble("Experiencia.comprar") * Double.parseDouble(args[0])) + ChatColor.GREEN +"$");
                 user.getPlayer().giveExp(Integer.parseInt(args[0]));
             }
         }
