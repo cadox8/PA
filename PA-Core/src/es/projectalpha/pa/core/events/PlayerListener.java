@@ -79,9 +79,9 @@ public class PlayerListener implements Listener {
         }
 
         //Format
-        String tag = "[&" + PACmd.Grupo.groupColor(user.getUserData().getGrupo()) + WordUtils.capitalizeFully(user.getUserData().getGrupo().toString().toLowerCase()) + "&r] " + PACmd.Grupo.groupColor(user.getUserData().getGrupo()) + user.getName() + "&r:";
+        String tag = "[&" + PACmd.Grupo.groupColor(user.getUserData().getGrupo()) + WordUtils.capitalizeFully(user.getUserData().getGrupo().toString().toLowerCase()) + "&r] &" + PACmd.Grupo.groupColor(user.getUserData().getGrupo()) + user.getName() + "&r: ";
         if (user.isOnRank(PACmd.Grupo.ORIGIN)) e.setMessage(Utils.colorize(e.getMessage()));
-        e.setFormat(Utils.colorize(tag) + "%s");
+        e.setFormat(Utils.colorize(tag) + e.getMessage());
     }
 
     /*
