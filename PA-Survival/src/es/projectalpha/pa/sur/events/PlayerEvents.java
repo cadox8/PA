@@ -146,7 +146,7 @@ public class PlayerEvents implements Listener{
 
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onBreak(BlockBreakEvent e) {
-        SurvivalUser u = PASurvival.getPlayer((Player) e);
+        SurvivalUser u = PASurvival.getPlayer(e.getPlayer());
 
         if (plugin.getMineTask().getBlocks().containsKey(u)) {
             plugin.getMineTask().getBlocks().put(u, plugin.getMineTask().getBlocks().get(u) + 1);
@@ -156,7 +156,7 @@ public class PlayerEvents implements Listener{
 
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onWorldChange(PlayerChangedWorldEvent e) {
-        SurvivalUser u = PASurvival.getPlayer((Player) e);
+        SurvivalUser u = PASurvival.getPlayer(e.getPlayer());
 
         if (e.getFrom().getName().toLowerCase().equalsIgnoreCase("eventos")) {
             if (plugin.getMineTask().getBlocks().containsKey(u)) {
