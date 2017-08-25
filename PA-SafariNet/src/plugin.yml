@@ -2,7 +2,7 @@ name: ${project.artifactId}
 main: es.projectalpha.pa.sn.SafariNet
 version: ${project.version}
 authors: [cadox8, Wikijito7]
-depends: [Vault, PA-Core]
+depends: [Vault, PA-Core, WorldGuard]
 
 commands:
     game:
