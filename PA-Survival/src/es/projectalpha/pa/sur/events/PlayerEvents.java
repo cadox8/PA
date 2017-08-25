@@ -70,15 +70,18 @@ public class PlayerEvents implements Listener{
         Entity en1 = e.getEntity();
         Entity en = e.getEntity().getKiller();
 
-        Player pl = (Player) en1;
-        Player p = (Player) en;
+        if(en instanceof Player && en1 instanceof Player){
+            Player pl = (Player) en1;
+            Player p = (Player) en;
 
-        if (manager.isInPvP(p)) {
-            manager.removeCooldown(p);
-            manager.removeCooldown(pl);
+            if (manager.isInPvP(p)) {
+                manager.removeCooldown(p);
+                manager.removeCooldown(pl);
 
-            p.sendMessage(Utils.colorize(PAData.SURVIVAL.getPrefix() + ChatColor.DARK_GREEN + " Ya no estás en pvp, puedes desconectarte."));
-            pl.sendMessage(Utils.colorize(PAData.SURVIVAL.getPrefix() + ChatColor.DARK_GREEN + " Ya no estás en pvp, puedes desconectarte."));
+                p.sendMessage(Utils.colorize(PAData.SURVIVAL.getPrefix() + ChatColor.DARK_GREEN + " Ya no estás en pvp, puedes desconectarte."));
+                pl.sendMessage(Utils.colorize(PAData.SURVIVAL.getPrefix() + ChatColor.DARK_GREEN + " Ya no estás en pvp, puedes desconectarte."));
+            }
+            pl.sendMessage(ChatColor.GREEN + "");
         }
     }
 

@@ -34,7 +34,7 @@ public class Cash2xp extends PACmd {
                 }
 
                 if (eco.getBalance(user.getPlayer()) < (Files.config.getDouble("Experiencia.comprar") * Double.parseDouble(args[0]))) {
-                    user.sendMessage(PAData.SURVIVAL.getPrefix() + "&cNo tienes suficiente dinero para hacer esto. (" + (Files.user.getDouble("Experiencia.comprar") * Double.parseDouble(args[0])) + ")");
+                    user.sendMessage(PAData.SURVIVAL.getPrefix() + "&cNo tienes suficiente dinero para hacer esto. (" + (Files.config.getDouble("Experiencia.comprar") * Double.parseDouble(args[0])) + ")");
                     return;
                 }
 
