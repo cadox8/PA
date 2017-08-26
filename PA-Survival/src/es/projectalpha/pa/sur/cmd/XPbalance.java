@@ -12,7 +12,7 @@ public class XPbalance extends PACmd{
     private ExperienceManager expManager;
 
     public XPbalance() {
-        super("xpbalance", Grupo.Usuario, Arrays.asList("xpb", "expb", "expbalance"));
+        super("xpbalance", Grupo.Usuario, Arrays.asList("xpb", "expb", "expbalance", "bxp", "balancexp", "bexp", "balanceexp"));
     }
 
     @Override
