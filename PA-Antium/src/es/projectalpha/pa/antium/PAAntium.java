@@ -29,7 +29,7 @@ public class PAAntium extends JavaPlugin {
 
         if (getServer().getPluginManager().getPlugin("PA-Core") == null) getServer().getPluginManager().disablePlugin(this);
 
-        filter();
+      
 
         plugin = PACore.getInstance();
         plugin.debugLog("Registrando clases, eventos y permisos...");
@@ -53,21 +53,7 @@ public class PAAntium extends JavaPlugin {
         PACommands.register(new LoginCMD(), new RegisterCMD(), new AntiumCMD());
     }
 
-    private void filter() {
-        Filter f = new Filter() {
-            public boolean isLoggable(LogRecord line) {
-                return false;
-            }
-
-            public String doFilter(String arg0) {
-                return null;
-            }
-            public String doFilterUrl(String arg0) {
-                return null;
-            }
-        };
-        getLogger().setFilter(f);
-    }
+    
 
     public static PAUser getUser(OfflinePlayer p) {
         return PAServer.getUser(p);
