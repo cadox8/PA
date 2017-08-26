@@ -1,5 +1,7 @@
 package es.projectalpha.pa.sn.events;
 
+import com.sk89q.worldguard.protection.ApplicableRegionSet;
+import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 import es.projectalpha.pa.sn.SNMob;
 import es.projectalpha.pa.sn.SafariNet;
 import es.projectalpha.pa.sn.files.Files;
@@ -37,7 +39,14 @@ public class SpawnMob implements Listener{
             int id = Integer.parseInt(e.getItem().getItemMeta().getLore().get(0));
             String s = e.getItem().getItemMeta().getLore().get(1);
 
-            //TODO: Aquí va la region!
+            boolean canCatch = true;
+            ApplicableRegionSet region = plugin.getWg().getRegionManager(p.getWorld()).getApplicableRegions(p.getLocation());
+            for (ProtectedRegion r : region.getRegions()) if (!r.getOwners().contains(p.getName())) canCatch = false;
+
+            if (!canCatch) {
+                p.sendMessage(SafariNet.getInstance().getPrefix() + ChatColor.RED + "No puedes spawnear un mob en parcelas ajenas");
+                return;
+            }
 
             SNMob mob = new SNMob(p);
             if (!mob.isOwner(id)) {
