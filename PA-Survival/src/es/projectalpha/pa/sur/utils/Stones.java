@@ -23,12 +23,12 @@ public final class Stones /*like the rolling*/ {
     @AllArgsConstructor
     public enum StoneType {
         COAL(new Stones().stone1, 5),
-        IRON(new Stones().stone2,10),
-        GOLD(new Stones().stone3,15),
-        LAPIS(new Stones().stone4,20),
-        EMERALD(new Stones().stone5,25),
-        DIAMOND(new Stones().stone6,35),
-        STAFF(new Stones().staffst,75);
+        IRON(new Stones().stone2, 10),
+        GOLD(new Stones().stone3, 15),
+        LAPIS(new Stones().stone4, 20),
+        EMERALD(new Stones().stone5, 25),
+        DIAMOND(new Stones().stone6, 35),
+        STAFF(new Stones().staffst, 75);
 
         @Getter private ItemStack itemStack;
         @Getter private int area;

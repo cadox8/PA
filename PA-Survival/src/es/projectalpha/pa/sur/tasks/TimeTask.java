@@ -6,7 +6,6 @@ import es.projectalpha.pa.sur.PASurvival;
 import es.projectalpha.pa.sur.files.Files;
 import es.projectalpha.pa.sur.manager.Balance;
 import net.milkbowl.vault.economy.Economy;
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.scheduler.BukkitRunnable;
 
@@ -63,14 +62,11 @@ public class TimeTask extends BukkitRunnable {
                 if(min == 30 && seg == 0){
                     System.out.println(hora + ":" + min + ":" + seg);
                     int rd = new Random().nextInt(9999);
-                    Utils.broadcastMsg("&aHora de la lotería, los números ganadores son: &6" + rd + ".");
+                    Utils.broadcastMsg("&aHora de la lotería, el número ganador es: &6" + rd + ".");
 
                     Files.user.getStringList("Users").forEach(p ->{
-                        System.out.println(p);
                         Files.user.getStringList("Users." + p + ".bol").forEach(b ->{
-                            System.out.println(rd + ", numeros de los jugadores " + p + ": " + b);
                             if(Integer.parseInt(b) == rd){
-                                System.out.println("&aEl ganador de la lotería es " + p + ". Ha ganado " + Files.user.getInt("loteria") + "$");
                                 Utils.broadcastMsg("&aEl ganador de la lotería es " + p + ". Ha ganado " + Files.user.getInt("loteria") + "$");
                                 balance.addBalace(PASurvival.getPlayer(plugin.getServer().getOfflinePlayer(p)), Files.user.getInt("loteria"));
                                 Files.user.set("loteria", 0);
@@ -78,18 +74,13 @@ public class TimeTask extends BukkitRunnable {
                                 return;
                             }else{
                                 Utils.broadcastMsg("&cNo ha habido ningun ganador hoy, mañana habra otra oportunidad.");
-                                System.out.println("&cNo ha habido ningún ganador hoy, mañana habrá otra oportunidad.");
                                 Files.user.set("Users." + p + ".", "bol");
-                                Files.user.set("Users." + p + ".apos",0);
+                                Files.user.set("Users." + p + ".apos", 0);
                             }
                         });
                     });
-
-
                 }
                 break;
         }
     }
-
-
 }
