@@ -46,8 +46,8 @@ public class PABungee extends Plugin implements Listener {
     @EventHandler
     public void onChat(ChatEvent e) {
         ProxiedPlayer p = (ProxiedPlayer)e.getSender();
-        if (p.getServer().getInfo().getName().equalsIgnoreCase("login") && e.getMessage().startsWith("/lobby")) e.setCancelled(true);
-        if (e.getMessage().startsWith("/bungee")) e.setCancelled(true);
+
+        if (e.getMessage().startsWith("/bungee") || e.getMessage().startsWith("bungee")) e.setCancelled(true);
     }
 
     @EventHandler
