@@ -10,6 +10,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.scheduler.BukkitRunnable;
 
+import java.text.DecimalFormat;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.Random;
@@ -53,10 +54,13 @@ public class TimeTask extends BukkitRunnable {
                         Files.user.set("Users." + e + ".pimp", false);
                         Files.saveFiles();
                     });
+                    DecimalFormat df = new DecimalFormat("#.00");
+                    Files.user.set("recaudado", Files.user.getInt("recaudado") - Double.valueOf(df.format((Files.user.getInt("recaudado") * 0.1))));
+                    Files.user.set("loteria", Files.user.getInt("loteria") + Double.valueOf(df.format((Files.user.getInt("recaudado") * 0.1))));
                 }
                 break;
-            case 13:
-                if(min == 34 && seg == 0){
+            case 18:
+                if(min == 30 && seg == 0){
                     System.out.println(hora + ":" + min + ":" + seg);
                     int rd = new Random().nextInt(9999);
                     Utils.broadcastMsg("&aHora de la lotería, los números ganadores son: &6" + rd + ".");

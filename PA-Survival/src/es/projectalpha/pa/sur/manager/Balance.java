@@ -44,8 +44,6 @@ public final class Balance {
         DecimalFormat df = new DecimalFormat("#.00");
         saveBalance(p);
         Files.user.set("recaudado", Files.user.getInt("recaudado") + amount);
-        Files.user.set("recaudado", Files.user.getInt("recaudado") - Double.valueOf(df.format((Files.user.getInt("recaudado") * 0.1))));
-        Files.user.set("loteria", Files.user.getInt("loteria") + Double.valueOf(df.format((Files.user.getInt("recaudado") * 0.1))));
         Files.user.set("Users." + p.getName() + ".imprec", Files.user.getInt("Users." + p.getName() + ".imprec") + amount);
         removeBalance(p, amount);
         saveBalance(p);
