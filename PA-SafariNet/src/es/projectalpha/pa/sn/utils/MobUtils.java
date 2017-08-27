@@ -21,6 +21,7 @@ public class MobUtils {
         mobs.add(EntityType.EVOKER);
         mobs.add(EntityType.VEX);
         mobs.add(EntityType.SLIME);
+        mobs.add(EntityType.ILLUSIONER);
         return mobs;
     }
 
@@ -79,6 +80,14 @@ public class MobUtils {
 
     public boolean isRabbit(Entity e){
         return e.getType() == EntityType.RABBIT;
+    }
+
+    public boolean isParrot(Entity e) {
+        return e.getType() == EntityType.PARROT;
+    }
+
+    public boolean isShulker(Entity e) {
+        return e.getType() == EntityType.SHULKER;
     }
 }
 

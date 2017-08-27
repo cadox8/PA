@@ -57,6 +57,7 @@ public class Files {
             config.set("coste.OCELOT", 10);
             config.set("coste.PIG", 10);
             config.set("coste.GUARDIAN", 10);
+            config.set("coste.PARROT", 10);
 
             //Words
             List<String> worlds = new ArrayList<>();

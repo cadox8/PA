@@ -177,6 +177,22 @@ public class SNMob {
         return r.getRabbitType();
     }
 
+    //Parrot
+    public Parrot.Variant getVariant() {
+        Parrot p;
+        if (!mu.isParrot(entity)) return null;
+        p = (Parrot) entity;
+        return p.getVariant();
+    }
+
+    //Shulker
+    public DyeColor getShulkerColor() {
+        Shulker s;
+        if (!mu.isSheep(entity)) return null;
+        s = (Shulker)entity;
+        return s.getColor();
+    }
+
     //Utils
     private LivingEntity getLivingEntity(){
         return (LivingEntity)entity;
@@ -222,6 +238,9 @@ public class SNMob {
         if (mu.isCreeper(entity)) settings.put("powered", String.valueOf(isChargedCreeper()));
         //Rabbit
         if (mu.isRabbit(entity)) settings.put("rabbitType", getRabbitType().toString());
+        //Parrot
+        if (mu.isParrot(entity)) settings.put("parrotType", getVariant().toString());
+        if (mu.isParrot(entity)) settings.put("tamed", String.valueOf(isTamed()));
 
         //
         String path = player.getName() + "_" + files.getMobsCount(player) + ".";
@@ -264,6 +283,8 @@ public class SNMob {
         if (files.getMobs().contains(path + ".recipes")) settings.put("recipes", files.getMobs().getString(path + ".recipes"));
         if (files.getMobs().contains(path + ".powered")) settings.put("powered", files.getMobs().getString(path + ".powered"));
         if (files.getMobs().contains(path + ".rabbitType")) settings.put("rabbitType", files.getMobs().getString(path + ".rabbitType"));
+        if (files.getMobs().contains(path + ".parrotType")) settings.put("parrotType", files.getMobs().getString(path + ".parrotType"));
+        if (files.getMobs().contains(path + ".shul")) settings.put("shul", files.getMobs().getString(path + ".shul"));
 
         return settings;
     }
@@ -286,7 +307,7 @@ public class SNMob {
         Villager.Profession professionZombie = settings.keySet().contains("professionZombie") ?  Villager.Profession.valueOf(settings.get("professionZombie")) : Villager.Profession.BLACKSMITH;
         double JumpStrenght = settings.keySet().contains("jump") ? Double.parseDouble(settings.get("jump")) : new Random().nextInt(5) + 1;
         int domestication = settings.keySet().contains("domestication") ? Integer.parseInt(settings.get("domestication")) : 0;
-        boolean isTamed = settings.keySet().contains("tamed") ? Boolean.parseBoolean(settings.get("tamed")) : false;
+        boolean isTamed = Boolean.parseBoolean(settings.get("tamed"));
         Horse.Color horseColor = settings.keySet().contains("horseColor") ? Horse.Color.valueOf(settings.get("horseColor")) : Horse.Color.BLACK;
         Horse.Style horseStyle = settings.keySet().contains("horseStyle") ? Horse.Style.valueOf(settings.get("horseStyle")) : Horse.Style.NONE;
         boolean hasChest = settings.keySet().contains("chest") ? Boolean.valueOf(settings.get("chest")) : false;
@@ -294,6 +315,8 @@ public class SNMob {
         int llamaStrength = settings.keySet().contains("llamaStrength") ? Integer.parseInt(settings.get("llamaStrength")) : 0;
         boolean powered = settings.keySet().contains("powered") ? Boolean.valueOf(settings.get("powered")) : false;
         Rabbit.Type rabbitType = settings.keySet().contains("rabbitType") ? Rabbit.Type.valueOf(settings.get("rabbitType")) : Rabbit.Type.BLACK;
+        Parrot.Variant parrotType = settings.keySet().contains("parrotType") ? Parrot.Variant.valueOf(settings.get("parrotType")) : Parrot.Variant.BLUE;
+        DyeColor shul = settings.keySet().contains("shul") ? DyeColor.valueOf(settings.get("shul")) : DyeColor.PURPLE;
 
         switch (EntityType.valueOf(entityTypeS)){
             case SHEEP:
@@ -547,6 +570,22 @@ public class SNMob {
                 sq.setCustomNameVisible(true);
                 sq.setMaxHealth(health);
                 sq.setHealth(health);
+                break;
+            case PARROT:
+                Parrot p = player.getWorld().spawn(player.getLocation(), Parrot.class);
+                p.setCustomName(name);
+                p.setCustomNameVisible(true);
+                p.setMaxHealth(health);
+                p.setHealth(health);
+                p.setVariant(parrotType);
+                break;
+            case SHULKER:
+                Shulker shu = player.getWorld().spawn(player.getLocation(), Shulker.class);
+                shu.setCustomName(name);
+                shu.setCustomNameVisible(true);
+                shu.setMaxHealth(health);
+                shu.setHealth(health);
+                shu.setColor(shul);
                 break;
         }
     }
