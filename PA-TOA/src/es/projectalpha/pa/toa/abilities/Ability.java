@@ -100,6 +100,13 @@ public class Ability {
                 FENIX.play(u);
                 name = FENIX.getName();
                 break;
+            case SOUL_SAND:
+                CADENAS.play(u);
+                name = CADENAS.getName();
+                break;
+            case EYE_OF_ENDER:
+                HALCON.play(u);
+                name = HALCON.getName();
             case POTION:
                 GUERRILLERO.play(u);
                 name = GUERRILLERO.getName();
