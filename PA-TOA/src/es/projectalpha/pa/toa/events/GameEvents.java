@@ -61,7 +61,8 @@ public class GameEvents implements Listener {
         final TOAUser u = TOA.getPlayer(e.getPlayer());
 
         if (e.getItem() != null) {
-            if (e.getItem().getType() == Material.WRITTEN_BOOK) return;
+            Material m = e.getItem().getType();
+            if (m == Material.WRITTEN_BOOK || m == Material.BOW || m == Material.SHEARS || m == Material.DIAMOND_SWORD) return;
             Ability.useAbility(u, e.getItem().getType());
             e.setCancelled(true);
         }
