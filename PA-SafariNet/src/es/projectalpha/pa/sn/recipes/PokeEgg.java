@@ -1,9 +1,11 @@
 package es.projectalpha.pa.sn.recipes;
 
+import es.projectalpha.pa.core.PACore;
 import es.projectalpha.pa.core.utils.ItemMaker;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.NamespacedKey;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
@@ -21,7 +23,7 @@ public class PokeEgg {
     public void registerRecipe(){
         ItemStack i = getPokeEgg();
 
-        ShapedRecipe pokeEgg = new ShapedRecipe(i);
+        ShapedRecipe pokeEgg = new ShapedRecipe(new NamespacedKey(PACore.getInstance(), "pa"), i);
 
         pokeEgg.shape("BAB", "DCD", "BAB");
 
