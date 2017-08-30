@@ -4,7 +4,6 @@ import com.sk89q.worldguard.protection.ApplicableRegionSet;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 import es.projectalpha.pa.sn.SNMob;
 import es.projectalpha.pa.sn.SafariNet;
-import es.projectalpha.pa.sn.files.Files;
 import es.projectalpha.pa.sn.recipes.PokeEgg;
 import es.projectalpha.pa.sn.utils.MobUtils;
 import es.projectalpha.pa.sn.utils.VaultUtils;
@@ -23,7 +22,6 @@ import org.bukkit.event.player.PlayerEggThrowEvent;
  */
 public class CatchMob implements Listener{
 
-    private Files files = new Files();
     private MobUtils mu = new MobUtils();
     private PokeEgg pe = new PokeEgg();
     private VaultUtils vu = new VaultUtils();

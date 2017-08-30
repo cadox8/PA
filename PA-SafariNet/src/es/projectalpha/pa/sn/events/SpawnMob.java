@@ -4,7 +4,6 @@ import com.sk89q.worldguard.protection.ApplicableRegionSet;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 import es.projectalpha.pa.sn.SNMob;
 import es.projectalpha.pa.sn.SafariNet;
-import es.projectalpha.pa.sn.files.Files;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -20,7 +19,6 @@ import org.bukkit.inventory.EquipmentSlot;
  */
 public class SpawnMob implements Listener{
 
-    private Files files = new Files();
     private SafariNet plugin;
 
     public SpawnMob(SafariNet Main){

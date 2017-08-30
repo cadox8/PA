@@ -12,7 +12,7 @@ public class Merchant {
 
     public Merchant(ItemStack needed, ItemStack other, ItemStack result) {
         setNeeded(needed);
-        if (other == null) setOther(other);
+        if (other != null) setOther(other);
         setResult(result);
     }
 
