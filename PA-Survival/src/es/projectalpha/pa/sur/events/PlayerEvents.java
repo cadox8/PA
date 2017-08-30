@@ -13,6 +13,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -165,6 +166,38 @@ public class PlayerEvents implements Listener{
             if (plugin.getMineTask().getBlocks().containsKey(u)) {
                 plugin.getMineTask().getBlocks().remove(u, plugin.getMineTask().getBlocks().get(u));
                 return;
+            }
+        }
+    }
+
+    @EventHandler
+    public void onConsume(PlayerItemConsumeEvent e) {
+        SurvivalUser u = PASurvival.getPlayer(e.getPlayer());
+
+        if (e.getItem().getType() == Material.BREAD && e.getItem().hasItemMeta()) {
+            if (e.getItem().getEnchantments().keySet().contains(Enchantment.ARROW_DAMAGE)) {
+                String name = ChatColor.stripColor(e.getItem().getItemMeta().getDisplayName());
+                if (name.equalsIgnoreCase("Bocadillo de Jamón")) {
+                    e.setCancelled(true);
+                    e.setItem(null);
+                    if (u.getPlayer().getFoodLevel() + 5 > 20) {
+                        u.getPlayer().setFoodLevel(20);
+                    } else {
+                        u.getPlayer().setFoodLevel(u.getPlayer().getFoodLevel() + 5);
+                    }
+                    u.getPlayer().setSaturation(3F);
+                }
+
+                if (name.equalsIgnoreCase("Hamburguesa Artesana")) {
+                    e.setCancelled(true);
+                    e.setItem(null);
+                    if (u.getPlayer().getFoodLevel() + 6 > 20) {
+                        u.getPlayer().setFoodLevel(20);
+                    } else {
+                        u.getPlayer().setFoodLevel(u.getPlayer().getFoodLevel() + 6);
+                    }
+                    u.getPlayer().setSaturation(4F);
+                }
             }
         }
     }

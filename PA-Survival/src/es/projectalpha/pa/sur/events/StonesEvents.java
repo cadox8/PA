@@ -1,13 +1,9 @@
 package es.projectalpha.pa.sur.events;
 
-import es.projectalpha.pa.core.api.PAData;
-import es.projectalpha.pa.core.cmd.PACmd;
 import es.projectalpha.pa.core.utils.CuboidZone;
-import es.projectalpha.pa.core.utils.Utils;
 import es.projectalpha.pa.sur.PASurvival;
 import es.projectalpha.pa.sur.files.Files;
 import es.projectalpha.pa.sur.utils.Stones;
-import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -15,12 +11,8 @@ import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
-import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
-import org.bukkit.event.block.BlockBreakEvent;
-import org.bukkit.event.block.BlockPlaceEvent;
-import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 
 import java.util.ArrayList;
@@ -42,12 +34,9 @@ public class StonesEvents implements Listener {
         Block b2;
         CuboidZone cz;
 
-        System.out.println(1);
         if (e.getItem() == null) {
-            System.out.println(2);
             if (e.getAction() == Action.RIGHT_CLICK_BLOCK) {
                 if (p.getInventory().getItemInMainHand() != null) return;
-                System.out.println(3);
                 b = e.getClickedBlock();
                 if (isStairs(b.getType())) {
                     if (!p.isSneaking() && p.getVehicle() != null) {
@@ -55,7 +44,6 @@ public class StonesEvents implements Listener {
                         return;
                     }
                     p.setSneaking(false);
-                    System.out.println(4);
 
                     Location l = b.getLocation().add(0.5, -1.3, 0.3);
 
@@ -94,7 +82,7 @@ public class StonesEvents implements Listener {
             }
         }
 
-        Location l = b.getLocation();
+        /*Location l = b.getLocation();
 
         for (Stones.StoneType st : Stones.StoneType.values()) {
             if (st.getItemStack().getType() == e.getItem().getType()) {
@@ -136,10 +124,10 @@ public class StonesEvents implements Listener {
                 p.sendMessage(PAData.SURVIVAL.getPrefix() + ChatColor.GREEN + "Zona protegida, tamaño " + area + "x" + area + "x" + area);
                 Files.saveFiles();
             }
-        }
+        }*/
     }
 
-    @EventHandler
+   /* @EventHandler
     public void onPlace(BlockPlaceEvent e) {
         Player p = e.getPlayer();
         Location l = p.getLocation();
@@ -209,7 +197,7 @@ public class StonesEvents implements Listener {
                 });
             });
         }
-    }
+    }*/
 
     private boolean isStairs(Material m) {
         List<Material> stairs = new ArrayList<>();

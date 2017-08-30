@@ -7,9 +7,10 @@ import es.projectalpha.pa.sur.cmd.*;
 import es.projectalpha.pa.sur.events.IronElevators;
 import es.projectalpha.pa.sur.events.PlayerEvents;
 import es.projectalpha.pa.sur.events.PvPEvent;
-import es.projectalpha.pa.sur.events.Sit;
+import es.projectalpha.pa.sur.events.StonesEvents;
 import es.projectalpha.pa.sur.files.Files;
 import es.projectalpha.pa.sur.manager.PvPManager;
+import es.projectalpha.pa.sur.recipes.Bocatas;
 import es.projectalpha.pa.sur.tasks.MineTask;
 import es.projectalpha.pa.sur.tasks.TimeTask;
 import lombok.Getter;
@@ -31,6 +32,7 @@ public class PASurvival extends JavaPlugin {
     public static ArrayList<SurvivalUser> players = new ArrayList<>();
 
     @Getter private Files files = new Files();
+    @Getter private Bocatas bocatas;
     @Getter private PvPManager manager;
     @Getter private Economy vault;
     @Getter private TimeTask timeTask;
@@ -42,12 +44,18 @@ public class PASurvival extends JavaPlugin {
     public void onEnable() {
         instance = this;
         manager = new PvPManager();
+
         files.setupFiles();
         setupEconomy();
+
         PACommands.register(new StonesCMD(), new RecaudadoCMD(), new PvPCMD(), new LoteriaCMD(),
                 new Cash2xp(), new Exp2cash(), new XPbalance(), new Cadox8CMD(), new MineCMD());
+
         registerEvents();
 
+        bocatas = new Bocatas();
+        bocatas.bocataJamon();
+        bocatas.hamburguesa();
 
         timeTask = new TimeTask(instance);
         mineTask = new MineTask(instance);
@@ -59,8 +67,7 @@ public class PASurvival extends JavaPlugin {
         pm.registerEvents(new IronElevators(), instance);
         pm.registerEvents(new PlayerEvents(instance), instance);
         pm.registerEvents(new PvPEvent(), instance);
-        pm.registerEvents(new Sit(), instance);
-        //pm.registerEvents(new StonesEvents(), instance);
+        pm.registerEvents(new StonesEvents(), instance);
     }
 
     public static SurvivalUser getPlayer(OfflinePlayer p) {
