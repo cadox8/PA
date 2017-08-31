@@ -25,6 +25,7 @@ import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.CreatureSpawnEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.*;
+import org.bukkit.inventory.ItemStack;
 
 import java.text.DecimalFormat;
 import java.util.Random;
@@ -173,33 +174,39 @@ public class PlayerEvents implements Listener{
         }
     }
 
-    @EventHandler
-    public void onConsume(PlayerItemConsumeEvent e) {
+    @EventHandler(priority = EventPriority.HIGHEST)
+    public void onConsume(PlayerInteractEvent e) {
         SurvivalUser u = PASurvival.getPlayer(e.getPlayer());
+
+        if (e.getItem() == null) return;
 
         if (e.getItem().getType() == Material.BREAD && e.getItem().hasItemMeta()) {
             if (e.getItem().getEnchantments().keySet().contains(Enchantment.ARROW_DAMAGE)) {
                 String name = ChatColor.stripColor(e.getItem().getItemMeta().getDisplayName());
+                ItemStack i = u.getPlayer().getInventory().getItemInMainHand();
+
+                if (u.getPlayer().getFoodLevel() >= 20) return;
+
                 if (name.equalsIgnoreCase("Bocadillo de Jamón")) {
-                    e.setCancelled(true);
-                    e.setItem(null);
                     if (u.getPlayer().getFoodLevel() + 5 > 20) {
                         u.getPlayer().setFoodLevel(20);
                     } else {
                         u.getPlayer().setFoodLevel(u.getPlayer().getFoodLevel() + 5);
                     }
                     u.getPlayer().setSaturation(3F);
+                    i.setAmount(i.getAmount() - 1);
+                    u.getPlayer().getInventory().setItemInMainHand(i);
                 }
 
                 if (name.equalsIgnoreCase("Hamburguesa Artesana")) {
-                    e.setCancelled(true);
-                    e.setItem(null);
                     if (u.getPlayer().getFoodLevel() + 6 > 20) {
                         u.getPlayer().setFoodLevel(20);
                     } else {
                         u.getPlayer().setFoodLevel(u.getPlayer().getFoodLevel() + 6);
                     }
                     u.getPlayer().setSaturation(4F);
+                    i.setAmount(i.getAmount() - 1);
+                    u.getPlayer().getInventory().setItemInMainHand(i);
                 }
             }
         }
