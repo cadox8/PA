@@ -15,16 +15,19 @@ import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Entity;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
+import org.bukkit.event.entity.CreatureSpawnEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.*;
 
 import java.text.DecimalFormat;
+import java.util.Random;
 
 
 public class PlayerEvents implements Listener{
@@ -197,6 +200,18 @@ public class PlayerEvents implements Listener{
                         u.getPlayer().setFoodLevel(u.getPlayer().getFoodLevel() + 6);
                     }
                     u.getPlayer().setSaturation(4F);
+                }
+            }
+        }
+    }
+
+    @EventHandler
+    public void onCreatureSpawn(CreatureSpawnEvent e) {
+        if (e.getSpawnReason() == CreatureSpawnEvent.SpawnReason.SPAWNER) {
+            if (e.getEntity().getWorld().getName().equalsIgnoreCase("world_nether") || e.getEntity().getWorld().getName().equalsIgnoreCase("Nether")) {
+                if (e.getEntity().getType() == EntityType.SKELETON) {
+                    e.setCancelled(true);
+                    if (new Random().nextInt(11) > 2) e.getEntity().getWorld().spawnEntity(e.getLocation(), EntityType.WITHER_SKELETON);
                 }
             }
         }

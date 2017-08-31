@@ -44,7 +44,12 @@ public class PASurvival extends JavaPlugin {
     public void onEnable() {
         instance = this;
         manager = new PvPManager();
+        bocatas = new Bocatas();
+        bocatas.bocataJamon();
+        bocatas.hamburguesa();
 
+        timeTask = new TimeTask(instance);
+        mineTask = new MineTask(instance);
         files.setupFiles();
         setupEconomy();
 
@@ -52,13 +57,6 @@ public class PASurvival extends JavaPlugin {
                 new Cash2xp(), new Exp2cash(), new XPbalance(), new Cadox8CMD(), new MineCMD());
 
         registerEvents();
-
-        bocatas = new Bocatas();
-        bocatas.bocataJamon();
-        bocatas.hamburguesa();
-
-        timeTask = new TimeTask(instance);
-        mineTask = new MineTask(instance);
         timeTask.runTaskTimer(instance, 0, 15);
     }
 
