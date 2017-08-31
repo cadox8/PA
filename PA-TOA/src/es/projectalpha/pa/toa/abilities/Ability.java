@@ -68,6 +68,9 @@ public class Ability {
     protected void play(TOAUser u) {}
 
     protected boolean canUse(TOAUser u) {
+        System.out.println(u.getUserData().getKit());
+        System.out.println(race.getId());
+        System.out.println(u.getUserData().getKit() == race.getId());
         return u.getUserData().getKit() == race.getId();
     }
 

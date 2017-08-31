@@ -74,7 +74,7 @@ public class PlayerEvents implements Listener {
             int level = Utils.isInt(name) ? Integer.parseInt(name) : 0;
             double damage = 10 + (level * 0.8);
 
-            if (Ability.getAbilities().get(Ability.AbilityType.ESCUDO).contains(u)) damage = damage - (0.75 * damage);
+            if (!Ability.getAbilities().isEmpty() && Ability.getAbilities().get(Ability.AbilityType.ESCUDO).contains(u)) damage = damage - (0.75 * damage);
 
             if (plugin.getHealth().getHealth(u) - damage <= 0) {
                 u.death();
@@ -98,8 +98,8 @@ public class PlayerEvents implements Listener {
                 damage = 20;
             }
 
-            if (Ability.getAbilities().get(Ability.AbilityType.GOLPE_CERTERO).contains(u)) multi = 2.3;
-            if (Ability.getAbilities().get(Ability.AbilityType.SUSPIRO).contains(u)) {
+            if (!Ability.getAbilities().isEmpty() && Ability.getAbilities().get(Ability.AbilityType.GOLPE_CERTERO).contains(u)) multi = 2.3;
+            if (!Ability.getAbilities().isEmpty() && Ability.getAbilities().get(Ability.AbilityType.SUSPIRO).contains(u)) {
                 multi = multi + 1.5;
                 plugin.getHealth().regen(u, 0.2 * ((Monster) e.getEntity()).getHealth());
             }

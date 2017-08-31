@@ -12,6 +12,9 @@ public class InfoTask extends BukkitRunnable {
     }
 
     public void run() {
-        plugin.getGm().getInTower().forEach(u -> u.sendActionBar("&4VIDA: &6" + plugin.getHealth().getHealth(u)));
+        plugin.getGm().getInTower().forEach(u -> {
+            if (u == null || !u.isOnline()) return;
+            u.sendActionBar("&4VIDA: &6" + plugin.getHealth().getHealth(u));
+        });
     }
 }

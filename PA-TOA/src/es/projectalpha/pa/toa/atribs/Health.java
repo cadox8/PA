@@ -18,6 +18,11 @@ public class Health {
     }
 
     public void setHealth(TOAUser u, double value) {
+        if (!health.containsKey(u)) {
+            health.put(u, value);
+            return;
+        }
+
         if (value >= healthPerLevel(u)) {
             health.put(u, healthPerLevel(u));
             return;
