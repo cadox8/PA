@@ -1,6 +1,5 @@
 package es.projectalpha.pa.toa.abilities.picaro;
 
-import es.projectalpha.pa.core.utils.Cooldown;
 import es.projectalpha.pa.toa.abilities.Ability;
 import es.projectalpha.pa.toa.api.TOAUser;
 import es.projectalpha.pa.toa.races.Race;
@@ -37,7 +36,6 @@ public class Dagas extends Ability {
                 });
             }, 0, 20);
         }
-
-        new Cooldown(getCooldown()).setOnCooldown(getName());
+        cool.setOnCooldown(getName());
     }
 }

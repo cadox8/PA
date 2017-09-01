@@ -3,6 +3,7 @@ package es.projectalpha.pa.toa.tasks;
 import es.projectalpha.pa.toa.TOA;
 import lombok.Getter;
 import lombok.Setter;
+import org.bukkit.entity.Entity;
 import org.bukkit.scheduler.BukkitRunnable;
 
 public class SpawnTask extends BukkitRunnable {
@@ -27,6 +28,6 @@ public class SpawnTask extends BukkitRunnable {
 
     public void removeAll() {
         if (plugin.getAm().mobs.isEmpty()) return;
-        plugin.getAm().mobs.get(0).getL().getWorld().getEntities().forEach(e -> e.remove());
+        plugin.getAm().mobs.get(0).getLocation().getWorld().getEntities().forEach(Entity::remove);
     }
 }

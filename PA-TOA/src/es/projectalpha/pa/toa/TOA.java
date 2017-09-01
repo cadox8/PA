@@ -8,7 +8,7 @@ import es.projectalpha.pa.toa.cmd.MobsCMD;
 import es.projectalpha.pa.toa.cmd.MochilaCMD;
 import es.projectalpha.pa.toa.cmd.RaceCMD;
 import es.projectalpha.pa.toa.cmd.ShopsCMD;
-import es.projectalpha.pa.toa.drops.DropsManager;
+import es.projectalpha.pa.toa.drops.Drop;
 import es.projectalpha.pa.toa.events.BagEvents;
 import es.projectalpha.pa.toa.events.GameEvents;
 import es.projectalpha.pa.toa.events.PlayerEvents;
@@ -34,7 +34,6 @@ public class TOA extends JavaPlugin {
 
     @Getter private ArenaManager am;
     @Getter private GameManager gm;
-    @Getter private DropsManager drops;
     @Getter private FileUtils fileUtils;
     @Getter private Health health;
     @Getter private Armor armor;
@@ -60,7 +59,7 @@ public class TOA extends JavaPlugin {
         fileUtils = new FileUtils();
         am = new ArenaManager(instance);
         gm = new GameManager(instance);
-        drops = new DropsManager();
+        Drop.registerDrop(Drop.ARROW, Drop.ROTTEN, Drop.ROD);
         spawnTask = new SpawnTask(instance);
         health = new Health(instance);
         armor = new Armor(instance);

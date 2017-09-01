@@ -6,7 +6,7 @@ import es.projectalpha.pa.core.utils.Utils;
 import es.projectalpha.pa.toa.TOA;
 import es.projectalpha.pa.toa.abilities.Ability;
 import es.projectalpha.pa.toa.api.TOAUser;
-import es.projectalpha.pa.toa.drops.DropsManager;
+import es.projectalpha.pa.toa.drops.Drop;
 import es.projectalpha.pa.toa.manager.Experience;
 import es.projectalpha.pa.toa.mobs.Mob;
 import es.projectalpha.pa.toa.mobs.MobType;
@@ -41,7 +41,7 @@ public class GameEvents implements Listener {
             e.getDrops().clear();
             e.setDroppedExp(0);
 
-            DropsManager.drop(MobType.parseMobType(e.getEntityType()), u.getUserData().getKit()).forEach(d -> {
+            Drop.drop(MobType.parseMobType(e.getEntityType()), u.getUserData().getKit()).forEach(d -> {
                 BagEvents.addItem(u, d);
                 u.sendSound(Sounds.ITEM_PICKUP);
             });

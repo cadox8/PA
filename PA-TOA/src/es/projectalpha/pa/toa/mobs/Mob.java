@@ -7,16 +7,16 @@ public class Mob {
 
     @Getter private int level;
     @Getter private MobType mobType;
-    @Getter private Location l;
+    @Getter private Location location;
 
-    public Mob(int level, MobType mobType, Location l) {
+    public Mob(int level, MobType mobType, Location location) {
         this.level = level;
         this.mobType = mobType;
-        this.l = l;
+        this.location = location;
     }
 
     public void spawn() {
-        Mobs mobs = new Mobs(l, level);
+        Mobs mobs = new Mobs(location, level);
         int health = getHealth(mobType);
 
         switch (mobType) {

@@ -58,11 +58,13 @@ public class Ability {
     @Getter private String name;
     @Getter private Race.RaceType race;
     @Getter private int cooldown;
+    protected Cooldown cool;
 
     public Ability(String name, int cooldown, Race.RaceType race) {
         this.name = name;
         this.cooldown = cooldown;
         this.race = race;
+        cool = new Cooldown(cooldown);
     }
 
     protected void play(TOAUser u) {}

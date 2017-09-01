@@ -1,6 +1,5 @@
 package es.projectalpha.pa.toa.abilities.tank;
 
-import es.projectalpha.pa.core.utils.Cooldown;
 import es.projectalpha.pa.toa.abilities.Ability;
 import es.projectalpha.pa.toa.api.TOAUser;
 import es.projectalpha.pa.toa.races.Race;
@@ -26,6 +25,6 @@ public class GolpeCertero extends Ability {
             k.remove(u);
             getAbilities().put(AbilityType.GOLPE_CERTERO, k);
         }, 20 * 10);
-        new Cooldown(getCooldown()).setOnCooldown(getName());
+        cool.setOnCooldown(getName());
     }
 }

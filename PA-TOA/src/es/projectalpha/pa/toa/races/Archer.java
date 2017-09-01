@@ -15,8 +15,8 @@ public class Archer extends Race {
     public void setItems(Player p) {
         p.getInventory().setItem(0, new ItemMaker(Material.BOW).addEnchant(Enchantment.ARROW_INFINITE, 1).setUnbreakable().build());
 
-        p.getInventory().setItem(3, new ItemMaker(Material.POTION).setDisplayName("Guerrillero").build());
-        p.getInventory().setItem(3, new ItemMaker(Material.SOUL_SAND).setDisplayName("Cadenas").build());
+        p.getInventory().setItem(4, new ItemMaker(Material.POTION).setDisplayName("Guerrillero").build());
+        p.getInventory().setItem(5, new ItemMaker(Material.SOUL_SAND).setDisplayName("Cadenas").build());
 
         p.getInventory().setItem(8, new ItemMaker(Material.BLAZE_POWDER).setDisplayName("Fenix").build());
 

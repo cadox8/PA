@@ -1,6 +1,5 @@
 package es.projectalpha.pa.toa.abilities.archer;
 
-import es.projectalpha.pa.core.utils.Cooldown;
 import es.projectalpha.pa.toa.abilities.Ability;
 import es.projectalpha.pa.toa.api.TOAUser;
 import es.projectalpha.pa.toa.races.Race;
@@ -26,6 +25,6 @@ public class Fenix extends Ability {
             k.remove(u);
             getAbilities().put(AbilityType.FENIX, k);
         }, 20 * 7);
-        new Cooldown(getCooldown()).setOnCooldown(getName());
+        cool.setOnCooldown(getName());
     }
 }

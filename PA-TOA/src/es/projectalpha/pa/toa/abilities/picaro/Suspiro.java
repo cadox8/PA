@@ -1,6 +1,5 @@
 package es.projectalpha.pa.toa.abilities.picaro;
 
-import es.projectalpha.pa.core.utils.Cooldown;
 import es.projectalpha.pa.toa.abilities.Ability;
 import es.projectalpha.pa.toa.api.TOAUser;
 import es.projectalpha.pa.toa.races.Race;
@@ -26,7 +25,6 @@ public class Suspiro extends Ability {
             k.remove(u);
             getAbilities().put(AbilityType.SUSPIRO, k);
         }, 20 * 3);
-
-        new Cooldown(getCooldown()).setOnCooldown(getName());
+        cool.setOnCooldown(getName());
     }
 }

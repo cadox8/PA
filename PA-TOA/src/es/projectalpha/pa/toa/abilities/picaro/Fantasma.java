@@ -1,6 +1,5 @@
 package es.projectalpha.pa.toa.abilities.picaro;
 
-import es.projectalpha.pa.core.utils.Cooldown;
 import es.projectalpha.pa.toa.abilities.Ability;
 import es.projectalpha.pa.toa.api.TOAUser;
 import es.projectalpha.pa.toa.races.Race;
@@ -20,7 +19,6 @@ public class Fantasma extends Ability {
         u.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY, 100, 0, true, false));
         u.getPlayer().setWalkSpeed(0.4f);
         plugin.getServer().getScheduler().runTaskLater(plugin, () -> Race.parseRace(getRace().getId()).addEffects(u), 100);
-
-        new Cooldown(getCooldown()).setOnCooldown(getName());
+        cool.setOnCooldown(getName());
     }
 }

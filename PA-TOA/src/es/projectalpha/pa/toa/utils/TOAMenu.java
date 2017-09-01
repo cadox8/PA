@@ -4,6 +4,7 @@ import es.projectalpha.pa.core.api.PAUser;
 import es.projectalpha.pa.core.utils.ItemMaker;
 import es.projectalpha.pa.core.utils.Sounds;
 import es.projectalpha.pa.toa.TOA;
+import es.projectalpha.pa.toa.drops.Drop;
 import org.bukkit.inventory.Inventory;
 
 public class TOAMenu {
@@ -18,9 +19,9 @@ public class TOAMenu {
 
         //Servidores
         variado = plugin.getServer().createInventory(null, 9, "Vender Variado");
-        variado.setItem(0, new ItemMaker(plugin.getDrops().ARROW.getItem()).setLores("&3Precio venta x1: &c6 zenys").build());
-        variado.setItem(1, new ItemMaker(plugin.getDrops().ROTTEN.getItem()).setLores("&3Precio venta x1: &c6 zenys").build());
-        variado.setItem(2, new ItemMaker(plugin.getDrops().ROD.getItem()).setLores("&3Precio venta x1: &c8 zenys").build());
+        variado.setItem(0, new ItemMaker(Drop.ARROW.getItem()).setLores("&3Precio venta x1: &c6 zenys").build());
+        variado.setItem(1, new ItemMaker(Drop.ROTTEN.getItem()).setLores("&3Precio venta x1: &c6 zenys").build());
+        variado.setItem(2, new ItemMaker(Drop.ROD.getItem()).setLores("&3Precio venta x1: &c8 zenys").build());
 
         //Cosmeticos
         armas = plugin.getServer().createInventory(null, 9, "Vender Armas");
