@@ -9,7 +9,7 @@ import net.md_5.bungee.api.plugin.Command;
 public class CommandLobby extends Command {
 
     public CommandLobby() {
-        super("lobby", "", "");
+        super("lobby", "", null);
     }
 
     public void execute(CommandSender sender, String[] args) {
