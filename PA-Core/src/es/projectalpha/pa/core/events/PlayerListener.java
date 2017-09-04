@@ -8,6 +8,8 @@ import es.projectalpha.pa.core.cmd.PACmd;
 import es.projectalpha.pa.core.utils.Messages;
 import es.projectalpha.pa.core.utils.Utils;
 import org.apache.commons.lang.WordUtils;
+import org.bukkit.Material;
+import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -15,6 +17,8 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.SignChangeEvent;
 import org.bukkit.event.player.*;
 import org.bukkit.permissions.PermissionAttachment;
+
+import java.util.Set;
 
 public class PlayerListener implements Listener {
 
@@ -108,17 +112,19 @@ public class PlayerListener implements Listener {
         for (int i = 0; i < line.length; i++) e.setLine(i, Utils.colorize(line[i]));
     }
 
-/*    @EventHandler(priority = EventPriority.LOW)
+    @EventHandler(priority = EventPriority.LOW)
     public void onInteract(PlayerInteractEvent e) {
         PAUser u = PAServer.getUser(e.getPlayer());
 
+        if (e.getItem() == null) return;
+
         switch (e.getAction()) {
             case LEFT_CLICK_AIR:
-                if (u.isOnRank(PACmd.Grupo.Builder)) {
+                if (u.isOnRank(PACmd.Grupo.Builder) && e.getItem().getType() == Material.COMPASS) {
                     Block b = u.getPlayer().getTargetBlock((Set<Material>) null, 40);
                     u.teleport(b != null ? b.getLocation().add(0, 1, 0) : u.getLoc());
                 }
                 break;
         }
-    }*/
+    }
 }
