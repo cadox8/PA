@@ -5,6 +5,7 @@ import es.projectalpha.pa.core.api.PAServer;
 import es.projectalpha.pa.core.utils.Utils;
 import es.projectalpha.pa.sur.PASurvival;
 import es.projectalpha.pa.sur.api.SurvivalUser;
+import es.projectalpha.pa.sur.casino.Casino;
 import es.projectalpha.pa.sur.files.Files;
 import es.projectalpha.pa.sur.manager.Balance;
 import es.projectalpha.pa.sur.manager.PvPManager;
@@ -94,6 +95,12 @@ public class PlayerEvents implements Listener{
     public void BlockPlaceEvent(BlockPlaceEvent e){
         Player p = e.getPlayer();
         Block b = e.getBlock();
+
+        if (e.getItemInHand().getType() == Material.DROPPER && e.getItemInHand().getEnchantments() != null && e.getItemInHand().getEnchantments().containsKey(Enchantment.ARROW_DAMAGE)) {
+            Casino c = new Casino(e.getBlockPlaced().getLocation());
+            c.effect();
+        }
+
         for(Entity en : p.getNearbyEntities (4D, 4D, 4D)){
             if (en instanceof Player){
                 if(en == p) continue;

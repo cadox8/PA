@@ -21,6 +21,10 @@ public class Casino {
         new AnimationTask(this, u, in).runTaskTimer(plugin, 0, 20);
     }
 
+    public void effect() {
+
+    }
+
     public void reward(SurvivalUser u, double reward, ItemStack reward2) {
 
     }
