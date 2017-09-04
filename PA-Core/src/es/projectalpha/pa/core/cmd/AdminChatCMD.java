@@ -4,6 +4,7 @@ import es.projectalpha.pa.core.api.PAUser;
 import es.projectalpha.pa.core.utils.Utils;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
+import org.bukkit.command.ConsoleCommandSender;
 
 import java.util.Arrays;
 import java.util.List;
@@ -18,9 +19,17 @@ public class AdminChatCMD extends PACmd {
     public void run(PAUser user, String label, String[] args) {
         if (args.length > 0) {
             String message = Utils.buildString(args);
-            Utils.sendAdminMsg(user, message);
+            Utils.sendAdminMsg(user.getName(), message);
         } else {
             user.toggleAdminChat();
+        }
+    }
+
+    @Override
+    public void run(ConsoleCommandSender sender, String label, String[] args) {
+        if (args.length > 0) {
+            String message = Utils.buildString(args);
+            Utils.sendAdminMsg("Consola", message);
         }
     }
 

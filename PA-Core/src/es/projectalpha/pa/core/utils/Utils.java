@@ -26,11 +26,11 @@ public class Utils {
         return ChatColor.translateAlternateColorCodes('&', s);
     }
 
-    public static void sendAdminMsg(PAUser user, String msg) {
+    public static void sendAdminMsg(String name, String msg) {
         plugin.getServer().getOnlinePlayers().forEach(p -> {
             PAUser u = PAServer.getUser(p);
             if (u.isOnRank(PACmd.Grupo.Builder)) {
-                u.sendMessage("&0[&2A&0] &3" + user.getName() + "&r: " + Utils.colorize(msg));
+                u.sendMessage("&0[&2A&0] &3" + name + "&r: " + Utils.colorize(msg));
                 u.sendSound(Sounds.ANVIL_BREAK);
             }
         });

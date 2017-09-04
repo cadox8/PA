@@ -8,8 +8,6 @@ import es.projectalpha.pa.core.cmd.PACmd;
 import es.projectalpha.pa.core.utils.Messages;
 import es.projectalpha.pa.core.utils.Utils;
 import org.apache.commons.lang.WordUtils;
-import org.bukkit.Material;
-import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -17,8 +15,6 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.SignChangeEvent;
 import org.bukkit.event.player.*;
 import org.bukkit.permissions.PermissionAttachment;
-
-import java.util.Set;
 
 public class PlayerListener implements Listener {
 
@@ -79,7 +75,7 @@ public class PlayerListener implements Listener {
 
         //AdminChat
         if (PAServer.getAdminChatMode().contains(user)) {
-            Utils.sendAdminMsg(user, e.getMessage());
+            Utils.sendAdminMsg(user.getName(), e.getMessage());
             e.setCancelled(true);
         }
 
@@ -112,7 +108,7 @@ public class PlayerListener implements Listener {
         for (int i = 0; i < line.length; i++) e.setLine(i, Utils.colorize(line[i]));
     }
 
-    @EventHandler(priority = EventPriority.LOW)
+/*    @EventHandler(priority = EventPriority.LOW)
     public void onInteract(PlayerInteractEvent e) {
         PAUser u = PAServer.getUser(e.getPlayer());
 
@@ -126,5 +122,5 @@ public class PlayerListener implements Listener {
                 }
                 break;
         }
-    }
+    }*/
 }

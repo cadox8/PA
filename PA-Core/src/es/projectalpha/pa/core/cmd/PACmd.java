@@ -30,7 +30,7 @@ public abstract class PACmd {
     }
 
     public PACmd(final String name, final Grupo grupo, final String... aliases) {
-        this(name, grupo, Arrays.asList(aliases));
+        this(name, grupo, aliases.length > 0 ? Arrays.asList(aliases) : null);
     }
 
     public PACmd(final String name, final Grupo grupo) {
