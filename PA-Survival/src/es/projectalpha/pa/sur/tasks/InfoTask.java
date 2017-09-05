@@ -24,6 +24,8 @@ public class InfoTask extends BukkitRunnable {
     }
 
     public void run() {
-        PASurvival.players.forEach(u -> u.sendMessage(prefix + msgs.get(new Random().nextInt(msgs.size()))));
+        PASurvival.players.forEach(u -> {
+            if (u.isOnline() || u != null) u.sendMessage(prefix + msgs.get(new Random().nextInt(msgs.size())));
+        });
     }
 }
