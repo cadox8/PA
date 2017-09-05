@@ -11,6 +11,7 @@ import es.projectalpha.pa.sur.events.StonesEvents;
 import es.projectalpha.pa.sur.files.Files;
 import es.projectalpha.pa.sur.manager.PvPManager;
 import es.projectalpha.pa.sur.recipes.Bocatas;
+import es.projectalpha.pa.sur.tasks.InfoTask;
 import es.projectalpha.pa.sur.tasks.MineTask;
 import es.projectalpha.pa.sur.tasks.TimeTask;
 import lombok.Getter;
@@ -58,6 +59,7 @@ public class PASurvival extends JavaPlugin {
 
         registerEvents();
         timeTask.runTaskTimer(instance, 0, 15);
+        new InfoTask().runTaskTimer(instance, 5 * 60 * 20, 20);
     }
 
     private void registerEvents(){
