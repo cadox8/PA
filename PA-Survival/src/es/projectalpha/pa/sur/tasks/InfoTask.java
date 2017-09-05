@@ -1,5 +1,6 @@
 package es.projectalpha.pa.sur.tasks;
 
+import es.projectalpha.pa.core.utils.Utils;
 import es.projectalpha.pa.sur.PASurvival;
 import org.bukkit.scheduler.BukkitRunnable;
 
@@ -24,8 +25,8 @@ public class InfoTask extends BukkitRunnable {
     }
 
     public void run() {
-        PASurvival.players.forEach(u -> {
-            if (u.isOnline() || u != null) u.sendMessage(prefix + msgs.get(new Random().nextInt(msgs.size())));
+        PASurvival.getInstance().getServer().getOnlinePlayers().forEach(p -> {
+            p.sendMessage(Utils.colorize(prefix + msgs.get(new Random().nextInt(msgs.size()))));
         });
     }
 }

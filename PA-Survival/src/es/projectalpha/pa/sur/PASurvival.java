@@ -59,7 +59,7 @@ public class PASurvival extends JavaPlugin {
 
         registerEvents();
         timeTask.runTaskTimer(instance, 0, 15);
-        new InfoTask().runTaskTimer(instance, 5 * 60 * 20, 20);
+        new InfoTask().runTaskTimer(instance, 5 * 60 * 20, 5 * 60 * 20);
     }
 
     private void registerEvents(){
