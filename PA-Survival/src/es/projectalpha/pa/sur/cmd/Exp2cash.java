@@ -28,7 +28,7 @@ public class Exp2cash extends PACmd{
         exp = new ExperienceManager(user.getPlayer());
 
         if(args.length == 0){
-            user.sendMessage(PAData.SURVIVAL.getPrefix() + "&cPara user este comando haz /exp2cash <numero:all>.");
+            user.sendMessage(PAData.SURVIVAL.getPrefix() + "&cPara usar este comando haz /exp2cash <numero:all>.");
         }
 
         if(args.length == 1){

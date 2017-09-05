@@ -12,12 +12,15 @@ import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
+import java.lang.reflect.Array;
+import java.util.Arrays;
+
 public class RecaudadoCMD extends PACmd {
 
     private PASurvival plugin = PASurvival.getInstance();
 
     public RecaudadoCMD() {
-        super("recaudado", Grupo.Usuario);
+        super("recaudado", Grupo.Usuario, Arrays.asList("impuestos", "rec", "imp"));
     }
 
     private Files files = plugin.getFiles();
