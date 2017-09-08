@@ -12,6 +12,8 @@ import es.projectalpha.pa.rage.manager.GameManager;
 import lombok.Getter;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.EntityType;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -28,11 +30,16 @@ public class RageGames extends JavaPlugin {
 
     public void onEnable() {
         instance = this;
-        PACommands.register(new PointSetCMD());
+
         files.setupFiles();
+
+        PACommands.register(new PointSetCMD());
         registerClasses();
         registerEvents();
+
         am.prepareWorld(Bukkit.getWorld("rga1"));
+        getServer().getWorlds().forEach(w -> w.getLivingEntities().stream().filter(e -> !e.getType().equals(EntityType.PLAYER)).forEach(Entity::remove));
+
         GameState.setState(GameState.LOBBY);
     }
 

@@ -5,7 +5,7 @@ import es.projectalpha.pa.core.cmd.PACmd;
 import es.projectalpha.pa.core.utils.Utils;
 import es.projectalpha.pa.rage.RageGames;
 import es.projectalpha.pa.rage.api.RagePlayer;
-import org.bukkit.GameMode;
+import es.projectalpha.pa.rage.tasks.SpectatorTask;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -48,12 +48,7 @@ public class PlayerEvents implements Listener {
 
             plugin.getServer().getScheduler().runTaskLater(plugin, () -> u.sendToLobby(), 20);
         } else {
-            u.getPlayer().setGameMode(GameMode.SPECTATOR);
-            u.getPlayer().teleport(plugin.getAm().getRandomSpawn());
-            plugin.getServer().getScheduler().runTaskTimer(plugin, () -> {
-                u.sendActionBar("&cEstas en modo espectador, pon &6/lobby &cpara salir");
-                if (u.getPlayer().getGameMode() != GameMode.SPECTATOR) u.getPlayer().setGameMode(GameMode.SPECTATOR);
-            }, 0, 20);
+            new SpectatorTask(plugin, u).runTaskTimer(plugin, 0, 20);
         }
     }
 
@@ -83,11 +78,13 @@ public class PlayerEvents implements Listener {
         if(!(e.getEntity() instanceof Player)) return;
         Player p = (Player) e.getEntity();
 
+        if (plugin.getGm().isInLobby()) e.setCancelled(true);
+
         switch (e.getCause()) {
             case LAVA:
                 e.setCancelled(true);
                 p.teleport(plugin.getAm().getRandomSpawn());
-                RageGames.getPlayer(p).resetPlayer();
+                //RageGames.getPlayer(p).resetPlayer();
                 p.setHealth(20d);
                 p.setFireTicks(0);
                 break;

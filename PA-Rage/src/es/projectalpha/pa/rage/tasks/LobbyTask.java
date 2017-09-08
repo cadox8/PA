@@ -22,7 +22,7 @@ public class LobbyTask extends BukkitRunnable {
     public void run() {
         if (plugin.getGm().getPlaying().size() < plugin.getAm().getMinPlayers()) {
             plugin.getGm().setCheckStart(true);
-            plugin.getServer().getOnlinePlayers().forEach(pl ->pl.setLevel(0));
+            plugin.getServer().getOnlinePlayers().forEach(pl -> pl.setLevel(0));
             GameState.setState(GameState.LOBBY);
             cancel();
             return;

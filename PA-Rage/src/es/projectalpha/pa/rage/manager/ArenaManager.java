@@ -7,6 +7,7 @@ import lombok.Getter;
 import org.bukkit.Difficulty;
 import org.bukkit.Location;
 import org.bukkit.World;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 
 import java.util.ArrayList;
@@ -31,15 +32,13 @@ public class ArenaManager {
         w.setStorm(false);
         w.setDifficulty(Difficulty.PEACEFUL);
         w.setTime(14000);
-        w.getLivingEntities().stream().filter(e -> !e.getType().equals(EntityType.PLAYER)).forEach(e -> e.remove());
+        w.getLivingEntities().stream().filter(e -> !e.getType().equals(EntityType.PLAYER)).forEach(Entity::remove);
         initArena();
         w.setAutoSave(false);
     }
 
     private void initArena() {
-        for(int p = 1; p < Files.config.getInt("puntos"); p++) {
-                spawns.add(Utils.stringToLocation(Files.config.getString("spawns." + p)));
-        }
+        for(int p = 1; p < Files.config.getInt("puntos"); p++) spawns.add(Utils.stringToLocation(Files.config.getString("spawns." + p)));
     }
 
     public Location getRandomSpawn() {

@@ -1,6 +1,7 @@
 package es.projectalpha.pa.rage.tasks;
 
 import es.projectalpha.pa.core.api.PAData;
+import es.projectalpha.pa.core.utils.Log;
 import es.projectalpha.pa.core.utils.Messages;
 import es.projectalpha.pa.rage.RageGames;
 import es.projectalpha.pa.rage.api.RagePlayer;
@@ -31,7 +32,12 @@ public class ShutdownTask extends BukkitRunnable {
     }
 
     private void removeAll() {
-        plugin.getGm().getPlaying().forEach(p -> plugin.getGm().removePlayerFromGame(p));
-        RageGames.players.forEach(RagePlayer::sendToLobby);
+        try {
+            plugin.getGm().getPlaying().forEach(p -> plugin.getGm().removePlayerFromGame(p));
+            RageGames.players.forEach(RagePlayer::sendToLobby);
+        } catch (NullPointerException e) {
+            Log.debugLog("Error al mandar a los jugadores al Lobby");
+            Log.debugLog(plugin.getGm().getPlaying().toString());
+        }
     }
 }

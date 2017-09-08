@@ -31,12 +31,8 @@ public class GameManager {
     }
 
     public void addPlayerToGame(RagePlayer player) {
-        if (playing.contains(player)) {
-            playing.remove(player);
-            playing.add(player);
-        } else {
-            playing.add(player);
-        }
+        if (playing.contains(player)) playing.remove(player);
+        playing.add(player);
     }
 
     public void removePlayerFromGame(RagePlayer p) {
@@ -52,12 +48,13 @@ public class GameManager {
     }
 
     public void removePoint(RagePlayer u, int v) {
-        if (score.get(u) != 0) {
-            int pf = score.get(u) - v;
-            score.put(u, pf);
+        if (score.get(u) - v <= 0) {
+            score.put(u, 0);
+            return;
         }
+        int pf = score.get(u) - v;
+        score.put(u, pf);
     }
-
 
     public boolean acceptPlayers() {
         return GameState.getState() == GameState.LOBBY;
