@@ -87,7 +87,8 @@ public class PlayerListener implements Listener {
         }
 
         //Format
-        String tag = "[&" + PACmd.Grupo.groupColor(u.getUserData().getGrupo()) + WordUtils.capitalizeFully(u.getUserData().getGrupo().toString().toLowerCase()) + "&r] &" + PACmd.Grupo.groupColor(u.getUserData().getGrupo()) + u.getName() + "&r: ";
+        String name = u.getDisplayName().equalsIgnoreCase("") ? u.getName() : u.getDisplayName();
+        String tag = "[&" + PACmd.Grupo.groupColor(u.getUserData().getGrupo()) + WordUtils.capitalizeFully(u.getUserData().getGrupo().toString().toLowerCase()) + "&r] &" + PACmd.Grupo.groupColor(u.getUserData().getGrupo()) + name + "&r: ";
         if (u.isOnRank(PACmd.Grupo.ORIGIN)) e.setMessage(Utils.colorize(e.getMessage()));
 
         e.setFormat(Utils.colorize(tag) + e.getMessage().replace("%", ""));

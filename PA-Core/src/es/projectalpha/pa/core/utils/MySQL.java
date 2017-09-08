@@ -110,7 +110,7 @@ public class MySQL {
         PAUser.UserData data = new PAUser.UserData();
         try {
             PreparedStatement statementDatos = openConnection().prepareStatement("SELECT `timeJoin`,`grupo`,`god`,`coins`,`lastConnect`," +
-                    "`maxPiso`,`exp`,`lvl`,`zeny`,`kills`,`deaths`,`kit`,`karma` FROM `pa_datos` WHERE `name` = ?");
+                    "`maxPiso`,`exp`,`lvl`,`zeny`,`kills`,`deaths`,`kit`,`karma`,`nick` FROM `pa_datos` WHERE `name` = ?");
             statementDatos.setString(1, id);
             ResultSet rsDatos = statementDatos.executeQuery();
 
@@ -130,6 +130,7 @@ public class MySQL {
                 data.setDeaths(rsDatos.getInt("deaths"));
                 data.setKit(rsDatos.getInt("kit"));
                 data.setKarma(rsDatos.getInt("karma"));
+                data.setNickname(rsDatos.getString("nick"));
             } else {
                 PACore.getInstance().debugLog("No hay datos guardados de " + id);
             }

@@ -14,7 +14,7 @@ import java.util.List;
 public class NickCMD extends PACmd {
 
     public NickCMD() {
-        super("nick", Grupo.ORIGIN, "nickname");
+        super("nick", Grupo.VIP, "nickname");
     }
 
     @Override
@@ -23,14 +23,10 @@ public class NickCMD extends PACmd {
         switch (args.length) {
             case 1:
                 nick = args[0];
-
-                if (nick.equalsIgnoreCase("off")) {
-                    user.sendMessage(PAData.CORE.getPrefix() + "&cNick no permitido");
-                    return;
-                }
                 break;
             default:
-                user.sendMessage(PAData.CORE.getPrefix() + "&6Tu nick es " + user.getUserData().getNickname() == null ? user.getName() : user.getUserData().getNickname());
+                String s = user.getUserData().getNickname().equalsIgnoreCase("") ? user.getName() : user.getUserData().getNickname();
+                user.sendMessage(PAData.CORE.getPrefix() + "&6Tu nick es " + s);
                 return;
         }
         for (Player p : plugin.getServer().getOnlinePlayers()) {
@@ -41,10 +37,9 @@ public class NickCMD extends PACmd {
             }
         }
 
-        nick = user.isOnRank(Grupo.VIP) ? Utils.colorize(nick) : nick;
+        nick = Utils.colorize(nick);
         user.getPlayer().setDisplayName(nick.equalsIgnoreCase("off") ? user.getName() : nick);
         user.getUserData().setNickname(nick.equalsIgnoreCase("off") ? null : nick);
-
         user.sendMessage(PAData.CORE.getPrefix() + "&6Tu nuevo nick es " + nick);
 
         user.save();
