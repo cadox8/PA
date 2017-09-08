@@ -47,7 +47,7 @@ public class PlayerListener implements Listener {
             pperms.setPermission("bm.*", true);
         }
 
-        u.sendHeaderAndFooter("&cProject&6Alpha", "");
+        //u.sendHeaderAndFooter("&cProject&6Alpha", "");
 
         u.getUserData().setLastConnect(System.currentTimeMillis());
         u.getUserData().setTimeJoin(System.currentTimeMillis());
