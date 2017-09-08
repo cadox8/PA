@@ -24,18 +24,19 @@ public class RageGames extends JavaPlugin {
     public static ArrayList<RagePlayer> players = new ArrayList<>();
 
     @Getter private static RageGames instance;
-    @Getter private Files files = new Files();
+
+    @Getter private Files files;
     @Getter private GameManager gm;
     @Getter private ArenaManager am;
 
     public void onEnable() {
         instance = this;
 
-        files.setupFiles();
-
         PACommands.register(new PointSetCMD());
         registerClasses();
         registerEvents();
+
+        files.setupFiles();
 
         am.prepareWorld(Bukkit.getWorld("rga1"));
         getServer().getWorlds().forEach(w -> w.getLivingEntities().stream().filter(e -> !e.getType().equals(EntityType.PLAYER)).forEach(Entity::remove));
@@ -44,6 +45,7 @@ public class RageGames extends JavaPlugin {
     }
 
     private void registerClasses() {
+        files = new Files();
         gm = new GameManager(instance);
         am = new ArenaManager(instance);
     }

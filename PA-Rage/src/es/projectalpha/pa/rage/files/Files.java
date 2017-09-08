@@ -1,6 +1,5 @@
 package es.projectalpha.pa.rage.files;
 
-
 import lombok.Getter;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -12,6 +11,8 @@ public class Files {
 
     @Getter public static File fileConfig = new File("plugins/PA-Rage/", "config.yml");
     public static YamlConfiguration config = YamlConfiguration.loadConfiguration(fileConfig);
+
+    public Files() {}
 
     public void setupFiles() {
         if (!fileConfig.exists()) {
