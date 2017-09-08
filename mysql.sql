@@ -16,6 +16,7 @@ CREATE TABLE IF NOT EXISTS `pa_datos` (
   `kills`       INT(11)          NOT NULL DEFAULT '0',
   `deaths`      INT(11)          NOT NULL DEFAULT '0',
   `kit`         INT(2)           NOT NULL DEFAULT '-1',
+  `karma`       INT(100)         NOT NULL DEFAULT '100',
   PRIMARY KEY (`id`)
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8;
 
