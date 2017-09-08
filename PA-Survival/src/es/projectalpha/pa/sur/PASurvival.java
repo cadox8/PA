@@ -55,7 +55,7 @@ public class PASurvival extends JavaPlugin {
         setupEconomy();
 
         PACommands.register(new StonesCMD(), new RecaudadoCMD(), new PvPCMD(), new LoteriaCMD(),
-                new Cash2xp(), new Exp2cash(), new XPbalance(), new Cadox8CMD(), new MineCMD());
+                new Cash2xp(), new Exp2cash(), new XPbalance(), new Cadox8CMD(), new MineCMD(), new GGCMD());
 
         registerEvents();
         timeTask.runTaskTimer(instance, 0, 15);

@@ -39,9 +39,11 @@ public class PlayerEvents implements Listener{
     private PvPManager manager = new PvPManager();
     private Balance balance = new Balance();
     private Economy eco = PASurvival.getInstance().getVault();
+    public static boolean death;
 
     public PlayerEvents(PASurvival instance) {
         plugin = instance;
+        death = false;
     }
 
 
@@ -73,22 +75,20 @@ public class PlayerEvents implements Listener{
 
     @EventHandler
     public void onDeath(PlayerDeathEvent e) {
-        Entity en1 = e.getEntity();
-        Entity en = e.getEntity().getKiller();
+        Player pl = e.getEntity();
+        Player p = e.getEntity().getKiller();
 
-        if(en instanceof Player && en1 instanceof Player){
-            Player pl = (Player) en1;
-            Player p = (Player) en;
+        death = true;
+        plugin.getServer().getScheduler().runTaskLater(plugin, () -> death = false, 20 * 5);
 
-            if (manager.isInPvP(p)) {
-                manager.removeCooldown(p);
-                manager.removeCooldown(pl);
+        if (manager.isInPvP(p)) {
+            manager.removeCooldown(p);
+            manager.removeCooldown(pl);
 
-                p.sendMessage(Utils.colorize(PAData.SURVIVAL.getPrefix() + ChatColor.DARK_GREEN + " Ya no estás en pvp, puedes desconectarte."));
-                pl.sendMessage(Utils.colorize(PAData.SURVIVAL.getPrefix() + ChatColor.DARK_GREEN + " Ya no estás en pvp, puedes desconectarte."));
-            }
-            pl.sendMessage(ChatColor.GREEN + "");
+            p.sendMessage(Utils.colorize(PAData.SURVIVAL.getPrefix() + ChatColor.DARK_GREEN + " Ya no estás en pvp, puedes desconectarte."));
+            pl.sendMessage(Utils.colorize(PAData.SURVIVAL.getPrefix() + ChatColor.DARK_GREEN + " Ya no estás en pvp, puedes desconectarte."));
         }
+        pl.sendMessage(ChatColor.GREEN + "");
     }
 
     @EventHandler
