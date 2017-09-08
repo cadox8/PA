@@ -22,17 +22,17 @@ public class LobbyMenu {
 
         //Servidores
         servers = plugin.getServer().createInventory(null, 9, "Servidores");
-        servers.setItem(0, new ItemMaker(Material.BOW).setDisplayName(PAData.RG.getName()).build());
+        servers.setItem(0, new ItemMaker(Material.IRON_AXE).setDisplayName(PAData.RG.getName()).build());
         servers.setItem(2, new ItemMaker(Material.DIAMOND_BLOCK).setDisplayName("&cCreativo").setLores("&cAVISO: &bSERVIDOR EN LA 1.12.X").build());
         servers.setItem(6, new ItemMaker(Material.GRASS).setDisplayName("&dSurvival").setLores("&cAVISO: &bSERVIDOR EN LA 1.12.X").build());
-        servers.setItem(4, new ItemMaker(Material.IRON_AXE).setDisplayName("&6Tower &rOf &cAncients").build());
+        servers.setItem(4, new ItemMaker(Material.WRITTEN_BOOK).setDisplayName("&6Tower &rOf &cAncients").build());
         servers.setItem(8, new ItemMaker(Material.TNT).setDisplayName(PAData.NS.getName()).build());
 
         //RageGames
         rg = plugin.getServer().createInventory(null, 9, "RageGames");
-        rg.setItem(2, new ItemMaker(Material.BOW).setDisplayName("&eQuartz").build());
-        rg.setItem(3, new ItemMaker(Material.BOW).setDisplayName("&bVillage").build());
-        rg.setItem(4, new ItemMaker(Material.BOW).setDisplayName("&2Green").build());
+        rg.setItem(2, new ItemMaker(Material.IRON_AXE).setDisplayName("&eQuartz").build());
+        rg.setItem(3, new ItemMaker(Material.IRON_AXE).setDisplayName("&bVillage").build());
+        rg.setItem(4, new ItemMaker(Material.IRON_AXE).setDisplayName("&2Green").build());
         rg.setItem(8, new ItemMaker(Material.COMPASS).setDisplayName("&cModalidad").build());
 
 
