@@ -1,5 +1,8 @@
 package es.projectalpha.pa.core.api;
 
+import com.google.common.io.ByteArrayDataInput;
+import com.google.common.io.ByteArrayDataOutput;
+import com.google.common.io.ByteStreams;
 import es.projectalpha.pa.core.PACore;
 import lombok.Getter;
 import org.bukkit.OfflinePlayer;
@@ -54,5 +57,13 @@ public class PAServer {
 
     public static void removeTeleportHereRequest(String u) {
         tph.remove(u);
+    }
+
+    public static String serverName(PAUser u) {
+        ByteArrayDataOutput out = ByteStreams.newDataOutput();
+        out.writeUTF("GetServer");
+        ByteArrayDataInput in = ByteStreams.newDataInput(out.toByteArray());
+        u.getPlayer().sendPluginMessage(plugin, "BungeeCord", out.toByteArray());
+        return in.readUTF();
     }
 }

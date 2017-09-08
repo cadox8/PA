@@ -95,7 +95,6 @@ public class PACore extends JavaPlugin {
         logros = new LogrosManager(instance);
     }
 
-
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
         try {

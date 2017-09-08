@@ -81,7 +81,7 @@ public class MySQL {
 
             try {
                 PreparedStatement statementDatos = openConnection().prepareStatement("UPDATE `pa_datos` SET `grupo`=?,`god`=?,`coins`=?," +
-                        "`lastConnect`=?,`ip`=?,`nick`=?,`maxPiso`=?,`exp`=?,`lvl`=?,`zeny`=?,`kills`=?,`deaths`=?,`kit`=? WHERE `name`=?");
+                        "`lastConnect`=?,`ip`=?,`nick`=?,`maxPiso`=?,`exp`=?,`lvl`=?,`zeny`=?,`kills`=?,`deaths`=?,`kit`=?, `karma`=? WHERE `name`=?");
                 statementDatos.setInt(1, data.getGrupo() != null ? data.getGrupo().getRank() : 0);
                 statementDatos.setBoolean(2, data.getGod() == null ? false : data.getGod());
                 statementDatos.setInt(3, data.getCoins() == null ? 0 : data.getCoins());
@@ -95,8 +95,9 @@ public class MySQL {
                 statementDatos.setInt(11, data.getKills() == null ? 0 : data.getKills());
                 statementDatos.setInt(12, data.getDeaths() == null ? 0 : data.getDeaths());
                 statementDatos.setInt(13, data.getKit() == null ? -1 : data.getKit());
+                statementDatos.setInt(14, data.getKarma() == null ? 100 : data.getKarma());
 
-                statementDatos.setString(14, u.getName());
+                statementDatos.setString(15, u.getName());
                 statementDatos.executeUpdate();
             } catch (Exception ex) {
                 System.out.println("Ha ocurrido un error guardando los datos de " + u.getName());
@@ -109,7 +110,7 @@ public class MySQL {
         PAUser.UserData data = new PAUser.UserData();
         try {
             PreparedStatement statementDatos = openConnection().prepareStatement("SELECT `timeJoin`,`grupo`,`god`,`coins`,`lastConnect`," +
-                    "`maxPiso`,`exp`,`lvl`,`zeny`,`kills`,`deaths`,`kit` FROM `pa_datos` WHERE `name` = ?");
+                    "`maxPiso`,`exp`,`lvl`,`zeny`,`kills`,`deaths`,`kit`,`karma` FROM `pa_datos` WHERE `name` = ?");
             statementDatos.setString(1, id);
             ResultSet rsDatos = statementDatos.executeQuery();
 
@@ -128,6 +129,7 @@ public class MySQL {
                 data.setKills(rsDatos.getInt("kills"));
                 data.setDeaths(rsDatos.getInt("deaths"));
                 data.setKit(rsDatos.getInt("kit"));
+                data.setKarma(rsDatos.getInt("karma"));
             } else {
                 PACore.getInstance().debugLog("No hay datos guardados de " + id);
             }

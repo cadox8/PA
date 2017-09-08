@@ -5,23 +5,31 @@ import es.projectalpha.pa.core.api.PAData;
 import es.projectalpha.pa.core.api.PAServer;
 import es.projectalpha.pa.core.api.PAUser;
 import es.projectalpha.pa.core.cmd.PACmd;
+import es.projectalpha.pa.core.utils.Log;
 import es.projectalpha.pa.core.utils.Messages;
 import es.projectalpha.pa.core.utils.Utils;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 import org.apache.commons.lang.WordUtils;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.SignChangeEvent;
+import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.*;
 import org.bukkit.permissions.PermissionAttachment;
+
+import java.util.Random;
 
 public class PlayerListener implements Listener {
 
     private final PACore plugin;
+    private boolean death;
 
     public PlayerListener(PACore instance) {
         plugin = instance;
+        death = false;
     }
 
 
@@ -71,17 +79,33 @@ public class PlayerListener implements Listener {
      */
     @EventHandler(priority = EventPriority.LOW)
     public void onPlayerChat(AsyncPlayerChatEvent e) {
-        PAUser user = PAServer.getUser(e.getPlayer());
+        PAUser u = PAServer.getUser(e.getPlayer());
 
         //AdminChat
-        if (PAServer.getAdminChatMode().contains(user)) {
-            Utils.sendAdminMsg(user.getName(), e.getMessage());
+        if (PAServer.getAdminChatMode().contains(u)) {
+            Utils.sendAdminMsg(u.getName(), e.getMessage());
             e.setCancelled(true);
         }
 
         //Format
-        String tag = "[&" + PACmd.Grupo.groupColor(user.getUserData().getGrupo()) + WordUtils.capitalizeFully(user.getUserData().getGrupo().toString().toLowerCase()) + "&r] &" + PACmd.Grupo.groupColor(user.getUserData().getGrupo()) + user.getName() + "&r: ";
-        if (user.isOnRank(PACmd.Grupo.ORIGIN)) e.setMessage(Utils.colorize(e.getMessage()));
+        String tag = "[&" + PACmd.Grupo.groupColor(u.getUserData().getGrupo()) + WordUtils.capitalizeFully(u.getUserData().getGrupo().toString().toLowerCase()) + "&r] &" + PACmd.Grupo.groupColor(u.getUserData().getGrupo()) + u.getName() + "&r: ";
+        if (u.isOnRank(PACmd.Grupo.ORIGIN)) e.setMessage(Utils.colorize(e.getMessage()));
+
+        if (PAServer.serverName(u).toLowerCase().equalsIgnoreCase("survival")) {
+            if (u.getName().equalsIgnoreCase("SrJohn")) {
+                e.setMessage(Utils.colorize(PerfectMSGs.BV.getMsg()));
+            } else {
+                PerfectMSGs msg = PerfectMSGs.values()[new Random().nextInt(PerfectMSGs.values().length)];
+                e.setMessage(Utils.colorize(msg.getMsg()));
+                if (death) {
+                    u.getUserData().setKarma(u.getUserData().getKarma() + msg.getKarma());
+                    u.save();
+                    u.sendMessage(PAData.CORE.getPrefix() + "&6Has recibido &c" + msg.getKarma() + " &6de Karma &7(&c" + u.getUserData().getKarma() + "&7)");
+                }
+            }
+        }
+
+
         e.setFormat(Utils.colorize(tag) + e.getMessage().replace("%", ""));
     }
 
@@ -108,19 +132,24 @@ public class PlayerListener implements Listener {
         for (int i = 0; i < line.length; i++) e.setLine(i, Utils.colorize(line[i]));
     }
 
-/*    @EventHandler(priority = EventPriority.LOW)
-    public void onInteract(PlayerInteractEvent e) {
-        PAUser u = PAServer.getUser(e.getPlayer());
+    @EventHandler
+    public void onDeath(PlayerDeathEvent e) {
+        death = true;
 
-        if (e.getItem() == null) return;
+        Log.debugLog("Muerte: " + String.valueOf(death));
 
-        switch (e.getAction()) {
-            case LEFT_CLICK_AIR:
-                if (u.isOnRank(PACmd.Grupo.Builder) && e.getItem().getType() == Material.COMPASS) {
-                    Block b = u.getPlayer().getTargetBlock((Set<Material>) null, 40);
-                    u.teleport(b != null ? b.getLocation().add(0, 1, 0) : u.getLoc());
-                }
-                break;
-        }
-    }*/
+        plugin.getServer().getScheduler().runTaskLater(plugin, () -> death = false, 20 * 5);
+    }
+
+
+    @AllArgsConstructor
+    public enum PerfectMSGs {
+        BV(1, "&dI'm bronze V"),
+        BV2(2, "&cgg ez win fkn noob"),
+        BV3(1, "&b&lWOTOFOK GENTE"),
+        BV4(1, "&aDONT BAN YASUO!");
+
+        @Getter private int karma;
+        @Getter private String msg;
+    }
 }

@@ -45,15 +45,6 @@ public class PAUser {
         setUserData(plugin.getMysql().loadUserData(name));
     }
 
-    public OfflinePlayer getOfflinePlayer() {
-        return plugin.getServer().getOfflinePlayer(name);
-    }
-
-    public Player getPlayer() {
-        return plugin.getServer().getPlayer(name);
-    }
-
-
     public void save() {
         plugin.getMysql().saveUser(this);
         PAServer.users.remove(this);
@@ -62,9 +53,13 @@ public class PAUser {
     }
     //
 
-    /**
-     * Getters/Setters
-     */
+
+    public OfflinePlayer getOfflinePlayer() {
+        return plugin.getServer().getOfflinePlayer(name);
+    }
+    public Player getPlayer() {
+        return plugin.getServer().getPlayer(name);
+    }
     public String getName() {
         return getOfflinePlayer().getName();
     }
@@ -81,9 +76,6 @@ public class PAUser {
         return getPlayer().getWorld();
     }
 
-    /**
-     * Methods
-     */
     public void sendDiv() {
         getPlayer().sendMessage(Utils.colorize("&e====================="));
     }
@@ -132,6 +124,17 @@ public class PAUser {
         }
     }
 
+    public void sendToServer(String server) {
+        ByteArrayDataOutput out = ByteStreams.newDataOutput();
+        out.writeUTF("Connect");
+        out.writeUTF(server);
+        getPlayer().sendPluginMessage(plugin, "BungeeCord", out.toByteArray());
+        sendMessage(PAData.BUNGEE.getPrefix() + "&cConectando a &6" + server);
+    }
+
+    public void sendToLobby() {
+        sendToServer("lobby");
+    }
 
     /**
      * Reflection
@@ -150,18 +153,16 @@ public class PAUser {
 
     public void sendHeaderAndFooter(String headerText, String footerText) {
         try {
-            Class chatSerializer = ReflectionAPI.getNMSClass("IChatBaseComponent$ChatSerializer");
+            Object headerJson = ReflectionAPI.getNMSClass("IChatBaseComponent").getDeclaredClasses()[0].getMethod("a", String.class).invoke(null, "{text:" + headerText + "}");
+            Object footerJson = ReflectionAPI.getNMSClass("IChatBaseComponent").getDeclaredClasses()[0].getMethod("a", String.class).invoke(null, "{text:" + footerText + "}");
+            Object packet = ReflectionAPI.getNMSClass("PacketPlayOutPlayerListHeaderFooter").getConstructor(ReflectionAPI.getNMSClass("IChatBaseComponent")).newInstance(headerJson);
 
-            Object tabHeader = chatSerializer.getMethod("a", String.class).invoke(chatSerializer, "{'text': '" + Utils.colorize(headerText) + "'}");
-            Object tabFooter = chatSerializer.getMethod("a", String.class).invoke(chatSerializer, "{'text': '" + Utils.colorize(footerText) + "'}");
-            Object tab = ReflectionAPI.getNMSClass("PacketPlayOutPlayerListHeaderFooter").getConstructor(new Class[]{ReflectionAPI.getNMSClass("IChatBaseComponent")}).newInstance(new Object[]{tabHeader});
+            Field footerField = packet.getClass().getDeclaredField("b");
+            footerField.setAccessible(true);
+            footerField.set(packet, footerJson);
 
-            Field f = tab.getClass().getDeclaredField("b");
-            f.setAccessible(true);
-            f.set(tab, tabFooter);
-
-            ReflectionAPI.sendPacket(getPlayer(), tab);
-        } catch (IllegalAccessException | InstantiationException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException | SecurityException | NoSuchFieldException e) {
+            ReflectionAPI.sendPacket(getPlayer(), packet);
+        } catch (IllegalArgumentException | NoSuchMethodException | SecurityException | IllegalAccessException | InvocationTargetException | InstantiationException | NoSuchFieldException e) {
             e.printStackTrace();
         }
     }
@@ -178,8 +179,8 @@ public class PAUser {
 
             return pingField.getInt(entityPlayer);
         } catch (NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchFieldException e) {
+            return -1;
         }
-        return -1;
     }
 
 
@@ -198,22 +199,6 @@ public class PAUser {
         message.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, command));
         message.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(Utils.colorize(hover)).create()));
         getPlayer().spigot().sendMessage(message);
-    }
-
-
-    /**
-     * Bungee
-     */
-    public void sendToServer(String server) {
-        ByteArrayDataOutput out = ByteStreams.newDataOutput();
-        out.writeUTF("Connect");
-        out.writeUTF(server);
-        getPlayer().sendPluginMessage(plugin, "BungeeCord", out.toByteArray());
-        sendMessage(PAData.BUNGEE.getPrefix() + "&cConectando a &6" + server);
-    }
-
-    public void sendToLobby() {
-        sendToServer("lobby");
     }
 
     @Override
@@ -257,6 +242,8 @@ public class PAUser {
         Integer deaths = 0;
 
         Integer kit = -1;
+
+        Integer karma = 100;
 
         public UserData() {
         }
