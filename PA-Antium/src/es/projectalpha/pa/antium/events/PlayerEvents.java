@@ -3,7 +3,6 @@ package es.projectalpha.pa.antium.events;
 import es.projectalpha.pa.antium.PAAntium;
 import es.projectalpha.pa.core.PACore;
 import es.projectalpha.pa.core.api.PAData;
-import es.projectalpha.pa.core.api.PAServer;
 import es.projectalpha.pa.core.api.PAUser;
 import es.projectalpha.pa.core.utils.Utils;
 import org.bukkit.entity.Player;
@@ -42,8 +41,6 @@ public class PlayerEvents implements Listener {
         PAUser u = PAAntium.getUser(e.getPlayer());
 
         if (!plugin.getPassManager().getLogged().contains(u)) plugin.getPassManager().removeLogged(u);
-        u.save();
-        PAServer.users.remove(u);
     }
 
 

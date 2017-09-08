@@ -75,9 +75,7 @@ public class PlayerEvents implements Listener {
     public void onLeave(PlayerQuitEvent e) {
         PAUser u = PAServer.getUser(e.getPlayer());
 
-        u.save();
         LobbyTeams.removeScoreboardTeam(u);
-        if (PAServer.users.contains(u)) PAServer.users.remove(u);
     }
 
     @EventHandler

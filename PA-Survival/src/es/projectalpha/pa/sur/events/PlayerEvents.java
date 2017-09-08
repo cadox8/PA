@@ -1,7 +1,6 @@
 package es.projectalpha.pa.sur.events;
 
 import es.projectalpha.pa.core.api.PAData;
-import es.projectalpha.pa.core.api.PAServer;
 import es.projectalpha.pa.core.utils.Utils;
 import es.projectalpha.pa.sur.PASurvival;
 import es.projectalpha.pa.sur.api.SurvivalUser;
@@ -155,8 +154,7 @@ public class PlayerEvents implements Listener{
                 Bukkit.broadcastMessage(Utils.colorize(PAData.SURVIVAL.getPrefix() + ChatColor.GRAY + " ¡" + ChatColor.GOLD + p.getName() + ChatColor.GREEN + " se ha desconectado en combate!"));
             }
         }
-        u.save();
-        PAServer.users.remove(u);
+        PASurvival.players.remove(u);
     }
 
     @EventHandler(priority = EventPriority.HIGHEST)
