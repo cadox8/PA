@@ -55,6 +55,11 @@ public class PlayerListener implements Listener {
         u.save();
         u.getPlayer().setFlySpeed(0.2f);
         u.getPlayer().setWalkSpeed(0.2f);
+        if (u.getUserData().getNickname() != null) {
+            u.getPlayer().setDisplayName(u.getUserData().getNickname());
+        } else {
+            u.getPlayer().setDisplayName(u.getName());
+        }
 
         e.setJoinMessage(Messages.getMessage(Messages.JOIN, PAData.CORE, "%player%", e.getPlayer().getName()));
     }

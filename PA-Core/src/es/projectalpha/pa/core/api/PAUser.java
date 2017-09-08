@@ -75,6 +75,9 @@ public class PAUser {
     public World getWorld() {
         return getPlayer().getWorld();
     }
+    public String getDisplayName() {
+        return getPlayer().getDisplayName();
+    }
 
     public void sendDiv() {
         getPlayer().sendMessage(Utils.colorize("&e====================="));
