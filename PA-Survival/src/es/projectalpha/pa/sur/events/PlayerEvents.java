@@ -52,6 +52,8 @@ public class PlayerEvents implements Listener{
         Player p = e.getPlayer();
         SurvivalUser u = PASurvival.getPlayer(p);
 
+        u.setInfo();
+
         if (!Files.user.getStringList("Users").contains(p.getName())) {
             Files.user.set("Users." + p.getName() + ".pvp", false);
             Files.user.set("Users." + p.getName() + ".money", "0");
