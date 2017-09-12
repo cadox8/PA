@@ -34,7 +34,7 @@ public class LogrosManager {
 
             for (int x = 0; x <= maxLogros; x++) {
                 JSONObject structure = (JSONObject) jsonObject.get(String.valueOf(x));
-                logros.add(new Logro(x, structure.get("nombre").toString(), structure.get("desc").toString()));
+                logros.add(new Logro(x, structure.get("nombre").toString(), structure.get("desc").toString(), Integer.parseInt(structure.get("server").toString())));
             }
         } catch (IOException | ParseException e) {
             Log.log(Log.Level.SEVERE, "Error al cargar los logros");

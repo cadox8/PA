@@ -1,15 +1,33 @@
 {
-  "logros": 2,
+  "logros": 3,
   "1": {
     "nombre": "Beta Player",
-    "desc": "Un jugador capaz de haber aguantado con los bugs del servidor durante la beta."
+    "desc": "Un jugador capaz de haber aguantado con los bugs del servidor durante la beta.",
+	"server": "-1"
   },
   "2": {
-    "nombre": "Con el triciclo",
-    "desc": "Haber entrado al servidor por primera vez."
+    "nombre": "En triciclo",
+    "desc": "Haber entrado al servidor por primera vez.",
+	"server": "-1"
   },
   "3": {
-    "nombre": "Con el triciclo",
-    "desc": "Haber entrado al servidor por primera vez."
-  }
+    "nombre": "Explosión",
+    "desc": "Haber muerto por la explosión de un Creeper",
+	"server": "1"
+  },
+  "4": {
+	"nombre": "La suerte del novato",
+	"desc": "Gana tu primera partida en el Casino",
+	"server": "1"
+  },
+  "5": {
+	"nombre": "Asesino",
+	"desc": "Mata a 5 personas",
+	"server": "1"
+  },
+  "6": {
+	"nombre": "Experto del arco",
+	"desc": "Gana a una partida sólo usando el arco",
+	"server": "2"
+	}
 }

@@ -13,11 +13,13 @@ public class Logro {
     @Getter private int id;
     @Getter private String name;
     @Getter private String desc;
+    @Getter private int server;
 
-    public Logro(int id, String name, String desc) {
+    public Logro(int id, String name, String desc, int server) {
         this.id = id;
         this.name = name;
         this.desc = desc;
+        this.server = server;
     }
 
     private List<String> formatLore() {

@@ -32,6 +32,14 @@ CREATE TABLE IF NOT EXISTS `pa_logros` (
   `id`    INT(11) UNSIGNED NOT NULL AUTO_INCREMENT,
   `user`  VARCHAR(32)      NOT NULL DEFAULT '',
   `logro` INT(5)           NOT NULL,
+  `date`  TIMESTAMP        NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE = InnoDB DEFAULT CHARSET = utf8;
+
+CREATE TABLE IF NOT EXISTS `pa_data` (
+  `id`          INT(11) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `user`        VARCHAR(32)      NOT NULL DEFAULT '',
+  `users_kills` INT(100)         NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8;
 
