@@ -37,8 +37,7 @@ public class GGCMD extends PACmd {
         BV3(1, "&b&lWOTOFOK GENTE"),
         BV4(1, "&aDONT BAN YASUO!");
 
-        @Getter
-        private int karma;
+        @Getter private int karma;
         @Getter private String msg;
     }
 }

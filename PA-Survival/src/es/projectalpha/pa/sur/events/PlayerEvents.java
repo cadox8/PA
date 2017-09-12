@@ -23,6 +23,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.CreatureSpawnEvent;
+import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.*;
 import org.bukkit.inventory.ItemStack;
@@ -76,6 +77,10 @@ public class PlayerEvents implements Listener{
     public void onDeath(PlayerDeathEvent e) {
         Player pl = e.getEntity();
         Player p = e.getEntity().getKiller();
+
+        if (pl.getLastDamageCause().getCause() == EntityDamageEvent.DamageCause.ENTITY_EXPLOSION) {
+            //Para los logros
+        }
 
         death = true;
         plugin.getServer().getScheduler().runTaskLater(plugin, () -> death = false, 20 * 5);
