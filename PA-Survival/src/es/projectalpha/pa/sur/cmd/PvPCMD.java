@@ -27,7 +27,7 @@ public class PvPCMD extends PACmd {
                 return;
             }
 
-            if (Files.user.getBoolean(user.getName() + ".pvp") == true) {
+            if (Files.user.getBoolean("Users." + user.getName() + ".pvp") == true) {
                 Files.user.set("Users." + user.getName() + ".pvp", false);
                 user.sendMessage(PAData.SURVIVAL.getPrefix() +"&aPvp desactivado.");
                 plugin.getManager().addCooldown(user.getPlayer());
@@ -43,10 +43,13 @@ public class PvPCMD extends PACmd {
         if (args.length == 1) {
             switch (args[0]) {
                 case "on":
-                    if (plugin.getManager().isInCooldown(user.getPlayer()))
+                    if (plugin.getManager().isInCooldown(user.getPlayer())) {
                         user.sendMessage(PAData.SURVIVAL.getPrefix() + ChatColor.DARK_RED + "¡Tienes que esperar para volver a usar este comando!");
-                    if (Files.user.getBoolean(user.getName() + ".pvp") == (true)) {
+                        return;
+                    }
+                    if (Files.user.getBoolean("Users." + user.getName() + ".pvp") == true) {
                         user.sendMessage(PAData.SURVIVAL.getPrefix() + ChatColor.RED + "Tu pvp ya está activado.");
+                        return;
                     }
                     Files.user.set("Users." + user.getName() + ".pvp", true);
                     plugin.getManager().addCooldown(user.getPlayer());
@@ -54,10 +57,13 @@ public class PvPCMD extends PACmd {
                     Files.saveFiles();
                     break;
                 case "off":
-                    if (plugin.getManager().isInCooldown(user.getPlayer()))
+                    if (plugin.getManager().isInCooldown(user.getPlayer())) {
                         user.sendMessage(PAData.SURVIVAL.getPrefix() + ChatColor.DARK_RED + "¡Tienes que esperar para volver a usar este comando!");
-                    if (Files.user.getBoolean(user.getName() + ".pvp") == true) {
+                        return;
+                    }
+                    if (Files.user.getBoolean("Users." + user.getName() + ".pvp") == false) {
                         user.sendMessage(PAData.SURVIVAL.getPrefix() + ChatColor.RED + "Tu pvp ya está desactivado.");
+                        return;
                     }
                     Files.user.set("Users." + user.getName() + ".pvp", false);
                     plugin.getManager().addCooldown(user.getPlayer());
@@ -65,7 +71,7 @@ public class PvPCMD extends PACmd {
                     Files.saveFiles();
                     break;
                 case "status":
-                    switch (Files.user.getString(user.getName() + ".pvp")) {
+                    switch (Files.user.getString("Users." + user.getName() + ".pvp")) {
                         case "true":
                             user.sendMessage(PAData.SURVIVAL.getPrefix() + ChatColor.DARK_RED + "Actualmente tu pvp está activado.");
                             break;

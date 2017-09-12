@@ -31,7 +31,7 @@ public class GGCMD extends PACmd {
     }
 
     @AllArgsConstructor
-    public enum PerfectMSGs {
+    public enum PerfectMSGs { //ni de coña xdd
         BV(1, "&dI'm bronze V"),
         BV2(2, "&cgg ez win fkn noob"),
         BV3(1, "&b&lWOTOFOK GENTE"),

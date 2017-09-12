@@ -43,7 +43,7 @@ public final class Balance {
     public void cobrarImpuestos(SurvivalUser p, double amount) {
         DecimalFormat df = new DecimalFormat("#.00");
         saveBalance(p);
-        Files.user.set("recaudado", Files.user.getInt("recaudado") + amount);
+        Files.user.set("recaudado", (Files.user.getInt("recaudado")) + amount);
         Files.user.set("Users." + p.getName() + ".imprec", Files.user.getInt("Users." + p.getName() + ".imprec") + amount);
         removeBalance(p, amount);
         saveBalance(p);

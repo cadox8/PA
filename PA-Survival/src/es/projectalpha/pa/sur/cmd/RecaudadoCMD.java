@@ -21,6 +21,7 @@ public class RecaudadoCMD extends PACmd {
 
     public RecaudadoCMD() {
         super("recaudado", Grupo.Usuario, Arrays.asList("impuestos", "rec", "imp"));
+
     }
 
     private Files files = plugin.getFiles();
