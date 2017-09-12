@@ -2,8 +2,4 @@ name: ${project.artifactId}
 main: es.projectalpha.pa.sn.SafariNet
 version: ${project.version}
 authors: [cadox8, Wikijito7]
-depends: [Vault, PA-Core, WorldGuard]
-
-commands:
-    game:
-      description: Comando SafariNet
+depend: [Vault, PA-Core, WorldGuard]
