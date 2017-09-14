@@ -1,6 +1,5 @@
 package es.projectalpha.pa.antium;
 
-import es.projectalpha.pa.antium.cmd.AntiumCMD;
 import es.projectalpha.pa.antium.cmd.LoginCMD;
 import es.projectalpha.pa.antium.cmd.RegisterCMD;
 import es.projectalpha.pa.antium.events.PlayerEvents;
@@ -13,9 +12,6 @@ import lombok.Getter;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
-
-import java.util.logging.Filter;
-import java.util.logging.LogRecord;
 
 public class PAAntium extends JavaPlugin {
 
@@ -50,7 +46,7 @@ public class PAAntium extends JavaPlugin {
     }
 
     private void registerCommands() {
-        PACommands.register(new LoginCMD(), new RegisterCMD(), new AntiumCMD());
+        PACommands.register(new LoginCMD(), new RegisterCMD());
     }
 
     

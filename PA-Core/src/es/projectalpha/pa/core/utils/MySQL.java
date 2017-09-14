@@ -183,7 +183,6 @@ public class MySQL {
     }
 
     public boolean login(PAUser u, String inPass) {
-        PAUser.UserData data = new PAUser.UserData();
         try {
             PreparedStatement statementDatos = openConnection().prepareStatement("SELECT `pass` FROM `pa_antium` WHERE `name` = ?");
             statementDatos.setString(1, u.getName());
@@ -214,7 +213,19 @@ public class MySQL {
             PreparedStatement statement = openConnection().prepareStatement("SELECT * FROM `pa_antium` WHERE `name` =?");
             statement.setString(1, u.getName());
             ResultSet rs = statement.executeQuery();
-            if (!rs.next()) return false;
+            return !rs.next();
+        } catch (SQLException | ClassNotFoundException e) {
+            Log.log(Log.Level.SEVERE, e.toString());
+        }
+        return false;
+    }
+
+    public boolean deleteUserAntium(String name) {
+        if (!exists(name)) return false;
+        try {
+            PreparedStatement statement = openConnection().prepareStatement("DELETE * FROM `pa_antium` WHERE `name` =?");
+            statement.setString(1, name);
+            statement.executeQuery();
             return true;
         } catch (SQLException | ClassNotFoundException e) {
             Log.log(Log.Level.SEVERE, e.toString());
@@ -222,12 +233,40 @@ public class MySQL {
         return false;
     }
 
-    public boolean deleteUserAntium(PAUser u) {
+    public boolean changePassword(String name, String newPassword) {
+        if (!exists(name)) return false;
         try {
-            PreparedStatement statement = openConnection().prepareStatement("DELETE * FROM `pa_antium` WHERE `name` =?");
-            statement.setString(1, u.getName());
+            PreparedStatement statement = openConnection().prepareStatement("UPDATE `pa_antium` SET `pass`=? WHERE `name` =?");
+            statement.setString(1, ProtectPass.encodePass(newPassword));
+            statement.setString(2, name);
             statement.executeQuery();
             return true;
+        } catch (SQLException | ClassNotFoundException e) {
+            Log.log(Log.Level.SEVERE, e.toString());
+        }
+        return false;
+    }
+
+    public boolean setEmail(String name, String email) {
+        if (!exists(name)) return false;
+        try {
+            PreparedStatement statement = openConnection().prepareStatement("UPDATE `pa_antium` SET `email`=? WHERE `name` =?");
+            statement.setString(1, email);
+            statement.setString(2, name);
+            statement.executeQuery();
+            return true;
+        } catch (SQLException | ClassNotFoundException e) {
+            Log.log(Log.Level.SEVERE, e.toString());
+        }
+        return false;
+    }
+
+    private boolean exists(String name) {
+        try {
+            PreparedStatement statement = openConnection().prepareStatement("SELECT * FROM `pa_antium` WHERE `name` =?");
+            statement.setString(1, name);
+            ResultSet rs = statement.executeQuery();
+            return rs.next();
         } catch (SQLException | ClassNotFoundException e) {
             Log.log(Log.Level.SEVERE, e.toString());
         }

@@ -4,6 +4,9 @@ import es.projectalpha.pa.core.PACommands;
 import es.projectalpha.pa.core.utils.Log;
 import es.projectalpha.pa.lobby.cmd.SetSpawnCMD;
 import es.projectalpha.pa.lobby.cmd.SpawnCMD;
+import es.projectalpha.pa.lobby.cmd.antium.AntiumCMD;
+import es.projectalpha.pa.lobby.cmd.antium.NewPassCMD;
+import es.projectalpha.pa.lobby.cmd.antium.SetMailCMD;
 import es.projectalpha.pa.lobby.events.InventoryEvents;
 import es.projectalpha.pa.lobby.events.PlayerEvents;
 import es.projectalpha.pa.lobby.tasks.NoFallTask;
@@ -39,7 +42,7 @@ public class PALobby extends JavaPlugin {
             }
         }
 
-        PACommands.register(new SpawnCMD(), new SetSpawnCMD());
+        PACommands.register(new SpawnCMD(), new SetSpawnCMD(), new AntiumCMD(), new NewPassCMD(), new SetMailCMD());
         new LobbyMenu(instance);
         new NoFallTask(instance).runTaskTimer(instance, 0, 20);
     }
