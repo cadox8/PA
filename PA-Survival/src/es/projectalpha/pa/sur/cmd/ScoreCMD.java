@@ -16,7 +16,12 @@ public class ScoreCMD extends PACmd {
         SurvivalUser su = PASurvival.getPlayer(u.getPlayer());
 
         su.setScore(!su.isScore());
-        String state = su.isScore() ? "&3Activado" : "&cDesactivado";
+        String state = su.isScore() ? "&2Activado" : "&cDesactivado";
+        if (!su.isScore()) {
+            su.getPlayer().setScoreboard(PASurvival.getInstance().getServer().getScoreboardManager().getNewScoreboard());
+        } else {
+            su.setInfo();
+        }
         su.sendMessage(PAData.SURVIVAL.getPrefix() + "&6Tu Scoreboard se ha " + state);
     }
 }
