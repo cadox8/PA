@@ -66,6 +66,7 @@ public class PlayerEvents implements Listener {
         u.getPlayer().getInventory().clear();
         u.getPlayer().getInventory().setItem(0, new ItemMaker(Material.NETHER_STAR).setDisplayName("&cJuegos").build());
         u.getPlayer().getInventory().setItem(4, new ItemMaker(Material.REDSTONE).setDisplayName("&7Cosmeticos").build());
+        if (u.isOnRank(PACmd.Grupo.Builder)) u.getPlayer().getInventory().setItem(8, new ItemMaker(Material.WOOD_AXE).setDisplayName("&cConstructores").build());
         u.getPlayer().updateInventory();
 
         u.sendMessage("&6Actualmente hay &2" + PAServer.users.size() + " &6usuarios en línea");
@@ -110,6 +111,10 @@ public class PlayerEvents implements Listener {
                     e.setCancelled(true);
                     u.sendMessage(PAData.LOBBY.getPrefix() + "&cNo estamos listos aún");
                     //LobbyMenu.openMenu(u, LobbyMenu.MenuType.COSMETICOS);
+                    break;
+                case WOOD_AXE:
+                    e.setCancelled(true);
+                    u.sendToServer("cons");
                     break;
             }
 
