@@ -1,6 +1,7 @@
 package es.projectalpha.pa.bungee;
 
 import es.projectalpha.pa.bungee.cmd.CommandAlert;
+import es.projectalpha.pa.bungee.cmd.CommandCons;
 import es.projectalpha.pa.bungee.cmd.CommandLobby;
 import lombok.Getter;
 import net.md_5.bungee.api.ChatColor;
@@ -29,6 +30,7 @@ public class PABungee extends Plugin implements Listener {
         getProxy().getPluginManager().registerListener(this, this);
         getProxy().getPluginManager().registerCommand(this, new CommandAlert());
         getProxy().getPluginManager().registerCommand(this, new CommandLobby());
+        getProxy().getPluginManager().registerCommand(this, new CommandCons());
     }
 
     @EventHandler
@@ -45,8 +47,6 @@ public class PABungee extends Plugin implements Listener {
 
     @EventHandler
     public void onChat(ChatEvent e) {
-        ProxiedPlayer p = (ProxiedPlayer)e.getSender();
-
         if (e.getMessage().startsWith("/bungee") || e.getMessage().startsWith("bungee")) e.setCancelled(true);
     }
 
@@ -61,6 +61,9 @@ public class PABungee extends Plugin implements Listener {
 
     public ServerInfo getLobby() {
         return getProxy().getServerInfo("lobby");
+    }
+    public ServerInfo getCons() {
+        return getProxy().getServerInfo("cons");
     }
     private ServerInfo getLogin() {
         return getProxy().getServerInfo("login");
