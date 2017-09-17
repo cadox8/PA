@@ -31,11 +31,28 @@ public class SurvivalUser extends PAUser {
                 board.setName(PAData.SURVIVAL.getOldPrefix());
                 board.text(4, "§aDinero: §e" + Double.valueOf(df.format(plugin.getVault().getBalance(getOfflinePlayer()))));
                 board.text(3, "§e ");
-                board.text(2, "§aMundo: §e" + getLoc().getWorld().getName());
+                board.text(2, "§aMundo: " + parseName(getLoc().getWorld().getName()));
                 board.text(1, "§e ");
                 board.text(0, PACore.getOLD_IP());
                 if (getPlayer() != null && score) board.build(getPlayer());
             }
         }.runTaskTimer(plugin, 0, 1);
+    }
+
+    private String parseName(String name) {
+        switch (name) {
+            case "world":
+                return "§2Survival";
+            case "world_nether":
+                return "§cNether";
+            case "world_the_end":
+                return "§dEnd";
+            case "Recursos":
+                return "§aRecursos";
+            case "Eventos":
+                return "§6Eventos";
+            default:
+                return "§bError";
+        }
     }
 }
