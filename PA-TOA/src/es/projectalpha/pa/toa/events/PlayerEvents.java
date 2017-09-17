@@ -89,14 +89,10 @@ public class PlayerEvents implements Listener {
         if (e.getEntity() instanceof Monster && e.getDamager() instanceof Player) {
             TOAUser u = TOA.getPlayer((Player) e.getDamager());
             ItemStack i = u.getPlayer().getItemInHand() != null ? u.getPlayer().getItemInHand() : new ItemStack(Material.AIR);
-            double damage;
+            double damage = 20;
             double multi = 0;
 
-            if (i.hasItemMeta()) {
-                damage = i.getItemMeta().hasLore() ? Integer.parseInt(ChatColor.stripColor(i.getItemMeta().getLore().get(1))) : 20;
-            } else {
-                damage = 20;
-            }
+            if (i.hasItemMeta()) damage = i.getItemMeta().hasLore() ? Integer.parseInt(ChatColor.stripColor(i.getItemMeta().getLore().get(1))) : 20;
 
             if (!Ability.getAbilities().isEmpty() && Ability.getAbilities().get(Ability.AbilityType.GOLPE_CERTERO).contains(u)) multi = 2.3;
             if (!Ability.getAbilities().isEmpty() && Ability.getAbilities().get(Ability.AbilityType.SUSPIRO).contains(u)) {
