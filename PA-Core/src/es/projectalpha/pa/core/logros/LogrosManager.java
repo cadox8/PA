@@ -1,44 +1,41 @@
 package es.projectalpha.pa.core.logros;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import es.projectalpha.pa.core.PACore;
-import es.projectalpha.pa.core.utils.Log;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.URL;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class LogrosManager {
 
     private PACore plugin;
+
+    private Map<String, Object> map;
+    private File f;
 
     private ArrayList<Logro> logros;
 
     public LogrosManager(PACore instance) {
         this.plugin = instance;
         logros = new ArrayList<>();
-        //loadLogros();
+        map = new HashMap<>();
+        f = new File(plugin.getDataFolder(), "logros.json");
+        loadLogros();
     }
 
     private void loadLogros() {
-        JSONParser parser = new JSONParser();
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
         try {
-            BufferedReader in = new BufferedReader(new InputStreamReader(new URL("http://dev.projectalpha.es/logros.json").openStream()));
-            JSONObject jsonObject = (JSONObject) parser.parse(in);
-            int maxLogros = Integer.parseInt(String.valueOf(jsonObject.get("logros")));
+            map = gson.fromJson(new FileReader(f), new HashMap<String, Object>().getClass());
+            System.out.println(map.toString());
+        } catch (FileNotFoundException e) {
 
-            for (int x = 0; x <= maxLogros; x++) {
-                JSONObject structure = (JSONObject) jsonObject.get(String.valueOf(x));
-                logros.add(new Logro(x, structure.get("nombre").toString(), structure.get("desc").toString(), Integer.parseInt(structure.get("server").toString())));
-            }
-        } catch (IOException | ParseException e) {
-            Log.log(Log.Level.SEVERE, "Error al cargar los logros");
-            Log.debugLog(e.getMessage());
         }
     }
 }
