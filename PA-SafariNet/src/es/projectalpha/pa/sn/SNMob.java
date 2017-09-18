@@ -188,7 +188,7 @@ public class SNMob {
     //Shulker
     public DyeColor getShulkerColor() {
         Shulker s;
-        if (!mu.isSheep(entity)) return null;
+        if (!mu.isShulker(entity)) return null;
         s = (Shulker)entity;
         return s.getColor();
     }
@@ -222,7 +222,6 @@ public class SNMob {
         if (mu.isZombieVillager(entity)) settings.put("professionZombie", getVillagerZombieProfession().toString());
         //AbstractHorse
         if (mu.isHorse(entity)) settings.put("jump", getJumpStrength() + "");
-        if (mu.isHorse(entity) || mu.isDonkey(entity) || mu.isMule(entity) || mu.isLlama(entity)) settings.put("tamed", String.valueOf(isTamed()));
         if (mu.isHorse(entity) || mu.isDonkey(entity) || mu.isMule(entity) || mu.isLlama(entity)) settings.put("domestication", getDomesticationHorse() + "");
         //Horse
         if (mu.isHorse(entity)) settings.put("horseColor", getHorseColor().toString());
@@ -240,8 +239,9 @@ public class SNMob {
         if (mu.isRabbit(entity)) settings.put("rabbitType", getRabbitType().toString());
         //Parrot
         if (mu.isParrot(entity)) settings.put("parrotType", getVariant().toString());
-        if (mu.isParrot(entity)) settings.put("tamed", String.valueOf(isTamed()));
 
+        //Tamed
+        if (mu.isHorse(entity) || mu.isDonkey(entity) || mu.isMule(entity) || mu.isLlama(entity) || mu.isParrot(entity)) settings.put("tamed", isTamed() ? 1 + "" : 0 + "");
         //
         String path = player.getName() + "_" + files.getMobsCount(player) + ".";
 
@@ -307,7 +307,7 @@ public class SNMob {
         Villager.Profession professionZombie = settings.keySet().contains("professionZombie") ?  Villager.Profession.valueOf(settings.get("professionZombie")) : Villager.Profession.BLACKSMITH;
         double JumpStrenght = settings.keySet().contains("jump") ? Double.parseDouble(settings.get("jump")) : new Random().nextInt(5) + 1;
         int domestication = settings.keySet().contains("domestication") ? Integer.parseInt(settings.get("domestication")) : 0;
-        boolean isTamed = Boolean.parseBoolean(settings.get("tamed"));
+        boolean isTamed = Integer.parseInt(settings.get("tamed")) == 1;
         Horse.Color horseColor = settings.keySet().contains("horseColor") ? Horse.Color.valueOf(settings.get("horseColor")) : Horse.Color.BLACK;
         Horse.Style horseStyle = settings.keySet().contains("horseStyle") ? Horse.Style.valueOf(settings.get("horseStyle")) : Horse.Style.NONE;
         boolean hasChest = settings.keySet().contains("chest") ? Boolean.valueOf(settings.get("chest")) : false;
