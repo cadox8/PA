@@ -6,14 +6,14 @@ ProjectAlpha fue un servidor de Minecraft con temática de Minijuegos y Survival
 
   - Java 8.
   - Maven 3.
-  - Una base de datos MySQL para almacenar los datos de los usuarios. Nosotros usábamos [MySQL](https://www.mysql.com)
+  - Una base de datos MySQL para almacenar los datos de los usuarios. Nosotros usábamos [MySQL](https://www.mysql.com).
   
 ## Compilación
 
 Instala dependencias, inicia módulos y compila.
 
 ```sh
-$ mvn clean build
+$ mvn clean install
 ```
 
 Y carga el esquema de la base de datos en tu servidor.
@@ -53,6 +53,7 @@ Para su ejecución
 * **SafariNet**: Duplicado de huevo al ponerlo con plugins como McMMO.
 * **Survival**: Al usar el comando /loteria y poner un número grande (E.j. 99) puede llegar a congelar el servidor mientras todos los números son generados.
 * **Survival**: Los bocatas puedes llegar a no darte los nuevos efectos.
+* Alguno olvidado o que surge en de cosas no testeadas.
 
 ## ToDo
  - Mejorar el código internamente... la idea era hacerlo todo objetos, incluso las fases de los juegos
@@ -75,11 +76,11 @@ FEM fue desarrollado con la ayuda y uso de:
 * [Lombok](https://projectlombok.org/) - [MIT](https://opensource.org/licenses/mit-license.php) - The Project Lombok Authors
 * [FEM](https://github.com/cadiducho/FEM) - [MIT](https://github.com/Cadiducho/FEM/blob/develop/LICENSE) - [Cadiducho](https://twitter.com/Cadiducho) y [Cadox8](https://twitter.com/cadox8)
 
-*PA* es liberado bajo una [Licencia Apache](https://github.com/ProjectAlphaES/PA/blob/master/LICENSE.md)
+*ProjectAlpha (PA)* es liberado bajo una [Licencia Apache](https://github.com/cadox8/PA/blob/master/LICENSE.md)
 
 ## Comentarios de los desarrolladores
 
-> Cadox8:<br>
+> **Cadox8**:<br>
 > Para mi, trabajar en ProjectAlpha tanto tiempo como el que ya llevo aquí ha sido genial, basicamente por toda la gente nueva a la que he conocido. Espero que a alguien le sirva este código, bien para uso privado o para continuar con el proyecto y estaríamos encantados de saberlo.<br>
 > Muchas partes del código pueden estar mejor optimizadas y pueden ser muy mejorables. Lo primero, perdón por tenerlo así, pero nos centramos primero en que todo funcionara.
 
