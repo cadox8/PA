@@ -66,7 +66,5 @@ public class PassManager {
     }
 
     @Deprecated
-    public void updateEmail(PAUser u, String email) {
-        //DISABLED
-    }
+    public void updateEmail(PAUser u, String email) {}
 }

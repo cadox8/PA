@@ -20,7 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @author cadox8
+ * @author Cadiducho
  */
 
 public class PACommands implements TabCompleter {

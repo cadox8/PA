@@ -1,5 +1,5 @@
 {
-  "logros": 3,
+  "logros": 6,
   "1": {
     "nombre": "Beta Player",
     "desc": "Un jugador capaz de haber aguantado con los bugs del servidor durante la beta.",
@@ -29,5 +29,5 @@
 	"nombre": "Experto del arco",
 	"desc": "Gana a una partida sólo usando el arco",
 	"server": "2"
-	}
+  }
 }

@@ -14,6 +14,6 @@ public class SetSpawnCMD extends PACmd {
     public void run(PAUser user, String label, String... args) {
         PALobby.getInstance().getConfig().set("spawn", Utils.locationToString(user.getLoc()));
         PALobby.getInstance().saveConfig();
-        user.sendMessage("Illo, punto ponio.");
+        user.sendMessage("Illo, punto ponio."); //Mensajes de @Wikijito7
     }
 }

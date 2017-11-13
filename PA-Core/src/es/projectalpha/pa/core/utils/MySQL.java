@@ -12,7 +12,7 @@ import java.util.ArrayList;
 /**
  * Objeto para conexiones de MySQL
  *
- * @author Huskehhh base original, Cadox8 actualización y metodos
+ * @author Huskehhh base original, Cadiducho y Cadox8 actualización y metodos
  */
 public class MySQL {
 
