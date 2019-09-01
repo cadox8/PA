@@ -69,7 +69,7 @@ public class SNMob {
 
     public Villager.Profession getVillagerZombieProfession(){
         ZombieVillager zv;
-        if (!mu.isZombieVillager(entity)) return Villager.Profession.BLACKSMITH;
+        if (!mu.isZombieVillager(entity)) return Villager.Profession.ARMORER;
         zv = (ZombieVillager)entity;
         return zv.getVillagerProfession();
     }
@@ -83,7 +83,7 @@ public class SNMob {
 
     public Villager.Profession getVillagerProfession(){
         Villager v;
-        if (!mu.isVillager(entity)) return Villager.Profession.BLACKSMITH;
+        if (!mu.isVillager(entity)) return Villager.Profession.ARMORER;
         v = (Villager)entity;
         return v.getProfession();
     }
@@ -200,7 +200,7 @@ public class SNMob {
 
     //Data
     public ItemStack getMobEgg(){
-        return new ItemMaker(Material.MONSTER_EGG).setDisplayName("Spawn " + color.getRandomColor() + WordUtils.capitalizeFully(getEntityType().toString().toLowerCase())).setAmount(1).setDurability(getEntityID()).setLores((files.getMobsCount(player) - 1) + "", getEntityType().toString()).build();
+        return new ItemMaker(Material.SNOWBALL).setDisplayName("Spawn " + color.getRandomColor() + WordUtils.capitalizeFully(getEntityType().toString().toLowerCase())).setAmount(1).setDurability(getEntityID()).setLores((files.getMobsCount(player) - 1) + "", getEntityType().toString()).build();
     }
 
     //Methods
@@ -301,10 +301,10 @@ public class SNMob {
         double health = settings.keySet().contains("health") ? Double.valueOf(settings.get("health")) : 0;
         int age = settings.keySet().contains("age") ? Integer.parseInt(settings.get("age")) : 0;
         DyeColor color = settings.keySet().contains("color") ? DyeColor.valueOf(settings.get("color")) : DyeColor.WHITE;
-        Villager.Profession profession = settings.keySet().contains("profession") ?  Villager.Profession.valueOf(settings.get("profession")) : Villager.Profession.BLACKSMITH;
+        Villager.Profession profession = settings.keySet().contains("profession") ?  Villager.Profession.valueOf(settings.get("profession")) : Villager.Profession.ARMORER;
         List<MerchantRecipe> recipes = settings.keySet().contains("recipes") ?  new ArrayList<>() : new ArrayList<>();
         boolean isBaby = settings.keySet().contains("baby") ? Boolean.valueOf(settings.get("baby")) : false;
-        Villager.Profession professionZombie = settings.keySet().contains("professionZombie") ?  Villager.Profession.valueOf(settings.get("professionZombie")) : Villager.Profession.BLACKSMITH;
+        Villager.Profession professionZombie = settings.keySet().contains("professionZombie") ?  Villager.Profession.valueOf(settings.get("professionZombie")) : Villager.Profession.ARMORER;
         double JumpStrenght = settings.keySet().contains("jump") ? Double.parseDouble(settings.get("jump")) : new Random().nextInt(5) + 1;
         int domestication = settings.keySet().contains("domestication") ? Integer.parseInt(settings.get("domestication")) : 0;
         boolean isTamed = Integer.parseInt(settings.get("tamed")) == 1;

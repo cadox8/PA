@@ -32,7 +32,7 @@ public class SpawnMob implements Listener{
 
         if (e.getAction() == Action.RIGHT_CLICK_AIR || e.getAction() == Action.RIGHT_CLICK_BLOCK) {
             if(e.getHand() != EquipmentSlot.HAND) return;
-            if (e.getItem() == null || !e.getItem().hasItemMeta() || !e.getItem().getItemMeta().hasDisplayName() || e.getItem().getType() != Material.MONSTER_EGG) return;
+            if (e.getItem() == null || !e.getItem().hasItemMeta() || e.getItem().getItemMeta() == null || !e.getItem().getItemMeta().hasDisplayName() || e.getItem().getType() != Material.SNOWBALL) return;
             if (!ChatColor.stripColor(e.getItem().getItemMeta().getDisplayName()).contains("Spawn")) return;
             int id = Integer.parseInt(e.getItem().getItemMeta().getLore().get(0));
             String s = e.getItem().getItemMeta().getLore().get(1);

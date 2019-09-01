@@ -38,7 +38,7 @@
         </repository>
         <repository>
             <id>pa-repo</id>
-            <url>https://projectalpha.es</url>
+            <url>https://cadox8.github.io</url>
         </repository>
     </repositories>
     <dependencies>

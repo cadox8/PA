@@ -27,6 +27,7 @@
  */
 package org.inventivetalent.reflection.minecraft;
 
+import jdk.internal.reflect.ConstructorAccessor;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Entity;
 import org.inventivetalent.reflection.resolver.ConstructorResolver;
@@ -35,7 +36,6 @@ import org.inventivetalent.reflection.resolver.MethodResolver;
 import org.inventivetalent.reflection.resolver.minecraft.NMSClassResolver;
 import org.inventivetalent.reflection.resolver.minecraft.OBCClassResolver;
 import org.inventivetalent.reflection.util.AccessUtil;
-import sun.reflect.ConstructorAccessor;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;

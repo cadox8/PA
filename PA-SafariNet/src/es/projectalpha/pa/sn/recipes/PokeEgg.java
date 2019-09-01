@@ -25,7 +25,7 @@ public class PokeEgg {
 
         pokeEgg.shape("BAB", "DCD", "BAB");
 
-        pokeEgg.setIngredient('B', Material.WOOL);
+        pokeEgg.setIngredient('B', Material.WHITE_WOOL);
         pokeEgg.setIngredient('A', Material.STRING);
         pokeEgg.setIngredient('D', Material.GOLD_NUGGET);
         pokeEgg.setIngredient('C', Material.EGG);
