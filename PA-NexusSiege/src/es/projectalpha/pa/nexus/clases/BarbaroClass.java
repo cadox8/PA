@@ -10,7 +10,7 @@ public final class BarbaroClass {
 
     private ItemStack item1 = new ItemMaker(Material.IRON_AXE).setDisplayName("Hacha Baticor").setLores("¿RageGames? ¿Qué es eso?").build();
     private ItemStack item2 = new ItemMaker(Material.IRON_SWORD).setDisplayName("Espada Batahola").setLores("¿RageGames? ¿Qué es eso?").build();
-    @Getter private ItemStack item3 = new ItemMaker(Material.IRON_BARDING).setDisplayName("Invocar a Theotimos").setLores("¿RageGames? ¿Qué es eso?").build();
+    @Getter private ItemStack item3 = new ItemMaker(Material.IRON_BARS).setDisplayName("Invocar a Theotimos").setLores("¿RageGames? ¿Qué es eso?").build();
 
     private ItemStack armor1 = new ItemMaker(Material.IRON_HELMET).setDisplayName("Casco del Bárbaro").build();
     private ItemStack armor2 = new ItemMaker(Material.IRON_CHESTPLATE).setDisplayName("Peto del Bárbaro").build();

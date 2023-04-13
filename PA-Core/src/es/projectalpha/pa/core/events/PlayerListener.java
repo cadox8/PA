@@ -7,7 +7,6 @@ import es.projectalpha.pa.core.api.PAUser;
 import es.projectalpha.pa.core.cmd.PACmd;
 import es.projectalpha.pa.core.utils.Messages;
 import es.projectalpha.pa.core.utils.Utils;
-import org.apache.commons.lang.WordUtils;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -88,7 +87,7 @@ public class PlayerListener implements Listener {
 
         //Format
         String name = u.getDisplayName().equalsIgnoreCase("") ? u.getName() : u.getDisplayName();
-        String tag = "[&" + PACmd.Grupo.groupColor(u.getUserData().getGrupo()) + WordUtils.capitalizeFully(u.getUserData().getGrupo().toString().toLowerCase()) + "&r] &" + PACmd.Grupo.groupColor(u.getUserData().getGrupo()) + name + "&r: ";
+        String tag = "[&" + PACmd.Grupo.groupColor(u.getUserData().getGrupo()) + u.getUserData().getGrupo().toString().toLowerCase() + "&r] &" + PACmd.Grupo.groupColor(u.getUserData().getGrupo()) + name + "&r: ";
         if (u.isOnRank(PACmd.Grupo.ORIGIN)) e.setMessage(Utils.colorize(e.getMessage()));
 
         e.setFormat(Utils.colorize(tag) + e.getMessage().replace("%", ""));

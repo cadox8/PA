@@ -21,10 +21,10 @@ public enum ColorParser {
     PINK(DyeColor.PINK, ChatColor.LIGHT_PURPLE),
     PURPLE(DyeColor.PURPLE, ChatColor.DARK_PURPLE),
     RED(DyeColor.RED, ChatColor.DARK_RED),
-    SILVER(DyeColor.SILVER, ChatColor.GRAY),
+    SILVER(DyeColor.LIGHT_GRAY, ChatColor.GRAY),
     WHITE(DyeColor.WHITE, ChatColor.WHITE),
     YELLOW(DyeColor.YELLOW, ChatColor.YELLOW);
 
-    @Getter private DyeColor dyeColor;
-    @Getter private ChatColor chatColor;
+    @Getter private final DyeColor dyeColor;
+    @Getter private final ChatColor chatColor;
 }

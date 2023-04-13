@@ -15,7 +15,7 @@ import org.bukkit.scheduler.BukkitTask;
 public class AntiGravity extends Cosmetic {
 
     public AntiGravity() {
-        super("&bAnti Gravedad", Material.DIAMOND_BARDING, 20);
+        super("&bAnti Gravedad", Material.DIAMOND_HORSE_ARMOR, 20);
     }
 
     private int count = 10;

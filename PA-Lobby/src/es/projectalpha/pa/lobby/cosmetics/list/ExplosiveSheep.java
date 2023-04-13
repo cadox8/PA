@@ -16,7 +16,7 @@ import org.inventivetalent.particle.ParticleEffect;
 public class ExplosiveSheep extends Cosmetic {
 
     public ExplosiveSheep() {
-        super("&dOveja Fiestera", Material.WOOL, 15);
+        super("&dOveja Fiestera", Material.WHITE_WOOL, 15);
     }
 
     private int count = 10;

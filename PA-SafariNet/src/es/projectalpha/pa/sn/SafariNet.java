@@ -1,7 +1,5 @@
 package es.projectalpha.pa.sn;
 
-import com.sk89q.worldguard.bukkit.WGBukkit;
-import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
 import es.projectalpha.pa.core.PACommands;
 import es.projectalpha.pa.core.api.PAData;
 import es.projectalpha.pa.core.utils.Utils;
@@ -25,7 +23,6 @@ public class SafariNet extends JavaPlugin implements Listener{
     @Getter private static SafariNet instance;
 
     @Getter private Economy eco;
-    @Getter private WorldGuardPlugin wg;
     private PokeEgg pe = new PokeEgg();
     private Files files = new Files();
 
@@ -42,11 +39,6 @@ public class SafariNet extends JavaPlugin implements Listener{
         RegisteredServiceProvider<Economy> economyProvider = getServer().getServicesManager().getRegistration(net.milkbowl.vault.economy.Economy.class);
         if (economyProvider != null) {
             eco = economyProvider.getProvider();
-        }
-
-        Plugin plugin = getServer().getPluginManager().getPlugin("WorldGuard");
-        if (plugin != null) {
-            wg = WGBukkit.getPlugin();
         }
     }
 

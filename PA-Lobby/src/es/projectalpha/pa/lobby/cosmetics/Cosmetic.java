@@ -55,16 +55,14 @@ public class Cosmetic {
     public static boolean useCosmetic(PAUser u, Material m) {
         String name = "ERROR";
 
-        switch (m) {
-            case DIAMOND_BARDING:
-                ANTI_GRAVITY.play(u);
-                name = ANTI_GRAVITY.getName();
-                break;
-            case WOOL:
-                EXPLOSIVE_SHEEP.play(u);
-                name = EXPLOSIVE_SHEEP.getName();
-                break;
+        if (m == Material.DIAMOND_HORSE_ARMOR) {
+            ANTI_GRAVITY.play(u);
+            name = ANTI_GRAVITY.getName();
+        } else if (m == Material.WHITE_WOOL) {
+            EXPLOSIVE_SHEEP.play(u);
+            name = EXPLOSIVE_SHEEP.getName();
         }
+
         if (name.equalsIgnoreCase("ERROR")) {
             return false;
         }

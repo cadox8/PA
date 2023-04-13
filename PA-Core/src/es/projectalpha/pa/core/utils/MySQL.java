@@ -1,6 +1,6 @@
 package es.projectalpha.pa.core.utils;
 
-import com.mysql.jdbc.CommunicationsException;
+import com.mysql.cj.jdbc.exceptions.CommunicationsException;
 import es.projectalpha.pa.core.PACore;
 import es.projectalpha.pa.core.api.PAUser;
 import es.projectalpha.pa.core.cmd.PACmd;

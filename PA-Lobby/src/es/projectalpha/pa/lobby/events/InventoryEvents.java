@@ -24,11 +24,10 @@ public class InventoryEvents implements Listener {
     @EventHandler
     public void inventoryClick(InventoryClickEvent e) {
         if (!(e.getWhoClicked() instanceof Player)) return;
-        if (e.getClickedInventory().getTitle() == null) return;
         Player p = (Player) e.getWhoClicked();
         PAUser u = PAServer.getUser(p);
 
-        switch (e.getClickedInventory().getTitle()) {
+        switch (e.getView().getTitle()) {
             case "Servidores":
                 e.setCancelled(true);
                 switch (e.getSlot()) {

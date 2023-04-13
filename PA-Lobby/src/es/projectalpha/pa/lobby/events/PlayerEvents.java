@@ -66,7 +66,7 @@ public class PlayerEvents implements Listener {
         u.getPlayer().getInventory().clear();
         u.getPlayer().getInventory().setItem(0, new ItemMaker(Material.NETHER_STAR).setDisplayName("&cJuegos").build());
         u.getPlayer().getInventory().setItem(4, new ItemMaker(Material.REDSTONE).setDisplayName("&7Cosmeticos").build());
-        if (u.isOnRank(PACmd.Grupo.Builder)) u.getPlayer().getInventory().setItem(8, new ItemMaker(Material.WOOD_AXE).setDisplayName("&cConstructores").build());
+        if (u.isOnRank(PACmd.Grupo.Builder)) u.getPlayer().getInventory().setItem(8, new ItemMaker(Material.WOODEN_AXE).setDisplayName("&cConstructores").build());
         u.getPlayer().updateInventory();
 
         u.sendMessage("&6Actualmente hay &2" + PAServer.users.size() + " &6usuarios en línea");
@@ -112,14 +112,14 @@ public class PlayerEvents implements Listener {
                     u.sendMessage(PAData.LOBBY.getPrefix() + "&cNo estamos listos aún");
                     //LobbyMenu.openMenu(u, LobbyMenu.MenuType.COSMETICOS);
                     break;
-                case WOOD_AXE:
+                case WOODEN_AXE:
                     e.setCancelled(true);
                     u.sendToServer("cons");
                     break;
             }
 
             if (e.getClickedBlock() == null) return;
-            if (e.getClickedBlock().getType() == Material.ENCHANTMENT_TABLE) {
+            if (e.getClickedBlock().getType() == Material.ENCHANTING_TABLE) {
                 e.setCancelled(true);
                 u.sendMessage(PAData.LOBBY.getPrefix() + "&cActualmente estamos trabajando en esto, disculpen las molestias");
             }
@@ -127,17 +127,17 @@ public class PlayerEvents implements Listener {
 
         if (!u.isOnRank(PACmd.Grupo.Builder)) {
             if (e.getClickedBlock() != null) {
-                if (e.getClickedBlock().getType().equals(Material.TRAP_DOOR) || e.getClickedBlock().getType().equals(Material.IRON_TRAPDOOR)
-                        || e.getClickedBlock().getType().equals(Material.FENCE_GATE) || e.getClickedBlock().getType().equals(Material.FIRE)
+                if (e.getClickedBlock().getType().equals(Material.OAK_TRAPDOOR) || e.getClickedBlock().getType().equals(Material.IRON_TRAPDOOR)
+                        || e.getClickedBlock().getType().equals(Material.OAK_FENCE_GATE) || e.getClickedBlock().getType().equals(Material.FIRE)
                         || e.getClickedBlock().getType().equals(Material.CAULDRON) || e.getClickedBlock().getRelative(BlockFace.UP).getType().equals(Material.FIRE)
                         || e.getClickedBlock().getType() == Material.CHEST || e.getClickedBlock().getType() == Material.TRAPPED_CHEST
                         || e.getClickedBlock().getType() == Material.DROPPER || e.getClickedBlock().getType() == Material.DISPENSER
-                        || e.getClickedBlock().getType() == Material.BED_BLOCK || e.getClickedBlock().getType() == Material.BED
-                        || e.getClickedBlock().getType() == Material.WORKBENCH || e.getClickedBlock().getType() == Material.BREWING_STAND
+                        || e.getClickedBlock().getType() == Material.WHITE_BED
+                        || e.getClickedBlock().getType() == Material.LEGACY_WORKBENCH || e.getClickedBlock().getType() == Material.BREWING_STAND
                         || e.getClickedBlock().getType() == Material.ANVIL || e.getClickedBlock().getType() == Material.DARK_OAK_FENCE_GATE
                         || e.getClickedBlock().getType() == Material.SPRUCE_FENCE_GATE || e.getClickedBlock().getType() == Material.FURNACE
-                        || e.getClickedBlock().getType() == Material.BURNING_FURNACE || e.getClickedBlock().getType() == Material.HOPPER
-                        || e.getClickedBlock().getType() == Material.STONE_BUTTON || e.getClickedBlock().getType() == Material.WOOD_BUTTON) {
+                        || e.getClickedBlock().getType() == Material.FURNACE || e.getClickedBlock().getType() == Material.HOPPER
+                        || e.getClickedBlock().getType() == Material.STONE_BUTTON || e.getClickedBlock().getType() == Material.OAK_BUTTON) {
                     e.setCancelled(true);
                 }
             }

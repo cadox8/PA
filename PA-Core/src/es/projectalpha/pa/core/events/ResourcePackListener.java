@@ -17,7 +17,7 @@ public class ResourcePackListener implements Listener {
 
     private final Plugin plugin;
     private String name; // Nombre del pack sin .zip
-    private String host = "http://cadox8.cf/dl/";
+    private String host = "https://cadox8.cf/dl/";
 
     /**
      * Info: Cargar la clase desde cada plugin, junto con su juego.

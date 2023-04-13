@@ -175,7 +175,7 @@ public class BagEvents implements Listener {
     public void onClose(InventoryCloseEvent e) {
         TOAUser p = TOA.getPlayer((Player) e.getPlayer());
 
-        if (e.getInventory().getName().equalsIgnoreCase(ChatColor.RED + "Mochila") && otherInvs.containsKey(p)) {
+        if (e.getView().getTitle().equalsIgnoreCase(ChatColor.RED + "Mochila") && otherInvs.containsKey(p)) {
             p = otherInvs.get(p);
             saveInv(p, e.getInventory());
             otherInvs.remove(p);

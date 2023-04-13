@@ -7,6 +7,7 @@ import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.io.File;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 
 public class FileUtils {
 
@@ -47,7 +48,7 @@ public class FileUtils {
 
         InputStream defStream = plugin.getResource("inv.yml");
         if (defStream != null) {
-            YamlConfiguration defConfig = YamlConfiguration.loadConfiguration(defStream);
+            YamlConfiguration defConfig = YamlConfiguration.loadConfiguration(new InputStreamReader(defStream));
             fcInv.setDefaults(defConfig);
         }
     }

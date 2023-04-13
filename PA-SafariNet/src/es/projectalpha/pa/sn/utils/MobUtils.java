@@ -67,7 +67,7 @@ public class MobUtils {
     }
 
     public boolean isPigZombie(Entity e){
-        return e.getType() == EntityType.PIG_ZOMBIE;
+        return e.getType() == EntityType.ZOMBIFIED_PIGLIN;
     }
 
     public boolean isZombieVillager(Entity e){

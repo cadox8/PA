@@ -39,7 +39,7 @@ public class LobbyTask extends BukkitRunnable {
             case 2:
             case 1:
                 Utils.broadcastMsg("&7El juego empezará en &c" + count + " &7segundos");
-                plugin.getGm().getPlaying().forEach(p -> p.playSound(p.getLocation(), Sound.NOTE_PLING, 1F, 1F));
+                plugin.getGm().getPlaying().forEach(p -> p.playSound(p.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1F, 1F));
                 break;
             case 0:
                 new GameTask(plugin).runTaskTimer(plugin, 0, 20);

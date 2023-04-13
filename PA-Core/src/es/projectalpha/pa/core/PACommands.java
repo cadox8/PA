@@ -7,7 +7,6 @@ import es.projectalpha.pa.core.cmd.*;
 import es.projectalpha.pa.core.cmd.tp.*;
 import es.projectalpha.pa.core.utils.Log;
 import es.projectalpha.pa.core.utils.Messages;
-import org.apache.commons.lang.StringUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.command.*;
 import org.bukkit.entity.Player;
@@ -194,9 +193,7 @@ public class PACommands implements TabCompleter {
         if (!(args[args.length - 1].isEmpty() || args[args.length - 1] == null)) {
             List<String> remv = new ArrayList<>();
             for (String s : rtrn) {
-                if (!StringUtils.startsWithIgnoreCase(s, args[args.length - 1])) {
-                    remv.add(s);
-                }
+                if (s.toLowerCase().startsWith(args[args.length - 1].toLowerCase())) remv.add(s);
             }
             rtrn.removeAll(remv);
         }

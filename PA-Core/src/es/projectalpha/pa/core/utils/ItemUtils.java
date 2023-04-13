@@ -25,10 +25,10 @@ public class ItemUtils {
 
         switch (block) {
             case GLASS:
-                i = new ItemStack(Material.STAINED_GLASS, amount, color.getDyeData());
+                i = new ItemStack(Material.GLASS, amount, color.getDyeData());
                 break;
             case FLAT_GLASS:
-                i = new ItemStack(Material.STAINED_GLASS_PANE, amount, color.getDyeData());
+                i = new ItemStack(Material.GLASS_PANE, amount, color.getDyeData());
                 break;
             case CLAY:
                 i = new ItemStack(Material.CLAY, amount, color.getDyeData());

@@ -21,7 +21,6 @@ import es.projectalpha.pa.toa.api.TOAUser;
 import es.projectalpha.pa.toa.races.Race;
 import es.projectalpha.pa.toa.spells.Spell;
 import lombok.Getter;
-import org.apache.commons.lang.WordUtils;
 import org.bukkit.Material;
 
 import java.util.HashMap;
@@ -109,7 +108,7 @@ public class Ability {
                 CADENAS.play(u);
                 name = CADENAS.getName();
                 break;
-            case EYE_OF_ENDER:
+            case ENDER_EYE:
                 HALCON.play(u);
                 name = HALCON.getName();
             case POTION:
@@ -142,7 +141,7 @@ public class Ability {
             default:
                 break;
         }
-        u.sendMessage(PAData.TOA.getPrefix() + "&6Has usado la habilidad &c" + WordUtils.capitalizeFully(name.toLowerCase()));
+        u.sendMessage(PAData.TOA.getPrefix() + "&6Has usado la habilidad &c" + name.toLowerCase());
     }
 
     public enum AbilityType {

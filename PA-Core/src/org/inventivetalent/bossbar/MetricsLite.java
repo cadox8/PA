@@ -26,7 +26,7 @@ public class MetricsLite {
     /**
      * The base url of the metrics domain
      */
-    private static final String BASE_URL = "http://report.mcstats.org";
+    private static final String BASE_URL = "https://report.mcstats.org";
 
     /**
      * The url used to report a server's status
@@ -91,7 +91,7 @@ public class MetricsLite {
 
         // Do we need to create the file?
         if (configuration.get("guid", null) == null) {
-            configuration.options().header("http://mcstats.org").copyDefaults(true);
+            configuration.options().header("https://mcstats.org").copyDefaults(true);
             configuration.save(configurationFile);
         }
 

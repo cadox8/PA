@@ -11,7 +11,7 @@ public final class ArqueroClass {
 
     private ItemStack item1 = new ItemMaker(Material.BOW).setDisplayName("Arco del Arquero").addEnchant(Enchantment.ARROW_INFINITE, 1).build();
     private ItemStack item2 = new ItemMaker(Material.ARROW).setDisplayName("Flecha del Arquero").setAmount(10).build();
-    private ItemStack item3 = new ItemMaker(Material.WOOD_SWORD).setDisplayName("Espada del Arquero").build();
+    private ItemStack item3 = new ItemMaker(Material.WOODEN_SWORD).setDisplayName("Espada del Arquero").build();
     private ItemStack armor1 = new ItemMaker(Material.CHAINMAIL_HELMET).setDisplayName("Casco del arquero").build();
     private ItemStack armor2 = new ItemMaker(Material.CHAINMAIL_CHESTPLATE).setDisplayName("Peto del arquero").build();
     private ItemStack armor3 = new ItemMaker(Material.CHAINMAIL_LEGGINGS).setDisplayName("Pantalones del arquero").build();

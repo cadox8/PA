@@ -1,7 +1,5 @@
 package es.projectalpha.pa.sn.events;
 
-import com.sk89q.worldguard.protection.ApplicableRegionSet;
-import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 import es.projectalpha.pa.sn.SNMob;
 import es.projectalpha.pa.sn.SafariNet;
 import org.bukkit.ChatColor;
@@ -36,15 +34,6 @@ public class SpawnMob implements Listener{
             if (!ChatColor.stripColor(e.getItem().getItemMeta().getDisplayName()).contains("Spawn")) return;
             int id = Integer.parseInt(e.getItem().getItemMeta().getLore().get(0));
             String s = e.getItem().getItemMeta().getLore().get(1);
-
-            boolean canCatch = true;
-            ApplicableRegionSet region = plugin.getWg().getRegionManager(p.getWorld()).getApplicableRegions(p.getLocation());
-            for (ProtectedRegion r : region.getRegions()) if (!r.getOwners().contains(p.getName())) canCatch = false;
-
-            if (!canCatch) {
-                p.sendMessage(SafariNet.getInstance().getPrefix() + ChatColor.RED + "No puedes spawnear un mob en parcelas ajenas");
-                return;
-            }
 
             SNMob mob = new SNMob(p);
             if (!mob.isOwner(id)) {

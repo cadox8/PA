@@ -49,7 +49,7 @@ public class ShopsCMD extends PACmd {
                 v.setCustomName("&dComprador Variado");
                 return true;
             case 1:
-                v.setProfession(Villager.Profession.BLACKSMITH);
+                v.setProfession(Villager.Profession.ARMORER);
                 v.setCustomName("&cComprador Armas");
                 return true;
             default:

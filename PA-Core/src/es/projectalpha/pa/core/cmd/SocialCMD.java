@@ -14,9 +14,9 @@ public class SocialCMD extends PACmd {
         if (args.length >= 0) {
             user.sendDiv();
             user.sendMessage("&cDa click para acceder a las páginas");
-            user.jsonURL("&6Web", "&6Web", "http://projectalpha.es");
-            user.jsonURL("&5Foro", "&5Foro", "http://projectalpha.es/foro");
-            user.jsonURL("&aTienda", "&aTienda", "http://tienda.projectalpha.es");
+            user.jsonURL("&6Web", "&6Web", "https://projectalpha.es");
+            user.jsonURL("&5Foro", "&5Foro", "https://projectalpha.es/foro");
+            user.jsonURL("&aTienda", "&aTienda", "https://tienda.projectalpha.es");
             user.jsonURL("&3Twitter", "&3Twitter", "https://twitter.com/ProjectAlphaSV");
             user.sendDiv();
         }

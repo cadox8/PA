@@ -5,7 +5,6 @@ import es.projectalpha.pa.sn.files.Files;
 import es.projectalpha.pa.sn.utils.ColorUtils;
 import es.projectalpha.pa.sn.utils.MobUtils;
 import lombok.Getter;
-import org.apache.commons.lang.WordUtils;
 import org.bukkit.DyeColor;
 import org.bukkit.Material;
 import org.bukkit.attribute.Attribute;
@@ -200,7 +199,7 @@ public class SNMob {
 
     //Data
     public ItemStack getMobEgg(){
-        return new ItemMaker(Material.SNOWBALL).setDisplayName("Spawn " + color.getRandomColor() + WordUtils.capitalizeFully(getEntityType().toString().toLowerCase())).setAmount(1).setDurability(getEntityID()).setLores((files.getMobsCount(player) - 1) + "", getEntityType().toString()).build();
+        return new ItemMaker(Material.SNOWBALL).setDisplayName("Spawn " + color.getRandomColor() + getEntityType().toString().toLowerCase()).setAmount(1).setDurability(getEntityID()).setLores((files.getMobsCount(player) - 1) + "", getEntityType().toString()).build();
     }
 
     //Methods
@@ -450,7 +449,7 @@ public class SNMob {
                 z.setMaxHealth(health);
                 z.setHealth(health);
                 break;
-            case PIG_ZOMBIE:
+            case ZOMBIFIED_PIGLIN:
                 PigZombie pz = player.getWorld().spawn(player.getLocation(), PigZombie.class);
                 if (isBaby) pz.setBaby(true);
                 pz.setCustomName(name);

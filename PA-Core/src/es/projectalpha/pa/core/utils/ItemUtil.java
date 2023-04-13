@@ -20,7 +20,7 @@ public class ItemUtil {
             ""};
 
     public static ItemStack createHeadPlayer(String displayname, String username, List<String> lore) {
-        ItemStack playerHead = new ItemStack(Material.SKULL_ITEM, 1, (short) 3);
+        ItemStack playerHead = new ItemStack(Material.SKELETON_SKULL, 1, (short) 3);
         SkullMeta sm = (SkullMeta) playerHead.getItemMeta();
         sm.setOwner(username);
         ArrayList<String> colorLore = new ArrayList<>();
@@ -41,7 +41,7 @@ public class ItemUtil {
     }
 
     public static ItemStack createBanner(String name, List<String> lore, DyeColor color) {
-        ItemStack banner = new ItemStack(Material.BANNER);
+        ItemStack banner = new ItemStack(Material.WHITE_BANNER);
         BannerMeta itemMeta = (BannerMeta) banner.getItemMeta();
         itemMeta.addItemFlags(ItemFlag.HIDE_POTION_EFFECTS, ItemFlag.HIDE_ATTRIBUTES,
                 ItemFlag.HIDE_DESTROYS, ItemFlag.HIDE_ENCHANTS, ItemFlag.HIDE_PLACED_ON, ItemFlag.HIDE_UNBREAKABLE);

@@ -1,7 +1,5 @@
 package es.projectalpha.pa.sn.events;
 
-import com.sk89q.worldguard.protection.ApplicableRegionSet;
-import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 import es.projectalpha.pa.sn.SNMob;
 import es.projectalpha.pa.sn.SafariNet;
 import es.projectalpha.pa.sn.recipes.PokeEgg;
@@ -84,15 +82,6 @@ public class CatchMob implements Listener{
                                 p.getInventory().addItem(pe.getPokeEgg());
                                 return;
                             }
-                        }
-
-                        boolean canCatch = true;
-                        ApplicableRegionSet region = plugin.getWg().getRegionManager(p.getWorld()).getApplicableRegions(p.getLocation());
-                        for (ProtectedRegion r : region.getRegions()) if (!r.getOwners().contains(p.getName())) canCatch = false;
-
-                        if (!canCatch) {
-                            p.sendMessage(SafariNet.getInstance().getPrefix() + ChatColor.RED + "No puedes capturar a un mob en parcelas ajenas");
-                            return;
                         }
 
                         //To Fix

@@ -453,7 +453,7 @@ public enum ParticleEffect {
      * @throws ParticleException if this particle cannot have block or item data
      */
     public void sendData(Collection<? extends Player> receivers, double x, double y, double z, double offsetX, double offsetY, double offsetZ, double speed, int count, ItemStack itemStack) {
-        sendData(receivers, x, y, z, offsetX, offsetY, offsetZ, speed, count, itemStack.getTypeId(), itemStack.getData().getData());
+        sendData(receivers, x, y, z, offsetX, offsetY, offsetZ, speed, count, itemStack.getDurability(), itemStack.getData().getData());
     }
 
     public enum Feature {
